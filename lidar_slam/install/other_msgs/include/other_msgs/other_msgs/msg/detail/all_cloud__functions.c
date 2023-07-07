@@ -14,11 +14,11 @@
 // Include directives for member types
 // Member `header`
 #include "std_msgs/msg/detail/header__functions.h"
-// Member `cornersharp`
-// Member `cornerlesssharp`
-// Member `surfflat`
-// Member `surflessflat`
-// Member `fullpointres`
+// Member `corner_sharp`
+// Member `corner_less_sharp`
+// Member `surf_flat`
+// Member `surf_less_flat`
+// Member `full_point_res`
 #include "other_msgs/msg/detail/point__functions.h"
 
 bool
@@ -32,28 +32,28 @@ other_msgs__msg__AllCloud__init(other_msgs__msg__AllCloud * msg)
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // cornersharp
-  if (!other_msgs__msg__Point__Sequence__init(&msg->cornersharp, 0)) {
+  // corner_sharp
+  if (!other_msgs__msg__Point__Sequence__init(&msg->corner_sharp, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // cornerlesssharp
-  if (!other_msgs__msg__Point__Sequence__init(&msg->cornerlesssharp, 0)) {
+  // corner_less_sharp
+  if (!other_msgs__msg__Point__Sequence__init(&msg->corner_less_sharp, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // surfflat
-  if (!other_msgs__msg__Point__Sequence__init(&msg->surfflat, 0)) {
+  // surf_flat
+  if (!other_msgs__msg__Point__Sequence__init(&msg->surf_flat, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // surflessflat
-  if (!other_msgs__msg__Point__Sequence__init(&msg->surflessflat, 0)) {
+  // surf_less_flat
+  if (!other_msgs__msg__Point__Sequence__init(&msg->surf_less_flat, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // fullpointres
-  if (!other_msgs__msg__Point__Sequence__init(&msg->fullpointres, 0)) {
+  // full_point_res
+  if (!other_msgs__msg__Point__Sequence__init(&msg->full_point_res, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
@@ -68,16 +68,16 @@ other_msgs__msg__AllCloud__fini(other_msgs__msg__AllCloud * msg)
   }
   // header
   std_msgs__msg__Header__fini(&msg->header);
-  // cornersharp
-  other_msgs__msg__Point__Sequence__fini(&msg->cornersharp);
-  // cornerlesssharp
-  other_msgs__msg__Point__Sequence__fini(&msg->cornerlesssharp);
-  // surfflat
-  other_msgs__msg__Point__Sequence__fini(&msg->surfflat);
-  // surflessflat
-  other_msgs__msg__Point__Sequence__fini(&msg->surflessflat);
-  // fullpointres
-  other_msgs__msg__Point__Sequence__fini(&msg->fullpointres);
+  // corner_sharp
+  other_msgs__msg__Point__Sequence__fini(&msg->corner_sharp);
+  // corner_less_sharp
+  other_msgs__msg__Point__Sequence__fini(&msg->corner_less_sharp);
+  // surf_flat
+  other_msgs__msg__Point__Sequence__fini(&msg->surf_flat);
+  // surf_less_flat
+  other_msgs__msg__Point__Sequence__fini(&msg->surf_less_flat);
+  // full_point_res
+  other_msgs__msg__Point__Sequence__fini(&msg->full_point_res);
 }
 
 bool
@@ -92,33 +92,33 @@ other_msgs__msg__AllCloud__are_equal(const other_msgs__msg__AllCloud * lhs, cons
   {
     return false;
   }
-  // cornersharp
+  // corner_sharp
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->cornersharp), &(rhs->cornersharp)))
+      &(lhs->corner_sharp), &(rhs->corner_sharp)))
   {
     return false;
   }
-  // cornerlesssharp
+  // corner_less_sharp
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->cornerlesssharp), &(rhs->cornerlesssharp)))
+      &(lhs->corner_less_sharp), &(rhs->corner_less_sharp)))
   {
     return false;
   }
-  // surfflat
+  // surf_flat
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->surfflat), &(rhs->surfflat)))
+      &(lhs->surf_flat), &(rhs->surf_flat)))
   {
     return false;
   }
-  // surflessflat
+  // surf_less_flat
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->surflessflat), &(rhs->surflessflat)))
+      &(lhs->surf_less_flat), &(rhs->surf_less_flat)))
   {
     return false;
   }
-  // fullpointres
+  // full_point_res
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->fullpointres), &(rhs->fullpointres)))
+      &(lhs->full_point_res), &(rhs->full_point_res)))
   {
     return false;
   }
@@ -139,33 +139,33 @@ other_msgs__msg__AllCloud__copy(
   {
     return false;
   }
-  // cornersharp
+  // corner_sharp
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->cornersharp), &(output->cornersharp)))
+      &(input->corner_sharp), &(output->corner_sharp)))
   {
     return false;
   }
-  // cornerlesssharp
+  // corner_less_sharp
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->cornerlesssharp), &(output->cornerlesssharp)))
+      &(input->corner_less_sharp), &(output->corner_less_sharp)))
   {
     return false;
   }
-  // surfflat
+  // surf_flat
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->surfflat), &(output->surfflat)))
+      &(input->surf_flat), &(output->surf_flat)))
   {
     return false;
   }
-  // surflessflat
+  // surf_less_flat
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->surflessflat), &(output->surflessflat)))
+      &(input->surf_less_flat), &(output->surf_less_flat)))
   {
     return false;
   }
-  // fullpointres
+  // full_point_res
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->fullpointres), &(output->fullpointres)))
+      &(input->full_point_res), &(output->full_point_res)))
   {
     return false;
   }

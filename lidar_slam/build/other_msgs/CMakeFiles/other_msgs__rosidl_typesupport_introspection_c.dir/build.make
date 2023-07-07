@@ -79,6 +79,7 @@ rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesuppo
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/rosidl_typesupport_introspection_c/resource/srv__type_support.c.em
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: rosidl_adapter/other_msgs/msg/Point.idl
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: rosidl_adapter/other_msgs/msg/AllCloud.idl
+rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: rosidl_adapter/other_msgs/msg/SegCloud.idl
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -117,11 +118,17 @@ rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesuppo
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__rosidl_typesupport_introspection_c.h: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__rosidl_typesupport_introspection_c.h
 
+rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__rosidl_typesupport_introspection_c.h: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__rosidl_typesupport_introspection_c.h
+
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c
 
 rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c
+
+rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c
 
 CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c.o: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/flags.make
 CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c.o: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c
@@ -151,16 +158,32 @@ CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c -o CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c.s
 
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/flags.make
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o: rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o -MF CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o.d -o CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o -c /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c
+
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c > CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.i
+
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c -o CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.s
+
 # Object files for target other_msgs__rosidl_typesupport_introspection_c
 other_msgs__rosidl_typesupport_introspection_c_OBJECTS = \
 "CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c.o" \
-"CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c.o"
+"CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c.o" \
+"CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o"
 
 # External object files for target other_msgs__rosidl_typesupport_introspection_c
 other_msgs__rosidl_typesupport_introspection_c_EXTERNAL_OBJECTS =
 
 libother_msgs__rosidl_typesupport_introspection_c.so: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c.o
 libother_msgs__rosidl_typesupport_introspection_c.so: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c.o
+libother_msgs__rosidl_typesupport_introspection_c.so: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c.o
 libother_msgs__rosidl_typesupport_introspection_c.so: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/build.make
 libother_msgs__rosidl_typesupport_introspection_c.so: libother_msgs__rosidl_generator_c.so
 libother_msgs__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_introspection_c.so
@@ -171,7 +194,7 @@ libother_msgs__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/libbui
 libother_msgs__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/librosidl_runtime_c.so
 libother_msgs__rosidl_typesupport_introspection_c.so: /opt/ros/humble/lib/librcutils.so
 libother_msgs__rosidl_typesupport_introspection_c.so: CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C shared library libother_msgs__rosidl_typesupport_introspection_c.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C shared library libother_msgs__rosidl_typesupport_introspection_c.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -186,6 +209,8 @@ CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typ
 CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/other_msgs/msg/detail/all_cloud__type_support.c
 CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
 CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__type_support.c
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__rosidl_typesupport_introspection_c.h
+CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend: rosidl_typesupport_introspection_c/other_msgs/msg/detail/seg_cloud__type_support.c
 	cd /home/evan/code/lidar_slam/lidar_slam/build/other_msgs && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/evan/code/lidar_slam/lidar_slam/src/other_msgs /home/evan/code/lidar_slam/lidar_slam/src/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/depend
 

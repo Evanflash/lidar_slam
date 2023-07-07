@@ -74,6 +74,10 @@ CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/all_cloud.hpp
 CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__builder.hpp
 CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__struct.hpp
 CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__traits.hpp
+CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp
+CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp
+CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp
+CMakeFiles/other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp
 
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/lib/rosidl_generator_cpp/rosidl_generator_cpp
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_cpp/__init__.py
@@ -92,6 +96,7 @@ rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/share/rosidl_gene
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/share/rosidl_generator_cpp/resource/srv__traits.hpp.em
 rosidl_generator_cpp/other_msgs/msg/point.hpp: rosidl_adapter/other_msgs/msg/Point.idl
 rosidl_generator_cpp/other_msgs/msg/point.hpp: rosidl_adapter/other_msgs/msg/AllCloud.idl
+rosidl_generator_cpp/other_msgs/msg/point.hpp: rosidl_adapter/other_msgs/msg/SegCloud.idl
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_generator_cpp/other_msgs/msg/point.hpp: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -148,6 +153,18 @@ rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__struct.hpp: rosidl_generat
 rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__traits.hpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__traits.hpp
 
+rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp
+
+rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp
+
+rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp
+
+rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp
+
 other_msgs__cpp: CMakeFiles/other_msgs__cpp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/all_cloud.hpp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__builder.hpp
@@ -156,7 +173,11 @@ other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/all_cloud__traits.hp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/point__builder.hpp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/point__struct.hpp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/point__traits.hpp
+other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp
+other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp
+other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp
 other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/point.hpp
+other_msgs__cpp: rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp
 other_msgs__cpp: CMakeFiles/other_msgs__cpp.dir/build.make
 .PHONY : other_msgs__cpp
 

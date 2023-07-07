@@ -1,0 +1,26 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from other_msgs/msg/SegCloud.msg
+// generated code does not contain a copyright notice
+
+#include "other_msgs/msg/Point.idl"
+#include "std_msgs/msg/Header.idl"
+
+module other_msgs {
+  module msg {
+    struct SegCloud {
+      std_msgs::msg::Header header;
+
+      @verbatim (language="comment", text=
+        "聚类点")
+      sequence<other_msgs::msg::Point> seg_cloud;
+
+      sequence<float> seg_range;
+
+      @verbatim (language="comment", text=
+        "地面点")
+      sequence<other_msgs::msg::Point> ground_cloud;
+
+      sequence<float> ground_range;
+    };
+  };
+};

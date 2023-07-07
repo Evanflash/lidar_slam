@@ -97,16 +97,32 @@ CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/ms
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c -o CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.s
 
+CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o: CMakeFiles/other_msgs__rosidl_generator_py.dir/flags.make
+CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o: rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c
+CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o: CMakeFiles/other_msgs__rosidl_generator_py.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o -MF CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o.d -o CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o -c /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c
+
+CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c > CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.i
+
+CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c -o CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.s
+
 # Object files for target other_msgs__rosidl_generator_py
 other_msgs__rosidl_generator_py_OBJECTS = \
 "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_point_s.c.o" \
-"CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.o"
+"CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.o" \
+"CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o"
 
 # External object files for target other_msgs__rosidl_generator_py
 other_msgs__rosidl_generator_py_EXTERNAL_OBJECTS =
 
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_point_s.c.o
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.o
+rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: CMakeFiles/other_msgs__rosidl_generator_py.dir/build.make
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: /usr/lib/x86_64-linux-gnu/libpython3.10.so
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: libother_msgs__rosidl_typesupport_c.so
@@ -121,7 +137,7 @@ rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: /opt/ros/h
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: /opt/ros/humble/lib/librosidl_runtime_c.so
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: /opt/ros/humble/lib/librcutils.so
 rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so: CMakeFiles/other_msgs__rosidl_generator_py.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C shared library rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C shared library rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/other_msgs__rosidl_generator_py.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

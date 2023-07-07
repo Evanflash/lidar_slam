@@ -34,7 +34,7 @@ extern "C"
 {
 #endif
 
-#include "other_msgs/msg/detail/point__functions.h"  // cornerlesssharp, cornersharp, fullpointres, surfflat, surflessflat
+#include "other_msgs/msg/detail/point__functions.h"  // corner_less_sharp, corner_sharp, full_point_res, surf_flat, surf_less_flat
 #include "std_msgs/msg/detail/header__functions.h"  // header
 
 // forward declare type support functions
@@ -90,15 +90,15 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: cornersharp
+  // Field name: corner_sharp
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->cornersharp.size;
-    auto array_ptr = ros_message->cornersharp.data;
+    size_t size = ros_message->corner_sharp.size;
+    auto array_ptr = ros_message->corner_sharp.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -109,15 +109,15 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: cornerlesssharp
+  // Field name: corner_less_sharp
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->cornerlesssharp.size;
-    auto array_ptr = ros_message->cornerlesssharp.data;
+    size_t size = ros_message->corner_less_sharp.size;
+    auto array_ptr = ros_message->corner_less_sharp.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -128,15 +128,15 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: surfflat
+  // Field name: surf_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->surfflat.size;
-    auto array_ptr = ros_message->surfflat.data;
+    size_t size = ros_message->surf_flat.size;
+    auto array_ptr = ros_message->surf_flat.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -147,15 +147,15 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: surflessflat
+  // Field name: surf_less_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->surflessflat.size;
-    auto array_ptr = ros_message->surflessflat.data;
+    size_t size = ros_message->surf_less_flat.size;
+    auto array_ptr = ros_message->surf_less_flat.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -166,15 +166,15 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: fullpointres
+  // Field name: full_point_res
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->fullpointres.size;
-    auto array_ptr = ros_message->fullpointres.data;
+    size_t size = ros_message->full_point_res.size;
+    auto array_ptr = ros_message->full_point_res.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -211,7 +211,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: cornersharp
+  // Field name: corner_sharp
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -221,14 +221,14 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->cornersharp.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->cornersharp);
+    if (ros_message->corner_sharp.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->corner_sharp);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->cornersharp, size)) {
-      fprintf(stderr, "failed to create array for field 'cornersharp'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->corner_sharp, size)) {
+      fprintf(stderr, "failed to create array for field 'corner_sharp'");
       return false;
     }
-    auto array_ptr = ros_message->cornersharp.data;
+    auto array_ptr = ros_message->corner_sharp.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -238,7 +238,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: cornerlesssharp
+  // Field name: corner_less_sharp
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -248,14 +248,14 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->cornerlesssharp.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->cornerlesssharp);
+    if (ros_message->corner_less_sharp.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->corner_less_sharp);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->cornerlesssharp, size)) {
-      fprintf(stderr, "failed to create array for field 'cornerlesssharp'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->corner_less_sharp, size)) {
+      fprintf(stderr, "failed to create array for field 'corner_less_sharp'");
       return false;
     }
-    auto array_ptr = ros_message->cornerlesssharp.data;
+    auto array_ptr = ros_message->corner_less_sharp.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -265,7 +265,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: surfflat
+  // Field name: surf_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -275,14 +275,14 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->surfflat.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->surfflat);
+    if (ros_message->surf_flat.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->surf_flat);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->surfflat, size)) {
-      fprintf(stderr, "failed to create array for field 'surfflat'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->surf_flat, size)) {
+      fprintf(stderr, "failed to create array for field 'surf_flat'");
       return false;
     }
-    auto array_ptr = ros_message->surfflat.data;
+    auto array_ptr = ros_message->surf_flat.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -292,7 +292,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: surflessflat
+  // Field name: surf_less_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -302,14 +302,14 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->surflessflat.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->surflessflat);
+    if (ros_message->surf_less_flat.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->surf_less_flat);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->surflessflat, size)) {
-      fprintf(stderr, "failed to create array for field 'surflessflat'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->surf_less_flat, size)) {
+      fprintf(stderr, "failed to create array for field 'surf_less_flat'");
       return false;
     }
-    auto array_ptr = ros_message->surflessflat.data;
+    auto array_ptr = ros_message->surf_less_flat.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -319,7 +319,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: fullpointres
+  // Field name: full_point_res
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -329,14 +329,14 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->fullpointres.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->fullpointres);
+    if (ros_message->full_point_res.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->full_point_res);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->fullpointres, size)) {
-      fprintf(stderr, "failed to create array for field 'fullpointres'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->full_point_res, size)) {
+      fprintf(stderr, "failed to create array for field 'full_point_res'");
       return false;
     }
-    auto array_ptr = ros_message->fullpointres.data;
+    auto array_ptr = ros_message->full_point_res.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -367,10 +367,10 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
 
   current_alignment += get_serialized_size_std_msgs__msg__Header(
     &(ros_message->header), current_alignment);
-  // field.name cornersharp
+  // field.name corner_sharp
   {
-    size_t array_size = ros_message->cornersharp.size;
-    auto array_ptr = ros_message->cornersharp.data;
+    size_t array_size = ros_message->corner_sharp.size;
+    auto array_ptr = ros_message->corner_sharp.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -379,10 +379,10 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name cornerlesssharp
+  // field.name corner_less_sharp
   {
-    size_t array_size = ros_message->cornerlesssharp.size;
-    auto array_ptr = ros_message->cornerlesssharp.data;
+    size_t array_size = ros_message->corner_less_sharp.size;
+    auto array_ptr = ros_message->corner_less_sharp.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -391,10 +391,10 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name surfflat
+  // field.name surf_flat
   {
-    size_t array_size = ros_message->surfflat.size;
-    auto array_ptr = ros_message->surfflat.data;
+    size_t array_size = ros_message->surf_flat.size;
+    auto array_ptr = ros_message->surf_flat.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -403,10 +403,10 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name surflessflat
+  // field.name surf_less_flat
   {
-    size_t array_size = ros_message->surflessflat.size;
-    auto array_ptr = ros_message->surflessflat.data;
+    size_t array_size = ros_message->surf_less_flat.size;
+    auto array_ptr = ros_message->surf_less_flat.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -415,10 +415,10 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name fullpointres
+  // field.name full_point_res
   {
-    size_t array_size = ros_message->fullpointres.size;
-    auto array_ptr = ros_message->fullpointres.data;
+    size_t array_size = ros_message->full_point_res.size;
+    auto array_ptr = ros_message->full_point_res.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -469,7 +469,7 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: cornersharp
+  // member: corner_sharp
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -488,7 +488,7 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: cornerlesssharp
+  // member: corner_less_sharp
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -507,7 +507,7 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: surfflat
+  // member: surf_flat
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -526,7 +526,7 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: surflessflat
+  // member: surf_less_flat
   {
     size_t array_size = 0;
     full_bounded = false;
@@ -545,7 +545,7 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: fullpointres
+  // member: full_point_res
   {
     size_t array_size = 0;
     full_bounded = false;

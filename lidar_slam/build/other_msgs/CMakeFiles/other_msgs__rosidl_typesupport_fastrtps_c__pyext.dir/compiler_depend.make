@@ -248,8 +248,19 @@ CMakeFiles/other_msgs__rosidl_typesupport_fastrtps_c__pyext.dir/rosidl_generator
   rosidl_generator_c/other_msgs/msg/detail/point__functions.h \
   rosidl_generator_c/other_msgs/msg/detail/all_cloud__type_support.h \
   rosidl_generator_c/other_msgs/msg/detail/all_cloud__struct.h \
-  rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.h
+  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.h \
+  /opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h \
+  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/string.h \
+  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h \
+  rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.h \
+  rosidl_generator_c/other_msgs/msg/detail/seg_cloud__type_support.h \
+  rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h \
+  rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h
 
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__type_support.h:
+
+/opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/string.h:
 
 rosidl_generator_c/other_msgs/msg/detail/all_cloud__type_support.h:
 
@@ -262,6 +273,8 @@ rosidl_generator_c/other_msgs/msg/detail/point__struct.h:
 /usr/include/python3.10/eval.h:
 
 /usr/include/python3.10/cpython/import.h:
+
+/opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__struct.h:
 
 /usr/include/python3.10/import.h:
 
@@ -296,6 +309,8 @@ rosidl_generator_c/other_msgs/msg/detail/point__struct.h:
 /usr/include/python3.10/cpython/ceval.h:
 
 /usr/include/python3.10/genericaliasobject.h:
+
+/opt/ros/humble/include/builtin_interfaces/builtin_interfaces/msg/detail/time__struct.h:
 
 /usr/include/python3.10/descrobject.h:
 
@@ -382,6 +397,8 @@ rosidl_generator_c/other_msgs/msg/detail/point__struct.h:
 /usr/include/python3.10/fileobject.h:
 
 /usr/include/x86_64-linux-gnu/bits/statx-generic.h:
+
+/opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence.h:
 
 /usr/include/x86_64-linux-gnu/sys/types.h:
 
@@ -589,6 +606,8 @@ rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.h:
 
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes.h:
 
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h:
+
 /usr/include/x86_64-linux-gnu/python3.10/pyconfig.h:
 
 /usr/include/x86_64-linux-gnu/bits/uio_lim.h:
@@ -730,6 +749,8 @@ rosidl_generator_c/other_msgs/msg/rosidl_generator_c__visibility_control.h:
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /usr/include/x86_64-linux-gnu/asm/bitsperlong.h:
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/struct_statx_timestamp.h:
 

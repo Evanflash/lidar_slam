@@ -71,9 +71,11 @@ other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/_other_
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_c.c
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_point.py
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_all_cloud.py
+other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_seg_cloud.py
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/__init__.py
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_point_s.c
 other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_all_cloud_s.c
+other_msgs__py/CMakeFiles/other_msgs__py: rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c
 
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/lib/rosidl_generator_py/rosidl_generator_py
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/local/lib/python3.10/dist-packages/rosidl_generator_py/__init__.py
@@ -90,6 +92,7 @@ rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c:
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/rosidl_generator_py/resource/_srv.py.em
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/other_msgs/msg/Point.idl
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/other_msgs/msg/AllCloud.idl
+rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: rosidl_adapter/other_msgs/msg/SegCloud.idl
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -137,6 +140,9 @@ rosidl_generator_py/other_msgs/msg/_point.py: rosidl_generator_py/other_msgs/_ot
 rosidl_generator_py/other_msgs/msg/_all_cloud.py: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/other_msgs/msg/_all_cloud.py
 
+rosidl_generator_py/other_msgs/msg/_seg_cloud.py: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/other_msgs/msg/_seg_cloud.py
+
 rosidl_generator_py/other_msgs/msg/__init__.py: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/other_msgs/msg/__init__.py
 
@@ -145,6 +151,9 @@ rosidl_generator_py/other_msgs/msg/_point_s.c: rosidl_generator_py/other_msgs/_o
 
 rosidl_generator_py/other_msgs/msg/_all_cloud_s.c: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/other_msgs/msg/_all_cloud_s.c
+
+rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c
 
 other_msgs__py: other_msgs__py/CMakeFiles/other_msgs__py
 other_msgs__py: rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_c.c
@@ -155,6 +164,8 @@ other_msgs__py: rosidl_generator_py/other_msgs/msg/_all_cloud.py
 other_msgs__py: rosidl_generator_py/other_msgs/msg/_all_cloud_s.c
 other_msgs__py: rosidl_generator_py/other_msgs/msg/_point.py
 other_msgs__py: rosidl_generator_py/other_msgs/msg/_point_s.c
+other_msgs__py: rosidl_generator_py/other_msgs/msg/_seg_cloud.py
+other_msgs__py: rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c
 other_msgs__py: other_msgs__py/CMakeFiles/other_msgs__py.dir/build.make
 .PHONY : other_msgs__py
 

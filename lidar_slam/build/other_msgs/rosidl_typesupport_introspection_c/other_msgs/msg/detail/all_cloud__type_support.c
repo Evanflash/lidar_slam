@@ -17,17 +17,17 @@
 #include "std_msgs/msg/header.h"
 // Member `header`
 #include "std_msgs/msg/detail/header__rosidl_typesupport_introspection_c.h"
-// Member `cornersharp`
-// Member `cornerlesssharp`
-// Member `surfflat`
-// Member `surflessflat`
-// Member `fullpointres`
+// Member `corner_sharp`
+// Member `corner_less_sharp`
+// Member `surf_flat`
+// Member `surf_less_flat`
+// Member `full_point_res`
 #include "other_msgs/msg/point.h"
-// Member `cornersharp`
-// Member `cornerlesssharp`
-// Member `surfflat`
-// Member `surflessflat`
-// Member `fullpointres`
+// Member `corner_sharp`
+// Member `corner_less_sharp`
+// Member `surf_flat`
+// Member `surf_less_flat`
+// Member `full_point_res`
 #include "other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h"
 
 #ifdef __cplusplus
@@ -49,7 +49,7 @@ void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__AllCloud_fin
   other_msgs__msg__AllCloud__fini(message_memory);
 }
 
-size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__cornersharp(
+size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__corner_sharp(
   const void * untyped_member)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -57,7 +57,7 @@ size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_funct
   return member->size;
 }
 
-const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornersharp(
+const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_sharp(
   const void * untyped_member, size_t index)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -65,7 +65,7 @@ const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_
   return &member->data[index];
 }
 
-void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornersharp(
+void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_sharp(
   void * untyped_member, size_t index)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -73,29 +73,29 @@ void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_functi
   return &member->data[index];
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__cornersharp(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__corner_sharp(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const other_msgs__msg__Point * item =
     ((const other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornersharp(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_sharp(untyped_member, index));
   other_msgs__msg__Point * value =
     (other_msgs__msg__Point *)(untyped_value);
   *value = *item;
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__cornersharp(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__corner_sharp(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   other_msgs__msg__Point * item =
     ((other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornersharp(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_sharp(untyped_member, index));
   const other_msgs__msg__Point * value =
     (const other_msgs__msg__Point *)(untyped_value);
   *item = *value;
 }
 
-bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__cornersharp(
+bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__corner_sharp(
   void * untyped_member, size_t size)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -104,7 +104,7 @@ bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_funct
   return other_msgs__msg__Point__Sequence__init(member, size);
 }
 
-size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__cornerlesssharp(
+size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__corner_less_sharp(
   const void * untyped_member)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -112,7 +112,7 @@ size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_funct
   return member->size;
 }
 
-const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornerlesssharp(
+const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_less_sharp(
   const void * untyped_member, size_t index)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -120,7 +120,7 @@ const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_
   return &member->data[index];
 }
 
-void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornerlesssharp(
+void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_less_sharp(
   void * untyped_member, size_t index)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -128,29 +128,29 @@ void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_functi
   return &member->data[index];
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__cornerlesssharp(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__corner_less_sharp(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const other_msgs__msg__Point * item =
     ((const other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornerlesssharp(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_less_sharp(untyped_member, index));
   other_msgs__msg__Point * value =
     (other_msgs__msg__Point *)(untyped_value);
   *value = *item;
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__cornerlesssharp(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__corner_less_sharp(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   other_msgs__msg__Point * item =
     ((other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornerlesssharp(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_less_sharp(untyped_member, index));
   const other_msgs__msg__Point * value =
     (const other_msgs__msg__Point *)(untyped_value);
   *item = *value;
 }
 
-bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__cornerlesssharp(
+bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__corner_less_sharp(
   void * untyped_member, size_t size)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -159,7 +159,7 @@ bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_funct
   return other_msgs__msg__Point__Sequence__init(member, size);
 }
 
-size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surfflat(
+size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surf_flat(
   const void * untyped_member)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -167,7 +167,7 @@ size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_funct
   return member->size;
 }
 
-const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surfflat(
+const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_flat(
   const void * untyped_member, size_t index)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -175,7 +175,7 @@ const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_
   return &member->data[index];
 }
 
-void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surfflat(
+void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_flat(
   void * untyped_member, size_t index)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -183,29 +183,29 @@ void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_functi
   return &member->data[index];
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surfflat(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surf_flat(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const other_msgs__msg__Point * item =
     ((const other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surfflat(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_flat(untyped_member, index));
   other_msgs__msg__Point * value =
     (other_msgs__msg__Point *)(untyped_value);
   *value = *item;
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surfflat(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surf_flat(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   other_msgs__msg__Point * item =
     ((other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surfflat(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_flat(untyped_member, index));
   const other_msgs__msg__Point * value =
     (const other_msgs__msg__Point *)(untyped_value);
   *item = *value;
 }
 
-bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surfflat(
+bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surf_flat(
   void * untyped_member, size_t size)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -214,7 +214,7 @@ bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_funct
   return other_msgs__msg__Point__Sequence__init(member, size);
 }
 
-size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surflessflat(
+size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surf_less_flat(
   const void * untyped_member)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -222,7 +222,7 @@ size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_funct
   return member->size;
 }
 
-const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surflessflat(
+const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_less_flat(
   const void * untyped_member, size_t index)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -230,7 +230,7 @@ const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_
   return &member->data[index];
 }
 
-void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surflessflat(
+void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_less_flat(
   void * untyped_member, size_t index)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -238,29 +238,29 @@ void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_functi
   return &member->data[index];
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surflessflat(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surf_less_flat(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const other_msgs__msg__Point * item =
     ((const other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surflessflat(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_less_flat(untyped_member, index));
   other_msgs__msg__Point * value =
     (other_msgs__msg__Point *)(untyped_value);
   *value = *item;
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surflessflat(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surf_less_flat(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   other_msgs__msg__Point * item =
     ((other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surflessflat(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_less_flat(untyped_member, index));
   const other_msgs__msg__Point * value =
     (const other_msgs__msg__Point *)(untyped_value);
   *item = *value;
 }
 
-bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surflessflat(
+bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surf_less_flat(
   void * untyped_member, size_t size)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -269,7 +269,7 @@ bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_funct
   return other_msgs__msg__Point__Sequence__init(member, size);
 }
 
-size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__fullpointres(
+size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__full_point_res(
   const void * untyped_member)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -277,7 +277,7 @@ size_t other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_funct
   return member->size;
 }
 
-const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__fullpointres(
+const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__full_point_res(
   const void * untyped_member, size_t index)
 {
   const other_msgs__msg__Point__Sequence * member =
@@ -285,7 +285,7 @@ const void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_
   return &member->data[index];
 }
 
-void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__fullpointres(
+void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__full_point_res(
   void * untyped_member, size_t index)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -293,29 +293,29 @@ void * other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_functi
   return &member->data[index];
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__fullpointres(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__full_point_res(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const other_msgs__msg__Point * item =
     ((const other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__fullpointres(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__full_point_res(untyped_member, index));
   other_msgs__msg__Point * value =
     (other_msgs__msg__Point *)(untyped_value);
   *value = *item;
 }
 
-void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__fullpointres(
+void other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__full_point_res(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   other_msgs__msg__Point * item =
     ((other_msgs__msg__Point *)
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__fullpointres(untyped_member, index));
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__full_point_res(untyped_member, index));
   const other_msgs__msg__Point * value =
     (const other_msgs__msg__Point *)(untyped_value);
   *item = *value;
 }
 
-bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__fullpointres(
+bool other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__full_point_res(
   void * untyped_member, size_t size)
 {
   other_msgs__msg__Point__Sequence * member =
@@ -343,89 +343,89 @@ static rosidl_typesupport_introspection_c__MessageMember other_msgs__msg__AllClo
     NULL  // resize(index) function pointer
   },
   {
-    "cornersharp",  // name
+    "corner_sharp",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs__msg__AllCloud, cornersharp),  // bytes offset in struct
+    offsetof(other_msgs__msg__AllCloud, corner_sharp),  // bytes offset in struct
     NULL,  // default value
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__cornersharp,  // size() function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornersharp,  // get_const(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornersharp,  // get(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__cornersharp,  // fetch(index, &value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__cornersharp,  // assign(index, value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__cornersharp  // resize(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__corner_sharp,  // size() function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_sharp,  // get_const(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_sharp,  // get(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__corner_sharp,  // fetch(index, &value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__corner_sharp,  // assign(index, value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__corner_sharp  // resize(index) function pointer
   },
   {
-    "cornerlesssharp",  // name
+    "corner_less_sharp",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs__msg__AllCloud, cornerlesssharp),  // bytes offset in struct
+    offsetof(other_msgs__msg__AllCloud, corner_less_sharp),  // bytes offset in struct
     NULL,  // default value
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__cornerlesssharp,  // size() function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__cornerlesssharp,  // get_const(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__cornerlesssharp,  // get(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__cornerlesssharp,  // fetch(index, &value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__cornerlesssharp,  // assign(index, value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__cornerlesssharp  // resize(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__corner_less_sharp,  // size() function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__corner_less_sharp,  // get_const(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__corner_less_sharp,  // get(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__corner_less_sharp,  // fetch(index, &value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__corner_less_sharp,  // assign(index, value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__corner_less_sharp  // resize(index) function pointer
   },
   {
-    "surfflat",  // name
+    "surf_flat",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs__msg__AllCloud, surfflat),  // bytes offset in struct
+    offsetof(other_msgs__msg__AllCloud, surf_flat),  // bytes offset in struct
     NULL,  // default value
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surfflat,  // size() function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surfflat,  // get_const(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surfflat,  // get(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surfflat,  // fetch(index, &value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surfflat,  // assign(index, value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surfflat  // resize(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surf_flat,  // size() function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_flat,  // get_const(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_flat,  // get(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surf_flat,  // fetch(index, &value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surf_flat,  // assign(index, value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surf_flat  // resize(index) function pointer
   },
   {
-    "surflessflat",  // name
+    "surf_less_flat",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs__msg__AllCloud, surflessflat),  // bytes offset in struct
+    offsetof(other_msgs__msg__AllCloud, surf_less_flat),  // bytes offset in struct
     NULL,  // default value
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surflessflat,  // size() function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surflessflat,  // get_const(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surflessflat,  // get(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surflessflat,  // fetch(index, &value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surflessflat,  // assign(index, value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surflessflat  // resize(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__surf_less_flat,  // size() function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__surf_less_flat,  // get_const(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__surf_less_flat,  // get(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__surf_less_flat,  // fetch(index, &value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__surf_less_flat,  // assign(index, value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__surf_less_flat  // resize(index) function pointer
   },
   {
-    "fullpointres",  // name
+    "full_point_res",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     NULL,  // members of sub message (initialized later)
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs__msg__AllCloud, fullpointres),  // bytes offset in struct
+    offsetof(other_msgs__msg__AllCloud, full_point_res),  // bytes offset in struct
     NULL,  // default value
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__fullpointres,  // size() function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__fullpointres,  // get_const(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__fullpointres,  // get(index) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__fullpointres,  // fetch(index, &value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__fullpointres,  // assign(index, value) function pointer
-    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__fullpointres  // resize(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__size_function__AllCloud__full_point_res,  // size() function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_const_function__AllCloud__full_point_res,  // get_const(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__get_function__AllCloud__full_point_res,  // get(index) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__fetch_function__AllCloud__full_point_res,  // fetch(index, &value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__assign_function__AllCloud__full_point_res,  // assign(index, value) function pointer
+    other_msgs__msg__AllCloud__rosidl_typesupport_introspection_c__resize_function__AllCloud__full_point_res  // resize(index) function pointer
   }
 };
 

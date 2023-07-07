@@ -7,6 +7,8 @@ file(REMOVE_RECURSE
   "../rosidl_generator_py/other_msgs/msg/_all_cloud_s.c"
   "../rosidl_generator_py/other_msgs/msg/_point.py"
   "../rosidl_generator_py/other_msgs/msg/_point_s.c"
+  "../rosidl_generator_py/other_msgs/msg/_seg_cloud.py"
+  "../rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c"
   "CMakeFiles/other_msgs__py"
 )
 

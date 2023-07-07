@@ -7,7 +7,11 @@ file(REMOVE_RECURSE
   "rosidl_generator_cpp/other_msgs/msg/detail/point__builder.hpp"
   "rosidl_generator_cpp/other_msgs/msg/detail/point__struct.hpp"
   "rosidl_generator_cpp/other_msgs/msg/detail/point__traits.hpp"
+  "rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp"
+  "rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp"
+  "rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp"
   "rosidl_generator_cpp/other_msgs/msg/point.hpp"
+  "rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp"
 )
 
 # Per-language clean rules from dependency scanning.

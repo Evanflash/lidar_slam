@@ -68,6 +68,7 @@ include CMakeFiles/other_msgs.dir/progress.make
 
 CMakeFiles/other_msgs: /home/evan/code/lidar_slam/lidar_slam/src/other_msgs/msg/Point.msg
 CMakeFiles/other_msgs: /home/evan/code/lidar_slam/lidar_slam/src/other_msgs/msg/AllCloud.msg
+CMakeFiles/other_msgs: /home/evan/code/lidar_slam/lidar_slam/src/other_msgs/msg/SegCloud.msg
 CMakeFiles/other_msgs: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 CMakeFiles/other_msgs: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 CMakeFiles/other_msgs: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl

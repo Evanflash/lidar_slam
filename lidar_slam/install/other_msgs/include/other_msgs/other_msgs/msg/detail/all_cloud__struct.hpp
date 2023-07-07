@@ -18,11 +18,11 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__struct.hpp"
-// Member 'cornersharp'
-// Member 'cornerlesssharp'
-// Member 'surfflat'
-// Member 'surflessflat'
-// Member 'fullpointres'
+// Member 'corner_sharp'
+// Member 'corner_less_sharp'
+// Member 'surf_flat'
+// Member 'surf_less_flat'
+// Member 'full_point_res'
 #include "other_msgs/msg/detail/point__struct.hpp"
 
 #ifndef _WIN32
@@ -59,21 +59,21 @@ struct AllCloud_
   using _header_type =
     std_msgs::msg::Header_<ContainerAllocator>;
   _header_type header;
-  using _cornersharp_type =
+  using _corner_sharp_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _cornersharp_type cornersharp;
-  using _cornerlesssharp_type =
+  _corner_sharp_type corner_sharp;
+  using _corner_less_sharp_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _cornerlesssharp_type cornerlesssharp;
-  using _surfflat_type =
+  _corner_less_sharp_type corner_less_sharp;
+  using _surf_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _surfflat_type surfflat;
-  using _surflessflat_type =
+  _surf_flat_type surf_flat;
+  using _surf_less_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _surflessflat_type surflessflat;
-  using _fullpointres_type =
+  _surf_less_flat_type surf_less_flat;
+  using _full_point_res_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _fullpointres_type fullpointres;
+  _full_point_res_type full_point_res;
 
   // setters for named parameter idiom
   Type & set__header(
@@ -82,34 +82,34 @@ struct AllCloud_
     this->header = _arg;
     return *this;
   }
-  Type & set__cornersharp(
+  Type & set__corner_sharp(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->cornersharp = _arg;
+    this->corner_sharp = _arg;
     return *this;
   }
-  Type & set__cornerlesssharp(
+  Type & set__corner_less_sharp(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->cornerlesssharp = _arg;
+    this->corner_less_sharp = _arg;
     return *this;
   }
-  Type & set__surfflat(
+  Type & set__surf_flat(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->surfflat = _arg;
+    this->surf_flat = _arg;
     return *this;
   }
-  Type & set__surflessflat(
+  Type & set__surf_less_flat(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->surflessflat = _arg;
+    this->surf_less_flat = _arg;
     return *this;
   }
-  Type & set__fullpointres(
+  Type & set__full_point_res(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->fullpointres = _arg;
+    this->full_point_res = _arg;
     return *this;
   }
 
@@ -158,19 +158,19 @@ struct AllCloud_
     if (this->header != other.header) {
       return false;
     }
-    if (this->cornersharp != other.cornersharp) {
+    if (this->corner_sharp != other.corner_sharp) {
       return false;
     }
-    if (this->cornerlesssharp != other.cornerlesssharp) {
+    if (this->corner_less_sharp != other.corner_less_sharp) {
       return false;
     }
-    if (this->surfflat != other.surfflat) {
+    if (this->surf_flat != other.surf_flat) {
       return false;
     }
-    if (this->surflessflat != other.surflessflat) {
+    if (this->surf_less_flat != other.surf_less_flat) {
       return false;
     }
-    if (this->fullpointres != other.fullpointres) {
+    if (this->full_point_res != other.full_point_res) {
       return false;
     }
     return true;

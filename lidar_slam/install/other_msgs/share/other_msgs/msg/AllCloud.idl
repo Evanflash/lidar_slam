@@ -12,15 +12,25 @@ module other_msgs {
     struct AllCloud {
       std_msgs::msg::Header header;
 
-      sequence<other_msgs::msg::Point> cornersharp;
+      @verbatim (language="comment", text=
+        "曲率最大的点")
+      sequence<other_msgs::msg::Point> corner_sharp;
 
-      sequence<other_msgs::msg::Point> cornerlesssharp;
+      @verbatim (language="comment", text=
+        "曲率次大的点")
+      sequence<other_msgs::msg::Point> corner_less_sharp;
 
-      sequence<other_msgs::msg::Point> surfflat;
+      @verbatim (language="comment", text=
+        "曲率最小的点")
+      sequence<other_msgs::msg::Point> surf_flat;
 
-      sequence<other_msgs::msg::Point> surflessflat;
+      @verbatim (language="comment", text=
+        "曲率次小的点")
+      sequence<other_msgs::msg::Point> surf_less_flat;
 
-      sequence<other_msgs::msg::Point> fullpointres;
+      @verbatim (language="comment", text=
+        "所有点")
+      sequence<other_msgs::msg::Point> full_point_res;
     };
   };
 };

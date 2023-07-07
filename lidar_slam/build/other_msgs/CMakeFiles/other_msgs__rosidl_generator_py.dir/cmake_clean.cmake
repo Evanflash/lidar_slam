@@ -3,6 +3,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c.o.d"
   "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_point_s.c.o"
   "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_point_s.c.o.d"
+  "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o"
+  "CMakeFiles/other_msgs__rosidl_generator_py.dir/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c.o.d"
   "rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.pdb"
   "rosidl_generator_py/other_msgs/libother_msgs__rosidl_generator_py.so"
 )

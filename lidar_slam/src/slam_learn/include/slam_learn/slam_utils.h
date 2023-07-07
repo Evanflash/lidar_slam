@@ -2,11 +2,21 @@
 #define _LIDAR_SLAM_UTILS_H
 
 #include "other_msgs/msg/point.hpp"
+#include "other_msgs/msg/seg_cloud.hpp"
+
+#include <string>
+#include <vector>
+#include <unordered_set>
+#include <boost/circular_buffer.hpp>
+#include <Eigen/Dense>
+
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>
 
 #include <pcl/point_cloud.h>
 #include <pcl/point_types.h>
+#include <pcl_conversions/pcl_conversions.h>
+#include <pcl/filters/filter.h>
 
 namespace lidarslam{
 

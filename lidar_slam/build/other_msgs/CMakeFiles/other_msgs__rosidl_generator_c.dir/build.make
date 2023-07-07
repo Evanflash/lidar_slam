@@ -84,6 +84,7 @@ rosidl_generator_c/other_msgs/msg/point.h: /opt/ros/humble/share/rosidl_generato
 rosidl_generator_c/other_msgs/msg/point.h: /opt/ros/humble/share/rosidl_generator_c/resource/srv__type_support.h.em
 rosidl_generator_c/other_msgs/msg/point.h: rosidl_adapter/other_msgs/msg/Point.idl
 rosidl_generator_c/other_msgs/msg/point.h: rosidl_adapter/other_msgs/msg/AllCloud.idl
+rosidl_generator_c/other_msgs/msg/point.h: rosidl_adapter/other_msgs/msg/SegCloud.idl
 rosidl_generator_c/other_msgs/msg/point.h: /opt/ros/humble/share/std_msgs/msg/Bool.idl
 rosidl_generator_c/other_msgs/msg/point.h: /opt/ros/humble/share/std_msgs/msg/Byte.idl
 rosidl_generator_c/other_msgs/msg/point.h: /opt/ros/humble/share/std_msgs/msg/ByteMultiArray.idl
@@ -140,11 +141,26 @@ rosidl_generator_c/other_msgs/msg/detail/all_cloud__struct.h: rosidl_generator_c
 rosidl_generator_c/other_msgs/msg/detail/all_cloud__type_support.h: rosidl_generator_c/other_msgs/msg/point.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/all_cloud__type_support.h
 
+rosidl_generator_c/other_msgs/msg/seg_cloud.h: rosidl_generator_c/other_msgs/msg/point.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/seg_cloud.h
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h: rosidl_generator_c/other_msgs/msg/point.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h: rosidl_generator_c/other_msgs/msg/point.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__type_support.h: rosidl_generator_c/other_msgs/msg/point.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/seg_cloud__type_support.h
+
 rosidl_generator_c/other_msgs/msg/detail/point__functions.c: rosidl_generator_c/other_msgs/msg/point.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/point__functions.c
 
 rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c: rosidl_generator_c/other_msgs/msg/point.h
 	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c
+
+rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c: rosidl_generator_c/other_msgs/msg/point.h
+	@$(CMAKE_COMMAND) -E touch_nocreate rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c
 
 CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/point__functions.c.o: CMakeFiles/other_msgs__rosidl_generator_c.dir/flags.make
 CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/point__functions.c.o: rosidl_generator_c/other_msgs/msg/detail/point__functions.c
@@ -174,23 +190,39 @@ CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c.s"
 	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c -o CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c.s
 
+CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o: CMakeFiles/other_msgs__rosidl_generator_c.dir/flags.make
+CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o: rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c
+CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o: CMakeFiles/other_msgs__rosidl_generator_c.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o -MF CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o.d -o CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o -c /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c
+
+CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c > CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.i
+
+CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c -o CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.s
+
 # Object files for target other_msgs__rosidl_generator_c
 other_msgs__rosidl_generator_c_OBJECTS = \
 "CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/point__functions.c.o" \
-"CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c.o"
+"CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c.o" \
+"CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o"
 
 # External object files for target other_msgs__rosidl_generator_c
 other_msgs__rosidl_generator_c_EXTERNAL_OBJECTS =
 
 libother_msgs__rosidl_generator_c.so: CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/point__functions.c.o
 libother_msgs__rosidl_generator_c.so: CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/all_cloud__functions.c.o
+libother_msgs__rosidl_generator_c.so: CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c.o
 libother_msgs__rosidl_generator_c.so: CMakeFiles/other_msgs__rosidl_generator_c.dir/build.make
 libother_msgs__rosidl_generator_c.so: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so
 libother_msgs__rosidl_generator_c.so: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_generator_c.so
 libother_msgs__rosidl_generator_c.so: /opt/ros/humble/lib/librosidl_runtime_c.so
 libother_msgs__rosidl_generator_c.so: /opt/ros/humble/lib/librcutils.so
 libother_msgs__rosidl_generator_c.so: CMakeFiles/other_msgs__rosidl_generator_c.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C shared library libother_msgs__rosidl_generator_c.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Linking C shared library libother_msgs__rosidl_generator_c.so"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/other_msgs__rosidl_generator_c.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -210,7 +242,12 @@ CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_m
 CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/point__functions.h
 CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/point__struct.h
 CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/point__type_support.h
+CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.c
+CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h
+CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h
+CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/detail/seg_cloud__type_support.h
 CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/point.h
+CMakeFiles/other_msgs__rosidl_generator_c.dir/depend: rosidl_generator_c/other_msgs/msg/seg_cloud.h
 	cd /home/evan/code/lidar_slam/lidar_slam/build/other_msgs && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/evan/code/lidar_slam/lidar_slam/src/other_msgs /home/evan/code/lidar_slam/lidar_slam/src/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/CMakeFiles/other_msgs__rosidl_generator_c.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/other_msgs__rosidl_generator_c.dir/depend
 

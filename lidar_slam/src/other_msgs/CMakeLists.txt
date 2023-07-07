@@ -10,6 +10,7 @@ find_package(rosidl_default_generators)
 rosidl_generate_interfaces(${PROJECT_NAME}
   "msg/Point.msg"
   "msg/AllCloud.msg"
+  "msg/SegCloud.msg"
   DEPENDENCIES std_msgs
 )
 

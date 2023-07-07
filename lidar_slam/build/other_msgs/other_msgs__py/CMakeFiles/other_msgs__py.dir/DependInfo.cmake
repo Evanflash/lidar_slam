@@ -19,6 +19,8 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_all_cloud_s.c" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_point.py" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_point_s.c" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_seg_cloud.py" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/msg/_seg_cloud_s.c" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_py/other_msgs/_other_msgs_s.ep.rosidl_typesupport_fastrtps_c.c"
   )
 
 

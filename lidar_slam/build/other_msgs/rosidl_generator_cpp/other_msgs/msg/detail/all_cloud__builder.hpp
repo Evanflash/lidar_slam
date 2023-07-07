@@ -21,15 +21,15 @@ namespace msg
 namespace builder
 {
 
-class Init_AllCloud_fullpointres
+class Init_AllCloud_full_point_res
 {
 public:
-  explicit Init_AllCloud_fullpointres(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_full_point_res(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  ::other_msgs::msg::AllCloud fullpointres(::other_msgs::msg::AllCloud::_fullpointres_type arg)
+  ::other_msgs::msg::AllCloud full_point_res(::other_msgs::msg::AllCloud::_full_point_res_type arg)
   {
-    msg_.fullpointres = std::move(arg);
+    msg_.full_point_res = std::move(arg);
     return std::move(msg_);
   }
 
@@ -37,64 +37,64 @@ private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_surflessflat
+class Init_AllCloud_surf_less_flat
 {
 public:
-  explicit Init_AllCloud_surflessflat(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_surf_less_flat(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_fullpointres surflessflat(::other_msgs::msg::AllCloud::_surflessflat_type arg)
+  Init_AllCloud_full_point_res surf_less_flat(::other_msgs::msg::AllCloud::_surf_less_flat_type arg)
   {
-    msg_.surflessflat = std::move(arg);
-    return Init_AllCloud_fullpointres(msg_);
+    msg_.surf_less_flat = std::move(arg);
+    return Init_AllCloud_full_point_res(msg_);
   }
 
 private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_surfflat
+class Init_AllCloud_surf_flat
 {
 public:
-  explicit Init_AllCloud_surfflat(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_surf_flat(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_surflessflat surfflat(::other_msgs::msg::AllCloud::_surfflat_type arg)
+  Init_AllCloud_surf_less_flat surf_flat(::other_msgs::msg::AllCloud::_surf_flat_type arg)
   {
-    msg_.surfflat = std::move(arg);
-    return Init_AllCloud_surflessflat(msg_);
+    msg_.surf_flat = std::move(arg);
+    return Init_AllCloud_surf_less_flat(msg_);
   }
 
 private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_cornerlesssharp
+class Init_AllCloud_corner_less_sharp
 {
 public:
-  explicit Init_AllCloud_cornerlesssharp(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_corner_less_sharp(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_surfflat cornerlesssharp(::other_msgs::msg::AllCloud::_cornerlesssharp_type arg)
+  Init_AllCloud_surf_flat corner_less_sharp(::other_msgs::msg::AllCloud::_corner_less_sharp_type arg)
   {
-    msg_.cornerlesssharp = std::move(arg);
-    return Init_AllCloud_surfflat(msg_);
+    msg_.corner_less_sharp = std::move(arg);
+    return Init_AllCloud_surf_flat(msg_);
   }
 
 private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_cornersharp
+class Init_AllCloud_corner_sharp
 {
 public:
-  explicit Init_AllCloud_cornersharp(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_corner_sharp(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_cornerlesssharp cornersharp(::other_msgs::msg::AllCloud::_cornersharp_type arg)
+  Init_AllCloud_corner_less_sharp corner_sharp(::other_msgs::msg::AllCloud::_corner_sharp_type arg)
   {
-    msg_.cornersharp = std::move(arg);
-    return Init_AllCloud_cornerlesssharp(msg_);
+    msg_.corner_sharp = std::move(arg);
+    return Init_AllCloud_corner_less_sharp(msg_);
   }
 
 private:
@@ -107,10 +107,10 @@ public:
   Init_AllCloud_header()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  Init_AllCloud_cornersharp header(::other_msgs::msg::AllCloud::_header_type arg)
+  Init_AllCloud_corner_sharp header(::other_msgs::msg::AllCloud::_header_type arg)
   {
     msg_.header = std::move(arg);
-    return Init_AllCloud_cornersharp(msg_);
+    return Init_AllCloud_corner_sharp(msg_);
   }
 
 private:

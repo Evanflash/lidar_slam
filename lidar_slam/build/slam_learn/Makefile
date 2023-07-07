@@ -197,6 +197,43 @@ slam_learn_uninstall/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/slam_learn_uninstall.dir/build.make CMakeFiles/slam_learn_uninstall.dir/build
 .PHONY : slam_learn_uninstall/fast
 
+#=============================================================================
+# Target rules for targets named data_process_node
+
+# Build rule for target.
+data_process_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_process_node
+.PHONY : data_process_node
+
+# fast build rule for target.
+data_process_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/build
+.PHONY : data_process_node/fast
+
+src/data_process.o: src/data_process.cpp.o
+.PHONY : src/data_process.o
+
+# target to build an object file
+src/data_process.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/src/data_process.cpp.o
+.PHONY : src/data_process.cpp.o
+
+src/data_process.i: src/data_process.cpp.i
+.PHONY : src/data_process.i
+
+# target to preprocess a source file
+src/data_process.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/src/data_process.cpp.i
+.PHONY : src/data_process.cpp.i
+
+src/data_process.s: src/data_process.cpp.s
+.PHONY : src/data_process.s
+
+# target to generate assembly for a file
+src/data_process.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/src/data_process.cpp.s
+.PHONY : src/data_process.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -212,6 +249,10 @@ help:
 	@echo "... test"
 	@echo "... slam_learn_uninstall"
 	@echo "... uninstall"
+	@echo "... data_process_node"
+	@echo "... src/data_process.o"
+	@echo "... src/data_process.i"
+	@echo "... src/data_process.s"
 .PHONY : help
 
 

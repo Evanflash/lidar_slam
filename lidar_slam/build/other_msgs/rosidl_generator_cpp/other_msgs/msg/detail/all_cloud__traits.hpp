@@ -17,11 +17,11 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__traits.hpp"
-// Member 'cornersharp'
-// Member 'cornerlesssharp'
-// Member 'surfflat'
-// Member 'surflessflat'
-// Member 'fullpointres'
+// Member 'corner_sharp'
+// Member 'corner_less_sharp'
+// Member 'surf_flat'
+// Member 'surf_less_flat'
+// Member 'full_point_res'
 #include "other_msgs/msg/detail/point__traits.hpp"
 
 namespace other_msgs
@@ -42,14 +42,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: cornersharp
+  // member: corner_sharp
   {
-    if (msg.cornersharp.size() == 0) {
-      out << "cornersharp: []";
+    if (msg.corner_sharp.size() == 0) {
+      out << "corner_sharp: []";
     } else {
-      out << "cornersharp: [";
-      size_t pending_items = msg.cornersharp.size();
-      for (auto item : msg.cornersharp) {
+      out << "corner_sharp: [";
+      size_t pending_items = msg.corner_sharp.size();
+      for (auto item : msg.corner_sharp) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -60,14 +60,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: cornerlesssharp
+  // member: corner_less_sharp
   {
-    if (msg.cornerlesssharp.size() == 0) {
-      out << "cornerlesssharp: []";
+    if (msg.corner_less_sharp.size() == 0) {
+      out << "corner_less_sharp: []";
     } else {
-      out << "cornerlesssharp: [";
-      size_t pending_items = msg.cornerlesssharp.size();
-      for (auto item : msg.cornerlesssharp) {
+      out << "corner_less_sharp: [";
+      size_t pending_items = msg.corner_less_sharp.size();
+      for (auto item : msg.corner_less_sharp) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -78,14 +78,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: surfflat
+  // member: surf_flat
   {
-    if (msg.surfflat.size() == 0) {
-      out << "surfflat: []";
+    if (msg.surf_flat.size() == 0) {
+      out << "surf_flat: []";
     } else {
-      out << "surfflat: [";
-      size_t pending_items = msg.surfflat.size();
-      for (auto item : msg.surfflat) {
+      out << "surf_flat: [";
+      size_t pending_items = msg.surf_flat.size();
+      for (auto item : msg.surf_flat) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -96,14 +96,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: surflessflat
+  // member: surf_less_flat
   {
-    if (msg.surflessflat.size() == 0) {
-      out << "surflessflat: []";
+    if (msg.surf_less_flat.size() == 0) {
+      out << "surf_less_flat: []";
     } else {
-      out << "surflessflat: [";
-      size_t pending_items = msg.surflessflat.size();
-      for (auto item : msg.surflessflat) {
+      out << "surf_less_flat: [";
+      size_t pending_items = msg.surf_less_flat.size();
+      for (auto item : msg.surf_less_flat) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -114,14 +114,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: fullpointres
+  // member: full_point_res
   {
-    if (msg.fullpointres.size() == 0) {
-      out << "fullpointres: []";
+    if (msg.full_point_res.size() == 0) {
+      out << "full_point_res: []";
     } else {
-      out << "fullpointres: [";
-      size_t pending_items = msg.fullpointres.size();
-      for (auto item : msg.fullpointres) {
+      out << "full_point_res: [";
+      size_t pending_items = msg.full_point_res.size();
+      for (auto item : msg.full_point_res) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -146,16 +146,16 @@ inline void to_block_style_yaml(
     to_block_style_yaml(msg.header, out, indentation + 2);
   }
 
-  // member: cornersharp
+  // member: corner_sharp
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.cornersharp.size() == 0) {
-      out << "cornersharp: []\n";
+    if (msg.corner_sharp.size() == 0) {
+      out << "corner_sharp: []\n";
     } else {
-      out << "cornersharp:\n";
-      for (auto item : msg.cornersharp) {
+      out << "corner_sharp:\n";
+      for (auto item : msg.corner_sharp) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -165,16 +165,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: cornerlesssharp
+  // member: corner_less_sharp
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.cornerlesssharp.size() == 0) {
-      out << "cornerlesssharp: []\n";
+    if (msg.corner_less_sharp.size() == 0) {
+      out << "corner_less_sharp: []\n";
     } else {
-      out << "cornerlesssharp:\n";
-      for (auto item : msg.cornerlesssharp) {
+      out << "corner_less_sharp:\n";
+      for (auto item : msg.corner_less_sharp) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -184,16 +184,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: surfflat
+  // member: surf_flat
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.surfflat.size() == 0) {
-      out << "surfflat: []\n";
+    if (msg.surf_flat.size() == 0) {
+      out << "surf_flat: []\n";
     } else {
-      out << "surfflat:\n";
-      for (auto item : msg.surfflat) {
+      out << "surf_flat:\n";
+      for (auto item : msg.surf_flat) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -203,16 +203,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: surflessflat
+  // member: surf_less_flat
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.surflessflat.size() == 0) {
-      out << "surflessflat: []\n";
+    if (msg.surf_less_flat.size() == 0) {
+      out << "surf_less_flat: []\n";
     } else {
-      out << "surflessflat:\n";
-      for (auto item : msg.surflessflat) {
+      out << "surf_less_flat:\n";
+      for (auto item : msg.surf_less_flat) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -222,16 +222,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: fullpointres
+  // member: full_point_res
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.fullpointres.size() == 0) {
-      out << "fullpointres: []\n";
+    if (msg.full_point_res.size() == 0) {
+      out << "full_point_res: []\n";
     } else {
-      out << "fullpointres:\n";
-      for (auto item : msg.fullpointres) {
+      out << "full_point_res:\n";
+      for (auto item : msg.full_point_res) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

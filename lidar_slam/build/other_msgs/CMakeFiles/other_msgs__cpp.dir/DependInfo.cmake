@@ -19,6 +19,10 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/point__builder.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/point__struct.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
   "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/point__traits.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__builder.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__struct.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/detail/seg_cloud__traits.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
+  "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/seg_cloud.hpp" "/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_cpp/other_msgs/msg/point.hpp"
   )
 
 

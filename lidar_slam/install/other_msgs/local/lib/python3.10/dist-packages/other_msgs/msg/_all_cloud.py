@@ -64,20 +64,20 @@ class AllCloud(metaclass=Metaclass_AllCloud):
 
     __slots__ = [
         '_header',
-        '_cornersharp',
-        '_cornerlesssharp',
-        '_surfflat',
-        '_surflessflat',
-        '_fullpointres',
+        '_corner_sharp',
+        '_corner_less_sharp',
+        '_surf_flat',
+        '_surf_less_flat',
+        '_full_point_res',
     ]
 
     _fields_and_field_types = {
         'header': 'std_msgs/Header',
-        'cornersharp': 'sequence<other_msgs/Point>',
-        'cornerlesssharp': 'sequence<other_msgs/Point>',
-        'surfflat': 'sequence<other_msgs/Point>',
-        'surflessflat': 'sequence<other_msgs/Point>',
-        'fullpointres': 'sequence<other_msgs/Point>',
+        'corner_sharp': 'sequence<other_msgs/Point>',
+        'corner_less_sharp': 'sequence<other_msgs/Point>',
+        'surf_flat': 'sequence<other_msgs/Point>',
+        'surf_less_flat': 'sequence<other_msgs/Point>',
+        'full_point_res': 'sequence<other_msgs/Point>',
     }
 
     SLOT_TYPES = (
@@ -95,11 +95,11 @@ class AllCloud(metaclass=Metaclass_AllCloud):
             ', '.join(sorted(k for k in kwargs.keys() if '_' + k not in self.__slots__))
         from std_msgs.msg import Header
         self.header = kwargs.get('header', Header())
-        self.cornersharp = kwargs.get('cornersharp', [])
-        self.cornerlesssharp = kwargs.get('cornerlesssharp', [])
-        self.surfflat = kwargs.get('surfflat', [])
-        self.surflessflat = kwargs.get('surflessflat', [])
-        self.fullpointres = kwargs.get('fullpointres', [])
+        self.corner_sharp = kwargs.get('corner_sharp', [])
+        self.corner_less_sharp = kwargs.get('corner_less_sharp', [])
+        self.surf_flat = kwargs.get('surf_flat', [])
+        self.surf_less_flat = kwargs.get('surf_less_flat', [])
+        self.full_point_res = kwargs.get('full_point_res', [])
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -132,15 +132,15 @@ class AllCloud(metaclass=Metaclass_AllCloud):
             return False
         if self.header != other.header:
             return False
-        if self.cornersharp != other.cornersharp:
+        if self.corner_sharp != other.corner_sharp:
             return False
-        if self.cornerlesssharp != other.cornerlesssharp:
+        if self.corner_less_sharp != other.corner_less_sharp:
             return False
-        if self.surfflat != other.surfflat:
+        if self.surf_flat != other.surf_flat:
             return False
-        if self.surflessflat != other.surflessflat:
+        if self.surf_less_flat != other.surf_less_flat:
             return False
-        if self.fullpointres != other.fullpointres:
+        if self.full_point_res != other.full_point_res:
             return False
         return True
 
@@ -164,12 +164,12 @@ class AllCloud(metaclass=Metaclass_AllCloud):
         self._header = value
 
     @builtins.property
-    def cornersharp(self):
-        """Message field 'cornersharp'."""
-        return self._cornersharp
+    def corner_sharp(self):
+        """Message field 'corner_sharp'."""
+        return self._corner_sharp
 
-    @cornersharp.setter
-    def cornersharp(self, value):
+    @corner_sharp.setter
+    def corner_sharp(self, value):
         if __debug__:
             from other_msgs.msg import Point
             from collections.abc import Sequence
@@ -184,16 +184,16 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, Point) for v in value) and
                  True), \
-                "The 'cornersharp' field must be a set or sequence and each value of type 'Point'"
-        self._cornersharp = value
+                "The 'corner_sharp' field must be a set or sequence and each value of type 'Point'"
+        self._corner_sharp = value
 
     @builtins.property
-    def cornerlesssharp(self):
-        """Message field 'cornerlesssharp'."""
-        return self._cornerlesssharp
+    def corner_less_sharp(self):
+        """Message field 'corner_less_sharp'."""
+        return self._corner_less_sharp
 
-    @cornerlesssharp.setter
-    def cornerlesssharp(self, value):
+    @corner_less_sharp.setter
+    def corner_less_sharp(self, value):
         if __debug__:
             from other_msgs.msg import Point
             from collections.abc import Sequence
@@ -208,16 +208,16 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, Point) for v in value) and
                  True), \
-                "The 'cornerlesssharp' field must be a set or sequence and each value of type 'Point'"
-        self._cornerlesssharp = value
+                "The 'corner_less_sharp' field must be a set or sequence and each value of type 'Point'"
+        self._corner_less_sharp = value
 
     @builtins.property
-    def surfflat(self):
-        """Message field 'surfflat'."""
-        return self._surfflat
+    def surf_flat(self):
+        """Message field 'surf_flat'."""
+        return self._surf_flat
 
-    @surfflat.setter
-    def surfflat(self, value):
+    @surf_flat.setter
+    def surf_flat(self, value):
         if __debug__:
             from other_msgs.msg import Point
             from collections.abc import Sequence
@@ -232,16 +232,16 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, Point) for v in value) and
                  True), \
-                "The 'surfflat' field must be a set or sequence and each value of type 'Point'"
-        self._surfflat = value
+                "The 'surf_flat' field must be a set or sequence and each value of type 'Point'"
+        self._surf_flat = value
 
     @builtins.property
-    def surflessflat(self):
-        """Message field 'surflessflat'."""
-        return self._surflessflat
+    def surf_less_flat(self):
+        """Message field 'surf_less_flat'."""
+        return self._surf_less_flat
 
-    @surflessflat.setter
-    def surflessflat(self, value):
+    @surf_less_flat.setter
+    def surf_less_flat(self, value):
         if __debug__:
             from other_msgs.msg import Point
             from collections.abc import Sequence
@@ -256,16 +256,16 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, Point) for v in value) and
                  True), \
-                "The 'surflessflat' field must be a set or sequence and each value of type 'Point'"
-        self._surflessflat = value
+                "The 'surf_less_flat' field must be a set or sequence and each value of type 'Point'"
+        self._surf_less_flat = value
 
     @builtins.property
-    def fullpointres(self):
-        """Message field 'fullpointres'."""
-        return self._fullpointres
+    def full_point_res(self):
+        """Message field 'full_point_res'."""
+        return self._full_point_res
 
-    @fullpointres.setter
-    def fullpointres(self, value):
+    @full_point_res.setter
+    def full_point_res(self, value):
         if __debug__:
             from other_msgs.msg import Point
             from collections.abc import Sequence
@@ -280,5 +280,5 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, Point) for v in value) and
                  True), \
-                "The 'fullpointres' field must be a set or sequence and each value of type 'Point'"
-        self._fullpointres = value
+                "The 'full_point_res' field must be a set or sequence and each value of type 'Point'"
+        self._full_point_res = value
