@@ -1,0 +1,26 @@
+// generated from rosidl_adapter/resource/msg.idl.em
+// with input from other_msgs/msg/AllCloud.msg
+// generated code does not contain a copyright notice
+
+#include "other_msgs/msg/Point.idl"
+#include "std_msgs/msg/Header.idl"
+
+module other_msgs {
+  module msg {
+    @verbatim (language="comment", text=
+      "header")
+    struct AllCloud {
+      std_msgs::msg::Header header;
+
+      sequence<other_msgs::msg::Point> cornersharp;
+
+      sequence<other_msgs::msg::Point> cornerlesssharp;
+
+      sequence<other_msgs::msg::Point> surfflat;
+
+      sequence<other_msgs::msg::Point> surflessflat;
+
+      sequence<other_msgs::msg::Point> fullpointres;
+    };
+  };
+};
