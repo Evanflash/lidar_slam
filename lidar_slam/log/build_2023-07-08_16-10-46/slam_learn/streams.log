@@ -1,0 +1,49 @@
+[0.025s] Invoking command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
+[0.080s] [35m[1mConsolidate compiler generated dependencies of target data_process_node[0m
+[0.100s] [ 50%] Built target data_process_test
+[0.117s] [ 75%] [32mBuilding CXX object CMakeFiles/data_process_node.dir/src/data_process.cpp.o[0m
+[6.018s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:[m[K In constructor ‘[01m[Klidarslam::DataProcess::DataProcess(const string&)[m[K’:
+[6.018s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:60:34:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[Klidarslam::DataProcess::declare_parameter(const string&)[m[K’
+[6.018s]    60 |         [01;31m[Kthis -> declare_parameter(PARAM_VERTICAL_SCANS)[m[K;
+[6.018s]       |         [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.018s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[6.019s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[6.019s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[6.019s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:13[m[K,
+[6.019s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:1[m[K:
+[6.019s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:421:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterT&, const ParameterDescriptor&, bool)[m[K’
+[6.019s]   421 |   [01;36m[Kdeclare_parameter[m[K(
+[6.019s]       |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[6.019s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:421:3:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[6.036s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:60:34:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 1 provided
+[6.036s]    60 |         [01;36m[Kthis -> declare_parameter(PARAM_VERTICAL_SCANS)[m[K;
+[6.036s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.036s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[6.036s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[6.036s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[6.036s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:13[m[K,
+[6.037s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:1[m[K:
+[6.037s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:434:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class ParameterT> auto rclcpp::Node::declare_parameter(const string&, const ParameterDescriptor&, bool)[m[K’
+[6.037s]   434 |   [01;36m[Kdeclare_parameter[m[K(
+[6.037s]       |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[6.037s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:434:3:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[6.037s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:60:34:[m[K [01;36m[Knote: [m[K  couldn’t deduce template parameter ‘[01m[KParameterT[m[K’
+[6.037s]    60 |         [01;36m[Kthis -> declare_parameter(PARAM_VERTICAL_SCANS)[m[K;
+[6.037s]       |         [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.037s] In file included from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28[m[K,
+[6.037s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22[m[K,
+[6.037s]                  from [01m[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155[m[K,
+[6.037s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:13[m[K,
+[6.037s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/data_process.cpp:1[m[K:
+[6.037s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:366:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kconst rclcpp::ParameterValue& rclcpp::Node::declare_parameter(const string&, const rclcpp::ParameterValue&, const ParameterDescriptor&, bool)[m[K’
+[6.038s]   366 |   [01;36m[Kdeclare_parameter[m[K(
+[6.038s]       |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[6.038s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:366:3:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 1 provided
+[6.038s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:391:3:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Kconst rclcpp::ParameterValue& rclcpp::Node::declare_parameter(const string&, rclcpp::ParameterType, const ParameterDescriptor&, bool)[m[K’
+[6.038s]   391 |   [01;36m[Kdeclare_parameter[m[K(
+[6.038s]       |   [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+[6.038s] [01m[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:391:3:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 1 provided
+[8.705s] gmake[2]: *** [CMakeFiles/data_process_node.dir/build.make:76: CMakeFiles/data_process_node.dir/src/data_process.cpp.o] Error 1
+[8.706s] gmake[1]: *** [CMakeFiles/Makefile2:139: CMakeFiles/data_process_node.dir/all] Error 2
+[8.706s] gmake: *** [Makefile:146: all] Error 2
+[8.709s] Invoked command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn' returned '2': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4

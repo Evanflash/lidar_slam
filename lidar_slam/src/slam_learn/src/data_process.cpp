@@ -39,9 +39,9 @@ private:
     // 配置参数
     int vertical_scans;
     int horizontal_scans;
-    int ang_bottom;
-    int ang_top;
-    int segment_theta;
+    float ang_bottom;
+    float ang_top;
+    float segment_theta;
     int segment_valid_point_num;
     int segment_valid_line_num;
     int ground_scan_index;
@@ -54,18 +54,18 @@ public:
         pubSegCloud = this -> create_publisher<other_msgs::msg::SegCloud>(
             "/seg_cloud", 1);
         subLaserCloudIn = this -> create_subscription<sensor_msgs::msg::PointCloud2>(
-            "/lidar_points", 1, std::bind(&DataProcess::run, this, std::placeholders::_1));
+            "/velodyne_points", 1, std::bind(&DataProcess::run, this, std::placeholders::_1));
 
         // 声明参数
-        this -> declare_parameter(PARAM_VERTICAL_SCANS, 32);
-        this -> declare_parameter(PARAM_HORIZONTAL_SCANS, 1080);
-        this -> declare_parameter(PARAM_ANGLE_BOTTOM, -10.6);
-        this -> declare_parameter(PARAM_ANGLE_TOP, 30.7);
-        this -> declare_parameter(PARAM_GROUND_INDEX, 20);
-        this -> declare_parameter(PARAM_SENSOR_ANGLE, 0);
-        this -> declare_parameter(PARAM_SEGMENT_THETA, 60);
-        this -> declare_parameter(PARAM_SEGMENT_VALID_POINT_NUM, 5);
-        this -> declare_parameter(PARAM_SEGMENT_VALID_LINE_NUM, 3);
+        this -> declare_parameter(PARAM_VERTICAL_SCANS, vertical_scans);
+        this -> declare_parameter(PARAM_HORIZONTAL_SCANS, horizontal_scans);
+        this -> declare_parameter(PARAM_ANGLE_BOTTOM, ang_bottom);
+        this -> declare_parameter(PARAM_ANGLE_TOP, ang_top);
+        this -> declare_parameter(PARAM_GROUND_INDEX, ground_scan_index);
+        this -> declare_parameter(PARAM_SENSOR_ANGLE, sensor_mount_angle);
+        this -> declare_parameter(PARAM_SEGMENT_THETA, segment_theta);
+        this -> declare_parameter(PARAM_SEGMENT_VALID_POINT_NUM, segment_valid_point_num);
+        this -> declare_parameter(PARAM_SEGMENT_VALID_LINE_NUM, segment_valid_line_num);
 
         // 更新参数
         if(!this -> get_parameter(PARAM_VERTICAL_SCANS, vertical_scans)){
@@ -127,7 +127,7 @@ private:
         // 参数初始化
         x_resolution = (M_PI * 2) / horizontal_scans;
         y_resolution = (M_PI / 180.0) * (ang_top - ang_bottom) / float(vertical_scans - 1);
-        ang_bottom = -(ang_bottom - 0.1) * (M_PI / 180.0);
+        ang_bottom = (ang_bottom - 0.1) * (M_PI / 180.0);
         segment_theta *= (M_PI / 180.0);
         sensor_mount_angle *= (M_PI / 180.0);
 
@@ -150,7 +150,6 @@ private:
                            std::numeric_limits<float>::quiet_NaN(), 
                            -1);
 
-        cloud_in -> clear();
         std::fill(full_cloud -> points.begin(), full_cloud -> points.end(), nanPoint);
 
         // 矩阵重置
@@ -196,7 +195,7 @@ private:
 
             // 获得在二维图像中，该点的横纵坐标
             float verticalAngle = std::asin(curPoint.z / range);
-            int rowInd = (verticalAngle + ang_bottom) / y_resolution;
+            int rowInd = (verticalAngle - ang_bottom) / y_resolution;
             if(rowInd < 0 || rowInd >= vertical_scans){
                 continue;
             }
@@ -211,7 +210,7 @@ private:
             }
 
             range_mat(rowInd, colInd) = range;
-
+            
             curPoint.intensity = (float)rowInd + (float)colInd / 10000.0;
             size_t index = colInd + rowInd * horizontal_scans;
             full_cloud -> points[index] = curPoint;
@@ -239,7 +238,7 @@ private:
                 float dZ = full_cloud -> points[upperInd].z - full_cloud -> points[lowerInd].z;
 
                 // 计算仰角，小于阈值则为地面点
-                float vertical_angle = std::atan2(dZ, sqrt(dX * dX + dY * dY + dZ * dZ));
+                float vertical_angle = std::atan2(fabs(dZ), sqrt(dX * dX + dY * dY + dZ * dZ));
                 if((vertical_angle - sensor_mount_angle) <= (M_PI / 18.0)){
                     ground_mat(i, j) = 1;
                     ground_mat(i + 1, j) = 1;
@@ -329,7 +328,7 @@ private:
                 int nxtIndy = fromInd.y() + iter.y();
                 nxtIndy = (nxtIndy + horizontal_scans) % horizontal_scans;
                 // 判断临近点的合法性以及是否访问过
-                if(nxtIndx < 0 || nxtIndx > vertical_scans || label_mat(nxtIndx, nxtIndy) != 0){
+                if(nxtIndx < 0 || nxtIndx >= vertical_scans || label_mat(nxtIndx, nxtIndy) != 0){
                     continue;
                 }
                 // 计算当前点与临近点的角度是否大于阈值

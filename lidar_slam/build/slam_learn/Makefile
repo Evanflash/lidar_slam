@@ -210,6 +210,19 @@ data_process_node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/build
 .PHONY : data_process_node/fast
 
+#=============================================================================
+# Target rules for targets named data_process_test
+
+# Build rule for target.
+data_process_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_process_test
+.PHONY : data_process_test
+
+# fast build rule for target.
+data_process_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/build
+.PHONY : data_process_test/fast
+
 src/data_process.o: src/data_process.cpp.o
 .PHONY : src/data_process.o
 
@@ -234,6 +247,30 @@ src/data_process.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/src/data_process.cpp.s
 .PHONY : src/data_process.cpp.s
 
+test/data_process_test.o: test/data_process_test.cpp.o
+.PHONY : test/data_process_test.o
+
+# target to build an object file
+test/data_process_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.o
+.PHONY : test/data_process_test.cpp.o
+
+test/data_process_test.i: test/data_process_test.cpp.i
+.PHONY : test/data_process_test.i
+
+# target to preprocess a source file
+test/data_process_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.i
+.PHONY : test/data_process_test.cpp.i
+
+test/data_process_test.s: test/data_process_test.cpp.s
+.PHONY : test/data_process_test.s
+
+# target to generate assembly for a file
+test/data_process_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.s
+.PHONY : test/data_process_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -250,9 +287,13 @@ help:
 	@echo "... slam_learn_uninstall"
 	@echo "... uninstall"
 	@echo "... data_process_node"
+	@echo "... data_process_test"
 	@echo "... src/data_process.o"
 	@echo "... src/data_process.i"
 	@echo "... src/data_process.s"
+	@echo "... test/data_process_test.o"
+	@echo "... test/data_process_test.i"
+	@echo "... test/data_process_test.s"
 .PHONY : help
 
 

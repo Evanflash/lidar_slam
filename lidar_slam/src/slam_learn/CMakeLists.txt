@@ -32,13 +32,24 @@ target_link_libraries(data_process_node
 )
 ament_target_dependencies(data_process_node ${dependencies} Eigen3)
 
+# test
+add_executable(data_process_test test/data_process_test.cpp)
+target_link_libraries(data_process_test
+  ${PCL_LIBRARIES}
+)
+ament_target_dependencies(data_process_test ${dependencies})
+
+
 install(TARGETS
   data_process_node
+  data_process_test
   DESTINATION lib/${PROJECT_NAME}
 )
 
 install(DIRECTORY
   config
+  launch
+  rviz
   DESTINATION share/${PROJECT_NAME}
 )
 
