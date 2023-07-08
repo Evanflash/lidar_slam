@@ -138,6 +138,11 @@ private:
 
         // 分配大小
         full_cloud -> resize(cloud_size);
+
+        // 矩阵分配大小
+        range_mat.resize(vertical_scans, horizontal_scans);
+        ground_mat.resize(vertical_scans, horizontal_scans);
+        label_mat.resize(vertical_scans, horizontal_scans);
     }
 
     /**
@@ -153,23 +158,21 @@ private:
         std::fill(full_cloud -> points.begin(), full_cloud -> points.end(), nanPoint);
 
         // 矩阵重置
-        range_mat.resize(vertical_scans, horizontal_scans);
-        ground_mat.resize(vertical_scans, horizontal_scans);
-        label_mat.resize(vertical_scans, horizontal_scans);
-
         range_mat.fill(__FLT_MAX__);
         ground_mat.setZero();
         label_mat.setZero();
 
         // 消息重置
-        std::vector<other_msgs::msg::Point> p1;
-        std::vector<other_msgs::msg::Point> p2;
-        seg_msg.ground_cloud.swap(p1);
+        std::vector<other_msgs::msg::Point>().swap(seg_msg.ground_cloud);
         seg_msg.ground_cloud.reserve(cloud_size);
         seg_msg.ground_range.assign(cloud_size, 0);
-        seg_msg.seg_cloud.swap(p2);
+        seg_msg.grd_ring_str_ind.resize(vertical_scans);
+        seg_msg.grd_ring_end_ind.resize(vertical_scans);
+        std::vector<other_msgs::msg::Point>().swap(seg_msg.seg_cloud);
         seg_msg.seg_cloud.reserve(cloud_size);
         seg_msg.seg_range.assign(cloud_size, 0);
+        seg_msg.seg_ring_str_ind.resize(vertical_scans);
+        seg_msg.seg_ring_end_ind.resize(vertical_scans);
 
         // 重置聚类标签
         label_count = 1;
@@ -258,6 +261,8 @@ private:
         for(int i = 0; i <= ground_scan_index; ++i){
             for(int j = 0; j < horizontal_scans; ++j){
                 if(ground_mat(i, j) == 1){
+                    seg_msg.grd_ring_str_ind[i] = curInd;
+
                     other_msgs::msg::Point point_msg;
                     int ind = j + i * horizontal_scans;
                     point_msg.x = full_cloud -> points[ind].x;
@@ -269,6 +274,7 @@ private:
                     ++curInd;
                 }
             }
+            seg_msg.grd_ring_end_ind[i] = curInd - 1 - 5;
         }
     }
 
@@ -286,17 +292,20 @@ private:
         for(int i = 0; i < vertical_scans; ++i){
             for(int j = 0; j < horizontal_scans; ++j){
                 if(label_mat(i, j) > 0 && label_mat(i, j) != 999999){
+                    seg_msg.seg_ring_str_ind[i] = curInd;
+
                     int ind = j + i * horizontal_scans;
                     other_msgs::msg::Point point_msg;
                     point_msg.x = full_cloud -> points[ind].x;
                     point_msg.y = full_cloud -> points[ind].y;
                     point_msg.z = full_cloud -> points[ind].z;
-                    point_msg.i = label_mat(i, j);
+                    point_msg.i = full_cloud -> points[ind].intensity;
                     seg_msg.seg_cloud.push_back(point_msg);
                     seg_msg.seg_range[curInd] = range_mat(i, j);
                     ++curInd;
                 }
             }
+            seg_msg.seg_ring_end_ind[i] = curInd - 1 - 5;
         }
     }
 

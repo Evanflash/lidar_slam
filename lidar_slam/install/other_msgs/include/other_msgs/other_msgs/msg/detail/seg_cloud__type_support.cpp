@@ -37,6 +37,96 @@ void SegCloud_fini_function(void * message_memory)
   typed_message->~SegCloud();
 }
 
+size_t size_function__SegCloud__seg_ring_str_ind(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__SegCloud__seg_ring_str_ind(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__SegCloud__seg_ring_str_ind(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__SegCloud__seg_ring_str_ind(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const int32_t *>(
+    get_const_function__SegCloud__seg_ring_str_ind(untyped_member, index));
+  auto & value = *reinterpret_cast<int32_t *>(untyped_value);
+  value = item;
+}
+
+void assign_function__SegCloud__seg_ring_str_ind(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<int32_t *>(
+    get_function__SegCloud__seg_ring_str_ind(untyped_member, index));
+  const auto & value = *reinterpret_cast<const int32_t *>(untyped_value);
+  item = value;
+}
+
+void resize_function__SegCloud__seg_ring_str_ind(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  member->resize(size);
+}
+
+size_t size_function__SegCloud__seg_ring_end_ind(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__SegCloud__seg_ring_end_ind(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__SegCloud__seg_ring_end_ind(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__SegCloud__seg_ring_end_ind(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const int32_t *>(
+    get_const_function__SegCloud__seg_ring_end_ind(untyped_member, index));
+  auto & value = *reinterpret_cast<int32_t *>(untyped_value);
+  value = item;
+}
+
+void assign_function__SegCloud__seg_ring_end_ind(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<int32_t *>(
+    get_function__SegCloud__seg_ring_end_ind(untyped_member, index));
+  const auto & value = *reinterpret_cast<const int32_t *>(untyped_value);
+  item = value;
+}
+
+void resize_function__SegCloud__seg_ring_end_ind(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  member->resize(size);
+}
+
 size_t size_function__SegCloud__seg_cloud(const void * untyped_member)
 {
   const auto * member = reinterpret_cast<const std::vector<other_msgs::msg::Point> *>(untyped_member);
@@ -124,6 +214,96 @@ void resize_function__SegCloud__seg_range(void * untyped_member, size_t size)
 {
   auto * member =
     reinterpret_cast<std::vector<float> *>(untyped_member);
+  member->resize(size);
+}
+
+size_t size_function__SegCloud__grd_ring_str_ind(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__SegCloud__grd_ring_str_ind(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__SegCloud__grd_ring_str_ind(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__SegCloud__grd_ring_str_ind(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const int32_t *>(
+    get_const_function__SegCloud__grd_ring_str_ind(untyped_member, index));
+  auto & value = *reinterpret_cast<int32_t *>(untyped_value);
+  value = item;
+}
+
+void assign_function__SegCloud__grd_ring_str_ind(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<int32_t *>(
+    get_function__SegCloud__grd_ring_str_ind(untyped_member, index));
+  const auto & value = *reinterpret_cast<const int32_t *>(untyped_value);
+  item = value;
+}
+
+void resize_function__SegCloud__grd_ring_str_ind(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  member->resize(size);
+}
+
+size_t size_function__SegCloud__grd_ring_end_ind(const void * untyped_member)
+{
+  const auto * member = reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return member->size();
+}
+
+const void * get_const_function__SegCloud__grd_ring_end_ind(const void * untyped_member, size_t index)
+{
+  const auto & member =
+    *reinterpret_cast<const std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void * get_function__SegCloud__grd_ring_end_ind(void * untyped_member, size_t index)
+{
+  auto & member =
+    *reinterpret_cast<std::vector<int32_t> *>(untyped_member);
+  return &member[index];
+}
+
+void fetch_function__SegCloud__grd_ring_end_ind(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const auto & item = *reinterpret_cast<const int32_t *>(
+    get_const_function__SegCloud__grd_ring_end_ind(untyped_member, index));
+  auto & value = *reinterpret_cast<int32_t *>(untyped_value);
+  value = item;
+}
+
+void assign_function__SegCloud__grd_ring_end_ind(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  auto & item = *reinterpret_cast<int32_t *>(
+    get_function__SegCloud__grd_ring_end_ind(untyped_member, index));
+  const auto & value = *reinterpret_cast<const int32_t *>(untyped_value);
+  item = value;
+}
+
+void resize_function__SegCloud__grd_ring_end_ind(void * untyped_member, size_t size)
+{
+  auto * member =
+    reinterpret_cast<std::vector<int32_t> *>(untyped_member);
   member->resize(size);
 }
 
@@ -217,7 +397,7 @@ void resize_function__SegCloud__ground_range(void * untyped_member, size_t size)
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember SegCloud_message_member_array[5] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember SegCloud_message_member_array[9] = {
   {
     "header",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -234,6 +414,40 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember SegCloud_mess
     nullptr,  // fetch(index, &value) function pointer
     nullptr,  // assign(index, value) function pointer
     nullptr  // resize(index) function pointer
+  },
+  {
+    "seg_ring_str_ind",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(other_msgs::msg::SegCloud, seg_ring_str_ind),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__SegCloud__seg_ring_str_ind,  // size() function pointer
+    get_const_function__SegCloud__seg_ring_str_ind,  // get_const(index) function pointer
+    get_function__SegCloud__seg_ring_str_ind,  // get(index) function pointer
+    fetch_function__SegCloud__seg_ring_str_ind,  // fetch(index, &value) function pointer
+    assign_function__SegCloud__seg_ring_str_ind,  // assign(index, value) function pointer
+    resize_function__SegCloud__seg_ring_str_ind  // resize(index) function pointer
+  },
+  {
+    "seg_ring_end_ind",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(other_msgs::msg::SegCloud, seg_ring_end_ind),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__SegCloud__seg_ring_end_ind,  // size() function pointer
+    get_const_function__SegCloud__seg_ring_end_ind,  // get_const(index) function pointer
+    get_function__SegCloud__seg_ring_end_ind,  // get(index) function pointer
+    fetch_function__SegCloud__seg_ring_end_ind,  // fetch(index, &value) function pointer
+    assign_function__SegCloud__seg_ring_end_ind,  // assign(index, value) function pointer
+    resize_function__SegCloud__seg_ring_end_ind  // resize(index) function pointer
   },
   {
     "seg_cloud",  // name
@@ -268,6 +482,40 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember SegCloud_mess
     fetch_function__SegCloud__seg_range,  // fetch(index, &value) function pointer
     assign_function__SegCloud__seg_range,  // assign(index, value) function pointer
     resize_function__SegCloud__seg_range  // resize(index) function pointer
+  },
+  {
+    "grd_ring_str_ind",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(other_msgs::msg::SegCloud, grd_ring_str_ind),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__SegCloud__grd_ring_str_ind,  // size() function pointer
+    get_const_function__SegCloud__grd_ring_str_ind,  // get_const(index) function pointer
+    get_function__SegCloud__grd_ring_str_ind,  // get(index) function pointer
+    fetch_function__SegCloud__grd_ring_str_ind,  // fetch(index, &value) function pointer
+    assign_function__SegCloud__grd_ring_str_ind,  // assign(index, value) function pointer
+    resize_function__SegCloud__grd_ring_str_ind  // resize(index) function pointer
+  },
+  {
+    "grd_ring_end_ind",  // name
+    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    nullptr,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(other_msgs::msg::SegCloud, grd_ring_end_ind),  // bytes offset in struct
+    nullptr,  // default value
+    size_function__SegCloud__grd_ring_end_ind,  // size() function pointer
+    get_const_function__SegCloud__grd_ring_end_ind,  // get_const(index) function pointer
+    get_function__SegCloud__grd_ring_end_ind,  // get(index) function pointer
+    fetch_function__SegCloud__grd_ring_end_ind,  // fetch(index, &value) function pointer
+    assign_function__SegCloud__grd_ring_end_ind,  // assign(index, value) function pointer
+    resize_function__SegCloud__grd_ring_end_ind  // resize(index) function pointer
   },
   {
     "ground_cloud",  // name
@@ -308,7 +556,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember SegCloud_mess
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers SegCloud_message_members = {
   "other_msgs::msg",  // message namespace
   "SegCloud",  // message name
-  5,  // number of fields
+  9,  // number of fields
   sizeof(other_msgs::msg::SegCloud),
   SegCloud_message_member_array,  // message members
   SegCloud_init_function,  // function to initialize message memory (memory has to be allocated)

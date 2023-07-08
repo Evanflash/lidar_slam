@@ -56,12 +56,24 @@ struct SegCloud_
   using _header_type =
     std_msgs::msg::Header_<ContainerAllocator>;
   _header_type header;
+  using _seg_ring_str_ind_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _seg_ring_str_ind_type seg_ring_str_ind;
+  using _seg_ring_end_ind_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _seg_ring_end_ind_type seg_ring_end_ind;
   using _seg_cloud_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _seg_cloud_type seg_cloud;
   using _seg_range_type =
     std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
   _seg_range_type seg_range;
+  using _grd_ring_str_ind_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _grd_ring_str_ind_type grd_ring_str_ind;
+  using _grd_ring_end_ind_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _grd_ring_end_ind_type grd_ring_end_ind;
   using _ground_cloud_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _ground_cloud_type ground_cloud;
@@ -76,6 +88,18 @@ struct SegCloud_
     this->header = _arg;
     return *this;
   }
+  Type & set__seg_ring_str_ind(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->seg_ring_str_ind = _arg;
+    return *this;
+  }
+  Type & set__seg_ring_end_ind(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->seg_ring_end_ind = _arg;
+    return *this;
+  }
   Type & set__seg_cloud(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
@@ -86,6 +110,18 @@ struct SegCloud_
     const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
   {
     this->seg_range = _arg;
+    return *this;
+  }
+  Type & set__grd_ring_str_ind(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->grd_ring_str_ind = _arg;
+    return *this;
+  }
+  Type & set__grd_ring_end_ind(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->grd_ring_end_ind = _arg;
     return *this;
   }
   Type & set__ground_cloud(
@@ -146,10 +182,22 @@ struct SegCloud_
     if (this->header != other.header) {
       return false;
     }
+    if (this->seg_ring_str_ind != other.seg_ring_str_ind) {
+      return false;
+    }
+    if (this->seg_ring_end_ind != other.seg_ring_end_ind) {
+      return false;
+    }
     if (this->seg_cloud != other.seg_cloud) {
       return false;
     }
     if (this->seg_range != other.seg_range) {
+      return false;
+    }
+    if (this->grd_ring_str_ind != other.grd_ring_str_ind) {
+      return false;
+    }
+    if (this->grd_ring_end_ind != other.grd_ring_end_ind) {
       return false;
     }
     if (this->ground_cloud != other.ground_cloud) {

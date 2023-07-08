@@ -6,6 +6,8 @@
 
 #include <string>
 #include <vector>
+#include <queue>
+#include <mutex>
 #include <unordered_set>
 #include <boost/circular_buffer.hpp>
 #include <Eigen/Dense>
@@ -17,6 +19,9 @@
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/filters/filter.h>
+#include <pcl/kdtree/kdtree_flann.h>
+
+#include <ceres/ceres.h>
 
 namespace lidarslam{
 
@@ -28,6 +33,11 @@ using CloudTypePtr = CloudType::Ptr;
 
 using SubPointCloud = rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr;
 using PubPointCloud = rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr;
+
+struct smoothness{
+    float curvature;    // 曲率
+    int index;          // 序号
+};
 
 } // namespace lidarslam
 

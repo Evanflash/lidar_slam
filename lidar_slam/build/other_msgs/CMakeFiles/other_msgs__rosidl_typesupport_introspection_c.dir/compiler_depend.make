@@ -218,11 +218,11 @@ CMakeFiles/other_msgs__rosidl_typesupport_introspection_c.dir/rosidl_typesupport
   /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__type_support.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__rosidl_typesupport_introspection_c.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/rosidl_typesupport_introspection_c__visibility_control.h \
+  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h \
   rosidl_generator_c/other_msgs/msg/point.h \
   rosidl_generator_c/other_msgs/msg/detail/point__functions.h \
   rosidl_generator_c/other_msgs/msg/detail/point__type_support.h \
-  rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h \
-  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h
+  rosidl_typesupport_introspection_c/other_msgs/msg/detail/point__rosidl_typesupport_introspection_c.h
 
 
 rosidl_generator_c/other_msgs/msg/detail/seg_cloud__functions.h:

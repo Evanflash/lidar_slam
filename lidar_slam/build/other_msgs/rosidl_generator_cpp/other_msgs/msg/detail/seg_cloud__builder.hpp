@@ -53,16 +53,48 @@ private:
   ::other_msgs::msg::SegCloud msg_;
 };
 
+class Init_SegCloud_grd_ring_end_ind
+{
+public:
+  explicit Init_SegCloud_grd_ring_end_ind(::other_msgs::msg::SegCloud & msg)
+  : msg_(msg)
+  {}
+  Init_SegCloud_ground_cloud grd_ring_end_ind(::other_msgs::msg::SegCloud::_grd_ring_end_ind_type arg)
+  {
+    msg_.grd_ring_end_ind = std::move(arg);
+    return Init_SegCloud_ground_cloud(msg_);
+  }
+
+private:
+  ::other_msgs::msg::SegCloud msg_;
+};
+
+class Init_SegCloud_grd_ring_str_ind
+{
+public:
+  explicit Init_SegCloud_grd_ring_str_ind(::other_msgs::msg::SegCloud & msg)
+  : msg_(msg)
+  {}
+  Init_SegCloud_grd_ring_end_ind grd_ring_str_ind(::other_msgs::msg::SegCloud::_grd_ring_str_ind_type arg)
+  {
+    msg_.grd_ring_str_ind = std::move(arg);
+    return Init_SegCloud_grd_ring_end_ind(msg_);
+  }
+
+private:
+  ::other_msgs::msg::SegCloud msg_;
+};
+
 class Init_SegCloud_seg_range
 {
 public:
   explicit Init_SegCloud_seg_range(::other_msgs::msg::SegCloud & msg)
   : msg_(msg)
   {}
-  Init_SegCloud_ground_cloud seg_range(::other_msgs::msg::SegCloud::_seg_range_type arg)
+  Init_SegCloud_grd_ring_str_ind seg_range(::other_msgs::msg::SegCloud::_seg_range_type arg)
   {
     msg_.seg_range = std::move(arg);
-    return Init_SegCloud_ground_cloud(msg_);
+    return Init_SegCloud_grd_ring_str_ind(msg_);
   }
 
 private:
@@ -85,16 +117,48 @@ private:
   ::other_msgs::msg::SegCloud msg_;
 };
 
+class Init_SegCloud_seg_ring_end_ind
+{
+public:
+  explicit Init_SegCloud_seg_ring_end_ind(::other_msgs::msg::SegCloud & msg)
+  : msg_(msg)
+  {}
+  Init_SegCloud_seg_cloud seg_ring_end_ind(::other_msgs::msg::SegCloud::_seg_ring_end_ind_type arg)
+  {
+    msg_.seg_ring_end_ind = std::move(arg);
+    return Init_SegCloud_seg_cloud(msg_);
+  }
+
+private:
+  ::other_msgs::msg::SegCloud msg_;
+};
+
+class Init_SegCloud_seg_ring_str_ind
+{
+public:
+  explicit Init_SegCloud_seg_ring_str_ind(::other_msgs::msg::SegCloud & msg)
+  : msg_(msg)
+  {}
+  Init_SegCloud_seg_ring_end_ind seg_ring_str_ind(::other_msgs::msg::SegCloud::_seg_ring_str_ind_type arg)
+  {
+    msg_.seg_ring_str_ind = std::move(arg);
+    return Init_SegCloud_seg_ring_end_ind(msg_);
+  }
+
+private:
+  ::other_msgs::msg::SegCloud msg_;
+};
+
 class Init_SegCloud_header
 {
 public:
   Init_SegCloud_header()
   : msg_(::rosidl_runtime_cpp::MessageInitialization::SKIP)
   {}
-  Init_SegCloud_seg_cloud header(::other_msgs::msg::SegCloud::_header_type arg)
+  Init_SegCloud_seg_ring_str_ind header(::other_msgs::msg::SegCloud::_header_type arg)
   {
     msg_.header = std::move(arg);
-    return Init_SegCloud_seg_cloud(msg_);
+    return Init_SegCloud_seg_ring_str_ind(msg_);
   }
 
 private:

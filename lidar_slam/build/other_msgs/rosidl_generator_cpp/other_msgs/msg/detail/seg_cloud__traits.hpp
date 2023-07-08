@@ -39,6 +39,42 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
+  // member: seg_ring_str_ind
+  {
+    if (msg.seg_ring_str_ind.size() == 0) {
+      out << "seg_ring_str_ind: []";
+    } else {
+      out << "seg_ring_str_ind: [";
+      size_t pending_items = msg.seg_ring_str_ind.size();
+      for (auto item : msg.seg_ring_str_ind) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: seg_ring_end_ind
+  {
+    if (msg.seg_ring_end_ind.size() == 0) {
+      out << "seg_ring_end_ind: []";
+    } else {
+      out << "seg_ring_end_ind: [";
+      size_t pending_items = msg.seg_ring_end_ind.size();
+      for (auto item : msg.seg_ring_end_ind) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
   // member: seg_cloud
   {
     if (msg.seg_cloud.size() == 0) {
@@ -65,6 +101,42 @@ inline void to_flow_style_yaml(
       out << "seg_range: [";
       size_t pending_items = msg.seg_range.size();
       for (auto item : msg.seg_range) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: grd_ring_str_ind
+  {
+    if (msg.grd_ring_str_ind.size() == 0) {
+      out << "grd_ring_str_ind: []";
+    } else {
+      out << "grd_ring_str_ind: [";
+      size_t pending_items = msg.grd_ring_str_ind.size();
+      for (auto item : msg.grd_ring_str_ind) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: grd_ring_end_ind
+  {
+    if (msg.grd_ring_end_ind.size() == 0) {
+      out << "grd_ring_end_ind: []";
+    } else {
+      out << "grd_ring_end_ind: [";
+      size_t pending_items = msg.grd_ring_end_ind.size();
+      for (auto item : msg.grd_ring_end_ind) {
         rosidl_generator_traits::value_to_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -125,6 +197,46 @@ inline void to_block_style_yaml(
     to_block_style_yaml(msg.header, out, indentation + 2);
   }
 
+  // member: seg_ring_str_ind
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.seg_ring_str_ind.size() == 0) {
+      out << "seg_ring_str_ind: []\n";
+    } else {
+      out << "seg_ring_str_ind:\n";
+      for (auto item : msg.seg_ring_str_ind) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: seg_ring_end_ind
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.seg_ring_end_ind.size() == 0) {
+      out << "seg_ring_end_ind: []\n";
+    } else {
+      out << "seg_ring_end_ind:\n";
+      for (auto item : msg.seg_ring_end_ind) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
   // member: seg_cloud
   {
     if (indentation > 0) {
@@ -154,6 +266,46 @@ inline void to_block_style_yaml(
     } else {
       out << "seg_range:\n";
       for (auto item : msg.seg_range) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: grd_ring_str_ind
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.grd_ring_str_ind.size() == 0) {
+      out << "grd_ring_str_ind: []\n";
+    } else {
+      out << "grd_ring_str_ind:\n";
+      for (auto item : msg.grd_ring_str_ind) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
+  }
+
+  // member: grd_ring_end_ind
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.grd_ring_end_ind.size() == 0) {
+      out << "grd_ring_end_ind: []\n";
+    } else {
+      out << "grd_ring_end_ind:\n";
+      for (auto item : msg.grd_ring_end_ind) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

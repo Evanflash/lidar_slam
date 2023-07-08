@@ -240,8 +240,8 @@ CMakeFiles/other_msgs__rosidl_generator_c.dir/rosidl_generator_c/other_msgs/msg/
   /opt/ros/humble/include/rcutils/rcutils/types/rcutils_ret.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__functions.h \
   /opt/ros/humble/include/std_msgs/std_msgs/msg/rosidl_generator_c__visibility_control.h \
-  rosidl_generator_c/other_msgs/msg/detail/point__functions.h \
-  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h
+  /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h \
+  rosidl_generator_c/other_msgs/msg/detail/point__functions.h
 
 
 rosidl_generator_c/other_msgs/msg/detail/seg_cloud__struct.h:

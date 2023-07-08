@@ -14,12 +14,16 @@
 // Include directives for member types
 // Member `header`
 #include "std_msgs/msg/detail/header__functions.h"
+// Member `seg_ring_str_ind`
+// Member `seg_ring_end_ind`
+// Member `seg_range`
+// Member `grd_ring_str_ind`
+// Member `grd_ring_end_ind`
+// Member `ground_range`
+#include "rosidl_runtime_c/primitives_sequence_functions.h"
 // Member `seg_cloud`
 // Member `ground_cloud`
 #include "other_msgs/msg/detail/point__functions.h"
-// Member `seg_range`
-// Member `ground_range`
-#include "rosidl_runtime_c/primitives_sequence_functions.h"
 
 bool
 other_msgs__msg__SegCloud__init(other_msgs__msg__SegCloud * msg)
@@ -32,6 +36,16 @@ other_msgs__msg__SegCloud__init(other_msgs__msg__SegCloud * msg)
     other_msgs__msg__SegCloud__fini(msg);
     return false;
   }
+  // seg_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->seg_ring_str_ind, 0)) {
+    other_msgs__msg__SegCloud__fini(msg);
+    return false;
+  }
+  // seg_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->seg_ring_end_ind, 0)) {
+    other_msgs__msg__SegCloud__fini(msg);
+    return false;
+  }
   // seg_cloud
   if (!other_msgs__msg__Point__Sequence__init(&msg->seg_cloud, 0)) {
     other_msgs__msg__SegCloud__fini(msg);
@@ -39,6 +53,16 @@ other_msgs__msg__SegCloud__init(other_msgs__msg__SegCloud * msg)
   }
   // seg_range
   if (!rosidl_runtime_c__float__Sequence__init(&msg->seg_range, 0)) {
+    other_msgs__msg__SegCloud__fini(msg);
+    return false;
+  }
+  // grd_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->grd_ring_str_ind, 0)) {
+    other_msgs__msg__SegCloud__fini(msg);
+    return false;
+  }
+  // grd_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->grd_ring_end_ind, 0)) {
     other_msgs__msg__SegCloud__fini(msg);
     return false;
   }
@@ -63,10 +87,18 @@ other_msgs__msg__SegCloud__fini(other_msgs__msg__SegCloud * msg)
   }
   // header
   std_msgs__msg__Header__fini(&msg->header);
+  // seg_ring_str_ind
+  rosidl_runtime_c__int32__Sequence__fini(&msg->seg_ring_str_ind);
+  // seg_ring_end_ind
+  rosidl_runtime_c__int32__Sequence__fini(&msg->seg_ring_end_ind);
   // seg_cloud
   other_msgs__msg__Point__Sequence__fini(&msg->seg_cloud);
   // seg_range
   rosidl_runtime_c__float__Sequence__fini(&msg->seg_range);
+  // grd_ring_str_ind
+  rosidl_runtime_c__int32__Sequence__fini(&msg->grd_ring_str_ind);
+  // grd_ring_end_ind
+  rosidl_runtime_c__int32__Sequence__fini(&msg->grd_ring_end_ind);
   // ground_cloud
   other_msgs__msg__Point__Sequence__fini(&msg->ground_cloud);
   // ground_range
@@ -85,6 +117,18 @@ other_msgs__msg__SegCloud__are_equal(const other_msgs__msg__SegCloud * lhs, cons
   {
     return false;
   }
+  // seg_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->seg_ring_str_ind), &(rhs->seg_ring_str_ind)))
+  {
+    return false;
+  }
+  // seg_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->seg_ring_end_ind), &(rhs->seg_ring_end_ind)))
+  {
+    return false;
+  }
   // seg_cloud
   if (!other_msgs__msg__Point__Sequence__are_equal(
       &(lhs->seg_cloud), &(rhs->seg_cloud)))
@@ -94,6 +138,18 @@ other_msgs__msg__SegCloud__are_equal(const other_msgs__msg__SegCloud * lhs, cons
   // seg_range
   if (!rosidl_runtime_c__float__Sequence__are_equal(
       &(lhs->seg_range), &(rhs->seg_range)))
+  {
+    return false;
+  }
+  // grd_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->grd_ring_str_ind), &(rhs->grd_ring_str_ind)))
+  {
+    return false;
+  }
+  // grd_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->grd_ring_end_ind), &(rhs->grd_ring_end_ind)))
   {
     return false;
   }
@@ -126,6 +182,18 @@ other_msgs__msg__SegCloud__copy(
   {
     return false;
   }
+  // seg_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->seg_ring_str_ind), &(output->seg_ring_str_ind)))
+  {
+    return false;
+  }
+  // seg_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->seg_ring_end_ind), &(output->seg_ring_end_ind)))
+  {
+    return false;
+  }
   // seg_cloud
   if (!other_msgs__msg__Point__Sequence__copy(
       &(input->seg_cloud), &(output->seg_cloud)))
@@ -135,6 +203,18 @@ other_msgs__msg__SegCloud__copy(
   // seg_range
   if (!rosidl_runtime_c__float__Sequence__copy(
       &(input->seg_range), &(output->seg_range)))
+  {
+    return false;
+  }
+  // grd_ring_str_ind
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->grd_ring_str_ind), &(output->grd_ring_str_ind)))
+  {
+    return false;
+  }
+  // grd_ring_end_ind
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->grd_ring_end_ind), &(output->grd_ring_end_ind)))
   {
     return false;
   }
