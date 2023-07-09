@@ -100,6 +100,12 @@ data_process_test: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
 data_process_test: /usr/lib/x86_64-linux-gnu/libOpenNI2.so
 data_process_test: /usr/lib/x86_64-linux-gnu/libusb-1.0.so
 data_process_test: /usr/lib/x86_64-linux-gnu/libflann_cpp.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_c.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_fastrtps_cpp.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_c.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_introspection_cpp.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_cpp.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_py.so
 data_process_test: /home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib/libother_msgs__rosidl_typesupport_fastrtps_c.so
 data_process_test: /home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib/libother_msgs__rosidl_typesupport_fastrtps_cpp.so
 data_process_test: /home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib/libother_msgs__rosidl_typesupport_introspection_c.so
@@ -275,6 +281,8 @@ data_process_test: /opt/ros/humble/lib/librosgraph_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libstatistics_msgs__rosidl_typesupport_c.so
 data_process_test: /opt/ros/humble/lib/libstatistics_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_cpp.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_typesupport_c.so
+data_process_test: /opt/ros/humble/lib/libnav_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/librosidl_typesupport_fastrtps_c.so
 data_process_test: /opt/ros/humble/lib/librosidl_typesupport_fastrtps_cpp.so
 data_process_test: /opt/ros/humble/lib/libfastcdr.so.1.0.24
@@ -287,10 +295,10 @@ data_process_test: /opt/ros/humble/lib/librosidl_typesupport_cpp.so
 data_process_test: /home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib/libother_msgs__rosidl_typesupport_c.so
 data_process_test: /home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib/libother_msgs__rosidl_generator_c.so
 data_process_test: /usr/lib/x86_64-linux-gnu/libpython3.10.so
-data_process_test: /opt/ros/humble/lib/libpcl_msgs__rosidl_generator_c.so
-data_process_test: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libgeometry_msgs__rosidl_typesupport_c.so
 data_process_test: /opt/ros/humble/lib/libstd_msgs__rosidl_typesupport_c.so
+data_process_test: /opt/ros/humble/lib/libpcl_msgs__rosidl_generator_c.so
+data_process_test: /opt/ros/humble/lib/libsensor_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libgeometry_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libstd_msgs__rosidl_generator_c.so
 data_process_test: /opt/ros/humble/lib/libbuiltin_interfaces__rosidl_typesupport_c.so

@@ -6,5 +6,5 @@ CXX_DEFINES = -DRCUTILS_ENABLE_FAULT_INJECTION -DROSIDL_TYPESUPPORT_FASTRTPS_C_B
 
 CXX_INCLUDES = -I/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_typesupport_fastrtps_c -I/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c -isystem /opt/ros/humble/include/fastcdr -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface -isystem /opt/ros/humble/include/rosidl_runtime_cpp -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_cpp -isystem /opt/ros/humble/include/rmw -isystem /opt/ros/humble/include/rosidl_typesupport_fastrtps_c -isystem /opt/ros/humble/include/std_msgs -isystem /opt/ros/humble/include/builtin_interfaces
 
-CXX_FLAGS = -fPIC -Wall -Wextra -Wpedantic -std=gnu++14
+CXX_FLAGS = -O2 -g -DNDEBUG -fPIC -Wall -Wextra -Wpedantic -std=gnu++14
 

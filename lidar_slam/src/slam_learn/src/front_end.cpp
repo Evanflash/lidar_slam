@@ -3,6 +3,13 @@
 
 namespace lidarslam{
 
+static const std::string PARAM_VERTICAL_SCANS = "param.vertical_scans";
+static const std::string PARAM_EDGE_THRESHOLD = "param.edge_threshold";
+static const std::string PARAM_SURF_THRESHOLD = "param.surf_threshold";
+static const std::string PARAM_DISTANCE = "param.distance";
+static double para_q[4] = {0.0, 0.0, 0.0, 1.0};
+static double para_t[3] = {0.0, 0.0, 0.0};
+
 class FrontEnd : public rclcpp::Node{
 private:
     // 处理后的点云
@@ -42,13 +49,44 @@ private:
     float nearest_feature_dist_sqr;
 
     bool isFirstFrame;
-    double para_q[4];
-    double para_t[3];
+
+    Eigen::Map<Eigen::Quaterniond> q_last_curr;
+    Eigen::Map<Eigen::Vector3d> t_last_curr;
+
+    Eigen::Quaterniond q_w_curr;
+    Eigen::Vector3d t_w_curr;
+
+    // 路径
+    nav_msgs::msg::Path path;
 
 public:
     FrontEnd(const std::string &name)
-        : Node(name)
+        : Node(name),
+          q_last_curr(para_q),
+          t_last_curr(para_t)
     {
+        subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
+            "/seg_cloud", 1, std::bind(&FrontEnd::run, this, std::placeholders::_1));
+
+        // 声明参数
+        this -> declare_parameter(PARAM_VERTICAL_SCANS, vertical_scans);
+        this -> declare_parameter(PARAM_EDGE_THRESHOLD, edgeThreshold);
+        this -> declare_parameter(PARAM_SURF_THRESHOLD, surfThreshold);
+        this -> declare_parameter(PARAM_DISTANCE, nearest_feature_dist_sqr);
+
+        // 更新参数
+        if(!this -> get_parameter(PARAM_VERTICAL_SCANS, vertical_scans)){
+            RCLCPP_WARN(this -> get_logger(), "data_process_node: %s not found", PARAM_VERTICAL_SCANS.c_str());
+        }
+        if(!this -> get_parameter(PARAM_EDGE_THRESHOLD, edgeThreshold)){
+            RCLCPP_WARN(this -> get_logger(), "data_process_node: %s not found", PARAM_EDGE_THRESHOLD.c_str());
+        }
+        if(!this -> get_parameter(PARAM_SURF_THRESHOLD, surfThreshold)){
+            RCLCPP_WARN(this -> get_logger(), "data_process_node: %s not found", PARAM_SURF_THRESHOLD.c_str());
+        }
+        if(!this -> get_parameter(PARAM_DISTANCE, nearest_feature_dist_sqr)){
+            RCLCPP_WARN(this -> get_logger(), "data_process_node: %s not found", PARAM_DISTANCE.c_str());
+        }
 
         // 初始化
         init();
@@ -68,6 +106,10 @@ public:
         surfLast.reset(new CloudType());
         groundSurfLast.reset(new CloudType());
 
+        kdtreeCornerLast.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeSurfLast.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
+
         isFirstFrame = true;
     }
 
@@ -76,13 +118,17 @@ public:
     */
     void run(const other_msgs::msg::SegCloud &msg){
         seg_msg = msg;
-
+        
         // 变量重置
         resetParameters();
         // 计算曲率
         calculateSmoothness();
         // 提取特征点
         extractFeatures();
+        // 里程计
+        odometry();
+        // 发布消息
+        publish();
     }
 
     /**
@@ -98,10 +144,10 @@ public:
         groundSurfLessFlat -> clear();
 
         // 曲率
-        std::vector<smoothness>().swap(segmentCurvature);
-        segmentCurvature.reserve(seg_msg.seg_cloud.size());
-        std::vector<smoothness>().swap(groundCurvature);
-        groundCurvature.reserve(seg_msg.ground_cloud.size());
+        segmentCurvature.clear();
+        segmentCurvature.resize(seg_msg.seg_cloud.size());
+        groundCurvature.clear();
+        groundCurvature.resize(seg_msg.ground_cloud.size());
         
         segmentNeighborPicked.clear();
         segmentNeighborPicked.resize(seg_msg.seg_cloud.size(), 0);
@@ -124,7 +170,7 @@ public:
                 smoothness sns;
                 sns.curvature = diffRange * diffRange;
                 sns.index = i;
-                curvatures.push_back(sns);
+                curvatures[i] = sns;
             }
         };
         cs(seg_msg.ground_cloud, seg_msg.ground_range, groundCurvature);
@@ -153,13 +199,14 @@ public:
         // 分割点云特征提取
         for(int i = 0; i < vertical_scans; ++i){
             for(int j = 0; j < 6; ++j){
-                int sp = (seg_msg.seg_ring_str_ind[i] * (6 - j) + seg_msg.seg_ring_end_ind[i] * j) / 6;
-                int ep = (seg_msg.seg_ring_str_ind[i] * (5 - j) + seg_msg.seg_ring_end_ind[i] * (j + 1)) / 6 - 1;
-
+                int sp = seg_msg.seg_ring_str_ind[i] + 
+                    (seg_msg.seg_ring_end_ind[i] - seg_msg.seg_ring_str_ind[i]) * j / 6;
+                int ep = seg_msg.seg_ring_str_ind[i] +
+                    (seg_msg.seg_ring_end_ind[i] - seg_msg.seg_ring_str_ind[i]) * (j + 1) / 6 - 1;
+                
                 if(sp >= ep) continue;
 
-                std::sort(segmentCurvature.begin() + sp, segmentCurvature.begin() + ep, cmp);
-
+                std::sort(segmentCurvature.begin() + sp, segmentCurvature.begin() + ep + 1, cmp);
                 // 从分割点云中提取边缘点和平面点
                 // 边缘点
                 int largestPickedNum = 0;
@@ -206,7 +253,7 @@ public:
 
                     }
                 }
-
+                
                 // 平面点
                 int smallestPickedNum = 1;
                 for(int k = sp; k <= ep; ++k){
@@ -248,21 +295,23 @@ public:
                 }    
             }
         }
-    
-        for(int i = 0; i < seg_msg.seg_cloud.size(); ++i){
+
+        for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
             tran(seg_msg.seg_cloud[i], point);
             surfLessFlat -> push_back(point);
         }
-
+        
         // 地面点特征提取
         for(int i = 0; i < vertical_scans; ++i){
              for(int j = 0; j < 6; ++j){
-                int sp = (seg_msg.grd_ring_str_ind[i] * (6 - j) + seg_msg.grd_ring_end_ind[i] * j) / 6;
-                int ep = (seg_msg.grd_ring_str_ind[i] * (5 - j) + seg_msg.grd_ring_end_ind[i] * (j + 1)) / 6 - 1;
+                int sp = seg_msg.grd_ring_str_ind[i] + 
+                    (seg_msg.grd_ring_end_ind[i] - seg_msg.grd_ring_str_ind[i]) * j / 6;
+                int ep = seg_msg.grd_ring_str_ind[i] +
+                    (seg_msg.grd_ring_end_ind[i] - seg_msg.grd_ring_str_ind[i]) * (j + 1) / 6 - 1;
 
                 if(sp >= ep) continue;
 
-                std::sort(groundCurvature.begin() + sp, groundCurvature.begin() + ep, cmp);
+                std::sort(groundCurvature.begin() + sp, groundCurvature.begin() + ep + 1, cmp);
 
                 // 平面点
                 int smallestPickedNum = 1;
@@ -305,7 +354,7 @@ public:
             }
         }
 
-        for(int i = 0; i < seg_msg.ground_cloud.size(); ++i){
+        for(int i = 0; i < int(seg_msg.ground_cloud.size()); ++i){
             tran(seg_msg.ground_cloud[i], point);
             groundSurfLessFlat -> push_back(point);
         }
@@ -436,11 +485,11 @@ public:
                                 break;
 
                             double pointSqDis = dis(surfLast -> points[j], pointSel);
-                            if(int(surfLast -> points[j].intensity) > closestPointScanID &&
+                            if(int(surfLast -> points[j].intensity) >= closestPointScanID &&
                                     pointSqDis < minPointSqDis2){
                                 minPointSqDis2 = pointSqDis;
                                 minPointInd2 = j;
-                            }else if(int(surfLast -> points[j].intensity) <= closestPointScanID &&
+                            }else if(int(surfLast -> points[j].intensity) < closestPointScanID &&
                                         pointSqDis < minPointSqDis3){
                                 minPointSqDis3 = pointSqDis;
                                 minPointInd3 = j;
@@ -460,11 +509,119 @@ public:
                         }
                     }
                 }
+
+                // 地面点云的平面点
+                for(int i = 0; i < groundFlatNum; ++i){
+                    pointSel = groundSurfFlat -> points[i];
+                    kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
+
+                    int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
+                    if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
+                        closestPointInd = pointSearchInd[0];
+                        int closestPointScanID = int(groundSurfLast -> points[closestPointInd].intensity);
+                        
+                        double minPointSqDis2 = nearest_feature_dist_sqr, minPointSqDis3 = nearest_feature_dist_sqr;
+                        for(int j = closestPointInd + 1; j < int(groundSurfLast -> size()); ++j){
+                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID + 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
+                            if(int(groundSurfLast -> points[j].intensity) <= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(groundSurfLast -> points[j].intensity) > closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+                        for(int j = closestPointInd - 1; j >= 0; --j){
+                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID - 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
+                            if(int(groundSurfLast -> points[j].intensity) >= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(groundSurfLast -> points[j].intensity) < closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+
+                        if(minPointInd2 >= 0 && minPointInd3 >= 0){
+                            Eigen::Vector3d curr_point = pointxyziToVector3d(groundSurfFlat -> points[i]);
+                            Eigen::Vector3d last_point_a = pointxyziToVector3d(groundSurfLast -> points[closestPointInd]);
+                            Eigen::Vector3d last_point_b = pointxyziToVector3d(groundSurfLast -> points[minPointInd2]);
+                            Eigen::Vector3d last_point_c = pointxyziToVector3d(groundSurfLast -> points[minPointInd3]);
+                            
+                            double s = 1.0;
+                            ceres::CostFunction *cost_function = 
+                                LidarPlaneFactor::Create(curr_point, last_point_a, last_point_b, last_point_c, s);
+                            problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
+                        }
+                    }
+                }
+                
+                // 求解
+                ceres::Solver::Options options;
+                options.linear_solver_type = ceres::DENSE_QR;
+                options.max_num_iterations = 4;
+                options.minimizer_progress_to_stdout = false;
+                ceres::Solver::Summary summary;
+                ceres::Solve(options, &problem, &summary);
             }
+            
+            t_w_curr = t_w_curr + q_w_curr * t_last_curr;
+            q_w_curr = q_w_curr * q_last_curr;
         }
-
+        
         // 更新上一帧点云
+        CloudTypePtr cloudTmp;
+        
+        cloudTmp = cornerLessSharp;
+        cornerLessSharp = cornerLast;
+        cornerLast = cloudTmp;
 
+        cloudTmp = surfLessFlat;
+        surfLessFlat = surfLast;
+        surfLast = cloudTmp;
+
+        cloudTmp = groundSurfLessFlat;
+        groundSurfLessFlat = groundSurfLast;
+        groundSurfLast = cloudTmp;
+        
+        kdtreeCornerLast -> setInputCloud(cornerLast);
+        kdtreeSurfLast -> setInputCloud(surfLast);
+        kdtreeGroundLast -> setInputCloud(groundSurfLast);
+    }
+
+    /**
+     * 发布消息
+    */
+    void publish(){
+        nav_msgs::msg::Odometry laserOdometry;
+        laserOdometry.header.frame_id = "map";
+        laserOdometry.child_frame_id = "/lidar_odom";
+        laserOdometry.pose.pose.orientation.x = q_w_curr.x();
+        laserOdometry.pose.pose.orientation.y = q_w_curr.y();
+        laserOdometry.pose.pose.orientation.z = q_w_curr.z();
+        laserOdometry.pose.pose.orientation.w = q_w_curr.w();
+        laserOdometry.pose.pose.position.x = t_w_curr.x();
+        laserOdometry.pose.pose.position.y = t_w_curr.y();
+        laserOdometry.pose.pose.position.z = t_w_curr.z();
+        RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", q_w_curr.x(), q_w_curr.y(), q_w_curr.z(),q_w_curr.w());
+        geometry_msgs::msg::PoseStamped laserPose;
+        laserPose.header = laserOdometry.header;
+        laserPose.pose = laserOdometry.pose.pose;
+        path.poses.push_back(laserPose);
+        path.header.frame_id = "map";
+        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath = 
+            this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
+        pubPath -> publish(path);
     }
 
 }; // class FrontEnd
@@ -473,7 +630,9 @@ public:
 
 int main(int argc, char** argv){
     rclcpp::init(argc, argv);
-
+    auto fe = std::make_shared<lidarslam::FrontEnd>("front_end");
+    RCLCPP_INFO(fe -> get_logger(), "\033[1;32m---->\033[0m Started.");
+    rclcpp::spin(fe);
     rclcpp::shutdown();
     return 0;
 }

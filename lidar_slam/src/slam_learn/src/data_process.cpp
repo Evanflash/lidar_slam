@@ -259,10 +259,9 @@ private:
         }
         int curInd = 0;
         for(int i = 0; i <= ground_scan_index; ++i){
+            seg_msg.grd_ring_str_ind[i] = curInd;
             for(int j = 0; j < horizontal_scans; ++j){
                 if(ground_mat(i, j) == 1){
-                    seg_msg.grd_ring_str_ind[i] = curInd;
-
                     other_msgs::msg::Point point_msg;
                     int ind = j + i * horizontal_scans;
                     point_msg.x = full_cloud -> points[ind].x;
@@ -290,10 +289,9 @@ private:
         // 提取分割后点云
         int curInd = 0;
         for(int i = 0; i < vertical_scans; ++i){
+            seg_msg.seg_ring_str_ind[i] = curInd;
             for(int j = 0; j < horizontal_scans; ++j){
                 if(label_mat(i, j) > 0 && label_mat(i, j) != 999999){
-                    seg_msg.seg_ring_str_ind[i] = curInd;
-
                     int ind = j + i * horizontal_scans;
                     other_msgs::msg::Point point_msg;
                     point_msg.x = full_cloud -> points[ind].x;

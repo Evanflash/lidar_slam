@@ -211,6 +211,19 @@ data_process_node/fast:
 .PHONY : data_process_node/fast
 
 #=============================================================================
+# Target rules for targets named front_end_node
+
+# Build rule for target.
+front_end_node: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 front_end_node
+.PHONY : front_end_node
+
+# fast build rule for target.
+front_end_node/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/front_end_node.dir/build.make CMakeFiles/front_end_node.dir/build
+.PHONY : front_end_node/fast
+
+#=============================================================================
 # Target rules for targets named data_process_test
 
 # Build rule for target.
@@ -246,6 +259,30 @@ src/data_process.s: src/data_process.cpp.s
 src/data_process.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_node.dir/build.make CMakeFiles/data_process_node.dir/src/data_process.cpp.s
 .PHONY : src/data_process.cpp.s
+
+src/front_end.o: src/front_end.cpp.o
+.PHONY : src/front_end.o
+
+# target to build an object file
+src/front_end.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/front_end_node.dir/build.make CMakeFiles/front_end_node.dir/src/front_end.cpp.o
+.PHONY : src/front_end.cpp.o
+
+src/front_end.i: src/front_end.cpp.i
+.PHONY : src/front_end.i
+
+# target to preprocess a source file
+src/front_end.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/front_end_node.dir/build.make CMakeFiles/front_end_node.dir/src/front_end.cpp.i
+.PHONY : src/front_end.cpp.i
+
+src/front_end.s: src/front_end.cpp.s
+.PHONY : src/front_end.s
+
+# target to generate assembly for a file
+src/front_end.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/front_end_node.dir/build.make CMakeFiles/front_end_node.dir/src/front_end.cpp.s
+.PHONY : src/front_end.cpp.s
 
 test/data_process_test.o: test/data_process_test.cpp.o
 .PHONY : test/data_process_test.o
@@ -288,9 +325,13 @@ help:
 	@echo "... uninstall"
 	@echo "... data_process_node"
 	@echo "... data_process_test"
+	@echo "... front_end_node"
 	@echo "... src/data_process.o"
 	@echo "... src/data_process.i"
 	@echo "... src/data_process.s"
+	@echo "... src/front_end.o"
+	@echo "... src/front_end.i"
+	@echo "... src/front_end.s"
 	@echo "... test/data_process_test.o"
 	@echo "... test/data_process_test.i"
 	@echo "... test/data_process_test.s"
