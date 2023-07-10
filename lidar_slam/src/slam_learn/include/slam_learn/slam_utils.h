@@ -8,6 +8,8 @@
 #include <vector>
 #include <queue>
 #include <mutex>
+#include <chrono>
+#include <unistd.h>
 #include <unordered_set>
 #include <boost/circular_buffer.hpp>
 #include <Eigen/Dense>
@@ -23,6 +25,9 @@
 #include <pcl_conversions/pcl_conversions.h>
 #include <pcl/filters/filter.h>
 #include <pcl/kdtree/kdtree_flann.h>
+#include <pcl/filters/voxel_grid.h>
+#include <pcl/sample_consensus/ransac.h>
+#include <pcl/sample_consensus/sac_model_plane.h>
 
 #include <ceres/ceres.h>
 

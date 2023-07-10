@@ -1,0 +1,322 @@
+[0.000000] (-) TimerEvent: {}
+[0.000614] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.001317] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.001435] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.022748] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.024235] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.025446] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan/code'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2241'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2022,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2022'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/7142d93b_d6ed_461c_8885_3b4c8b8abf7f'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.GUMI71'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.118'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('NO_AT_BRIDGE', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.092460] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target data_process_node\x1b[0m\n'}
+[0.092750] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target front_end_node\x1b[0m\n'}
+[0.099404] (-) TimerEvent: {}
+[0.128109] (slam_learn) StdoutLine: {'line': b'[ 33%] Built target data_process_test\n'}
+[0.137785] (slam_learn) StdoutLine: {'line': b'[ 66%] Built target data_process_node\n'}
+[0.155310] (slam_learn) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o\x1b[0m\n'}
+[0.199489] (-) TimerEvent: {}
+[0.299775] (-) TimerEvent: {}
+[0.400034] (-) TimerEvent: {}
+[0.500298] (-) TimerEvent: {}
+[0.600550] (-) TimerEvent: {}
+[0.700832] (-) TimerEvent: {}
+[0.801146] (-) TimerEvent: {}
+[0.901434] (-) TimerEvent: {}
+[1.001734] (-) TimerEvent: {}
+[1.102041] (-) TimerEvent: {}
+[1.202375] (-) TimerEvent: {}
+[1.302771] (-) TimerEvent: {}
+[1.403075] (-) TimerEvent: {}
+[1.503400] (-) TimerEvent: {}
+[1.603687] (-) TimerEvent: {}
+[1.703980] (-) TimerEvent: {}
+[1.804319] (-) TimerEvent: {}
+[1.904666] (-) TimerEvent: {}
+[2.004928] (-) TimerEvent: {}
+[2.105232] (-) TimerEvent: {}
+[2.205555] (-) TimerEvent: {}
+[2.305910] (-) TimerEvent: {}
+[2.406262] (-) TimerEvent: {}
+[2.506569] (-) TimerEvent: {}
+[2.606879] (-) TimerEvent: {}
+[2.707179] (-) TimerEvent: {}
+[2.807459] (-) TimerEvent: {}
+[2.907760] (-) TimerEvent: {}
+[3.008107] (-) TimerEvent: {}
+[3.108358] (-) TimerEvent: {}
+[3.208663] (-) TimerEvent: {}
+[3.308966] (-) TimerEvent: {}
+[3.409261] (-) TimerEvent: {}
+[3.509567] (-) TimerEvent: {}
+[3.609915] (-) TimerEvent: {}
+[3.710254] (-) TimerEvent: {}
+[3.810541] (-) TimerEvent: {}
+[3.910844] (-) TimerEvent: {}
+[4.011113] (-) TimerEvent: {}
+[4.111405] (-) TimerEvent: {}
+[4.211718] (-) TimerEvent: {}
+[4.312044] (-) TimerEvent: {}
+[4.412316] (-) TimerEvent: {}
+[4.512643] (-) TimerEvent: {}
+[4.613055] (-) TimerEvent: {}
+[4.713417] (-) TimerEvent: {}
+[4.813936] (-) TimerEvent: {}
+[4.914282] (-) TimerEvent: {}
+[5.014645] (-) TimerEvent: {}
+[5.115019] (-) TimerEvent: {}
+[5.215357] (-) TimerEvent: {}
+[5.315656] (-) TimerEvent: {}
+[5.415965] (-) TimerEvent: {}
+[5.516350] (-) TimerEvent: {}
+[5.616805] (-) TimerEvent: {}
+[5.717252] (-) TimerEvent: {}
+[5.817669] (-) TimerEvent: {}
+[5.918055] (-) TimerEvent: {}
+[6.018489] (-) TimerEvent: {}
+[6.118819] (-) TimerEvent: {}
+[6.219143] (-) TimerEvent: {}
+[6.319478] (-) TimerEvent: {}
+[6.419825] (-) TimerEvent: {}
+[6.520168] (-) TimerEvent: {}
+[6.620508] (-) TimerEvent: {}
+[6.720832] (-) TimerEvent: {}
+[6.821152] (-) TimerEvent: {}
+[6.921468] (-) TimerEvent: {}
+[7.021759] (-) TimerEvent: {}
+[7.037927] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2\x1b[m\x1b[K:\n'}
+[7.038150] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.038233] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:62:50:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Ks\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Kpcl::fields::s\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.038309] (slam_learn) StderrLine: {'line': b'   62 |                 q_last_curr = q_identity.slerp(T(\x1b[01;31m\x1b[Ks\x1b[m\x1b[K), q_last_curr);\n'}
+[7.038381] (slam_learn) StderrLine: {'line': b'      |                                                  \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.038471] (slam_learn) StderrLine: {'line': b'      |                                                  \x1b[32m\x1b[Kpcl::fields::s\x1b[m\x1b[K\n'}
+[7.038725] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/boost/preprocessor/tuple/elem.hpp:23\x1b[m\x1b[K,\n'}
+[7.038813] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/boost/preprocessor/seq/for_each_i.hpp:24\x1b[m\x1b[K,\n'}
+[7.038886] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/boost/concept/detail/concept_def.hpp:6\x1b[m\x1b[K,\n'}
+[7.038955] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/boost/concept_check.hpp:32\x1b[m\x1b[K,\n'}
+[7.039024] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/boost/circular_buffer/base.hpp:22\x1b[m\x1b[K,\n'}
+[7.039090] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/boost/circular_buffer.hpp:58\x1b[m\x1b[K,\n'}
+[7.039156] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:14\x1b[m\x1b[K,\n'}
+[7.039223] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[7.039296] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/pcl-1.12/pcl/impl/point_types.hpp:1983:1:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kpcl::fields::s\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[7.039363] (slam_learn) StderrLine: {'line': b' 1983 | \x1b[01;36m\x1b[KPOINT_CLOUD_REGISTER_POINT_STRUCT\x1b[m\x1b[K (pcl::_PointXYZHSV,\n'}
+[7.039428] (slam_learn) StderrLine: {'line': b'      | \x1b[01;36m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.121919] (-) TimerEvent: {}
+[7.222271] (-) TimerEvent: {}
+[7.256693] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::FrontEnd::odometry()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.256879] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:458:17:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[KsurfFlatNum\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.256964] (slam_learn) StderrLine: {'line': b'  458 |             int \x1b[01;35m\x1b[KsurfFlatNum\x1b[m\x1b[K = surfFlat -> size();\n'}
+[7.257037] (slam_learn) StderrLine: {'line': b'      |                 \x1b[01;35m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.257107] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:459:17:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[KgroundFlatNum\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[7.257182] (slam_learn) StderrLine: {'line': b'  459 |             int \x1b[01;35m\x1b[KgroundFlatNum\x1b[m\x1b[K = groundSurfFlat -> size();\n'}
+[7.257261] (slam_learn) StderrLine: {'line': b'      |                 \x1b[01;35m\x1b[K^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.322425] (-) TimerEvent: {}
+[7.422747] (-) TimerEvent: {}
+[7.523072] (-) TimerEvent: {}
+[7.623387] (-) TimerEvent: {}
+[7.723766] (-) TimerEvent: {}
+[7.824096] (-) TimerEvent: {}
+[7.924383] (-) TimerEvent: {}
+[8.024696] (-) TimerEvent: {}
+[8.125015] (-) TimerEvent: {}
+[8.225331] (-) TimerEvent: {}
+[8.281909] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Core:164\x1b[m\x1b[K,\n'}
+[8.282127] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Dense:1\x1b[m\x1b[K,\n'}
+[8.282207] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:15\x1b[m\x1b[K,\n'}
+[8.282281] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[8.282396] (slam_learn) StderrLine: {'line': b'/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, 3, 1>; Src = Eigen::Block<Eigen::Matrix<float, -1, 1>, -1, 1, false>; Func = Eigen::internal::assign_op<double, float>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[8.282471] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:858:27:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&, const Func&, typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type) [with Dst = Eigen::Matrix<double, 3, 1>; Src = Eigen::Block<Eigen::Matrix<float, -1, 1>, -1, 1, false>; Func = Eigen::internal::assign_op<double, float>; typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type = void*; typename Eigen::internal::evaluator_traits<SrcXprType>::Shape = Eigen::DenseShape]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.282571] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:836:18:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, 3, 1>; Src = Eigen::Block<Eigen::Matrix<float, -1, 1>, -1, 1, false>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.282642] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:779:32:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KDerived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Block<Eigen::Matrix<float, -1, 1>, -1, 1, false>; Derived = Eigen::Matrix<double, 3, 1>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.282713] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:225:24:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Block<Eigen::Matrix<float, -1, 1>, -1, 1, false>; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[8.282822] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:53:30:\x1b[m\x1b[K   required from here\n'}
+[8.282891] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kstatic assertion failed: YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY\n'}
+[8.282960] (slam_learn) StderrLine: {'line': b'  888 |   \x1b[01;31m\x1b[KEIGEN_CHECK_BINARY_COMPATIBILIY\x1b[m\x1b[K(Func,typename ActualDstTypeCleaned::Scalar,typename Src::Scalar);\n'}
+[8.283028] (slam_learn) StderrLine: {'line': b'      |   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[8.283095] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KEigen::internal::has_ReturnType<Eigen::ScalarBinaryOpTraits<double, float, Eigen::internal::assign_op<double, float> > >::value\x1b[m\x1b[K\xe2\x80\x99 evaluates to false\n'}
+[8.325449] (-) TimerEvent: {}
+[8.425761] (-) TimerEvent: {}
+[8.526087] (-) TimerEvent: {}
+[8.626399] (-) TimerEvent: {}
+[8.726711] (-) TimerEvent: {}
+[8.827030] (-) TimerEvent: {}
+[8.927358] (-) TimerEvent: {}
+[9.027657] (-) TimerEvent: {}
+[9.127976] (-) TimerEvent: {}
+[9.228263] (-) TimerEvent: {}
+[9.328607] (-) TimerEvent: {}
+[9.428951] (-) TimerEvent: {}
+[9.529270] (-) TimerEvent: {}
+[9.629593] (-) TimerEvent: {}
+[9.729976] (-) TimerEvent: {}
+[9.830285] (-) TimerEvent: {}
+[9.930617] (-) TimerEvent: {}
+[10.030938] (-) TimerEvent: {}
+[10.131205] (-) TimerEvent: {}
+[10.231524] (-) TimerEvent: {}
+[10.331858] (-) TimerEvent: {}
+[10.432157] (-) TimerEvent: {}
+[10.532523] (-) TimerEvent: {}
+[10.632860] (-) TimerEvent: {}
+[10.733157] (-) TimerEvent: {}
+[10.760380] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2\x1b[m\x1b[K:\n'}
+[10.760956] (slam_learn) StderrLine: {'line': b'/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const [with T = double]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.761099] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneFactor; T = double; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.761208] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.761283] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.761355] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/autodiff_cost_function.h:208:55:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneFactor; int kNumResiduals = 1; int ...Ns = {4, 3}]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.761430] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:\x1b[m\x1b[K   required from here\n'}
+[10.761498] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:63:40:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<double, 3, 1>::Matrix(<brace-enclosed initializer list>)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.761591] (slam_learn) StderrLine: {'line': b'   63 |                 Eigen::Matrix<T, 3, 1> \x1b[01;31m\x1b[Kt_last_curr\x1b[m\x1b[K{T(s) * t[0], T(s) * t[1], T(s) * t[2]};\n'}
+[10.761677] (slam_learn) StderrLine: {'line': b'      |                                        \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.761744] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Core:295\x1b[m\x1b[K,\n'}
+[10.761811] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Dense:1\x1b[m\x1b[K,\n'}
+[10.761902] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:15\x1b[m\x1b[K,\n'}
+[10.761986] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[10.762053] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:435:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class OtherDerived> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::RotationBase<OtherDerived, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::ColsAtCompileTime>&) [with OtherDerived = OtherDerived; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.762124] (slam_learn) StderrLine: {'line': b'  435 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const RotationBase<OtherDerived,ColsAtCompileTime>& r);\n'}
+[10.762190] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.762256] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:435:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.762328] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:422:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class OtherDerived> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = OtherDerived; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.762397] (slam_learn) StderrLine: {'line': b'  422 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const EigenBase<OtherDerived> &other)\n'}
+[10.762464] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.762530] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:422:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.762595] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:337:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class T0, class T1> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T0&, const T1&) [with T0 = T0; T1 = T1; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.762663] (slam_learn) StderrLine: {'line': b'  337 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const T0& x, const T1& y)\n'}
+[10.762729] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.762799] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:337:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.762865] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:329:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class T> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T&) [with T = T; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.762933] (slam_learn) StderrLine: {'line': b'  329 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const T& x)\n'}
+[10.762998] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.763063] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:329:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.763129] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:296:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class ... ArgTypes> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&, const Scalar&, const ArgTypes& ...) [with ArgTypes = {ArgTypes ...}; _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.763202] (slam_learn) StderrLine: {'line': b'  296 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& a0, const Scalar& a1, const Scalar& a2,  const Scalar& a3, const ArgTypes&... args)\n'}
+[10.763268] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.763353] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:296:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.763437] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:414:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.763515] (slam_learn) StderrLine: {'line': b'  414 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Matrix& other) : Base(other)\n'}
+[10.763581] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.763648] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:414:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.763932] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:401:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&, const Scalar&) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Scalar = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.764013] (slam_learn) StderrLine: {'line': b'  401 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& x, const Scalar& y, const Scalar& z, const Scalar& w)\n'}
+[10.764097] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.764164] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:401:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[10.764232] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:389:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Scalar = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.764308] (slam_learn) StderrLine: {'line': b'  389 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& x, const Scalar& y, const Scalar& z)\n'}
+[10.764374] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.764440] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:389:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  conversion of argument 1 would be ill-formed:\n'}
+[10.764507] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:321:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const std::initializer_list<std::initializer_list<typename Eigen::internal::traits<Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> >::Scalar> >&) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; typename Eigen::internal::traits<Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> >::Scalar = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.764587] (slam_learn) StderrLine: {'line': b'  321 |     explicit EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const std::initializer_list<std::initializer_list<Scalar>>& list) : Base(list) {}\n'}
+[10.764656] (slam_learn) StderrLine: {'line': b'      |                                  \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.764723] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:321:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.764795] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:273:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&&) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.764868] (slam_learn) StderrLine: {'line': b'  273 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(Matrix&& other) EIGEN_NOEXCEPT_IF(std::is_nothrow_move_constructible<Scalar>::value)\n'}
+[10.764935] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.765001] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:273:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.765068] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:267:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(Eigen::internal::constructor_without_unaligned_array_assert) [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.765164] (slam_learn) StderrLine: {'line': b'  267 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(internal::constructor_without_unaligned_array_assert)\n'}
+[10.765234] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.765303] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:267:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.765386] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:259:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix() [with _Scalar = double; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.765456] (slam_learn) StderrLine: {'line': b'  259 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K() : Base()\n'}
+[10.765522] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.765587] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:259:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[10.765653] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2\x1b[m\x1b[K:\n'}
+[10.765720] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:63:40:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kt_last_curr\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.765789] (slam_learn) StderrLine: {'line': b'   63 |                 Eigen::Matrix<T, 3, 1> \x1b[01;35m\x1b[Kt_last_curr\x1b[m\x1b[K{T(s) * t[0], T(s) * t[1], T(s) * t[2]};\n'}
+[10.765883] (slam_learn) StderrLine: {'line': b'      |                                        \x1b[01;35m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.833276] (-) TimerEvent: {}
+[10.856511] (slam_learn) StderrLine: {'line': b'/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const [with T = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[10.857239] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857404] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857508] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857590] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/internal/autodiff.h:349:39:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::internal::AutoDifferentiate(const Functor&, const T* const*, int, T*, T**) [with int kNumResiduals = 1; ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857673] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/autodiff_cost_function.h:211:69:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneFactor; int kNumResiduals = 1; int ...Ns = {4, 3}]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857751] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:\x1b[m\x1b[K   required from here\n'}
+[10.857825] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:63:40:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<ceres::Jet<double, 7>, 3, 1, 0, 3, 1>::Matrix(<brace-enclosed initializer list>)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.857916] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Core:295\x1b[m\x1b[K,\n'}
+[10.857992] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Dense:1\x1b[m\x1b[K,\n'}
+[10.858065] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:15\x1b[m\x1b[K,\n'}
+[10.858146] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[10.858234] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:435:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class OtherDerived> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::RotationBase<OtherDerived, Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::ColsAtCompileTime>&) [with OtherDerived = OtherDerived; _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.858315] (slam_learn) StderrLine: {'line': b'  435 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const RotationBase<OtherDerived,ColsAtCompileTime>& r);\n'}
+[10.858394] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.858463] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:435:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.858533] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:422:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class OtherDerived> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = OtherDerived; _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.858606] (slam_learn) StderrLine: {'line': b'  422 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const EigenBase<OtherDerived> &other)\n'}
+[10.858673] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.858741] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:422:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.858809] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:337:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class T0, class T1> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T0&, const T1&) [with T0 = T0; T1 = T1; _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.858881] (slam_learn) StderrLine: {'line': b'  337 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const T0& x, const T1& y)\n'}
+[10.858948] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.859021] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:337:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.859090] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:329:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class T> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const T&) [with T = T; _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.859165] (slam_learn) StderrLine: {'line': b'  329 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const T& x)\n'}
+[10.859233] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.859301] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:329:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.859369] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:296:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Ktemplate<class ... ArgTypes> Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&, const Scalar&, const ArgTypes& ...) [with ArgTypes = {ArgTypes ...}; _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.859442] (slam_learn) StderrLine: {'line': b'  296 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& a0, const Scalar& a1, const Scalar& a2,  const Scalar& a3, const ArgTypes&... args)\n'}
+[10.859533] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.859638] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:296:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  template argument deduction/substitution failed:\n'}
+[10.859729] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:414:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.859801] (slam_learn) StderrLine: {'line': b'  414 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Matrix& other) : Base(other)\n'}
+[10.859873] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.859940] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:414:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.860035] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:401:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&, const Scalar&) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Scalar = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.860128] (slam_learn) StderrLine: {'line': b'  401 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& x, const Scalar& y, const Scalar& z, const Scalar& w)\n'}
+[10.860197] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.860264] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:401:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 4 arguments, 3 provided\n'}
+[10.860331] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:389:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const Scalar&, const Scalar&, const Scalar&) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Scalar = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.860405] (slam_learn) StderrLine: {'line': b'  389 |     EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const Scalar& x, const Scalar& y, const Scalar& z)\n'}
+[10.860474] (slam_learn) StderrLine: {'line': b'      |                         \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.860541] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:389:25:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  conversion of argument 1 would be ill-formed:\n'}
+[10.860610] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:321:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(const std::initializer_list<std::initializer_list<typename Eigen::internal::traits<Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> >::Scalar> >&) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1; typename Eigen::internal::traits<Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols> >::Scalar = ceres::Jet<double, 7>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.860690] (slam_learn) StderrLine: {'line': b'  321 |     explicit EIGEN_STRONG_INLINE \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(const std::initializer_list<std::initializer_list<Scalar>>& list) : Base(list) {}\n'}
+[10.860763] (slam_learn) StderrLine: {'line': b'      |                                  \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.860830] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:321:34:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.860918] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:273:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>&&) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.860991] (slam_learn) StderrLine: {'line': b'  273 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(Matrix&& other) EIGEN_NOEXCEPT_IF(std::is_nothrow_move_constructible<Scalar>::value)\n'}
+[10.861060] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.861129] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:273:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.861213] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:267:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix(Eigen::internal::constructor_without_unaligned_array_assert) [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.861283] (slam_learn) StderrLine: {'line': b'  267 |     explicit \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K(internal::constructor_without_unaligned_array_assert)\n'}
+[10.861350] (slam_learn) StderrLine: {'line': b'      |              \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.861418] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:267:14:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 1 argument, 3 provided\n'}
+[10.861484] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:259:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::Matrix() [with _Scalar = ceres::Jet<double, 7>; int _Rows = 3; int _Cols = 1; int _Options = 0; int _MaxRows = 3; int _MaxCols = 1]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.861560] (slam_learn) StderrLine: {'line': b'  259 |     \x1b[01;36m\x1b[KMatrix\x1b[m\x1b[K() : Base()\n'}
+[10.861627] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[10.861698] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:259:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 3 provided\n'}
+[10.861764] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2\x1b[m\x1b[K:\n'}
+[10.861831] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:65:29:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno match for \xe2\x80\x98\x1b[01m\x1b[Koperator=\x1b[m\x1b[K\xe2\x80\x99 (operand types are \xe2\x80\x98\x1b[01m\x1b[Kceres::Jet<double, 7>\x1b[m\x1b[K\xe2\x80\x99 and \xe2\x80\x98\x1b[01m\x1b[Kdouble\x1b[m\x1b[K\xe2\x80\x99)\n'}
+[10.861929] (slam_learn) StderrLine: {'line': b'   65 |                 \x1b[01;31m\x1b[Kresidual[0] = (float)fabs(param.dot(point) + d) / dSqrt\x1b[m\x1b[K;\n'}
+[10.862016] (slam_learn) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.862083] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/local/include/ceres/internal/autodiff.h:152\x1b[m\x1b[K,\n'}
+[10.862149] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/local/include/ceres/autodiff_cost_function.h:130\x1b[m\x1b[K,\n'}
+[10.862215] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/local/include/ceres/ceres.h:37\x1b[m\x1b[K,\n'}
+[10.862282] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:32\x1b[m\x1b[K,\n'}
+[10.862348] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[10.862434] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/jet.h:211:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kceres::Jet<double, 7>& ceres::Jet<double, 7>::operator=(const ceres::Jet<double, 7>&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.862519] (slam_learn) StderrLine: {'line': b'  211 | struct \x1b[01;36m\x1b[KJet\x1b[m\x1b[K {\n'}
+[10.862587] (slam_learn) StderrLine: {'line': b'      |        \x1b[01;36m\x1b[K^~~\x1b[m\x1b[K\n'}
+[10.862652] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/jet.h:211:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[Kdouble\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kconst ceres::Jet<double, 7>&\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.862722] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/jet.h:211:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Kceres::Jet<double, 7>& ceres::Jet<double, 7>::operator=(ceres::Jet<double, 7>&&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.862788] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/local/include/ceres/jet.h:211:8:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  no known conversion for argument 1 from \xe2\x80\x98\x1b[01m\x1b[Kdouble\x1b[m\x1b[K\xe2\x80\x99 to \xe2\x80\x98\x1b[01m\x1b[Kceres::Jet<double, 7>&&\x1b[m\x1b[K\xe2\x80\x99\n'}
+[10.862855] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2\x1b[m\x1b[K:\n'}
+[10.862920] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:63:40:\x1b[m\x1b[K \x1b[01;35m\x1b[Kwarning: \x1b[m\x1b[Kunused variable \xe2\x80\x98\x1b[01m\x1b[Kt_last_curr\x1b[m\x1b[K\xe2\x80\x99 [\x1b[01;35m\x1b[K\x1b]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable\x07-Wunused-variable\x1b]8;;\x07\x1b[m\x1b[K]\n'}
+[10.862989] (slam_learn) StderrLine: {'line': b'   63 |                 Eigen::Matrix<T, 3, 1> \x1b[01;35m\x1b[Kt_last_curr\x1b[m\x1b[K{T(s) * t[0], T(s) * t[1], T(s) * t[2]};\n'}
+[10.863055] (slam_learn) StderrLine: {'line': b'      |                                        \x1b[01;35m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[10.933397] (-) TimerEvent: {}
+[11.033735] (-) TimerEvent: {}
+[11.134045] (-) TimerEvent: {}
+[11.234412] (-) TimerEvent: {}
+[11.334765] (-) TimerEvent: {}
+[11.435077] (-) TimerEvent: {}
+[11.535423] (-) TimerEvent: {}
+[11.635769] (-) TimerEvent: {}
+[11.736091] (-) TimerEvent: {}
+[11.836380] (-) TimerEvent: {}
+[11.936696] (-) TimerEvent: {}
+[12.037026] (-) TimerEvent: {}
+[12.102004] (slam_learn) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1\n'}
+[12.102402] (slam_learn) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2\n'}
+[12.103121] (slam_learn) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[12.105458] (slam_learn) CommandEnded: {'returncode': 2}
+[12.137157] (-) TimerEvent: {}
+[12.164425] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 2}
+[12.177692] (-) EventReactorShutdown: {}

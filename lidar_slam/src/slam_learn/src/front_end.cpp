@@ -14,6 +14,7 @@ class FrontEnd : public rclcpp::Node{
 private:
     // 处理后的点云
     rclcpp::Subscription<other_msgs::msg::SegCloud>::SharedPtr subSegMsg;
+    rclcpp::TimerBase::SharedPtr loop_rate;
 
     // 消息
     other_msgs::msg::SegCloud seg_msg;
@@ -56,18 +57,33 @@ private:
     Eigen::Quaterniond q_w_curr;
     Eigen::Vector3d t_w_curr;
 
+    // 队列
+    std::queue<other_msgs::msg::SegCloud> segCloudQueue;
+    std::mutex mtx;
+
     // 路径
     nav_msgs::msg::Path path;
+
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
+    PubPointCloud pubtest;
+    PubPointCloud pubtest2;
 
 public:
     FrontEnd(const std::string &name)
         : Node(name),
           q_last_curr(para_q),
-          t_last_curr(para_t)
+          t_last_curr(para_t),
+          q_w_curr(1, 0, 0, 0),
+          t_w_curr(0, 0, 0)
     {
         subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
-            "/seg_cloud", 1, std::bind(&FrontEnd::run, this, std::placeholders::_1));
+            "/seg_cloud", 1, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
+        
+        loop_rate = this -> create_wall_timer(std::chrono::milliseconds(100), std::bind(&FrontEnd::run, this));
 
+        pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
+        pubtest = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test", 1);
+        pubtest2 = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test2", 1);
         // 声明参数
         this -> declare_parameter(PARAM_VERTICAL_SCANS, vertical_scans);
         this -> declare_parameter(PARAM_EDGE_THRESHOLD, edgeThreshold);
@@ -116,9 +132,23 @@ public:
     /**
      * 回调函数
     */
-    void run(const other_msgs::msg::SegCloud &msg){
-        seg_msg = msg;
-        
+    void pushQueue(const other_msgs::msg::SegCloud &msg){
+        mtx.lock();
+        segCloudQueue.push(msg);
+        mtx.unlock();
+    }
+
+    /**
+     * 循环运行
+    */
+    void run(){
+        if(segCloudQueue.empty()){
+            return;
+        }
+        mtx.lock();
+        seg_msg = segCloudQueue.front();
+        segCloudQueue.pop();
+        mtx.unlock();
         // 变量重置
         resetParameters();
         // 计算曲率
@@ -126,7 +156,11 @@ public:
         // 提取特征点
         extractFeatures();
         // 里程计
+        std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
         odometry();
+        std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end - start;
+        RCLCPP_INFO(this -> get_logger(), "odometry time: %f", elapsed_seconds.count() * 1000);
         // 发布消息
         publish();
     }
@@ -263,7 +297,7 @@ public:
                         tran(seg_msg.seg_cloud[curInd], point);
                         surfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 4){
+                        if(++smallestPickedNum >= 1){
                             break;
                         }
                         
@@ -296,10 +330,21 @@ public:
             }
         }
 
+        
+
         for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
             tran(seg_msg.seg_cloud[i], point);
             surfLessFlat -> push_back(point);
         }
+        
+        sensor_msgs::msg::PointCloud2 msg;
+        pcl::toROSMsg(*surfLessFlat, msg);
+        msg.header.frame_id = "map";
+        pubtest -> publish(msg);
+
+        pcl::toROSMsg(*surfFlat, msg);
+        msg.header.frame_id = "map";
+        pubtest2 -> publish(msg);
         
         // 地面点特征提取
         for(int i = 0; i < vertical_scans; ++i){
@@ -322,7 +367,7 @@ public:
                         tran(seg_msg.ground_cloud[curInd], point);
                         groundSurfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 4){
+                        if(++smallestPickedNum >= 1){
                             break;
                         }
                         
@@ -358,6 +403,16 @@ public:
             tran(seg_msg.ground_cloud[i], point);
             groundSurfLessFlat -> push_back(point);
         }
+
+        // 使用ransac算法获得地面的法向量
+        pcl::SampleConsensusModelPlane<PointType>::Ptr model_p(
+            new pcl::SampleConsensusModelPlane<PointType>(groundSurfLessFlat));
+        pcl::RandomSampleConsensus<PointType> ransac(model_p);
+        ransac.setDistanceThreshold(0.1);
+        ransac.computeModel();
+        Eigen::VectorXf coeffs;
+        ransac.getModelCoefficients(coeffs);
+        
     }
 
     /**
@@ -376,6 +431,25 @@ public:
             Eigen::Vector3d v(point.x, point.y, point.z);
             return v;
         };
+        // 使用初始位姿插值
+        auto transform = [&](const PointType *const pi){
+            Eigen::Quaterniond q_point_last = Eigen::Quaterniond::Identity().slerp(1.0, q_last_curr);
+            Eigen::Vector3d t_point_last = 1.0 * t_last_curr;
+            Eigen::Vector3d point(pi -> x, pi -> y, pi -> z);
+            Eigen::Vector3d un_point = q_point_last * point + t_point_last;
+            PointType p(un_point.x(), un_point.y(), un_point.z());
+            return p;
+        };
+
+        // 降采样
+        auto downSample = [](CloudTypePtr cloud_in){
+            CloudTypePtr tmp(new CloudType());
+            pcl::VoxelGrid<PointType> downSampleFilter;
+            downSampleFilter.setLeafSize(0.5, 0.5, 0.5);
+            downSampleFilter.setInputCloud(cloud_in);
+            downSampleFilter.filter(*tmp);
+            *cloud_in = *tmp;
+        };
 
         if(isFirstFrame == true){
             isFirstFrame = false;
@@ -385,7 +459,7 @@ public:
             int groundFlatNum = groundSurfFlat -> size();
 
             // 两次优化
-            for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
+            for(size_t opti_counter = 0; opti_counter < 1; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
                 ceres::Manifold *q_manifold = new ceres::EigenQuaternionManifold();
                 ceres::Problem::Options problem_options;
@@ -400,7 +474,7 @@ public:
 
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
-                    pointSel = cornerSharp -> points[i];
+                    pointSel = transform(&cornerSharp -> points[i]);
                     kdtreeCornerLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
                     int closestPointInd = -1, minPointInd2 = -1;
                     if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
@@ -454,8 +528,8 @@ public:
                 }
                 
                 // 分割点云的平面点
-                for(int i = 0; i < surfFlatNum; ++i){
-                    pointSel = surfFlat -> points[i];
+                /*for(int i = 0; i < surfFlatNum; ++i){
+                    pointSel = transform(&surfFlat -> points[i]);
                     kdtreeSurfLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
                     int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
                     if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
@@ -508,11 +582,11 @@ public:
                             problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
                         }
                     }
-                }
+                }*/
 
                 // 地面点云的平面点
-                for(int i = 0; i < groundFlatNum; ++i){
-                    pointSel = groundSurfFlat -> points[i];
+                /*for(int i = 0; i < groundFlatNum; ++i){
+                    pointSel = transform(&groundSurfFlat -> points[i]);
                     kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
 
                     int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
@@ -564,7 +638,7 @@ public:
                             problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
                         }
                     }
-                }
+                }*/
                 
                 // 求解
                 ceres::Solver::Options options;
@@ -585,14 +659,17 @@ public:
         cloudTmp = cornerLessSharp;
         cornerLessSharp = cornerLast;
         cornerLast = cloudTmp;
+        downSample(cornerLast);
 
         cloudTmp = surfLessFlat;
         surfLessFlat = surfLast;
         surfLast = cloudTmp;
+        downSample(surfLast);
 
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
+        downSample(groundSurfLast);
         
         kdtreeCornerLast -> setInputCloud(cornerLast);
         kdtreeSurfLast -> setInputCloud(surfLast);
@@ -613,14 +690,13 @@ public:
         laserOdometry.pose.pose.position.x = t_w_curr.x();
         laserOdometry.pose.pose.position.y = t_w_curr.y();
         laserOdometry.pose.pose.position.z = t_w_curr.z();
-        RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", q_w_curr.x(), q_w_curr.y(), q_w_curr.z(),q_w_curr.w());
+        // RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", q_w_curr.x(), q_w_curr.y(), q_w_curr.z(),q_w_curr.w());
         geometry_msgs::msg::PoseStamped laserPose;
         laserPose.header = laserOdometry.header;
         laserPose.pose = laserOdometry.pose.pose;
         path.poses.push_back(laserPose);
         path.header.frame_id = "map";
-        rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath = 
-            this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
+        
         pubPath -> publish(path);
     }
 

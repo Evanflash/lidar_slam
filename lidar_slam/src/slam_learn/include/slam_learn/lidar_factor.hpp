@@ -46,6 +46,38 @@ struct LidarEdgeFactor{
     double s;
 };
 
+struct GroundPlaneFactor{
+    GroundPlaneFactor(Eigen::VectorXf coeffs_, Eigen::Vector3d point_)
+        : coeffs(coeffs_), point(point_)
+    {
+        param = coeffs.head(3);
+        d = coeffs[3];
+        dSqrt = 1 / sqrt(param.dot(param));
+    }
+
+    template<typename T>
+    bool operator()(const T* q, const T* t, T* residual) const{
+        Eigen::Quaternion<T> q_last_curr{q[3], q[0], q[1], q[2]};
+		Eigen::Quaternion<T> q_identity{T(1), T(0), T(0), T(0)};
+		q_last_curr = q_identity.slerp(T(s), q_last_curr);
+		Eigen::Matrix<T, 3, 1> t_last_curr{T(s) * t[0], T(s) * t[1], T(s) * t[2]};
+
+		residual[0] = (param.dot(point) + d) / dSqrt;
+        
+		return true;
+    }
+
+    static ceres::CostFunction *Create(const Eigen::VectorXf coeffs_, const Eigen::Vector3d point_){
+        return (new ceres::AutoDiffCostFunction<GroundPlaneFactor, 1, 4, 3>
+                (new GroundPlaneFactor(coeffs_, point_)));
+    }
+    Eigen::VectorXf coeffs;
+    Eigen::Vector3d param;
+    Eigen::Vector3d point;
+    double d;
+    double dSqrt;
+};
+
 struct LidarPlaneFactor{
     LidarPlaneFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d last_point_j_,
                      Eigen::Vector3d last_point_l_, Eigen::Vector3d last_point_m_, double s_)
