@@ -1,0 +1,36 @@
+[35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[ 33%] Built target data_process_node
+[ 66%] Built target data_process_test
+[ 83%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In member function ‘[01m[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:65:44:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Matrix<float, 3, 1>::dot(const Vector3d&) const[m[K’
+   65 |                 residual[0] = (T)([01;31m[Kparam.dot(point)[m[K + d) / dSqrt;
+      |                                   [01;31m[K~~~~~~~~~^~~~~~~[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:273[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:15[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:190:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class OtherDerived> typename Eigen::ScalarBinaryOpTraits<typename Eigen::internal::traits<T>::Scalar, typename Eigen::internal::traits<OtherDerived>::Scalar>::ReturnType Eigen::MatrixBase<Derived>::dot(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Matrix<float, 3, 1>][m[K’
+  190 |     [01;36m[Kdot[m[K(const MatrixBase<OtherDerived>& other) const;
+      |     [01;36m[K^~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/MatrixBase.h:190:5:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:303[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:15[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+/usr/include/eigen3/Eigen/src/Core/Dot.h: In substitution of ‘[01m[Ktemplate<class OtherDerived> typename Eigen::ScalarBinaryOpTraits<float, typename Eigen::internal::traits<T>::Scalar, Eigen::internal::scalar_product_op<float, typename Eigen::internal::traits<T>::Scalar> >::ReturnType Eigen::MatrixBase<Eigen::Matrix<float, 3, 1> >::dot<OtherDerived>(const Eigen::MatrixBase<Derived>&) const [with OtherDerived = Eigen::Matrix<double, 3, 1>][m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:65:30:[m[K   required from here
+[01m[K/usr/include/eigen3/Eigen/src/Core/Dot.h:72:1:[m[K [01;31m[Kerror: [m[Kno type named ‘[01m[KReturnType[m[K’ in ‘[01m[Kstruct Eigen::ScalarBinaryOpTraits<float, double, Eigen::internal::scalar_product_op<float, double> >[m[K’
+   72 | [01;31m[KMatrixBase<Derived>[m[K::dot(const MatrixBase<OtherDerived>& other) const
+      | [01;31m[K^~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::FrontEnd::odometry()[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:458:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KsurfFlatNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  458 |             int [01;35m[KsurfFlatNum[m[K = surfFlat -> size();
+      |                 [01;35m[K^~~~~~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:459:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KgroundFlatNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  459 |             int [01;35m[KgroundFlatNum[m[K = groundSurfFlat -> size();
+      |                 [01;35m[K^~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

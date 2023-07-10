@@ -1,0 +1,15 @@
+In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In static member function ‘[01m[Kstatic ceres::CostFunction* lidarslam::GroundPlaneFactor::Create(const VectorXf&, Eigen::Vector3d)[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:74:40:[m[K [01;31m[Kerror: [m[Kbinding reference of type ‘[01m[KEigen::VectorXf&[m[K’ {aka ‘[01m[KEigen::Matrix<float, -1, 1>&[m[K’} to ‘[01m[Kconst VectorXf[m[K’ {aka ‘[01m[Kconst Eigen::Matrix<float, -1, 1>[m[K’} discards qualifiers
+   74 |                 (new GroundPlaneFactor([01;31m[Kcoeffs_[m[K, point_)));
+      |                                        [01;31m[K^~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:50:40:[m[K [01;36m[Knote: [m[K  initializing argument 1 of ‘[01m[Klidarslam::GroundPlaneFactor::GroundPlaneFactor(Eigen::VectorXf&, Eigen::Vector3d)[m[K’
+   50 |     GroundPlaneFactor([01;36m[KEigen::VectorXf &coeffs_[m[K, Eigen::Vector3d point_)
+      |                       [01;36m[K~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::FrontEnd::odometry()[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:452:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KsurfFlatNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  452 |             int [01;35m[KsurfFlatNum[m[K = surfFlat -> size();
+      |                 [01;35m[K^~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

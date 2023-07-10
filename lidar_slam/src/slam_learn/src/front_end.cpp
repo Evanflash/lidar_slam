@@ -22,14 +22,18 @@ private:
     // 当前点特征点集
     CloudTypePtr cornerSharp;
     CloudTypePtr cornerLessSharp;
-    CloudTypePtr surfFlat;
-    CloudTypePtr surfLessFlat;
+    // CloudTypePtr surfFlat;
+    // CloudTypePtr surfLessFlat;
     CloudTypePtr groundSurfFlat;
     CloudTypePtr groundSurfLessFlat;
     // 上一时刻点特征点集
     CloudTypePtr cornerLast;
-    CloudTypePtr surfLast;
+    // CloudTypePtr surfLast;
     CloudTypePtr groundSurfLast;
+
+    // 上一时刻平面方程
+    Eigen::Vector3d param_abc;
+    double param_d;
 
     // 曲率
     std::vector<smoothness> segmentCurvature;
@@ -40,8 +44,8 @@ private:
 
     // kd tree
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeCornerLast;
-    pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfLast;
-    pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundLast;
+    // pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfLast;
+    // pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundLast;
 
     // 参数
     int vertical_scans;
@@ -79,7 +83,7 @@ public:
         subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
             "/seg_cloud", 1, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
         
-        loop_rate = this -> create_wall_timer(std::chrono::milliseconds(100), std::bind(&FrontEnd::run, this));
+        loop_rate = this -> create_wall_timer(std::chrono::milliseconds(500), std::bind(&FrontEnd::run, this));
 
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
         pubtest = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test", 1);
@@ -114,17 +118,17 @@ public:
     void init(){
         cornerSharp.reset(new CloudType());
         cornerLessSharp.reset(new CloudType());
-        surfFlat.reset(new CloudType());
-        surfLessFlat.reset(new CloudType());
+        // surfFlat.reset(new CloudType());
+        // surfLessFlat.reset(new CloudType());
         groundSurfFlat.reset(new CloudType());
         groundSurfLessFlat.reset(new CloudType());
         cornerLast.reset(new CloudType());
-        surfLast.reset(new CloudType());
+        // surfLast.reset(new CloudType());
         groundSurfLast.reset(new CloudType());
 
         kdtreeCornerLast.reset(new pcl::KdTreeFLANN<PointType>());
-        kdtreeSurfLast.reset(new pcl::KdTreeFLANN<PointType>());
-        kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
+        // kdtreeSurfLast.reset(new pcl::KdTreeFLANN<PointType>());
+        // kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
 
         isFirstFrame = true;
     }
@@ -172,8 +176,8 @@ public:
         // 点云
         cornerSharp -> clear();
         cornerLessSharp -> clear();
-        surfFlat -> clear();
-        surfLessFlat -> clear();
+        // surfFlat -> clear();
+        // surfLessFlat -> clear();
         groundSurfFlat -> clear();
         groundSurfLessFlat -> clear();
 
@@ -289,62 +293,53 @@ public:
                 }
                 
                 // 平面点
-                int smallestPickedNum = 1;
-                for(int k = sp; k <= ep; ++k){
-                    int curInd = segmentCurvature[k].index;
-                    if(segmentNeighborPicked[curInd] == 0 && 
-                       segmentCurvature[k].curvature < surfThreshold){
-                        tran(seg_msg.seg_cloud[curInd], point);
-                        surfFlat -> push_back(point);
+                // int smallestPickedNum = 0;
+                // for(int k = sp; k <= ep; ++k){
+                //     int curInd = segmentCurvature[k].index;
+                //     if(segmentNeighborPicked[curInd] == 0 && 
+                //        segmentCurvature[k].curvature < surfThreshold){
+                //         tran(seg_msg.seg_cloud[curInd], point);
+                //         surfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 1){
-                            break;
-                        }
+                //         if(++smallestPickedNum >= 1){
+                //             break;
+                //         }
                         
-                        // 标记选取的关键点与离该关键点近的点
-                        segmentNeighborPicked[curInd] = 1;
-                        for(int l = 1; l <= 5; ++l){
-                            float dx = seg_msg.seg_cloud[curInd + l].x -
-                                       seg_msg.seg_cloud[curInd + l - 1].x;
-                            float dy = seg_msg.seg_cloud[curInd + l].y -
-                                       seg_msg.seg_cloud[curInd + l - 1].y;
-                            float dz = seg_msg.seg_cloud[curInd + l].z -
-                                       seg_msg.seg_cloud[curInd + l - 1].z;
+                //         // 标记选取的关键点与离该关键点近的点
+                //         segmentNeighborPicked[curInd] = 1;
+                //         for(int l = 1; l <= 5; ++l){
+                //             float dx = seg_msg.seg_cloud[curInd + l].x -
+                //                        seg_msg.seg_cloud[curInd + l - 1].x;
+                //             float dy = seg_msg.seg_cloud[curInd + l].y -
+                //                        seg_msg.seg_cloud[curInd + l - 1].y;
+                //             float dz = seg_msg.seg_cloud[curInd + l].z -
+                //                        seg_msg.seg_cloud[curInd + l - 1].z;
                             
-                            if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                            segmentNeighborPicked[curInd + l] = 1;
-                        }
-                        for(int l = -1; l >= -5; --l){
-                            float dx = seg_msg.seg_cloud[curInd + l].x -
-                                       seg_msg.seg_cloud[curInd + l + 1].x;
-                            float dy = seg_msg.seg_cloud[curInd + l].y -
-                                       seg_msg.seg_cloud[curInd + l + 1].y;
-                            float dz = seg_msg.seg_cloud[curInd + l].z -
-                                       seg_msg.seg_cloud[curInd + l + 1].z;
+                //             if(dx * dx + dy * dy + dz * dz > 0.05) break;
+                //             segmentNeighborPicked[curInd + l] = 1;
+                //         }
+                //         for(int l = -1; l >= -5; --l){
+                //             float dx = seg_msg.seg_cloud[curInd + l].x -
+                //                        seg_msg.seg_cloud[curInd + l + 1].x;
+                //             float dy = seg_msg.seg_cloud[curInd + l].y -
+                //                        seg_msg.seg_cloud[curInd + l + 1].y;
+                //             float dz = seg_msg.seg_cloud[curInd + l].z -
+                //                        seg_msg.seg_cloud[curInd + l + 1].z;
                             
-                            if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                            segmentNeighborPicked[curInd + l] = 1;
-                        }
-                    }
-                }    
+                //             if(dx * dx + dy * dy + dz * dz > 0.05) break;
+                //             segmentNeighborPicked[curInd + l] = 1;
+                //         }
+                //     }
+                // }    
             }
         }
 
         
 
-        for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
-            tran(seg_msg.seg_cloud[i], point);
-            surfLessFlat -> push_back(point);
-        }
-        
-        sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*surfLessFlat, msg);
-        msg.header.frame_id = "map";
-        pubtest -> publish(msg);
-
-        pcl::toROSMsg(*surfFlat, msg);
-        msg.header.frame_id = "map";
-        pubtest2 -> publish(msg);
+        // for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
+        //     tran(seg_msg.seg_cloud[i], point);
+        //     surfLessFlat -> push_back(point);
+        // }
         
         // 地面点特征提取
         for(int i = 0; i < vertical_scans; ++i){
@@ -359,7 +354,7 @@ public:
                 std::sort(groundCurvature.begin() + sp, groundCurvature.begin() + ep + 1, cmp);
 
                 // 平面点
-                int smallestPickedNum = 1;
+                int smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
                     int curInd = groundCurvature[k].index;
                     if(groundNeighborPicked[curInd] == 0 && 
@@ -403,16 +398,11 @@ public:
             tran(seg_msg.ground_cloud[i], point);
             groundSurfLessFlat -> push_back(point);
         }
-
-        // 使用ransac算法获得地面的法向量
-        pcl::SampleConsensusModelPlane<PointType>::Ptr model_p(
-            new pcl::SampleConsensusModelPlane<PointType>(groundSurfLessFlat));
-        pcl::RandomSampleConsensus<PointType> ransac(model_p);
-        ransac.setDistanceThreshold(0.1);
-        ransac.computeModel();
-        Eigen::VectorXf coeffs;
-        ransac.getModelCoefficients(coeffs);
         
+        sensor_msgs::msg::PointCloud2 msg;
+        pcl::toROSMsg(*groundSurfLessFlat, msg);
+        msg.header.frame_id = "map";
+        pubtest -> publish(msg);
     }
 
     /**
@@ -455,11 +445,11 @@ public:
             isFirstFrame = false;
         }else{
             int cornerSharpNum = cornerSharp -> size();
-            int surfFlatNum = surfFlat -> size();
+            // int surfFlatNum = surfFlat -> size();
             int groundFlatNum = groundSurfFlat -> size();
 
             // 两次优化
-            for(size_t opti_counter = 0; opti_counter < 1; ++opti_counter){
+            for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
                 ceres::Manifold *q_manifold = new ceres::EigenQuaternionManifold();
                 ceres::Problem::Options problem_options;
@@ -640,6 +630,14 @@ public:
                     }
                 }*/
                 
+                // 地面点优化
+                for(int i = 0; i < groundFlatNum; ++i){
+                    pointSel = transform(&groundSurfFlat -> points[i]);
+                    Eigen::Vector3d point_in(pointSel.x, pointSel.y, pointSel.z);
+                    ceres::CostFunction *cost_function =
+                        GroundPlaneFactor::Create(param_abc, param_d, point_in);
+                    problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
+                }
                 // 求解
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
@@ -661,19 +659,33 @@ public:
         cornerLast = cloudTmp;
         downSample(cornerLast);
 
-        cloudTmp = surfLessFlat;
-        surfLessFlat = surfLast;
-        surfLast = cloudTmp;
-        downSample(surfLast);
+        // cloudTmp = surfLessFlat;
+        // surfLessFlat = surfLast;
+        // surfLast = cloudTmp;
+        // downSample(surfLast);
 
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
         downSample(groundSurfLast);
-        
+
+        // 使用ransac算法获得地面的法向量
+        pcl::SampleConsensusModelPlane<PointType>::Ptr model_p(
+            new pcl::SampleConsensusModelPlane<PointType>(groundSurfLast));
+        pcl::RandomSampleConsensus<PointType> ransac(model_p);
+        ransac.setDistanceThreshold(0.1);
+        ransac.computeModel();
+        Eigen::VectorXf coeffs(4);
+        ransac.getModelCoefficients(coeffs);
+        param_abc[0] = double(coeffs(0));
+        param_abc[1] = double(coeffs(1));
+        param_abc[2] = double(coeffs(2));
+        param_d = double(coeffs(3));
+        RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", 
+            param_abc[0], param_abc[1], param_abc[2], param_d);
         kdtreeCornerLast -> setInputCloud(cornerLast);
-        kdtreeSurfLast -> setInputCloud(surfLast);
-        kdtreeGroundLast -> setInputCloud(groundSurfLast);
+        // kdtreeSurfLast -> setInputCloud(surfLast);
+        // kdtreeGroundLast -> setInputCloud(groundSurfLast);
     }
 
     /**

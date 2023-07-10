@@ -1,0 +1,17 @@
+[35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[ 33%] Built target data_process_test
+[ 66%] Built target data_process_node
+[ 83%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In member function ‘[01m[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:67:31:[m[K [01;31m[Kerror: [m[K‘[01m[K_param[m[K’ was not declared in this scope; did you mean ‘[01m[Kparam[m[K’?
+   67 |                 residual[0] = [01;31m[K_param[m[K.dot(point) + _d;
+      |                               [01;31m[K^~~~~~[m[K
+      |                               [32m[Kparam[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::FrontEnd::odometry()[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:452:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KsurfFlatNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  452 |             int [01;35m[KsurfFlatNum[m[K = surfFlat -> size();
+      |                 [01;35m[K^~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

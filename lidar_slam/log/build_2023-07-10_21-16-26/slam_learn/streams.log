@@ -1,0 +1,50 @@
+[0.029s] Invoking command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
+[0.116s] [35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[0.129s] [ 33%] Built target data_process_node
+[0.139s] [ 66%] Built target data_process_test
+[0.160s] [ 83%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[7.399s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[7.399s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In member function ‘[01m[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const[m[K’:
+[7.399s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:65:17:[m[K [01;31m[Kerror: [m[K‘[01m[Kq_last_curr[m[K’ was not declared in this scope
+[7.399s]    65 |         point = [01;31m[Kq_last_curr[m[K * point + t_last_curr;
+[7.399s]       |                 [01;31m[K^~~~~~~~~~~[m[K
+[7.415s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:65:39:[m[K [01;31m[Kerror: [m[K‘[01m[Kt_last_curr[m[K’ was not declared in this scope
+[7.415s]    65 |         point = q_last_curr * point + [01;31m[Kt_last_curr[m[K;
+[7.415s]       |                                       [01;31m[K^~~~~~~~~~~[m[K
+[7.649s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::FrontEnd::odometry()[m[K’:
+[7.649s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:452:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KsurfFlatNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[7.649s]   452 |             int [01;35m[KsurfFlatNum[m[K = surfFlat -> size();
+[7.649s]       |                 [01;35m[K^~~~~~~~~~~[m[K
+[11.506s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.506s] /home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of ‘[01m[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const [with T = double][m[K’:
+[11.506s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneFactor; T = double; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>][m[K’
+[11.506s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double][m[K’
+[11.506s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double][m[K’
+[11.506s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:208:55:[m[K   required from ‘[01m[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneFactor; int kNumResiduals = 1; int ...Ns = {4, 3}][m[K’
+[11.506s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:[m[K   required from here
+[11.506s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:63:11:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[K_d[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+[11.506s]    63 |         T [01;35m[K_d[m[K = T(d);
+[11.507s]       |           [01;35m[K^~[m[K
+[11.507s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:56:30:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kq[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.507s]    56 |     bool operator()([01;35m[Kconst T* q[m[K, const T* t, T* residual) const{
+[11.507s]       |                     [01;35m[K~~~~~~~~~^[m[K
+[11.507s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:56:42:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.507s]    56 |     bool operator()(const T* q, [01;35m[Kconst T* t[m[K, T* residual) const{
+[11.507s]       |                                 [01;35m[K~~~~~~~~~^[m[K
+[11.617s] /home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of ‘[01m[Kbool lidarslam::GroundPlaneFactor::operator()(const T*, const T*, T*) const [with T = ceres::Jet<double, 7>][m[K’:
+[11.618s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>][m[K’
+[11.618s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>][m[K’
+[11.618s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = ceres::Jet<double, 7>][m[K’
+[11.618s] [01m[K/usr/local/include/ceres/internal/autodiff.h:349:39:[m[K   required from ‘[01m[Kbool ceres::internal::AutoDifferentiate(const Functor&, const T* const*, int, T*, T**) [with int kNumResiduals = 1; ParameterDims = ceres::internal::ParameterDims<false, 4, 3>; Functor = lidarslam::GroundPlaneFactor; T = double][m[K’
+[11.618s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:211:69:[m[K   required from ‘[01m[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneFactor; int kNumResiduals = 1; int ...Ns = {4, 3}][m[K’
+[11.618s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:[m[K   required from here
+[11.618s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:56:30:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kq[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.618s]    56 |     bool operator()([01;35m[Kconst T* q[m[K, const T* t, T* residual) const{
+[11.618s]       |                     [01;35m[K~~~~~~~~~^[m[K
+[11.618s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:56:42:[m[K [01;35m[Kwarning: [m[Kunused parameter ‘[01m[Kt[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-parameter-Wunused-parameter]8;;[m[K]
+[11.618s]    56 |     bool operator()(const T* q, [01;35m[Kconst T* t[m[K, T* residual) const{
+[11.618s]       |                                 [01;35m[K~~~~~~~~~^[m[K
+[13.242s] gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+[13.242s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+[13.242s] gmake: *** [Makefile:146: all] Error 2
+[13.246s] Invoked command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn' returned '2': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
