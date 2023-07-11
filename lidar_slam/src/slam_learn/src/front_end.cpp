@@ -7,12 +7,10 @@ static const std::string PARAM_VERTICAL_SCANS = "param.vertical_scans";
 static const std::string PARAM_EDGE_THRESHOLD = "param.edge_threshold";
 static const std::string PARAM_SURF_THRESHOLD = "param.surf_threshold";
 static const std::string PARAM_DISTANCE = "param.distance";
-static double para_q[4] = {0.0, 0.0, 0.0, 1.0};
-static double para_t[3] = {0.0, 0.0, 0.0};
 
 class FrontEnd : public rclcpp::Node{
 private:
-    // 处理后的点云
+    // 消息接收与控制
     rclcpp::Subscription<other_msgs::msg::SegCloud>::SharedPtr subSegMsg;
     rclcpp::TimerBase::SharedPtr loop_rate;
 
@@ -22,18 +20,11 @@ private:
     // 当前点特征点集
     CloudTypePtr cornerSharp;
     CloudTypePtr cornerLessSharp;
-    // CloudTypePtr surfFlat;
-    // CloudTypePtr surfLessFlat;
     CloudTypePtr groundSurfFlat;
     CloudTypePtr groundSurfLessFlat;
     // 上一时刻点特征点集
     CloudTypePtr cornerLast;
-    // CloudTypePtr surfLast;
     CloudTypePtr groundSurfLast;
-
-    // 上一时刻平面方程
-    Eigen::Vector3d param_abc;
-    double param_d;
 
     // 曲率
     std::vector<smoothness> segmentCurvature;
@@ -44,8 +35,7 @@ private:
 
     // kd tree
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeCornerLast;
-    // pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfLast;
-    // pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundLast;
+    pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundLast;
 
     // 参数
     int vertical_scans;
@@ -55,8 +45,8 @@ private:
 
     bool isFirstFrame;
 
-    Eigen::Map<Eigen::Quaterniond> q_last_curr;
-    Eigen::Map<Eigen::Vector3d> t_last_curr;
+    Eigen::Quaterniond q_last_curr;
+    Eigen::Vector3d t_last_curr;
 
     Eigen::Quaterniond q_w_curr;
     Eigen::Vector3d t_w_curr;
@@ -65,7 +55,7 @@ private:
     std::queue<other_msgs::msg::SegCloud> segCloudQueue;
     std::mutex mtx;
 
-    // 路径
+    // 路径, 测试
     nav_msgs::msg::Path path;
 
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
@@ -75,15 +65,13 @@ private:
 public:
     FrontEnd(const std::string &name)
         : Node(name),
-          q_last_curr(para_q),
-          t_last_curr(para_t),
           q_w_curr(1, 0, 0, 0),
           t_w_curr(0, 0, 0)
     {
         subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
             "/seg_cloud", 1, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
         
-        loop_rate = this -> create_wall_timer(std::chrono::milliseconds(500), std::bind(&FrontEnd::run, this));
+        // loop_rate = this -> create_wall_timer(std::chrono::milliseconds(100), std::bind(&FrontEnd::run, this));
 
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
         pubtest = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test", 1);
@@ -110,6 +98,9 @@ public:
 
         // 初始化
         init();
+        if(rclcpp::ok()){
+            run();
+        }
     }
 
     /**
@@ -118,17 +109,13 @@ public:
     void init(){
         cornerSharp.reset(new CloudType());
         cornerLessSharp.reset(new CloudType());
-        // surfFlat.reset(new CloudType());
-        // surfLessFlat.reset(new CloudType());
         groundSurfFlat.reset(new CloudType());
         groundSurfLessFlat.reset(new CloudType());
         cornerLast.reset(new CloudType());
-        // surfLast.reset(new CloudType());
         groundSurfLast.reset(new CloudType());
 
         kdtreeCornerLast.reset(new pcl::KdTreeFLANN<PointType>());
-        // kdtreeSurfLast.reset(new pcl::KdTreeFLANN<PointType>());
-        // kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
 
         isFirstFrame = true;
     }
@@ -146,27 +133,32 @@ public:
      * 循环运行
     */
     void run(){
-        if(segCloudQueue.empty()){
-            return;
+        while(1){
+            if(segCloudQueue.empty()){
+                //return;
+                sleep(1);
+                continue;
+            }
+            mtx.lock();
+            seg_msg = segCloudQueue.front();
+            segCloudQueue.pop();
+            mtx.unlock();
+            // 变量重置
+            resetParameters();
+            // 计算曲率
+            calculateSmoothness();
+            // 提取特征点
+            extractFeatures();
+            // 里程计
+            std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+            odometry();
+            std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end - start;
+            RCLCPP_INFO(this -> get_logger(), "odometry time: %f", elapsed_seconds.count() * 1000);
+            // 发布消息
+            publish();
         }
-        mtx.lock();
-        seg_msg = segCloudQueue.front();
-        segCloudQueue.pop();
-        mtx.unlock();
-        // 变量重置
-        resetParameters();
-        // 计算曲率
-        calculateSmoothness();
-        // 提取特征点
-        extractFeatures();
-        // 里程计
-        std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
-        odometry();
-        std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-        std::chrono::duration<double> elapsed_seconds = end - start;
-        RCLCPP_INFO(this -> get_logger(), "odometry time: %f", elapsed_seconds.count() * 1000);
-        // 发布消息
-        publish();
+        
     }
 
     /**
@@ -176,17 +168,15 @@ public:
         // 点云
         cornerSharp -> clear();
         cornerLessSharp -> clear();
-        // surfFlat -> clear();
-        // surfLessFlat -> clear();
         groundSurfFlat -> clear();
         groundSurfLessFlat -> clear();
 
         // 曲率
         segmentCurvature.clear();
-        segmentCurvature.resize(seg_msg.seg_cloud.size());
+        segmentCurvature.resize(seg_msg.seg_cloud.size(), smoothness(0, 0));
         groundCurvature.clear();
-        groundCurvature.resize(seg_msg.ground_cloud.size());
-        
+        groundCurvature.resize(seg_msg.ground_cloud.size(), smoothness(0, 0));
+        // 标志周围该点是否被选取
         segmentNeighborPicked.clear();
         segmentNeighborPicked.resize(seg_msg.seg_cloud.size(), 0);
         groundNeighborPicked.clear();
@@ -253,7 +243,7 @@ public:
                     if(segmentNeighborPicked[curInd] == 0 && 
                        segmentCurvature[k].curvature > edgeThreshold){
                         ++largestPickedNum;
-                        if(largestPickedNum <= 2){
+                        if(largestPickedNum <= 1){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
@@ -290,56 +280,9 @@ public:
                         }
 
                     }
-                }
-                
-                // 平面点
-                // int smallestPickedNum = 0;
-                // for(int k = sp; k <= ep; ++k){
-                //     int curInd = segmentCurvature[k].index;
-                //     if(segmentNeighborPicked[curInd] == 0 && 
-                //        segmentCurvature[k].curvature < surfThreshold){
-                //         tran(seg_msg.seg_cloud[curInd], point);
-                //         surfFlat -> push_back(point);
-
-                //         if(++smallestPickedNum >= 1){
-                //             break;
-                //         }
-                        
-                //         // 标记选取的关键点与离该关键点近的点
-                //         segmentNeighborPicked[curInd] = 1;
-                //         for(int l = 1; l <= 5; ++l){
-                //             float dx = seg_msg.seg_cloud[curInd + l].x -
-                //                        seg_msg.seg_cloud[curInd + l - 1].x;
-                //             float dy = seg_msg.seg_cloud[curInd + l].y -
-                //                        seg_msg.seg_cloud[curInd + l - 1].y;
-                //             float dz = seg_msg.seg_cloud[curInd + l].z -
-                //                        seg_msg.seg_cloud[curInd + l - 1].z;
-                            
-                //             if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                //             segmentNeighborPicked[curInd + l] = 1;
-                //         }
-                //         for(int l = -1; l >= -5; --l){
-                //             float dx = seg_msg.seg_cloud[curInd + l].x -
-                //                        seg_msg.seg_cloud[curInd + l + 1].x;
-                //             float dy = seg_msg.seg_cloud[curInd + l].y -
-                //                        seg_msg.seg_cloud[curInd + l + 1].y;
-                //             float dz = seg_msg.seg_cloud[curInd + l].z -
-                //                        seg_msg.seg_cloud[curInd + l + 1].z;
-                            
-                //             if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                //             segmentNeighborPicked[curInd + l] = 1;
-                //         }
-                //     }
-                // }    
+                }    
             }
         }
-
-        
-
-        // for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
-        //     tran(seg_msg.seg_cloud[i], point);
-        //     surfLessFlat -> push_back(point);
-        // }
         
         // 地面点特征提取
         for(int i = 0; i < vertical_scans; ++i){
@@ -362,7 +305,7 @@ public:
                         tran(seg_msg.ground_cloud[curInd], point);
                         groundSurfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 1){
+                        if(++smallestPickedNum >= 2){
                             break;
                         }
                         
@@ -444,23 +387,109 @@ public:
         if(isFirstFrame == true){
             isFirstFrame = false;
         }else{
+            // q: [qx, qy, qz]
+            // t: [tx, ty, tz]
+            double q[3] = {0.0, 0.0, 0.0};
+            double t[3] = {0.0, 0.0, 0.0};
             int cornerSharpNum = cornerSharp -> size();
-            // int surfFlatNum = surfFlat -> size();
             int groundFlatNum = groundSurfFlat -> size();
-
-            // 两次优化
+            std::chrono::time_point<std::chrono::system_clock> groundStr = std::chrono::system_clock::now();
+            // 地面点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
-                ceres::Manifold *q_manifold = new ceres::EigenQuaternionManifold();
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(para_q, 4, q_manifold);
-                problem.AddParameterBlock(para_t, 3);
+                problem.AddParameterBlock(q, 3);
+                problem.AddParameterBlock(t, 3);
 
                 PointType pointSel;
                 std::vector<int> pointSearchInd;
                 std::vector<float> pointSearchSqDis;
+
+                for(int i = 0; i < groundFlatNum; ++i){
+                    pointSel = transform(&groundSurfFlat -> points[i]);
+                    kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
+
+                    int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
+                    if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
+                        closestPointInd = pointSearchInd[0];
+                        int closestPointScanID = int(groundSurfLast -> points[closestPointInd].intensity);
+                        
+                        double minPointSqDis2 = nearest_feature_dist_sqr, minPointSqDis3 = nearest_feature_dist_sqr;
+                        for(int j = closestPointInd + 1; j < int(groundSurfLast -> size()); ++j){
+                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID + 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
+                            if(int(groundSurfLast -> points[j].intensity) <= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(groundSurfLast -> points[j].intensity) > closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+                        for(int j = closestPointInd - 1; j >= 0; --j){
+                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID - 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
+                            if(int(groundSurfLast -> points[j].intensity) >= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(groundSurfLast -> points[j].intensity) < closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+
+                        if(minPointInd2 >= 0 && minPointInd3 >= 0){
+                            Eigen::Vector3d curr_point = pointxyziToVector3d(groundSurfFlat -> points[i]);
+                            Eigen::Vector3d last_point_a = pointxyziToVector3d(groundSurfLast -> points[closestPointInd]);
+                            Eigen::Vector3d last_point_b = pointxyziToVector3d(groundSurfLast -> points[minPointInd2]);
+                            Eigen::Vector3d last_point_c = pointxyziToVector3d(groundSurfLast -> points[minPointInd3]);
+                            
+                            ceres::CostFunction *cost_function = 
+                                GroundPlaneFactor::Create(curr_point, last_point_a, last_point_b, last_point_c);
+                            problem.AddResidualBlock(cost_function, loss_function, q, t);
+                        }
+                    }
+                }
+                // 求解
+                ceres::Solver::Options options;
+                options.linear_solver_type = ceres::DENSE_QR;
+                options.max_num_iterations = 4;
+                options.minimizer_progress_to_stdout = false;
+                ceres::Solver::Summary summary;
+                ceres::Solve(options, &problem, &summary);
+            }
+            std::chrono::time_point<std::chrono::system_clock> groundEnd = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = groundStr - groundEnd;
+            RCLCPP_INFO(this -> get_logger(), "ground time: %f", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
+            //     t[0], t[1], t[2], q[0], q[1], q[2]);
+            std::chrono::time_point<std::chrono::system_clock> cornerStr = std::chrono::system_clock::now();
+            // 边缘点优化
+            for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
+                ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
+                ceres::Problem::Options problem_options;
+
+                ceres::Problem problem(problem_options);
+                problem.AddParameterBlock(q + 2, 1);
+                problem.AddParameterBlock(t, 2);
+
+                PointType pointSel;
+                std::vector<int> pointSearchInd;
+                std::vector<float> pointSearchSqDis;
+                Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], Eigen::Vector3d::UnitX()));
+                Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], Eigen::Vector3d::UnitY()));
+                Eigen::Matrix3d qyx;
+                qyx = pitch * roll;
 
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
@@ -509,134 +538,11 @@ public:
                             Eigen::Vector3d last_point_a = pointxyziToVector3d(cornerLast -> points[closestPointInd]);
                             Eigen::Vector3d last_point_b = pointxyziToVector3d(cornerLast -> points[minPointInd2]);
 
-                            double s = 1.0;
                             ceres::CostFunction *cost_function = 
-                                LidarEdgeFactor::Create(curr_point, last_point_a, last_point_b, s);
-                            problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
+                                CornerFactor::Create(curr_point, last_point_a, last_point_b, qyx, t[2]);
+                            problem.AddResidualBlock(cost_function, loss_function, q + 2, t);
                         }
                     }
-                }
-                
-                // 分割点云的平面点
-                /*for(int i = 0; i < surfFlatNum; ++i){
-                    pointSel = transform(&surfFlat -> points[i]);
-                    kdtreeSurfLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
-                    int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
-                    if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
-                        closestPointInd = pointSearchInd[0];
-                        int closestPointScanID = int(surfLast -> points[closestPointInd].intensity);
-                        
-                        double minPointSqDis2 = nearest_feature_dist_sqr, minPointSqDis3 = nearest_feature_dist_sqr;
-                        for(int j = closestPointInd + 1; j < int(surfLast -> size()); ++j){
-                            // 不是附近的点
-                            if(int(surfLast -> points[j].intensity) > closestPointScanID + 2.5)
-                                break;
-                            
-                            double pointSqDis = dis(surfLast -> points[j], pointSel);
-                            if(int(surfLast -> points[j].intensity) <= closestPointScanID &&
-                                    pointSqDis < minPointSqDis2){
-                                minPointSqDis2 = pointSqDis;
-                                minPointInd2 = j;
-                            }else if(int(surfLast -> points[j].intensity) > closestPointScanID &&
-                                        pointSqDis < minPointSqDis3){
-                                minPointSqDis3 = pointSqDis;
-                                minPointInd3 = j;
-                            }
-                        }
-                        for(int j = closestPointInd - 1; j >= 0; --j){
-                            // 不是附近点
-                            if(int(surfLast -> points[j].intensity) < closestPointScanID - 2.5)
-                                break;
-
-                            double pointSqDis = dis(surfLast -> points[j], pointSel);
-                            if(int(surfLast -> points[j].intensity) >= closestPointScanID &&
-                                    pointSqDis < minPointSqDis2){
-                                minPointSqDis2 = pointSqDis;
-                                minPointInd2 = j;
-                            }else if(int(surfLast -> points[j].intensity) < closestPointScanID &&
-                                        pointSqDis < minPointSqDis3){
-                                minPointSqDis3 = pointSqDis;
-                                minPointInd3 = j;
-                            }
-                        }
-
-                        if(minPointInd2 >= 0 && minPointInd3 >= 0){
-                            Eigen::Vector3d curr_point = pointxyziToVector3d(surfFlat -> points[i]);
-                            Eigen::Vector3d last_point_a = pointxyziToVector3d(surfLast -> points[closestPointInd]);
-                            Eigen::Vector3d last_point_b = pointxyziToVector3d(surfLast -> points[minPointInd2]);
-                            Eigen::Vector3d last_point_c = pointxyziToVector3d(surfLast -> points[minPointInd3]);
-                            
-                            double s = 1.0;
-                            ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(curr_point, last_point_a, last_point_b, last_point_c, s);
-                            problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
-                        }
-                    }
-                }*/
-
-                // 地面点云的平面点
-                /*for(int i = 0; i < groundFlatNum; ++i){
-                    pointSel = transform(&groundSurfFlat -> points[i]);
-                    kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
-
-                    int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
-                    if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
-                        closestPointInd = pointSearchInd[0];
-                        int closestPointScanID = int(groundSurfLast -> points[closestPointInd].intensity);
-                        
-                        double minPointSqDis2 = nearest_feature_dist_sqr, minPointSqDis3 = nearest_feature_dist_sqr;
-                        for(int j = closestPointInd + 1; j < int(groundSurfLast -> size()); ++j){
-                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID + 2.5)
-                                break;
-                            
-                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
-                            if(int(groundSurfLast -> points[j].intensity) <= closestPointScanID &&
-                                    pointSqDis < minPointSqDis2){
-                                minPointSqDis2 = pointSqDis;
-                                minPointInd2 = j;
-                            }else if(int(groundSurfLast -> points[j].intensity) > closestPointScanID &&
-                                        pointSqDis < minPointSqDis3){
-                                minPointSqDis3 = pointSqDis;
-                                minPointInd3 = j;
-                            }
-                        }
-                        for(int j = closestPointInd - 1; j >= 0; --j){
-                            if(int(groundSurfLast -> points[j].intensity) > closestPointScanID - 2.5)
-                                break;
-                            
-                            double pointSqDis = dis(groundSurfLast -> points[j], pointSel);
-                            if(int(groundSurfLast -> points[j].intensity) >= closestPointScanID &&
-                                    pointSqDis < minPointSqDis2){
-                                minPointSqDis2 = pointSqDis;
-                                minPointInd2 = j;
-                            }else if(int(groundSurfLast -> points[j].intensity) < closestPointScanID &&
-                                        pointSqDis < minPointSqDis3){
-                                minPointSqDis3 = pointSqDis;
-                                minPointInd3 = j;
-                            }
-                        }
-
-                        if(minPointInd2 >= 0 && minPointInd3 >= 0){
-                            Eigen::Vector3d curr_point = pointxyziToVector3d(groundSurfFlat -> points[i]);
-                            Eigen::Vector3d last_point_a = pointxyziToVector3d(groundSurfLast -> points[closestPointInd]);
-                            Eigen::Vector3d last_point_b = pointxyziToVector3d(groundSurfLast -> points[minPointInd2]);
-                            Eigen::Vector3d last_point_c = pointxyziToVector3d(groundSurfLast -> points[minPointInd3]);
-                            
-                            double s = 1.0;
-                            ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(curr_point, last_point_a, last_point_b, last_point_c, s);
-                            problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
-                        }
-                    }
-                }*/
-                
-                // 地面点优化
-                for(int i = 0; i < groundFlatNum; ++i){
-                    pointSel = transform(&groundSurfFlat -> points[i]);
-                    Eigen::Vector3d point_in(pointSel.x, pointSel.y, pointSel.z);
-                    ceres::CostFunction *cost_function =
-                        GroundPlaneFactor::Create(param_abc, param_d, point_in);
-                    problem.AddResidualBlock(cost_function, loss_function, para_q, para_t);
                 }
                 // 求解
                 ceres::Solver::Options options;
@@ -644,9 +550,19 @@ public:
                 options.max_num_iterations = 4;
                 options.minimizer_progress_to_stdout = false;
                 ceres::Solver::Summary summary;
-                ceres::Solve(options, &problem, &summary);
+                ceres::Solve(options, &problem, &summary);            
             }
-            
+            std::chrono::time_point<std::chrono::system_clock> cornerEnd = std::chrono::system_clock::now();
+            elapsed_seconds = cornerStr - cornerEnd;
+            RCLCPP_INFO(this -> get_logger(), "corner time: %f", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
+            //     t[0], t[1], t[2], q[0], q[1], q[2]);
+            Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], ::Eigen::Vector3d::UnitX()));
+            Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], ::Eigen::Vector3d::UnitY()));
+            Eigen::AngleAxisd yaw(Eigen::AngleAxisd(q[2], ::Eigen::Vector3d::UnitZ()));
+            q_last_curr = yaw * pitch * roll;
+            t_last_curr = Eigen::Vector3d(t[0], t[1], t[2]);
+
             t_w_curr = t_w_curr + q_w_curr * t_last_curr;
             q_w_curr = q_w_curr * q_last_curr;
         }
@@ -659,33 +575,13 @@ public:
         cornerLast = cloudTmp;
         downSample(cornerLast);
 
-        // cloudTmp = surfLessFlat;
-        // surfLessFlat = surfLast;
-        // surfLast = cloudTmp;
-        // downSample(surfLast);
-
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
         downSample(groundSurfLast);
 
-        // 使用ransac算法获得地面的法向量
-        pcl::SampleConsensusModelPlane<PointType>::Ptr model_p(
-            new pcl::SampleConsensusModelPlane<PointType>(groundSurfLast));
-        pcl::RandomSampleConsensus<PointType> ransac(model_p);
-        ransac.setDistanceThreshold(0.1);
-        ransac.computeModel();
-        Eigen::VectorXf coeffs(4);
-        ransac.getModelCoefficients(coeffs);
-        param_abc[0] = double(coeffs(0));
-        param_abc[1] = double(coeffs(1));
-        param_abc[2] = double(coeffs(2));
-        param_d = double(coeffs(3));
-        RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", 
-            param_abc[0], param_abc[1], param_abc[2], param_d);
         kdtreeCornerLast -> setInputCloud(cornerLast);
-        // kdtreeSurfLast -> setInputCloud(surfLast);
-        // kdtreeGroundLast -> setInputCloud(groundSurfLast);
+        kdtreeGroundLast -> setInputCloud(groundSurfLast);
     }
 
     /**
@@ -702,7 +598,7 @@ public:
         laserOdometry.pose.pose.position.x = t_w_curr.x();
         laserOdometry.pose.pose.position.y = t_w_curr.y();
         laserOdometry.pose.pose.position.z = t_w_curr.z();
-        // RCLCPP_INFO(this -> get_logger(), "%f, %f, %f, %f", q_w_curr.x(), q_w_curr.y(), q_w_curr.z(),q_w_curr.w());
+
         geometry_msgs::msg::PoseStamped laserPose;
         laserPose.header = laserOdometry.header;
         laserPose.pose = laserOdometry.pose.pose;

@@ -43,6 +43,9 @@ using SubPointCloud = rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::Share
 using PubPointCloud = rclcpp::Publisher<sensor_msgs::msg::PointCloud2>::SharedPtr;
 
 struct smoothness{
+    smoothness(float c, int i)
+        : curvature(c), index(i){}
+    smoothness(){}
     float curvature;    // 曲率
     int index;          // 序号
 };

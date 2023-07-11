@@ -6,25 +6,86 @@
 #include <eigen3/Eigen/Dense>
 
 namespace lidarslam{
+// 地面点残差计算
+struct GroundPlaneFactor{
+    GroundPlaneFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d point_j_,
+                     Eigen::Vector3d point_l_, Eigen::Vector3d point_m_)
+        : curr_point(curr_point_), point_j(point_j_), 
+          point_l(point_l_), point_m(point_m_)
+    {
+        ljm_norm = (point_j - point_l).cross(point_j - point_m);
+        ljm_norm.normalize();
+    }
 
-struct LidarEdgeFactor{
-    LidarEdgeFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d last_point_a_,
-                    Eigen::Vector3d last_point_b_, double s_)
-        : curr_point(curr_point_), last_point_a(last_point_a_), last_point_b(last_point_b_), s(s_){}
-
-    template <typename T>
-    bool operator()(const T* q, const T* t, T *residual) const{
+    template<typename T>
+    bool operator()(const T* q, const T* t, T* residual) const{
         Eigen::Matrix<T, 3, 1> cp{T(curr_point.x()), T(curr_point.y()), T(curr_point.z())};
-        Eigen::Matrix<T, 3, 1> lpa{T(last_point_a.x()), T(last_point_a.y()), T(last_point_a.z())};
-        Eigen::Matrix<T, 3, 1> lpb{T(last_point_b.x()), T(last_point_b.y()), T(last_point_b.z())};
+        Eigen::Matrix<T, 3, 1> lpj{T(point_j.x()), T(point_j.y()), T(point_j.z())};
+        Eigen::Matrix<T, 3, 1> ljm{T(ljm_norm.x()), T(ljm_norm.y()), T(ljm_norm.z())};
 
-        Eigen::Quaternion<T> q_last_curr{q[3], q[0], q[1], q[2]};
-        Eigen::Quaternion<T> q_identity{T(1), T(0), T(0), T(0)};
-        q_last_curr = q_identity.slerp(T(s), q_last_curr);
-        Eigen::Matrix<T, 3, 1> t_last_curr{T(s) * t[0], T(s) * t[1], T(s) * t[2]};
+        T cx = ceres::cos(q[0]);
+        T sx = ceres::sin(q[0]);
+        T cy = ceres::cos(q[1]);
+        T sy = ceres::sin(q[1]);
+        T cz = ceres::cos(q[2]);
+        T sz = ceres::sin(q[2]);
+        Eigen::Matrix<T, 3, 3> qx;
+        qx << T(1.0), T(0.0), T(0.0),
+              T(0.0), cx, -sx,
+              T(0.0), sx, cx;
+        Eigen::Matrix<T, 3, 3> qy;
+        qy << cy, T(0.0), sy,
+              T(0.0), T(1.0), T(0.0),
+              -sy, T(0.0), cy;
+        Eigen::Matrix<T, 3, 3> qz;
+        qz << cz, -sz, T(0.0),
+              sz, cz, T(0.0),
+              T(0.0), T(0.0), T(1.0);
+    
+        
 
-        Eigen::Matrix<T, 3, 1> lp;
-        lp = q_last_curr * cp + t_last_curr;
+        Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
+
+        Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
+        
+        residual[0] = (lp - lpj).dot(ljm);
+        return true;
+    }
+
+    static ceres::CostFunction *Create(Eigen::Vector3d curr_point_, Eigen::Vector3d point_j_,
+                     Eigen::Vector3d point_l_, Eigen::Vector3d point_m_){
+        return (new ceres::AutoDiffCostFunction<GroundPlaneFactor, 1, 3, 3>
+                (new GroundPlaneFactor(curr_point_, point_j_, point_l_, point_m_)));
+    }
+    Eigen::Vector3d curr_point, point_j, point_l, point_m;
+    Eigen::Vector3d ljm_norm;
+};
+
+// 边缘点残差计算
+struct CornerFactor{
+    CornerFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d point_a_,
+                    Eigen::Vector3d point_b_, Eigen::Matrix<double, 3, 3> qyx_, double z_)
+        : _curr_point(curr_point_), _point_a(point_a_), _point_b(point_b_), _qyx(qyx_), _z(z_){}
+    // qz, tx, ty
+    template<typename T>
+    bool operator()(const T* q, const T* t, T* residual) const {
+        T cz = ceres::cos(q[0]);
+        T sz = ceres::sin(q[0]);
+        Eigen::Matrix<T, 3, 3> qz;
+        qz << cz, -sz, T(0.0),
+              sz, cz, T(0.0),
+              T(0.0), T(0.0), T(1.0);
+        Eigen::Matrix<T, 3, 3> qyx;
+        qyx << T(_qyx(0, 0)), T(_qyx(0, 1)), T(_qyx(0, 2)), 
+               T(_qyx(1, 0)), T(_qyx(1, 1)), T(_qyx(1, 2)), 
+               T(_qyx(2, 0)), T(_qyx(2, 1)), T(_qyx(2, 2));
+        Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], T(_z)};
+
+        Eigen::Matrix<T, 3, 1> cp{T(_curr_point.x()), T(_curr_point.y()), T(_curr_point.z())};
+        Eigen::Matrix<T, 3, 1> lpa{T(_point_a.x()), T(_point_a.y()), T(_point_a.z())};
+        Eigen::Matrix<T, 3, 1> lpb{T(_point_b.x()), T(_point_b.y()), T(_point_b.z())};
+
+        Eigen::Matrix<T, 3, 1> lp = qz * qyx * cp + txyz;
 
         Eigen::Matrix<T, 3, 1> nu = (lp - lpa).cross(lp - lpb);
         Eigen::Matrix<T, 3, 1> de = lpa - lpb;
@@ -36,121 +97,18 @@ struct LidarEdgeFactor{
         return true;
     }
 
-    static ceres::CostFunction *Create(const Eigen::Vector3d curr_point_, const Eigen::Vector3d last_point_a_,
-                                       const Eigen::Vector3d last_point_b_, const double s_){
-        return (new ceres::AutoDiffCostFunction<LidarEdgeFactor, 3, 4, 3>
-                (new LidarEdgeFactor(curr_point_, last_point_a_, last_point_b_, s_)));
+    static ceres::CostFunction *Create(Eigen::Vector3d curr_point_, Eigen::Vector3d point_a_,
+                    Eigen::Vector3d point_b_, Eigen::Matrix<double, 3, 3> qyx_, double z_){
+        return (new ceres::AutoDiffCostFunction<CornerFactor, 3, 1, 2>
+            (new CornerFactor(curr_point_, point_a_, point_b_, qyx_, z_)));
     }
 
-    Eigen::Vector3d curr_point, last_point_a, last_point_b;
-    double s;
+    Eigen::Vector3d _curr_point;
+    Eigen::Vector3d _point_a;
+    Eigen::Vector3d _point_b;
+    Eigen::Matrix<double, 3, 3> _qyx;
+    double _z;
 };
-
-struct GroundPlaneFactor{
-    GroundPlaneFactor(Eigen::Vector3d param_, double d_, Eigen::Vector3d p_)
-        : param(param_), d(d_), p(p_)
-    {
-    }
-
-    template<typename T>
-    bool operator()(const T* q, const T* t, T* residual) const{
-        Eigen::Quaternion<T> q_last_curr{q[3], q[0], q[1], q[2]};
-		Eigen::Quaternion<T> q_identity{T(1), T(0), T(0), T(0)};
-		q_last_curr = q_identity.slerp(T(1.0), q_last_curr);
-		Eigen::Matrix<T, 3, 1> t_last_curr{t[0], t[1], t[2]};
-        Eigen::Matrix<T, 3, 1> _param{T(param.x()), T(param.y()), T(param.z())};
-        Eigen::Matrix<T, 3, 1> point{T(p.x()), T(p.y()), T(p.z())};
-
-        point = q_last_curr * point + t_last_curr;
-
-		residual[0] = _param.dot(point) + T(d);
-        residual[0] = residual[0] < 0 ? -residual[0] : residual[0];
-        
-		return true;
-    }
-
-    static ceres::CostFunction *Create(const Eigen::Vector3d param_, 
-                                        const double d_, const Eigen::Vector3d p_){
-        return (new ceres::AutoDiffCostFunction<GroundPlaneFactor, 1, 4, 3>
-                (new GroundPlaneFactor(param_, d_, p_)));
-    }
-    Eigen::Vector3d param;
-    double d;
-    Eigen::Vector3d p;
-};
-
-struct LidarPlaneFactor{
-    LidarPlaneFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d last_point_j_,
-                     Eigen::Vector3d last_point_l_, Eigen::Vector3d last_point_m_, double s_)
-        : curr_point(curr_point_), last_point_j(last_point_j_), last_point_l(last_point_l_),
-          last_point_m(last_point_m_), s(s_)
-    {   
-        ljm_norm = (last_point_j - last_point_l).cross(last_point_j - last_point_m);
-        ljm_norm.normalize();
-    }
-
-    template<typename T>
-    bool operator()(const T* q, const T* t, T* residual) const{
-        Eigen::Matrix<T, 3, 1> cp{T(curr_point.x()), T(curr_point.y()), T(curr_point.z())};
-        Eigen::Matrix<T, 3, 1> lpj{T(last_point_j.x()), T(last_point_j.y()), T(last_point_j.z())};
-        Eigen::Matrix<T, 3, 1> ljm{T(ljm_norm.x()), T(ljm_norm.y()), T(ljm_norm.z())};
-
-        Eigen::Quaternion<T> q_last_curr{q[3], q[0], q[1], q[2]};
-		Eigen::Quaternion<T> q_identity{T(1), T(0), T(0), T(0)};
-		q_last_curr = q_identity.slerp(T(s), q_last_curr);
-		Eigen::Matrix<T, 3, 1> t_last_curr{T(s) * t[0], T(s) * t[1], T(s) * t[2]};
-
-		Eigen::Matrix<T, 3, 1> lp;
-		lp = q_last_curr * cp + t_last_curr;
-
-		residual[0] = (lp - lpj).dot(ljm);
-
-		return true;
-    }
-
-    static ceres::CostFunction *Create(const Eigen::Vector3d curr_point_, const Eigen::Vector3d last_point_j_,
-                                       const Eigen::Vector3d last_point_l_, const Eigen::Vector3d last_point_m_,
-                                       const double s_){
-        return (new ceres::AutoDiffCostFunction<LidarPlaneFactor, 1, 4, 3>
-                (new LidarPlaneFactor(curr_point_, last_point_j_, last_point_l_, last_point_m_, s_)));
-    }
-
-
-    Eigen::Vector3d curr_point, last_point_j, last_point_l, last_point_m;
-    Eigen::Vector3d ljm_norm;
-    double s;
-};
-
-struct LidarPlaneNormFactor{
-    LidarPlaneNormFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d plane_unit_norm_, double negative_OA_dot_norm_)
-        : curr_point(curr_point_),
-          plane_unit_norm(plane_unit_norm_),
-          negative_OA_dot_norm(negative_OA_dot_norm_){}
-
-    template <typename T>
-    bool operator()(const T *q, const T *t, T *residual) const{
-        Eigen::Quaternion<T> q_w_curr{q[3], q[0], q[1], q[2]};
-        Eigen::Matrix<T, 3, 1> t_w_curr{t[0], t[1], t[2]};
-        Eigen::Matrix<T, 3, 1> cp{T(curr_point.x()), T(curr_point.y()), T(curr_point.z())};
-        Eigen::Matrix<T, 3, 1> point_w;
-        point_w = q_w_curr * cp + t_w_curr;
-
-        Eigen::Matrix<T, 3, 1> norm(T(plane_unit_norm.x()), T(plane_unit_norm.y()), T(plane_unit_norm.z()));
-        residual[0] = norm.dot(point_w) + T(negative_OA_dot_norm);
-        return true;
-    }
-
-    static ceres::CostFunction *Create(const Eigen::Vector3d curr_point_, const Eigen::Vector3d plane_unit_norm_, 
-                                        const double negative_OA_dot_norm_){
-        return (new ceres::AutoDiffCostFunction<LidarPlaneNormFactor, 1, 4, 3>(
-                    new LidarPlaneNormFactor(curr_point_, plane_unit_norm_, negative_OA_dot_norm_)));
-    }
-
-    Eigen::Vector3d curr_point;
-    Eigen::Vector3d plane_unit_norm;
-    double negative_OA_dot_norm;
-};
-
 
 }
 
