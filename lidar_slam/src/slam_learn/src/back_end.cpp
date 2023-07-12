@@ -1,4 +1,5 @@
 #include "slam_utils.h"
+#include "lidar_factor.hpp"
 
 #include <gtsam/geometry/Pose3.h>
 #include <gtsam/geometry/Rot3.h>
@@ -21,10 +22,10 @@ private:
     // 互斥锁
     std::mutex mtx;
 
-    float transformBefoMapped[6];
-    Eigen::Quaternionf q_odom;
-    Eigen::Vector3f t_odom;
-    float transformAftrMapped[6];
+    double transformBefoMapped[6];
+    Eigen::Quaterniond q_odom;
+    Eigen::Vector3d t_odom;
+    double transformAftrMapped[6];
 
     // 滑动窗口
     std::deque<CloudTypePtr> recentCornerKeyFrames;
@@ -145,10 +146,10 @@ private:
             transformBefoMapped[i] = all_cloud.trans_form[i];
         }
         // x y z qx qy qz
-        q_odom = (Eigen::AngleAxisf(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
-                  Eigen::AngleAxisf(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
-                  Eigen::AngleAxisf(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
-        t_odom = Eigen::Vector3f(transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
+        q_odom = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
+                  Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
+                  Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
+        t_odom = Eigen::Vector3d(transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
 
         // 获得点云
         msgToPointCloud(cornerSharpLast, all_cloud.corner_sharp);
@@ -191,15 +192,6 @@ private:
      * 图优化
     */
     void scan2MapOptimization(){
-        // 使用初始位姿将点坐标转换
-        auto trans = [&](PointType &point){
-            Eigen::Vector3f p(point.x, point.y, point.z);
-            p = q_odom * p + t_odom;
-            point.x = p.x();
-            point.y = p.y();
-            point.z = p.z();
-        };
-
         if(isFirstFrame){
             isFirstFrame = false;
         }else{
@@ -215,22 +207,160 @@ private:
 
             // 地面点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
-                    
-                for(int i = 0; i < groundPointsNum; ++i){
+                ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
+                ceres::Problem::Options problem_options;
 
+                ceres::Problem problem(problem_options);
+                problem.AddParameterBlock(transformBefoMapped + 3, 3);
+                problem.AddParameterBlock(transformBefoMapped, 3);
+
+                Eigen::Matrix<double, 5, 1> matb;
+                matb.fill(-1);
+                Eigen::Matrix<double, 5, 3> matA;
+                Eigen::Matrix<double, 3, 1> matX;
+
+                for(int i = 0; i < groundPointsNum; ++i){
+                    pointSel = groundSurfLast -> points[i];
+                    kdtreeGroundFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
+
+                    if(pointSearchSqDis[4] < 1.0){
+                        for(int j = 0; j < 5; ++j){
+                            matA(j, 0) = laserGroundFromMap -> points[pointSearchInd[j]].x;
+                            matA(j, 1) = laserGroundFromMap -> points[pointSearchInd[j]].y;
+                            matA(j, 2) = laserGroundFromMap -> points[pointSearchInd[j]].z;
+                        }
+                        // 求解Ax = b得到平面方程
+                        matX = matA.colPivHouseholderQr().solve(matb);
+
+                        double pa = matX(0, 0);
+                        double pb = matX(1, 0);
+                        double pc = matX(2, 0);
+                        double pd = 1;
+                        // 归一化
+                        double ps = sqrt(pa * pa + pb * pb + pc * pc);
+                        pa /= ps;
+                        pb /= ps;
+                        pc /= ps;
+                        pd /= ps;
+
+                        // 判断平面是否合理
+                        bool planeValid = true;
+                        for(int j = 0; j < 5; ++j){
+                            if(abs(pa * laserGroundFromMap -> points[pointSearchInd[j]].x +
+                                   pb * laserGroundFromMap -> points[pointSearchInd[j]].y +
+                                   pc * laserGroundFromMap -> points[pointSearchInd[j]].z +
+                                   pd) > 0.2){
+                                planeValid = false;
+                                break;
+                            }
+                        }
+
+                        // 若平面合理，则优化
+                        if(planeValid == true){
+                            ceres::CostFunction *cost_function = 
+                                GroundPlaneBack::Create(pa, pb, pc, pd, pointSel);
+                            problem.AddResidualBlock(
+                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                        }
+                    }  
                 }
+                // 求解
+                ceres::Solver::Options options;
+                options.linear_solver_type = ceres::DENSE_QR;
+                options.max_num_iterations = 4;
+                options.minimizer_progress_to_stdout = false;
+                ceres::Solver::Summary summary;
+                ceres::Solve(options, &problem, &summary);
             }
             
+            // 计算 qyx
+            Eigen::AngleAxisd roll(Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
+            Eigen::AngleAxisd pitch(Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()));
+            Eigen::Matrix3d qyx;
+            qyx = pitch * roll;
+
             // 边缘点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
+                ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
+                ceres::Problem::Options problem_options;
+
+                ceres::Problem problem(problem_options);
+                problem.AddParameterBlock(transformBefoMapped + 5, 2);
+                problem.AddParameterBlock(transformBefoMapped, 1);
+                
+                Eigen::Matrix<double, 3, 3> matA;
+                Eigen::Vector3d matD;
+                Eigen::Matrix3d matV;
 
                 for(int i = 0; i < cornerPointsNum; ++i){
+                    pointSel = cornerSharpLast -> points[i];
+                    kdtreeCornerFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
+                    if(pointSearchSqDis[4] < 1.0){
+                        float cx = 0, cy = 0, cz = 0;
+                        for(int j = 0; j < 5; ++j){
+                            cx += laserCornerFromMap -> points[pointSearchInd[j]].x;
+                            cy += laserCornerFromMap -> points[pointSearchInd[j]].y;
+                            cz += laserCornerFromMap -> points[pointSearchInd[j]].z;
+                        }
+                        cx /= 5;
+                        cy /= 5;
+                        cz /= 5;
+
+                        float a11 = 0, a12 = 0, a13 = 0, a22 = 0, a23 = 0, a33 = 0;
+                        for(int j = 0; j < 5; ++j){
+                            float ax = laserCornerFromMap -> points[pointSearchInd[j]].x - cx;
+                            float ay = laserCornerFromMap -> points[pointSearchInd[j]].y - cy;
+                            float az = laserCornerFromMap -> points[pointSearchInd[j]].z - cz;
+
+                            a11 += ax * ax;
+                            a12 += ax * ay;
+                            a13 += ax * az;
+                            a22 += ay * ay;
+                            a23 += ay * az;
+                            a33 += az * az;
+                        }
+                        a11 /= 5;
+                        a12 /= 5;
+                        a13 /= 5;
+                        a22 /= 5;
+                        a23 /= 5;
+                        a33 /= 5;
+
+                        matA << a11, a12, a13,
+                                a12, a22, a23,
+                                a13, a23, a33;
+                        Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> esolver(matA);
+                        matD = esolver.eigenvalues().real();
+                        matV = esolver.eigenvectors().real();
+
+                        // 判断是否为直线
+                        if(matD[2] > 3 * matD[1]){
+                            Eigen::Vector3d point_a{cx + 0.1 * matV(0, 0),
+                                                    cy + 0.1 * matV(0, 1),
+                                                    cz + 0.1 * matV(0, 2)};
+                            Eigen::Vector3d point_b{cx - 0.1 * matV(0, 0),
+                                                    cy - 0.1 * matV(0, 1),
+                                                    cz - 0.1 * matV(0, 2)};
+                            Eigen::Vector3d curr_point{pointSel.x, pointSel.y, pointSel.z};
+
+                            ceres::CostFunction *cost_function = 
+                                CornerFactor::Create(curr_point, point_a, point_b, qyx, transformBefoMapped[2]);
+                            problem.AddResidualBlock(
+                                cost_function, loss_function, transformBefoMapped + 5, transformBefoMapped);
+                        }
+                    }
+                     
                 }
+                // 求解
+                ceres::Solver::Options options;
+                options.linear_solver_type = ceres::DENSE_QR;
+                options.max_num_iterations = 4;
+                options.minimizer_progress_to_stdout = false;
+                ceres::Solver::Summary summary;
+                ceres::Solve(options, &problem, &summary);
             }
         }
-        
-
     }
 
     /**

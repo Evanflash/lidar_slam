@@ -1,0 +1,164 @@
+[0.026s] Invoking command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
+[0.088s] [35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[0.095s] [35m[1mConsolidate compiler generated dependencies of target back_end_node[0m
+[0.147s] [ 12%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[0.151s] [ 25%] [32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o[0m
+[0.527s] [ 50%] Built target data_process_test
+[0.527s] [ 75%] Built target data_process_node
+[11.931s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.931s] /home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of ‘[01m[Kbool lidarslam::GroundPlaneBack::operator()(const T*, const T*, T*) const [with T = ceres::Jet<double, 6>][m[K’:
+[11.931s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>][m[K’
+[11.931s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>][m[K’
+[11.931s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>][m[K’
+[11.931s] [01m[K/usr/local/include/ceres/internal/autodiff.h:349:39:[m[K   required from ‘[01m[Kbool ceres::internal::AutoDifferentiate(const Functor&, const T* const*, int, T*, T**) [with int kNumResiduals = 1; ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = double][m[K’
+[11.931s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:211:69:[m[K   required from ‘[01m[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneBack; int kNumResiduals = 1; int ...Ns = {3, 3}][m[K’
+[11.931s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:[m[K   required from here
+[11.932s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator+[m[K’ (operand types are ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ and ‘[01m[Kceres::Jet<double, 6>[m[K’)
+[11.932s]   148 |         residual[0] = Eigen::[01;31m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.932s]       |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[11.932s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+[11.932s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[11.932s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+[11.932s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[11.932s] [01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h:27:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class OtherDerived> const Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<typename Eigen::internal::traits<T>::Scalar, typename Eigen::internal::traits<OtherDerived>::Scalar>, const Derived, const OtherDerived> Eigen::MatrixBase<Derived>::operator+(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>][m[K’
+[11.932s]    27 | [01;36m[KEIGEN_MAKE_CWISE_BINARY_OP[m[K(operator+,sum)
+[11.932s]       | [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[11.932s] [01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h:27:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[11.932s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.932s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kceres::Jet<double, 6>[m[K’ is not derived from ‘[01m[Kconst Eigen::MatrixBase<Derived>[m[K’
+[11.932s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.933s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[11.933s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[11.933s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[11.933s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[11.933s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[11.933s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[11.933s] [01m[K/usr/local/include/ceres/jet.h:298:25:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> const ceres::Jet<T, N>& ceres::operator+(const ceres::Jet<T, N>&)[m[K’
+[11.933s]   298 | inline Jet<T, N> const& [01;36m[Koperator[m[K+(const Jet<T, N>& f) {
+[11.933s]       |                         [01;36m[K^~~~~~~~[m[K
+[11.933s] [01m[K/usr/local/include/ceres/jet.h:298:25:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[11.933s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.933s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[11.933s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.933s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[11.933s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[11.933s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[11.934s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[11.934s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[11.934s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[11.934s] [01m[K/usr/local/include/ceres/jet.h:313:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(const ceres::Jet<T, N>&, const ceres::Jet<T, N>&)[m[K’
+[11.934s]   313 | inline Jet<T, N> [01;36m[Koperator[m[K+(const Jet<T, N>& f, const Jet<T, N>& g) {
+[11.934s]       |                  [01;36m[K^~~~~~~~[m[K
+[11.934s] [01m[K/usr/local/include/ceres/jet.h:313:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[11.934s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.934s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[11.934s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.934s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[11.934s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[11.934s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[11.934s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[11.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[11.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[11.935s] [01m[K/usr/local/include/ceres/jet.h:319:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(const ceres::Jet<T, N>&, T)[m[K’
+[11.935s]   319 | inline Jet<T, N> [01;36m[Koperator[m[K+(const Jet<T, N>& f, T s) {
+[11.935s]       |                  [01;36m[K^~~~~~~~[m[K
+[11.935s] [01m[K/usr/local/include/ceres/jet.h:319:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[11.935s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.935s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[11.935s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.935s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[11.935s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[11.935s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[11.935s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[11.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[11.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[11.935s] [01m[K/usr/local/include/ceres/jet.h:325:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(T, const ceres::Jet<T, N>&)[m[K’
+[11.936s]   325 | inline Jet<T, N> [01;36m[Koperator[m[K+(T s, const Jet<T, N>& f) {
+[11.936s]       |                  [01;36m[K^~~~~~~~[m[K
+[11.936s] [01m[K/usr/local/include/ceres/jet.h:325:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[11.936s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[11.936s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  deduced conflicting types for parameter ‘[01m[KT[m[K’ (‘[01m[KEigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ and ‘[01m[Kdouble[m[K’)
+[11.936s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[11.936s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[13.889s] gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+[13.889s] gmake[1]: *** [CMakeFiles/Makefile2:169: CMakeFiles/front_end_node.dir/all] Error 2
+[13.890s] gmake[1]: *** Waiting for unfinished jobs....
+[19.023s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.023s] /home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp: In instantiation of ‘[01m[Kbool lidarslam::GroundPlaneBack::operator()(const T*, const T*, T*) const [with T = ceres::Jet<double, 6>][m[K’:
+[19.024s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:55:17:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, std::false_type, std::integer_sequence<int, Indices ...>) [with Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>; int ...Indices = {0, 1}; std::false_type = std::integral_constant<bool, false>][m[K’
+[19.024s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:77:30:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluateImpl(const Functor&, const T* const*, T*, const void*) [with ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>][m[K’
+[19.024s] [01m[K/usr/local/include/ceres/internal/variadic_evaluate.h:106:45:[m[K   required from ‘[01m[Kbool ceres::internal::VariadicEvaluate(const Functor&, const T* const*, T*) [with ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = ceres::Jet<double, 6>][m[K’
+[19.024s] [01m[K/usr/local/include/ceres/internal/autodiff.h:349:39:[m[K   required from ‘[01m[Kbool ceres::internal::AutoDifferentiate(const Functor&, const T* const*, int, T*, T**) [with int kNumResiduals = 1; ParameterDims = ceres::internal::ParameterDims<false, 3, 3>; Functor = lidarslam::GroundPlaneBack; T = double][m[K’
+[19.024s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:211:69:[m[K   required from ‘[01m[Kbool ceres::AutoDiffCostFunction<CostFunctor, kNumResiduals, Ns>::Evaluate(const double* const*, double*, double**) const [with CostFunctor = lidarslam::GroundPlaneBack; int kNumResiduals = 1; int ...Ns = {3, 3}][m[K’
+[19.024s] [01m[K/usr/local/include/ceres/autodiff_cost_function.h:201:8:[m[K   required from here
+[19.024s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;31m[Kerror: [m[Kno match for ‘[01m[Koperator+[m[K’ (operand types are ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ and ‘[01m[Kceres::Jet<double, 6>[m[K’)
+[19.024s]   148 |         residual[0] = Eigen::[01;31m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.024s]       |                              [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[19.024s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+[19.024s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[19.024s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+[19.024s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+[19.024s] [01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h:27:1:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class OtherDerived> const Eigen::CwiseBinaryOp<Eigen::internal::scalar_sum_op<typename Eigen::internal::traits<T>::Scalar, typename Eigen::internal::traits<OtherDerived>::Scalar>, const Derived, const OtherDerived> Eigen::MatrixBase<Derived>::operator+(const Eigen::MatrixBase<OtherDerived>&) const [with OtherDerived = OtherDerived; Derived = Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>][m[K’
+[19.025s]    27 | [01;36m[KEIGEN_MAKE_CWISE_BINARY_OP[m[K(operator+,sum)
+[19.025s]       | [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[19.025s] [01m[K/usr/include/eigen3/Eigen/src/plugins/CommonCwiseBinaryOps.h:27:1:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[19.025s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.025s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kceres::Jet<double, 6>[m[K’ is not derived from ‘[01m[Kconst Eigen::MatrixBase<Derived>[m[K’
+[19.025s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.025s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[19.025s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[19.025s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[19.025s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[19.025s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[19.025s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+[19.025s] [01m[K/usr/local/include/ceres/jet.h:298:25:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> const ceres::Jet<T, N>& ceres::operator+(const ceres::Jet<T, N>&)[m[K’
+[19.025s]   298 | inline Jet<T, N> const& [01;36m[Koperator[m[K+(const Jet<T, N>& f) {
+[19.026s]       |                         [01;36m[K^~~~~~~~[m[K
+[19.026s] [01m[K/usr/local/include/ceres/jet.h:298:25:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[19.026s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.026s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[19.026s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.026s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[19.026s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[19.026s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[19.026s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[19.026s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[19.026s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+[19.026s] [01m[K/usr/local/include/ceres/jet.h:313:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(const ceres::Jet<T, N>&, const ceres::Jet<T, N>&)[m[K’
+[19.026s]   313 | inline Jet<T, N> [01;36m[Koperator[m[K+(const Jet<T, N>& f, const Jet<T, N>& g) {
+[19.026s]       |                  [01;36m[K^~~~~~~~[m[K
+[19.026s] [01m[K/usr/local/include/ceres/jet.h:313:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[19.027s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.027s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[19.027s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.027s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[19.027s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[19.027s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[19.027s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[19.027s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[19.027s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+[19.027s] [01m[K/usr/local/include/ceres/jet.h:319:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(const ceres::Jet<T, N>&, T)[m[K’
+[19.027s]   319 | inline Jet<T, N> [01;36m[Koperator[m[K+(const Jet<T, N>& f, T s) {
+[19.027s]       |                  [01;36m[K^~~~~~~~[m[K
+[19.027s] [01m[K/usr/local/include/ceres/jet.h:319:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[19.027s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.027s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  ‘[01m[Kconst Eigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ is not derived from ‘[01m[Kconst ceres::Jet<T, N>[m[K’
+[19.027s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.028s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[19.028s] In file included from [01m[K/usr/local/include/ceres/internal/autodiff.h:152[m[K,
+[19.028s]                  from [01m[K/usr/local/include/ceres/autodiff_cost_function.h:130[m[K,
+[19.028s]                  from [01m[K/usr/local/include/ceres/ceres.h:37[m[K,
+[19.028s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:35[m[K,
+[19.028s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+[19.028s] [01m[K/usr/local/include/ceres/jet.h:325:18:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[Ktemplate<class T, int N> ceres::Jet<T, N> ceres::operator+(T, const ceres::Jet<T, N>&)[m[K’
+[19.028s]   325 | inline Jet<T, N> [01;36m[Koperator[m[K+(T s, const Jet<T, N>& f) {
+[19.028s]       |                  [01;36m[K^~~~~~~~[m[K
+[19.028s] [01m[K/usr/local/include/ceres/jet.h:325:18:[m[K [01;36m[Knote: [m[K  template argument deduction/substitution failed:
+[19.028s] In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[19.028s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:148:72:[m[K [01;36m[Knote: [m[K  deduced conflicting types for parameter ‘[01m[KT[m[K’ (‘[01m[KEigen::Product<Eigen::Matrix<ceres::Jet<double, 6>, 1, 3, 1, 1, 3>, Eigen::Matrix<ceres::Jet<double, 6>, 3, 1, 0, 3, 1>, 0>[m[K’ and ‘[01m[Kdouble[m[K’)
+[19.028s]   148 |         residual[0] = Eigen::[01;36m[KMatrix<T, 1, 3>(T(pa), T(pb), T(pc)) * lp + T(pd)[m[K;
+[19.028s]       |                              [01;36m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~[m[K
+[21.202s] gmake[2]: *** [CMakeFiles/back_end_node.dir/build.make:76: CMakeFiles/back_end_node.dir/src/back_end.cpp.o] Error 1
+[21.202s] gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/back_end_node.dir/all] Error 2
+[21.203s] gmake: *** [Makefile:146: all] Error 2
+[21.205s] Invoked command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn' returned '2': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
