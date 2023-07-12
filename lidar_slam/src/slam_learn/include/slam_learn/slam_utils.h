@@ -3,6 +3,7 @@
 
 #include "other_msgs/msg/point.hpp"
 #include "other_msgs/msg/seg_cloud.hpp"
+#include "other_msgs/msg/all_cloud.hpp"
 
 #include <string>
 #include <vector>
@@ -14,6 +15,7 @@
 #include <boost/circular_buffer.hpp>
 #include <Eigen/Dense>
 #include <thread>
+#include <deque>
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>

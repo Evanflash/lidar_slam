@@ -14,11 +14,13 @@
 // Include directives for member types
 // Member `header`
 #include "std_msgs/msg/detail/header__functions.h"
+// Member `trans_form`
+#include "rosidl_runtime_c/primitives_sequence_functions.h"
 // Member `corner_sharp`
 // Member `corner_less_sharp`
-// Member `surf_flat`
 // Member `surf_less_flat`
-// Member `full_point_res`
+// Member `ground_flat`
+// Member `ground_less_flat`
 #include "other_msgs/msg/detail/point__functions.h"
 
 bool
@@ -32,6 +34,11 @@ other_msgs__msg__AllCloud__init(other_msgs__msg__AllCloud * msg)
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
+  // trans_form
+  if (!rosidl_runtime_c__float__Sequence__init(&msg->trans_form, 0)) {
+    other_msgs__msg__AllCloud__fini(msg);
+    return false;
+  }
   // corner_sharp
   if (!other_msgs__msg__Point__Sequence__init(&msg->corner_sharp, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
@@ -42,18 +49,18 @@ other_msgs__msg__AllCloud__init(other_msgs__msg__AllCloud * msg)
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // surf_flat
-  if (!other_msgs__msg__Point__Sequence__init(&msg->surf_flat, 0)) {
-    other_msgs__msg__AllCloud__fini(msg);
-    return false;
-  }
   // surf_less_flat
   if (!other_msgs__msg__Point__Sequence__init(&msg->surf_less_flat, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // full_point_res
-  if (!other_msgs__msg__Point__Sequence__init(&msg->full_point_res, 0)) {
+  // ground_flat
+  if (!other_msgs__msg__Point__Sequence__init(&msg->ground_flat, 0)) {
+    other_msgs__msg__AllCloud__fini(msg);
+    return false;
+  }
+  // ground_less_flat
+  if (!other_msgs__msg__Point__Sequence__init(&msg->ground_less_flat, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
@@ -68,16 +75,18 @@ other_msgs__msg__AllCloud__fini(other_msgs__msg__AllCloud * msg)
   }
   // header
   std_msgs__msg__Header__fini(&msg->header);
+  // trans_form
+  rosidl_runtime_c__float__Sequence__fini(&msg->trans_form);
   // corner_sharp
   other_msgs__msg__Point__Sequence__fini(&msg->corner_sharp);
   // corner_less_sharp
   other_msgs__msg__Point__Sequence__fini(&msg->corner_less_sharp);
-  // surf_flat
-  other_msgs__msg__Point__Sequence__fini(&msg->surf_flat);
   // surf_less_flat
   other_msgs__msg__Point__Sequence__fini(&msg->surf_less_flat);
-  // full_point_res
-  other_msgs__msg__Point__Sequence__fini(&msg->full_point_res);
+  // ground_flat
+  other_msgs__msg__Point__Sequence__fini(&msg->ground_flat);
+  // ground_less_flat
+  other_msgs__msg__Point__Sequence__fini(&msg->ground_less_flat);
 }
 
 bool
@@ -89,6 +98,12 @@ other_msgs__msg__AllCloud__are_equal(const other_msgs__msg__AllCloud * lhs, cons
   // header
   if (!std_msgs__msg__Header__are_equal(
       &(lhs->header), &(rhs->header)))
+  {
+    return false;
+  }
+  // trans_form
+  if (!rosidl_runtime_c__float__Sequence__are_equal(
+      &(lhs->trans_form), &(rhs->trans_form)))
   {
     return false;
   }
@@ -104,21 +119,21 @@ other_msgs__msg__AllCloud__are_equal(const other_msgs__msg__AllCloud * lhs, cons
   {
     return false;
   }
-  // surf_flat
-  if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->surf_flat), &(rhs->surf_flat)))
-  {
-    return false;
-  }
   // surf_less_flat
   if (!other_msgs__msg__Point__Sequence__are_equal(
       &(lhs->surf_less_flat), &(rhs->surf_less_flat)))
   {
     return false;
   }
-  // full_point_res
+  // ground_flat
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->full_point_res), &(rhs->full_point_res)))
+      &(lhs->ground_flat), &(rhs->ground_flat)))
+  {
+    return false;
+  }
+  // ground_less_flat
+  if (!other_msgs__msg__Point__Sequence__are_equal(
+      &(lhs->ground_less_flat), &(rhs->ground_less_flat)))
   {
     return false;
   }
@@ -139,6 +154,12 @@ other_msgs__msg__AllCloud__copy(
   {
     return false;
   }
+  // trans_form
+  if (!rosidl_runtime_c__float__Sequence__copy(
+      &(input->trans_form), &(output->trans_form)))
+  {
+    return false;
+  }
   // corner_sharp
   if (!other_msgs__msg__Point__Sequence__copy(
       &(input->corner_sharp), &(output->corner_sharp)))
@@ -151,21 +172,21 @@ other_msgs__msg__AllCloud__copy(
   {
     return false;
   }
-  // surf_flat
-  if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->surf_flat), &(output->surf_flat)))
-  {
-    return false;
-  }
   // surf_less_flat
   if (!other_msgs__msg__Point__Sequence__copy(
       &(input->surf_less_flat), &(output->surf_less_flat)))
   {
     return false;
   }
-  // full_point_res
+  // ground_flat
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->full_point_res), &(output->full_point_res)))
+      &(input->ground_flat), &(output->ground_flat)))
+  {
+    return false;
+  }
+  // ground_less_flat
+  if (!other_msgs__msg__Point__Sequence__copy(
+      &(input->ground_less_flat), &(output->ground_less_flat)))
   {
     return false;
   }

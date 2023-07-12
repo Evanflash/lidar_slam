@@ -13,24 +13,28 @@ module other_msgs {
       std_msgs::msg::Header header;
 
       @verbatim (language="comment", text=
-        "曲率最大的点")
+        "6自由度参数，x y z qx qy qz")
+      sequence<float> trans_form;
+
+      @verbatim (language="comment", text=
+        "corner特征点")
       sequence<other_msgs::msg::Point> corner_sharp;
 
       @verbatim (language="comment", text=
-        "曲率次大的点")
+        "所有边缘点")
       sequence<other_msgs::msg::Point> corner_less_sharp;
 
       @verbatim (language="comment", text=
-        "曲率最小的点")
-      sequence<other_msgs::msg::Point> surf_flat;
-
-      @verbatim (language="comment", text=
-        "曲率次小的点")
+        "所有平面点")
       sequence<other_msgs::msg::Point> surf_less_flat;
 
       @verbatim (language="comment", text=
-        "所有点")
-      sequence<other_msgs::msg::Point> full_point_res;
+        "地面特征点")
+      sequence<other_msgs::msg::Point> ground_flat;
+
+      @verbatim (language="comment", text=
+        "所有地面点")
+      sequence<other_msgs::msg::Point> ground_less_flat;
     };
   };
 };

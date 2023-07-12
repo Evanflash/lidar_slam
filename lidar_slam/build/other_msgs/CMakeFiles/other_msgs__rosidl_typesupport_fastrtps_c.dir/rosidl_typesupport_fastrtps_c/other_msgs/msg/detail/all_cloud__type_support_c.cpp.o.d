@@ -191,5 +191,6 @@ CMakeFiles/other_msgs__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fast
  /usr/include/c++/11/stdlib.h \
  /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/rosidl_generator_c__visibility_control.h \
  /home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c/other_msgs/msg/detail/point__functions.h \
+ /opt/ros/humble/include/rosidl_runtime_c/rosidl_runtime_c/primitives_sequence_functions.h \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/detail/header__functions.h \
  /opt/ros/humble/include/std_msgs/std_msgs/msg/rosidl_generator_c__visibility_control.h

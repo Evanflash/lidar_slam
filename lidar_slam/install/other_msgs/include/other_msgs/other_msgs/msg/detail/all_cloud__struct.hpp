@@ -20,9 +20,9 @@
 #include "std_msgs/msg/detail/header__struct.hpp"
 // Member 'corner_sharp'
 // Member 'corner_less_sharp'
-// Member 'surf_flat'
 // Member 'surf_less_flat'
-// Member 'full_point_res'
+// Member 'ground_flat'
+// Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__struct.hpp"
 
 #ifndef _WIN32
@@ -59,27 +59,36 @@ struct AllCloud_
   using _header_type =
     std_msgs::msg::Header_<ContainerAllocator>;
   _header_type header;
+  using _trans_form_type =
+    std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
+  _trans_form_type trans_form;
   using _corner_sharp_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _corner_sharp_type corner_sharp;
   using _corner_less_sharp_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _corner_less_sharp_type corner_less_sharp;
-  using _surf_flat_type =
-    std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _surf_flat_type surf_flat;
   using _surf_less_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _surf_less_flat_type surf_less_flat;
-  using _full_point_res_type =
+  using _ground_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _full_point_res_type full_point_res;
+  _ground_flat_type ground_flat;
+  using _ground_less_flat_type =
+    std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
+  _ground_less_flat_type ground_less_flat;
 
   // setters for named parameter idiom
   Type & set__header(
     const std_msgs::msg::Header_<ContainerAllocator> & _arg)
   {
     this->header = _arg;
+    return *this;
+  }
+  Type & set__trans_form(
+    const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
+  {
+    this->trans_form = _arg;
     return *this;
   }
   Type & set__corner_sharp(
@@ -94,22 +103,22 @@ struct AllCloud_
     this->corner_less_sharp = _arg;
     return *this;
   }
-  Type & set__surf_flat(
-    const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
-  {
-    this->surf_flat = _arg;
-    return *this;
-  }
   Type & set__surf_less_flat(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
     this->surf_less_flat = _arg;
     return *this;
   }
-  Type & set__full_point_res(
+  Type & set__ground_flat(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->full_point_res = _arg;
+    this->ground_flat = _arg;
+    return *this;
+  }
+  Type & set__ground_less_flat(
+    const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
+  {
+    this->ground_less_flat = _arg;
     return *this;
   }
 
@@ -158,19 +167,22 @@ struct AllCloud_
     if (this->header != other.header) {
       return false;
     }
+    if (this->trans_form != other.trans_form) {
+      return false;
+    }
     if (this->corner_sharp != other.corner_sharp) {
       return false;
     }
     if (this->corner_less_sharp != other.corner_less_sharp) {
       return false;
     }
-    if (this->surf_flat != other.surf_flat) {
-      return false;
-    }
     if (this->surf_less_flat != other.surf_less_flat) {
       return false;
     }
-    if (this->full_point_res != other.full_point_res) {
+    if (this->ground_flat != other.ground_flat) {
+      return false;
+    }
+    if (this->ground_less_flat != other.ground_less_flat) {
       return false;
     }
     return true;

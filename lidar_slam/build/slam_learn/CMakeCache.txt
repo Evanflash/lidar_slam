@@ -115,6 +115,8 @@ BLAS_vecLib_LIBRARY:FILEPATH=BLAS_vecLib_LIBRARY-NOTFOUND
 //Build the testing tree.
 BUILD_TESTING:BOOL=ON
 
+Boost_CHRONO_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_chrono.so.1.74.0
+
 Boost_DATE_TIME_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_date_time.so.1.74.0
 
 //The directory containing a CMake configuration file for Boost.
@@ -127,9 +129,17 @@ Boost_INCLUDE_DIR:PATH=/usr/include
 
 Boost_IOSTREAMS_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.74.0
 
+Boost_PROGRAM_OPTIONS_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_program_options.so.1.74.0
+
+Boost_REGEX_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_regex.so.1.74.0
+
 Boost_SERIALIZATION_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_serialization.so.1.74.0
 
 Boost_SYSTEM_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_system.so.1.74.0
+
+Boost_THREAD_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_thread.so.1.74.0
+
+Boost_TIMER_LIBRARY_RELEASE:STRING=/usr/lib/x86_64-linux-gnu/libboost_timer.so.1.74.0
 
 //Path to a program.
 CMAKE_ADDR2LINE:FILEPATH=/usr/bin/addr2line
@@ -397,6 +407,12 @@ GLEW_INCLUDE_DIR:PATH=/usr/include
 
 //glew library
 GLEW_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libGLEW.so
+
+//The directory containing a CMake configuration file for GTSAM.
+GTSAM_DIR:PATH=/usr/local/lib/cmake/GTSAM
+
+//GTSAM include directory
+GTSAM_INCLUDE_DIR:PATH=/usr/local/lib/cmake/GTSAM/../../../include
 
 //Path to a file.
 JPEG_INCLUDE_DIR:PATH=/usr/include
@@ -1159,6 +1175,12 @@ ament_cmake_version_DIR:PATH=/opt/ros/humble/share/ament_cmake_version/cmake
 //The directory containing a CMake configuration file for ament_index_cpp.
 ament_index_cpp_DIR:PATH=/opt/ros/humble/share/ament_index_cpp/cmake
 
+//The directory containing a CMake configuration file for boost_atomic.
+boost_atomic_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_atomic-1.74.0
+
+//The directory containing a CMake configuration file for boost_chrono.
+boost_chrono_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_chrono-1.74.0
+
 //The directory containing a CMake configuration file for boost_date_time.
 boost_date_time_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_date_time-1.74.0
 
@@ -1171,11 +1193,23 @@ boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0
 //The directory containing a CMake configuration file for boost_iostreams.
 boost_iostreams_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_iostreams-1.74.0
 
+//The directory containing a CMake configuration file for boost_program_options.
+boost_program_options_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_program_options-1.74.0
+
+//The directory containing a CMake configuration file for boost_regex.
+boost_regex_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_regex-1.74.0
+
 //The directory containing a CMake configuration file for boost_serialization.
 boost_serialization_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_serialization-1.74.0
 
 //The directory containing a CMake configuration file for boost_system.
 boost_system_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_system-1.74.0
+
+//The directory containing a CMake configuration file for boost_thread.
+boost_thread_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_thread-1.74.0
+
+//The directory containing a CMake configuration file for boost_timer.
+boost_timer_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_timer-1.74.0
 
 //The directory containing a CMake configuration file for builtin_interfaces.
 builtin_interfaces_DIR:PATH=/opt/ros/humble/share/builtin_interfaces/cmake
@@ -2489,6 +2523,10 @@ __pkg_config_checked_PC_OPENNI2:INTERNAL=1
 __pkg_config_checked_PC_libusb:INTERNAL=1
 __pkg_config_checked_PKG_FONTCONFIG:INTERNAL=1
 __pkg_config_checked__OPENSSL:INTERNAL=1
+//ADVANCED property for variable: boost_atomic_DIR
+boost_atomic_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_chrono_DIR
+boost_chrono_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_date_time_DIR
 boost_date_time_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_filesystem_DIR
@@ -2497,10 +2535,18 @@ boost_filesystem_DIR-ADVANCED:INTERNAL=1
 boost_headers_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_iostreams_DIR
 boost_iostreams_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_program_options_DIR
+boost_program_options_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_regex_DIR
+boost_regex_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_serialization_DIR
 boost_serialization_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: boost_system_DIR
 boost_system_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_thread_DIR
+boost_thread_DIR-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: boost_timer_DIR
+boost_timer_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: double-conversion_INCLUDE_DIR
 double-conversion_INCLUDE_DIR-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: double-conversion_LIBRARY

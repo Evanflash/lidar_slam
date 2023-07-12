@@ -180,6 +180,10 @@ cdr_serialize(
   std_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
     ros_message.header,
     cdr);
+  // Member: trans_form
+  {
+    cdr << ros_message.trans_form;
+  }
   // Member: corner_sharp
   {
     size_t size = ros_message.corner_sharp.size();
@@ -200,16 +204,6 @@ cdr_serialize(
         cdr);
     }
   }
-  // Member: surf_flat
-  {
-    size_t size = ros_message.surf_flat.size();
-    cdr << static_cast<uint32_t>(size);
-    for (size_t i = 0; i < size; i++) {
-      other_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-        ros_message.surf_flat[i],
-        cdr);
-    }
-  }
   // Member: surf_less_flat
   {
     size_t size = ros_message.surf_less_flat.size();
@@ -220,13 +214,23 @@ cdr_serialize(
         cdr);
     }
   }
-  // Member: full_point_res
+  // Member: ground_flat
   {
-    size_t size = ros_message.full_point_res.size();
+    size_t size = ros_message.ground_flat.size();
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; i++) {
       other_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-        ros_message.full_point_res[i],
+        ros_message.ground_flat[i],
+        cdr);
+    }
+  }
+  // Member: ground_less_flat
+  {
+    size_t size = ros_message.ground_less_flat.size();
+    cdr << static_cast<uint32_t>(size);
+    for (size_t i = 0; i < size; i++) {
+      other_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
+        ros_message.ground_less_flat[i],
         cdr);
     }
   }
@@ -242,6 +246,11 @@ cdr_deserialize(
   // Member: header
   std_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
     cdr, ros_message.header);
+
+  // Member: trans_form
+  {
+    cdr >> ros_message.trans_form;
+  }
 
   // Member: corner_sharp
   {
@@ -267,18 +276,6 @@ cdr_deserialize(
     }
   }
 
-  // Member: surf_flat
-  {
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    ros_message.surf_flat.resize(size);
-    for (size_t i = 0; i < size; i++) {
-      other_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-        cdr, ros_message.surf_flat[i]);
-    }
-  }
-
   // Member: surf_less_flat
   {
     uint32_t cdrSize;
@@ -291,15 +288,27 @@ cdr_deserialize(
     }
   }
 
-  // Member: full_point_res
+  // Member: ground_flat
   {
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    ros_message.full_point_res.resize(size);
+    ros_message.ground_flat.resize(size);
     for (size_t i = 0; i < size; i++) {
       other_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-        cdr, ros_message.full_point_res[i]);
+        cdr, ros_message.ground_flat[i]);
+    }
+  }
+
+  // Member: ground_less_flat
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    ros_message.ground_less_flat.resize(size);
+    for (size_t i = 0; i < size; i++) {
+      other_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
+        cdr, ros_message.ground_less_flat[i]);
     }
   }
 
@@ -324,6 +333,16 @@ get_serialized_size(
   current_alignment +=
     std_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
     ros_message.header, current_alignment);
+  // Member: trans_form
+  {
+    size_t array_size = ros_message.trans_form.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    size_t item_size = sizeof(ros_message.trans_form[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
   // Member: corner_sharp
   {
     size_t array_size = ros_message.corner_sharp.size();
@@ -350,19 +369,6 @@ get_serialized_size(
         ros_message.corner_less_sharp[index], current_alignment);
     }
   }
-  // Member: surf_flat
-  {
-    size_t array_size = ros_message.surf_flat.size();
-
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    for (size_t index = 0; index < array_size; ++index) {
-      current_alignment +=
-        other_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-        ros_message.surf_flat[index], current_alignment);
-    }
-  }
   // Member: surf_less_flat
   {
     size_t array_size = ros_message.surf_less_flat.size();
@@ -376,9 +382,9 @@ get_serialized_size(
         ros_message.surf_less_flat[index], current_alignment);
     }
   }
-  // Member: full_point_res
+  // Member: ground_flat
   {
-    size_t array_size = ros_message.full_point_res.size();
+    size_t array_size = ros_message.ground_flat.size();
 
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
@@ -386,7 +392,20 @@ get_serialized_size(
     for (size_t index = 0; index < array_size; ++index) {
       current_alignment +=
         other_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-        ros_message.full_point_res[index], current_alignment);
+        ros_message.ground_flat[index], current_alignment);
+    }
+  }
+  // Member: ground_less_flat
+  {
+    size_t array_size = ros_message.ground_less_flat.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment +=
+        other_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
+        ros_message.ground_less_flat[index], current_alignment);
     }
   }
 
@@ -427,6 +446,18 @@ max_serialized_size_AllCloud(
     }
   }
 
+  // Member: trans_form
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
   // Member: corner_sharp
   {
     size_t array_size = 0;
@@ -467,26 +498,6 @@ max_serialized_size_AllCloud(
     }
   }
 
-  // Member: surf_flat
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-
-    for (size_t index = 0; index < array_size; ++index) {
-      bool inner_full_bounded;
-      bool inner_is_plain;
-      current_alignment +=
-        other_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Point(
-        inner_full_bounded, inner_is_plain, current_alignment);
-      full_bounded &= inner_full_bounded;
-      is_plain &= inner_is_plain;
-    }
-  }
-
   // Member: surf_less_flat
   {
     size_t array_size = 0;
@@ -507,7 +518,27 @@ max_serialized_size_AllCloud(
     }
   }
 
-  // Member: full_point_res
+  // Member: ground_flat
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      current_alignment +=
+        other_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Point(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+
+  // Member: ground_less_flat
   {
     size_t array_size = 0;
     full_bounded = false;

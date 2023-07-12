@@ -21,11 +21,13 @@ extern "C"
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__struct.h"
+// Member 'trans_form'
+#include "rosidl_runtime_c/primitives_sequence.h"
 // Member 'corner_sharp'
 // Member 'corner_less_sharp'
-// Member 'surf_flat'
 // Member 'surf_less_flat'
-// Member 'full_point_res'
+// Member 'ground_flat'
+// Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__struct.h"
 
 /// Struct defined in msg/AllCloud in the package other_msgs.
@@ -35,16 +37,18 @@ extern "C"
 typedef struct other_msgs__msg__AllCloud
 {
   std_msgs__msg__Header header;
-  /// 曲率最大的点
+  /// 6自由度参数，x y z qx qy qz
+  rosidl_runtime_c__float__Sequence trans_form;
+  /// corner特征点
   other_msgs__msg__Point__Sequence corner_sharp;
-  /// 曲率次大的点
+  /// 所有边缘点
   other_msgs__msg__Point__Sequence corner_less_sharp;
-  /// 曲率最小的点
-  other_msgs__msg__Point__Sequence surf_flat;
-  /// 曲率次小的点
+  /// 所有平面点
   other_msgs__msg__Point__Sequence surf_less_flat;
-  /// 所有点
-  other_msgs__msg__Point__Sequence full_point_res;
+  /// 地面特征点
+  other_msgs__msg__Point__Sequence ground_flat;
+  /// 所有地面点
+  other_msgs__msg__Point__Sequence ground_less_flat;
 } other_msgs__msg__AllCloud;
 
 // Struct for a sequence of other_msgs__msg__AllCloud.

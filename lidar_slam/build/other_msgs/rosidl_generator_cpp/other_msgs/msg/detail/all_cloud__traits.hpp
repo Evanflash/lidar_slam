@@ -19,9 +19,9 @@
 #include "std_msgs/msg/detail/header__traits.hpp"
 // Member 'corner_sharp'
 // Member 'corner_less_sharp'
-// Member 'surf_flat'
 // Member 'surf_less_flat'
-// Member 'full_point_res'
+// Member 'ground_flat'
+// Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__traits.hpp"
 
 namespace other_msgs
@@ -39,6 +39,24 @@ inline void to_flow_style_yaml(
   {
     out << "header: ";
     to_flow_style_yaml(msg.header, out);
+    out << ", ";
+  }
+
+  // member: trans_form
+  {
+    if (msg.trans_form.size() == 0) {
+      out << "trans_form: []";
+    } else {
+      out << "trans_form: [";
+      size_t pending_items = msg.trans_form.size();
+      for (auto item : msg.trans_form) {
+        rosidl_generator_traits::value_to_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
     out << ", ";
   }
 
@@ -78,24 +96,6 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: surf_flat
-  {
-    if (msg.surf_flat.size() == 0) {
-      out << "surf_flat: []";
-    } else {
-      out << "surf_flat: [";
-      size_t pending_items = msg.surf_flat.size();
-      for (auto item : msg.surf_flat) {
-        to_flow_style_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
   // member: surf_less_flat
   {
     if (msg.surf_less_flat.size() == 0) {
@@ -114,14 +114,32 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: full_point_res
+  // member: ground_flat
   {
-    if (msg.full_point_res.size() == 0) {
-      out << "full_point_res: []";
+    if (msg.ground_flat.size() == 0) {
+      out << "ground_flat: []";
     } else {
-      out << "full_point_res: [";
-      size_t pending_items = msg.full_point_res.size();
-      for (auto item : msg.full_point_res) {
+      out << "ground_flat: [";
+      size_t pending_items = msg.ground_flat.size();
+      for (auto item : msg.ground_flat) {
+        to_flow_style_yaml(item, out);
+        if (--pending_items > 0) {
+          out << ", ";
+        }
+      }
+      out << "]";
+    }
+    out << ", ";
+  }
+
+  // member: ground_less_flat
+  {
+    if (msg.ground_less_flat.size() == 0) {
+      out << "ground_less_flat: []";
+    } else {
+      out << "ground_less_flat: [";
+      size_t pending_items = msg.ground_less_flat.size();
+      for (auto item : msg.ground_less_flat) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -144,6 +162,26 @@ inline void to_block_style_yaml(
     }
     out << "header:\n";
     to_block_style_yaml(msg.header, out, indentation + 2);
+  }
+
+  // member: trans_form
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.trans_form.size() == 0) {
+      out << "trans_form: []\n";
+    } else {
+      out << "trans_form:\n";
+      for (auto item : msg.trans_form) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "- ";
+        rosidl_generator_traits::value_to_yaml(item, out);
+        out << "\n";
+      }
+    }
   }
 
   // member: corner_sharp
@@ -184,25 +222,6 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: surf_flat
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.surf_flat.size() == 0) {
-      out << "surf_flat: []\n";
-    } else {
-      out << "surf_flat:\n";
-      for (auto item : msg.surf_flat) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "-\n";
-        to_block_style_yaml(item, out, indentation + 2);
-      }
-    }
-  }
-
   // member: surf_less_flat
   {
     if (indentation > 0) {
@@ -222,16 +241,35 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: full_point_res
+  // member: ground_flat
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.full_point_res.size() == 0) {
-      out << "full_point_res: []\n";
+    if (msg.ground_flat.size() == 0) {
+      out << "ground_flat: []\n";
     } else {
-      out << "full_point_res:\n";
-      for (auto item : msg.full_point_res) {
+      out << "ground_flat:\n";
+      for (auto item : msg.ground_flat) {
+        if (indentation > 0) {
+          out << std::string(indentation, ' ');
+        }
+        out << "-\n";
+        to_block_style_yaml(item, out, indentation + 2);
+      }
+    }
+  }
+
+  // member: ground_less_flat
+  {
+    if (indentation > 0) {
+      out << std::string(indentation, ' ');
+    }
+    if (msg.ground_less_flat.size() == 0) {
+      out << "ground_less_flat: []\n";
+    } else {
+      out << "ground_less_flat:\n";
+      for (auto item : msg.ground_less_flat) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

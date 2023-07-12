@@ -1,0 +1,425 @@
+[0.000000] (-) TimerEvent: {}
+[0.000467] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.000525] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.007010] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.030361] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.032071] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.033367] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2547'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2292,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2292'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/d6caa375_0139_4a79_9a9b_9bca74516ce5'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.XC6L71'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.112'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.099924] (-) TimerEvent: {}
+[0.200261] (-) TimerEvent: {}
+[0.300603] (-) TimerEvent: {}
+[0.304215] (slam_learn) StdoutLine: {'line': b'-- Found ament_cmake: 1.3.3 (/opt/ros/humble/share/ament_cmake/cmake)\n'}
+[0.400774] (-) TimerEvent: {}
+[0.501190] (-) TimerEvent: {}
+[0.601511] (-) TimerEvent: {}
+[0.701896] (-) TimerEvent: {}
+[0.802295] (-) TimerEvent: {}
+[0.902844] (-) TimerEvent: {}
+[0.938556] (slam_learn) StdoutLine: {'line': b'-- Found rclcpp: 16.0.3 (/opt/ros/humble/share/rclcpp/cmake)\n'}
+[1.003169] (-) TimerEvent: {}
+[1.103574] (-) TimerEvent: {}
+[1.204144] (-) TimerEvent: {}
+[1.304700] (-) TimerEvent: {}
+[1.405093] (-) TimerEvent: {}
+[1.505556] (-) TimerEvent: {}
+[1.514495] (slam_learn) StdoutLine: {'line': b'-- Found rosidl_generator_c: 3.1.4 (/opt/ros/humble/share/rosidl_generator_c/cmake)\n'}
+[1.544323] (slam_learn) StdoutLine: {'line': b'-- Found rosidl_adapter: 3.1.4 (/opt/ros/humble/share/rosidl_adapter/cmake)\n'}
+[1.605725] (-) TimerEvent: {}
+[1.640960] (slam_learn) StdoutLine: {'line': b'-- Found rosidl_generator_cpp: 3.1.4 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)\n'}
+[1.706021] (-) TimerEvent: {}
+[1.751765] (slam_learn) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[1.806185] (-) TimerEvent: {}
+[1.886006] (slam_learn) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[1.906281] (-) TimerEvent: {}
+[2.006604] (-) TimerEvent: {}
+[2.107117] (-) TimerEvent: {}
+[2.173717] (slam_learn) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 6.1.1 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)\n'}
+[2.186709] (slam_learn) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 6.2.2 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)\n'}
+[2.207435] (-) TimerEvent: {}
+[2.307754] (-) TimerEvent: {}
+[2.408259] (-) TimerEvent: {}
+[2.508768] (-) TimerEvent: {}
+[2.609332] (-) TimerEvent: {}
+[2.709672] (-) TimerEvent: {}
+[2.789628] (slam_learn) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[2.809840] (-) TimerEvent: {}
+[2.910172] (-) TimerEvent: {}
+[3.010504] (-) TimerEvent: {}
+[3.110826] (-) TimerEvent: {}
+[3.139433] (slam_learn) StdoutLine: {'line': b'-- Found sensor_msgs: 4.2.3 (/opt/ros/humble/share/sensor_msgs/cmake)\n'}
+[3.210948] (-) TimerEvent: {}
+[3.311275] (-) TimerEvent: {}
+[3.381777] (slam_learn) StdoutLine: {'line': b'-- Found nav_msgs: 4.2.3 (/opt/ros/humble/share/nav_msgs/cmake)\n'}
+[3.411376] (-) TimerEvent: {}
+[3.511672] (-) TimerEvent: {}
+[3.532767] (slam_learn) StdoutLine: {'line': b'-- Found pcl_conversions: 2.4.0 (/opt/ros/humble/share/pcl_conversions/cmake)\n'}
+[3.611827] (-) TimerEvent: {}
+[3.712121] (-) TimerEvent: {}
+[3.791035] (slam_learn) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[3.812330] (-) TimerEvent: {}
+[3.906326] (slam_learn) StdoutLine: {'line': b'-- FLANN found (include: /usr/include, lib: /usr/lib/x86_64-linux-gnu/libflann_cpp.so)\n'}
+[3.912394] (-) TimerEvent: {}
+[4.012719] (-) TimerEvent: {}
+[4.113162] (-) TimerEvent: {}
+[4.213733] (-) TimerEvent: {}
+[4.314093] (-) TimerEvent: {}
+[4.414754] (-) TimerEvent: {}
+[4.515117] (-) TimerEvent: {}
+[4.615668] (-) TimerEvent: {}
+[4.716138] (-) TimerEvent: {}
+[4.816696] (-) TimerEvent: {}
+[4.917036] (-) TimerEvent: {}
+[5.017499] (-) TimerEvent: {}
+[5.117828] (-) TimerEvent: {}
+[5.218342] (-) TimerEvent: {}
+[5.318858] (-) TimerEvent: {}
+[5.419196] (-) TimerEvent: {}
+[5.519519] (-) TimerEvent: {}
+[5.619846] (-) TimerEvent: {}
+[5.720213] (-) TimerEvent: {}
+[5.821129] (-) TimerEvent: {}
+[5.921422] (-) TimerEvent: {}
+[6.021949] (-) TimerEvent: {}
+[6.122464] (-) TimerEvent: {}
+[6.222973] (-) TimerEvent: {}
+[6.323281] (-) TimerEvent: {}
+[6.423734] (-) TimerEvent: {}
+[6.524087] (-) TimerEvent: {}
+[6.534517] (slam_learn) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[6.559940] (slam_learn) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[6.560249] (slam_learn) StderrLine: {'line': b'\x1b[0m** WARNING ** io features related to pcap will be disabled\x1b[0m\n'}
+[6.624263] (-) TimerEvent: {}
+[6.724589] (-) TimerEvent: {}
+[6.736346] (slam_learn) StdoutLine: {'line': b'-- Eigen found (include: /usr/include/eigen3, version: 3.4.0)\n'}
+[6.745162] (slam_learn) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[6.752806] (slam_learn) StdoutLine: {'line': b'-- OpenNI2 found (version: 2.2.0.33, include: /usr/include/openni2, lib: /usr/lib/x86_64-linux-gnu/libOpenNI2.so;libusb::libusb)\n'}
+[6.824707] (-) TimerEvent: {}
+[6.925072] (-) TimerEvent: {}
+[7.025500] (-) TimerEvent: {}
+[7.110238] (slam_learn) StdoutLine: {'line': b'-- Found Qhull version 8.0.2\n'}
+[7.125617] (-) TimerEvent: {}
+[7.225928] (-) TimerEvent: {}
+[7.282703] (slam_learn) StdoutLine: {'line': b'-- OpenNI found (version: 1.5.4.0, include: /usr/include/ni, lib: /usr/lib/libOpenNI.so;libusb::libusb)\n'}
+[7.326046] (-) TimerEvent: {}
+[7.426354] (-) TimerEvent: {}
+[7.446281] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_COMMON\n'}
+[7.446857] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_KDTREE\n'}
+[7.447709] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_OCTREE\n'}
+[7.448171] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_SEARCH\n'}
+[7.448644] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_SAMPLE_CONSENSUS\n'}
+[7.449202] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_FILTERS\n'}
+[7.449742] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_2D\n'}
+[7.450132] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_GEOMETRY\n'}
+[7.450579] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_IO\n'}
+[7.451219] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_FEATURES\n'}
+[7.451834] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_ML\n'}
+[7.452335] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_SEGMENTATION\n'}
+[7.452905] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_VISUALIZATION\n'}
+[7.453477] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_SURFACE\n'}
+[7.453953] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_REGISTRATION\n'}
+[7.454506] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_KEYPOINTS\n'}
+[7.454986] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_TRACKING\n'}
+[7.455543] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_RECOGNITION\n'}
+[7.456073] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_STEREO\n'}
+[7.456659] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_APPS\n'}
+[7.457787] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_IN_HAND_SCANNER\n'}
+[7.458132] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_MODELER\n'}
+[7.458476] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_POINT_CLOUD_EDITOR\n'}
+[7.458932] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_OUTOFCORE\n'}
+[7.459435] (slam_learn) StdoutLine: {'line': b'-- looking for PCL_PEOPLE\n'}
+[7.485704] (slam_learn) StdoutLine: {'line': b'-- Found other_msgs: 0.0.0 (/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/share/other_msgs/cmake)\n'}
+[7.526475] (-) TimerEvent: {}
+[7.626780] (-) TimerEvent: {}
+[7.727072] (-) TimerEvent: {}
+[7.760450] (slam_learn) StdoutLine: {'line': b'-- Found AMD headers in: /usr/include/suitesparse\n'}
+[7.760714] (slam_learn) StdoutLine: {'line': b'-- Found AMD library: /usr/lib/x86_64-linux-gnu/libamd.so\n'}
+[7.760841] (slam_learn) StdoutLine: {'line': b'-- Found CAMD headers in: /usr/include/suitesparse\n'}
+[7.760943] (slam_learn) StdoutLine: {'line': b'-- Found CAMD library: /usr/lib/x86_64-linux-gnu/libcamd.so\n'}
+[7.761069] (slam_learn) StdoutLine: {'line': b'-- Found CCOLAMD headers in: /usr/include/suitesparse\n'}
+[7.761146] (slam_learn) StdoutLine: {'line': b'-- Found CCOLAMD library: /usr/lib/x86_64-linux-gnu/libccolamd.so\n'}
+[7.761247] (slam_learn) StdoutLine: {'line': b'-- Found CHOLMOD headers in: /usr/include/suitesparse\n'}
+[7.761355] (slam_learn) StdoutLine: {'line': b'-- Found CHOLMOD library: /usr/lib/x86_64-linux-gnu/libcholmod.so\n'}
+[7.761447] (slam_learn) StdoutLine: {'line': b'-- Found COLAMD headers in: /usr/include/suitesparse\n'}
+[7.761591] (slam_learn) StdoutLine: {'line': b'-- Found COLAMD library: /usr/lib/x86_64-linux-gnu/libcolamd.so\n'}
+[7.761663] (slam_learn) StdoutLine: {'line': b'-- Found SPQR headers in: /usr/include/suitesparse\n'}
+[7.761732] (slam_learn) StdoutLine: {'line': b'-- Found SPQR library: /usr/lib/x86_64-linux-gnu/libspqr.so\n'}
+[7.761799] (slam_learn) StdoutLine: {'line': b'-- Found Config headers in: /usr/include/suitesparse\n'}
+[7.761867] (slam_learn) StdoutLine: {'line': b'-- Found Config library: /usr/lib/x86_64-linux-gnu/libsuitesparseconfig.so\n'}
+[7.762048] (slam_learn) StdoutLine: {'line': b'-- Found Intel Thread Building Blocks (TBB) library (2021.5 / ) include location: . Assuming SuiteSparseQR was compiled with TBB.\n'}
+[7.762204] (slam_learn) StdoutLine: {'line': b'-- Adding librt to SuiteSparse_config libraries (required on Linux & Unix [not OSX] if SuiteSparse is compiled with timing).\n'}
+[7.779190] (slam_learn) StdoutLine: {'line': b'-- Could NOT find METIS (missing: METIS_INCLUDE_DIR METIS_LIBRARY) \n'}
+[7.782615] (slam_learn) StdoutLine: {'line': b'-- Found required Ceres dependency: Eigen version 3.4.0 in /usr/share/eigen3/cmake\n'}
+[7.803481] (slam_learn) StdoutLine: {'line': b'-- Found required Ceres dependency: glog\n'}
+[7.804222] (slam_learn) StdoutLine: {'line': b'-- Found required Ceres dependency: gflags\n'}
+[7.804954] (slam_learn) StdoutLine: {'line': b'-- Found Ceres version: 2.2.0 installed in: /usr/local with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, SuiteSparse, SchurSpecializations]\n'}
+[7.827595] (-) TimerEvent: {}
+[7.927930] (-) TimerEvent: {}
+[8.028479] (-) TimerEvent: {}
+[8.038127] (slam_learn) StdoutLine: {'line': b'-- GTSAM include directory:  /usr/local/lib/cmake/GTSAM/../../../include\n'}
+[8.128602] (-) TimerEvent: {}
+[8.228970] (-) TimerEvent: {}
+[8.329286] (-) TimerEvent: {}
+[8.429582] (-) TimerEvent: {}
+[8.530063] (-) TimerEvent: {}
+[8.549750] (slam_learn) StdoutLine: {'line': b'-- Configuring done\n'}
+[8.630343] (-) TimerEvent: {}
+[8.730914] (-) TimerEvent: {}
+[8.831409] (-) TimerEvent: {}
+[8.932046] (-) TimerEvent: {}
+[9.032548] (-) TimerEvent: {}
+[9.133483] (-) TimerEvent: {}
+[9.233871] (-) TimerEvent: {}
+[9.334322] (-) TimerEvent: {}
+[9.434901] (-) TimerEvent: {}
+[9.535501] (-) TimerEvent: {}
+[9.636039] (-) TimerEvent: {}
+[9.736558] (-) TimerEvent: {}
+[9.837006] (-) TimerEvent: {}
+[9.937361] (-) TimerEvent: {}
+[9.992233] (slam_learn) StdoutLine: {'line': b'-- Generating done\n'}
+[9.995750] (slam_learn) StdoutLine: {'line': b'-- Build files have been written to: /home/evan/code/lidar_slam/lidar_slam/build/slam_learn\n'}
+[10.034119] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target front_end_node\x1b[0m\n'}
+[10.034607] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target data_process_node\x1b[0m\n'}
+[10.044938] (-) TimerEvent: {}
+[10.059868] (slam_learn) StdoutLine: {'line': b'[ 12%] \x1b[32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o\x1b[0m\n'}
+[10.072902] (slam_learn) StdoutLine: {'line': b'[ 37%] Built target data_process_node\n'}
+[10.077895] (slam_learn) StdoutLine: {'line': b'[ 62%] Built target front_end_node\n'}
+[10.113925] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target data_process_test\x1b[0m\n'}
+[10.145067] (-) TimerEvent: {}
+[10.150633] (slam_learn) StdoutLine: {'line': b'[ 87%] Built target data_process_test\n'}
+[10.245181] (-) TimerEvent: {}
+[10.345473] (-) TimerEvent: {}
+[10.445796] (-) TimerEvent: {}
+[10.546094] (-) TimerEvent: {}
+[10.646419] (-) TimerEvent: {}
+[10.746715] (-) TimerEvent: {}
+[10.847028] (-) TimerEvent: {}
+[10.947340] (-) TimerEvent: {}
+[11.047668] (-) TimerEvent: {}
+[11.148038] (-) TimerEvent: {}
+[11.248370] (-) TimerEvent: {}
+[11.348691] (-) TimerEvent: {}
+[11.448999] (-) TimerEvent: {}
+[11.549274] (-) TimerEvent: {}
+[11.649590] (-) TimerEvent: {}
+[11.749911] (-) TimerEvent: {}
+[11.850235] (-) TimerEvent: {}
+[11.950554] (-) TimerEvent: {}
+[12.050868] (-) TimerEvent: {}
+[12.151179] (-) TimerEvent: {}
+[12.251489] (-) TimerEvent: {}
+[12.351806] (-) TimerEvent: {}
+[12.452124] (-) TimerEvent: {}
+[12.552430] (-) TimerEvent: {}
+[12.652753] (-) TimerEvent: {}
+[12.753168] (-) TimerEvent: {}
+[12.853480] (-) TimerEvent: {}
+[12.953808] (-) TimerEvent: {}
+[13.054121] (-) TimerEvent: {}
+[13.154833] (-) TimerEvent: {}
+[13.255195] (-) TimerEvent: {}
+[13.355546] (-) TimerEvent: {}
+[13.455893] (-) TimerEvent: {}
+[13.556217] (-) TimerEvent: {}
+[13.656530] (-) TimerEvent: {}
+[13.756889] (-) TimerEvent: {}
+[13.857223] (-) TimerEvent: {}
+[13.957561] (-) TimerEvent: {}
+[14.057874] (-) TimerEvent: {}
+[14.158225] (-) TimerEvent: {}
+[14.258546] (-) TimerEvent: {}
+[14.358859] (-) TimerEvent: {}
+[14.459174] (-) TimerEvent: {}
+[14.559489] (-) TimerEvent: {}
+[14.659813] (-) TimerEvent: {}
+[14.760129] (-) TimerEvent: {}
+[14.860466] (-) TimerEvent: {}
+[14.960781] (-) TimerEvent: {}
+[15.061151] (-) TimerEvent: {}
+[15.161476] (-) TimerEvent: {}
+[15.261794] (-) TimerEvent: {}
+[15.362114] (-) TimerEvent: {}
+[15.462428] (-) TimerEvent: {}
+[15.562715] (-) TimerEvent: {}
+[15.663035] (-) TimerEvent: {}
+[15.763351] (-) TimerEvent: {}
+[15.863702] (-) TimerEvent: {}
+[15.964021] (-) TimerEvent: {}
+[16.064342] (-) TimerEvent: {}
+[16.164658] (-) TimerEvent: {}
+[16.264987] (-) TimerEvent: {}
+[16.365326] (-) TimerEvent: {}
+[16.465642] (-) TimerEvent: {}
+[16.565932] (-) TimerEvent: {}
+[16.666272] (-) TimerEvent: {}
+[16.766643] (-) TimerEvent: {}
+[16.866959] (-) TimerEvent: {}
+[16.967268] (-) TimerEvent: {}
+[17.067561] (-) TimerEvent: {}
+[17.167876] (-) TimerEvent: {}
+[17.268193] (-) TimerEvent: {}
+[17.368509] (-) TimerEvent: {}
+[17.468823] (-) TimerEvent: {}
+[17.569147] (-) TimerEvent: {}
+[17.669452] (-) TimerEvent: {}
+[17.769775] (-) TimerEvent: {}
+[17.870099] (-) TimerEvent: {}
+[17.970416] (-) TimerEvent: {}
+[18.070734] (-) TimerEvent: {}
+[18.171090] (-) TimerEvent: {}
+[18.271401] (-) TimerEvent: {}
+[18.371694] (-) TimerEvent: {}
+[18.472007] (-) TimerEvent: {}
+[18.572320] (-) TimerEvent: {}
+[18.672677] (-) TimerEvent: {}
+[18.772963] (-) TimerEvent: {}
+[18.873290] (-) TimerEvent: {}
+[18.973608] (-) TimerEvent: {}
+[19.073925] (-) TimerEvent: {}
+[19.174238] (-) TimerEvent: {}
+[19.274553] (-) TimerEvent: {}
+[19.374848] (-) TimerEvent: {}
+[19.475164] (-) TimerEvent: {}
+[19.575478] (-) TimerEvent: {}
+[19.675811] (-) TimerEvent: {}
+[19.776144] (-) TimerEvent: {}
+[19.876433] (-) TimerEvent: {}
+[19.976735] (-) TimerEvent: {}
+[20.077027] (-) TimerEvent: {}
+[20.177331] (-) TimerEvent: {}
+[20.277647] (-) TimerEvent: {}
+[20.356049] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:17:33:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KAll\x1b[m\x1b[K\xe2\x80\x99 is not a member of \xe2\x80\x98\x1b[01m\x1b[Kother_msgs::msg\x1b[m\x1b[K\xe2\x80\x99; did you mean \xe2\x80\x98\x1b[01m\x1b[Krclcpp::SignalHandlerOptions::All\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[20.356447] (slam_learn) StderrLine: {'line': b'   17 |     std::queue<other_msgs::msg::\x1b[01;31m\x1b[KAll\x1b[m\x1b[K>\n'}
+[20.356528] (slam_learn) StderrLine: {'line': b'      |                                 \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[20.356599] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:25\x1b[m\x1b[K,\n'}
+[20.356668] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[20.356736] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[20.356801] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[20.356897] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[20.356977] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[20.357043] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[20.357108] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[20.357172] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[20.357254] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[20.357332] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[20.357406] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:20\x1b[m\x1b[K,\n'}
+[20.357470] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1\x1b[m\x1b[K:\n'}
+[20.357533] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/utilities.hpp:50:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Krclcpp::SignalHandlerOptions::All\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[20.357604] (slam_learn) StderrLine: {'line': b'   50 |   \x1b[01;36m\x1b[KAll\x1b[m\x1b[K,\n'}
+[20.357668] (slam_learn) StderrLine: {'line': b'      |   \x1b[01;36m\x1b[K^~~\x1b[m\x1b[K\n'}
+[20.357732] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:17:36:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 1 is invalid\n'}
+[20.357797] (slam_learn) StderrLine: {'line': b'   17 |     std::queue<other_msgs::msg::All\x1b[01;31m\x1b[K>\x1b[m\x1b[K\n'}
+[20.357861] (slam_learn) StderrLine: {'line': b'      |                                    \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[20.357925] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:17:36:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktemplate argument 2 is invalid\n'}
+[20.357991] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:17:5:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Ktwo or more data types in declaration of \xe2\x80\x98\x1b[01m\x1b[KtransformTobeMapped\x1b[m\x1b[K\xe2\x80\x99\n'}
+[20.358057] (slam_learn) StderrLine: {'line': b'   17 |     \x1b[01;31m\x1b[Kstd\x1b[m\x1b[K::queue<other_msgs::msg::All>\n'}
+[20.358121] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[20.371218] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:35:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdTreeFLANN\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kpcl\x1b[m\x1b[K\xe2\x80\x99 does not name a template type; did you mean \xe2\x80\x98\x1b[01m\x1b[KKdTreeFLANN\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[20.371578] (slam_learn) StderrLine: {'line': b'   35 |     pcl::\x1b[01;31m\x1b[KkdTreeFLANN\x1b[m\x1b[K<PointType>::Ptr kdtreeSurfFromMap;\n'}
+[20.371669] (slam_learn) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[20.371741] (slam_learn) StderrLine: {'line': b'      |          \x1b[32m\x1b[KKdTreeFLANN\x1b[m\x1b[K\n'}
+[20.371808] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:36:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdTreeFLANN\x1b[m\x1b[K\xe2\x80\x99 in namespace \xe2\x80\x98\x1b[01m\x1b[Kpcl\x1b[m\x1b[K\xe2\x80\x99 does not name a template type; did you mean \xe2\x80\x98\x1b[01m\x1b[KKdTreeFLANN\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[20.371878] (slam_learn) StderrLine: {'line': b'   36 |     pcl::\x1b[01;31m\x1b[KkdTreeFLANN\x1b[m\x1b[K<PointType>::Ptr kdtreeGroundFromMap;\n'}
+[20.371953] (slam_learn) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[20.372018] (slam_learn) StderrLine: {'line': b'      |          \x1b[32m\x1b[KKdTreeFLANN\x1b[m\x1b[K\n'}
+[20.375474] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:\x1b[m\x1b[K In constructor \xe2\x80\x98\x1b[01m\x1b[Klidarslam::BackEnd::BackEnd()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[20.375862] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:61:5:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Krclcpp::Node::Node()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[20.375975] (slam_learn) StderrLine: {'line': b'   61 |     \x1b[01;31m\x1b[K{\x1b[m\x1b[K\n'}
+[20.376047] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[20.376113] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/single_threaded_executor.hpp:28\x1b[m\x1b[K,\n'}
+[20.376179] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:22\x1b[m\x1b[K,\n'}
+[20.376251] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[20.376315] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:20\x1b[m\x1b[K,\n'}
+[20.376379] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1\x1b[m\x1b[K:\n'}
+[20.376443] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1294:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Krclcpp::Node::Node(const rclcpp::Node&, const string&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[20.376509] (slam_learn) StderrLine: {'line': b' 1294 |   \x1b[01;36m\x1b[KNode\x1b[m\x1b[K(\n'}
+[20.376572] (slam_learn) StderrLine: {'line': b'      |   \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[20.376635] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:1294:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 2 arguments, 0 provided\n'}
+[20.376698] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:101:12:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Krclcpp::Node::Node(const string&, const string&, const rclcpp::NodeOptions&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[20.376763] (slam_learn) StderrLine: {'line': b'  101 |   explicit \x1b[01;36m\x1b[KNode\x1b[m\x1b[K(\n'}
+[20.376827] (slam_learn) StderrLine: {'line': b'      |            \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[20.377053] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:101:12:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 3 arguments, 0 provided\n'}
+[20.377142] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:89:12:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Krclcpp::Node::Node(const string&, const rclcpp::NodeOptions&)\x1b[m\x1b[K\xe2\x80\x99\n'}
+[20.377216] (slam_learn) StderrLine: {'line': b'   89 |   explicit \x1b[01;36m\x1b[KNode\x1b[m\x1b[K(\n'}
+[20.377284] (slam_learn) StderrLine: {'line': b'      |            \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[20.377356] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/node.hpp:89:12:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 2 arguments, 0 provided\n'}
+[20.377422] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::BackEnd::run()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[20.377488] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:72:16:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected primary-expression before \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[20.377555] (slam_learn) StderrLine: {'line': b'   72 |             if(\x1b[01;31m\x1b[K)\x1b[m\x1b[K\n'}
+[20.377648] (-) TimerEvent: {}
+[20.377757] (slam_learn) StderrLine: {'line': b'      |                \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[20.377841] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:73:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected primary-expression before \xe2\x80\x98\x1b[01m\x1b[K}\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[20.377910] (slam_learn) StderrLine: {'line': b'   73 |         \x1b[01;31m\x1b[K}\x1b[m\x1b[K\n'}
+[20.377978] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[20.384053] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::BackEnd::scan2MapOptimization()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[20.384307] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:108:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kbreak statement not within loop or switch\n'}
+[20.384391] (slam_learn) StderrLine: {'line': b'  108 |             \x1b[01;31m\x1b[Kbreak\x1b[m\x1b[K;\n'}
+[20.384463] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~\x1b[m\x1b[K\n'}
+[20.425244] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:111:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdtreeGroundFromMap\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[KlaserGroundFromMap\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[20.425424] (slam_learn) StderrLine: {'line': b'  111 |             \x1b[01;31m\x1b[KkdtreeGroundFromMap\x1b[m\x1b[K -> setInputCloud(laserGroundFromMap);\n'}
+[20.425500] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[20.425569] (slam_learn) StderrLine: {'line': b'      |             \x1b[32m\x1b[KlaserGroundFromMap\x1b[m\x1b[K\n'}
+[20.477789] (-) TimerEvent: {}
+[20.578118] (-) TimerEvent: {}
+[20.678444] (-) TimerEvent: {}
+[20.778766] (-) TimerEvent: {}
+[20.879083] (-) TimerEvent: {}
+[20.979398] (-) TimerEvent: {}
+[21.079713] (-) TimerEvent: {}
+[21.180031] (-) TimerEvent: {}
+[21.280350] (-) TimerEvent: {}
+[21.380664] (-) TimerEvent: {}
+[21.480970] (-) TimerEvent: {}
+[21.581274] (-) TimerEvent: {}
+[21.681607] (-) TimerEvent: {}
+[21.781953] (-) TimerEvent: {}
+[21.882276] (-) TimerEvent: {}
+[21.982593] (-) TimerEvent: {}
+[22.082909] (-) TimerEvent: {}
+[22.183219] (-) TimerEvent: {}
+[22.283514] (-) TimerEvent: {}
+[22.383828] (-) TimerEvent: {}
+[22.484212] (-) TimerEvent: {}
+[22.584525] (-) TimerEvent: {}
+[22.684871] (-) TimerEvent: {}
+[22.785247] (-) TimerEvent: {}
+[22.885573] (-) TimerEvent: {}
+[22.985889] (-) TimerEvent: {}
+[23.086322] (-) TimerEvent: {}
+[23.148705] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/x86_64-linux-gnu/c++/11/bits/c++allocator.h:33\x1b[m\x1b[K,\n'}
+[23.148921] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/bits/allocator.h:46\x1b[m\x1b[K,\n'}
+[23.149002] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/unordered_map:40\x1b[m\x1b[K,\n'}
+[23.149073] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/functional:61\x1b[m\x1b[K,\n'}
+[23.149151] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/pstl/glue_algorithm_defs.h:13\x1b[m\x1b[K,\n'}
+[23.149217] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/c++/11/algorithm:74\x1b[m\x1b[K,\n'}
+[23.149288] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/include/other_msgs/other_msgs/msg/detail/point__struct.hpp:8\x1b[m\x1b[K,\n'}
+[23.149355] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/include/other_msgs/other_msgs/msg/point.hpp:7\x1b[m\x1b[K,\n'}
+[23.149427] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:4\x1b[m\x1b[K,\n'}
+[23.149492] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1\x1b[m\x1b[K:\n'}
+[23.149561] (slam_learn) StderrLine: {'line': b'/usr/include/c++/11/ext/new_allocator.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid __gnu_cxx::new_allocator<_Tp>::construct(_Up*, _Args&& ...) [with _Up = lidarslam::BackEnd; _Args = {const char (&)[9]}; _Tp = lidarslam::BackEnd]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[23.149628] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/alloc_traits.h:516:17:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstatic void std::allocator_traits<std::allocator<_Tp1> >::construct(std::allocator_traits<std::allocator<_Tp1> >::allocator_type&, _Up*, _Args&& ...) [with _Up = lidarslam::BackEnd; _Args = {const char (&)[9]}; _Tp = lidarslam::BackEnd; std::allocator_traits<std::allocator<_Tp1> >::allocator_type = std::allocator<lidarslam::BackEnd>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.149697] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr_base.h:519:39:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::_Sp_counted_ptr_inplace<_Tp, _Alloc, _Lp>::_Sp_counted_ptr_inplace(_Alloc, _Args&& ...) [with _Args = {const char (&)[9]}; _Tp = lidarslam::BackEnd; _Alloc = std::allocator<lidarslam::BackEnd>; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_atomic]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.149764] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr_base.h:650:16:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::__shared_count<_Lp>::__shared_count(_Tp*&, std::_Sp_alloc_shared_tag<_Alloc>, _Args&& ...) [with _Tp = lidarslam::BackEnd; _Alloc = std::allocator<lidarslam::BackEnd>; _Args = {const char (&)[9]}; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_atomic]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.149835] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr_base.h:1342:14:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::__shared_ptr<_Tp, _Lp>::__shared_ptr(std::_Sp_alloc_shared_tag<_Tp>, _Args&& ...) [with _Alloc = std::allocator<lidarslam::BackEnd>; _Args = {const char (&)[9]}; _Tp = lidarslam::BackEnd; __gnu_cxx::_Lock_policy _Lp = __gnu_cxx::_S_atomic]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.149902] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr.h:409:59:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<_Tp>::shared_ptr(std::_Sp_alloc_shared_tag<_Tp>, _Args&& ...) [with _Alloc = std::allocator<lidarslam::BackEnd>; _Args = {const char (&)[9]}; _Tp = lidarslam::BackEnd]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.149969] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr.h:862:14:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<_Tp> std::allocate_shared(const _Alloc&, _Args&& ...) [with _Tp = lidarslam::BackEnd; _Alloc = std::allocator<lidarslam::BackEnd>; _Args = {const char (&)[9]}]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.150036] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/bits/shared_ptr.h:878:39:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kstd::shared_ptr<_Tp> std::make_shared(_Args&& ...) [with _Tp = lidarslam::BackEnd; _Args = {const char (&)[9]}]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.150100] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:169:51:\x1b[m\x1b[K   required from here\n'}
+[23.150166] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/c++/11/ext/new_allocator.h:162:11:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kno matching function for call to \xe2\x80\x98\x1b[01m\x1b[Klidarslam::BackEnd::BackEnd(const char [9])\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.150232] (slam_learn) StderrLine: {'line': b'  162 |         { \x1b[01;31m\x1b[K::new((void *)__p) _Up(std::forward<_Args>(__args)...)\x1b[m\x1b[K; }\n'}
+[23.150300] (slam_learn) StderrLine: {'line': b'      |           \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[23.150369] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:60:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[Kcandidate: \xe2\x80\x98\x1b[01m\x1b[Klidarslam::BackEnd::BackEnd()\x1b[m\x1b[K\xe2\x80\x99\n'}
+[23.150435] (slam_learn) StderrLine: {'line': b'   60 |     \x1b[01;36m\x1b[KBackEnd\x1b[m\x1b[K()\n'}
+[23.150500] (slam_learn) StderrLine: {'line': b'      |     \x1b[01;36m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[23.150564] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:60:5:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K  candidate expects 0 arguments, 1 provided\n'}
+[23.186445] (-) TimerEvent: {}
+[23.286774] (-) TimerEvent: {}
+[23.387092] (-) TimerEvent: {}
+[23.487412] (-) TimerEvent: {}
+[23.587740] (-) TimerEvent: {}
+[23.606405] (slam_learn) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/back_end_node.dir/build.make:76: CMakeFiles/back_end_node.dir/src/back_end.cpp.o] Error 1\n'}
+[23.607198] (slam_learn) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/back_end_node.dir/all] Error 2\n'}
+[23.607455] (slam_learn) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[23.610614] (slam_learn) CommandEnded: {'returncode': 2}
+[23.670514] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 2}
+[23.681627] (-) EventReactorShutdown: {}

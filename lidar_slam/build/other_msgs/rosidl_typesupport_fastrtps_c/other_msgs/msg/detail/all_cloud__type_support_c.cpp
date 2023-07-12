@@ -34,7 +34,9 @@ extern "C"
 {
 #endif
 
-#include "other_msgs/msg/detail/point__functions.h"  // corner_less_sharp, corner_sharp, full_point_res, surf_flat, surf_less_flat
+#include "other_msgs/msg/detail/point__functions.h"  // corner_less_sharp, corner_sharp, ground_flat, ground_less_flat, surf_less_flat
+#include "rosidl_runtime_c/primitives_sequence.h"  // trans_form
+#include "rosidl_runtime_c/primitives_sequence_functions.h"  // trans_form
 #include "std_msgs/msg/detail/header__functions.h"  // header
 
 // forward declare type support functions
@@ -90,6 +92,14 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
+  // Field name: trans_form
+  {
+    size_t size = ros_message->trans_form.size;
+    auto array_ptr = ros_message->trans_form.data;
+    cdr << static_cast<uint32_t>(size);
+    cdr.serializeArray(array_ptr, size);
+  }
+
   // Field name: corner_sharp
   {
     const message_type_support_callbacks_t * callbacks =
@@ -128,25 +138,6 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: surf_flat
-  {
-    const message_type_support_callbacks_t * callbacks =
-      static_cast<const message_type_support_callbacks_t *>(
-      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
-      )()->data);
-    size_t size = ros_message->surf_flat.size;
-    auto array_ptr = ros_message->surf_flat.data;
-    cdr << static_cast<uint32_t>(size);
-    for (size_t i = 0; i < size; ++i) {
-      if (!callbacks->cdr_serialize(
-          &array_ptr[i], cdr))
-      {
-        return false;
-      }
-    }
-  }
-
   // Field name: surf_less_flat
   {
     const message_type_support_callbacks_t * callbacks =
@@ -166,15 +157,34 @@ static bool _AllCloud__cdr_serialize(
     }
   }
 
-  // Field name: full_point_res
+  // Field name: ground_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
       ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
         rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
       )()->data);
-    size_t size = ros_message->full_point_res.size;
-    auto array_ptr = ros_message->full_point_res.data;
+    size_t size = ros_message->ground_flat.size;
+    auto array_ptr = ros_message->ground_flat.data;
+    cdr << static_cast<uint32_t>(size);
+    for (size_t i = 0; i < size; ++i) {
+      if (!callbacks->cdr_serialize(
+          &array_ptr[i], cdr))
+      {
+        return false;
+      }
+    }
+  }
+
+  // Field name: ground_less_flat
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
+      )()->data);
+    size_t size = ros_message->ground_less_flat.size;
+    auto array_ptr = ros_message->ground_less_flat.data;
     cdr << static_cast<uint32_t>(size);
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_serialize(
@@ -209,6 +219,22 @@ static bool _AllCloud__cdr_deserialize(
     {
       return false;
     }
+  }
+
+  // Field name: trans_form
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->trans_form.data) {
+      rosidl_runtime_c__float__Sequence__fini(&ros_message->trans_form);
+    }
+    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->trans_form, size)) {
+      fprintf(stderr, "failed to create array for field 'trans_form'");
+      return false;
+    }
+    auto array_ptr = ros_message->trans_form.data;
+    cdr.deserializeArray(array_ptr, size);
   }
 
   // Field name: corner_sharp
@@ -265,33 +291,6 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: surf_flat
-  {
-    const message_type_support_callbacks_t * callbacks =
-      static_cast<const message_type_support_callbacks_t *>(
-      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
-      )()->data);
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->surf_flat.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->surf_flat);
-    }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->surf_flat, size)) {
-      fprintf(stderr, "failed to create array for field 'surf_flat'");
-      return false;
-    }
-    auto array_ptr = ros_message->surf_flat.data;
-    for (size_t i = 0; i < size; ++i) {
-      if (!callbacks->cdr_deserialize(
-          cdr, &array_ptr[i]))
-      {
-        return false;
-      }
-    }
-  }
-
   // Field name: surf_less_flat
   {
     const message_type_support_callbacks_t * callbacks =
@@ -319,7 +318,7 @@ static bool _AllCloud__cdr_deserialize(
     }
   }
 
-  // Field name: full_point_res
+  // Field name: ground_flat
   {
     const message_type_support_callbacks_t * callbacks =
       static_cast<const message_type_support_callbacks_t *>(
@@ -329,14 +328,41 @@ static bool _AllCloud__cdr_deserialize(
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->full_point_res.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->full_point_res);
+    if (ros_message->ground_flat.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->ground_flat);
     }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->full_point_res, size)) {
-      fprintf(stderr, "failed to create array for field 'full_point_res'");
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->ground_flat, size)) {
+      fprintf(stderr, "failed to create array for field 'ground_flat'");
       return false;
     }
-    auto array_ptr = ros_message->full_point_res.data;
+    auto array_ptr = ros_message->ground_flat.data;
+    for (size_t i = 0; i < size; ++i) {
+      if (!callbacks->cdr_deserialize(
+          cdr, &array_ptr[i]))
+      {
+        return false;
+      }
+    }
+  }
+
+  // Field name: ground_less_flat
+  {
+    const message_type_support_callbacks_t * callbacks =
+      static_cast<const message_type_support_callbacks_t *>(
+      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
+        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
+      )()->data);
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->ground_less_flat.data) {
+      other_msgs__msg__Point__Sequence__fini(&ros_message->ground_less_flat);
+    }
+    if (!other_msgs__msg__Point__Sequence__init(&ros_message->ground_less_flat, size)) {
+      fprintf(stderr, "failed to create array for field 'ground_less_flat'");
+      return false;
+    }
+    auto array_ptr = ros_message->ground_less_flat.data;
     for (size_t i = 0; i < size; ++i) {
       if (!callbacks->cdr_deserialize(
           cdr, &array_ptr[i]))
@@ -367,6 +393,17 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
 
   current_alignment += get_serialized_size_std_msgs__msg__Header(
     &(ros_message->header), current_alignment);
+  // field.name trans_form
+  {
+    size_t array_size = ros_message->trans_form.size;
+    auto array_ptr = ros_message->trans_form.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    (void)array_ptr;
+    size_t item_size = sizeof(array_ptr[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
   // field.name corner_sharp
   {
     size_t array_size = ros_message->corner_sharp.size;
@@ -391,18 +428,6 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name surf_flat
-  {
-    size_t array_size = ros_message->surf_flat.size;
-    auto array_ptr = ros_message->surf_flat.data;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    for (size_t index = 0; index < array_size; ++index) {
-      current_alignment += get_serialized_size_other_msgs__msg__Point(
-        &array_ptr[index], current_alignment);
-    }
-  }
   // field.name surf_less_flat
   {
     size_t array_size = ros_message->surf_less_flat.size;
@@ -415,10 +440,22 @@ size_t get_serialized_size_other_msgs__msg__AllCloud(
         &array_ptr[index], current_alignment);
     }
   }
-  // field.name full_point_res
+  // field.name ground_flat
   {
-    size_t array_size = ros_message->full_point_res.size;
-    auto array_ptr = ros_message->full_point_res.data;
+    size_t array_size = ros_message->ground_flat.size;
+    auto array_ptr = ros_message->ground_flat.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    for (size_t index = 0; index < array_size; ++index) {
+      current_alignment += get_serialized_size_other_msgs__msg__Point(
+        &array_ptr[index], current_alignment);
+    }
+  }
+  // field.name ground_less_flat
+  {
+    size_t array_size = ros_message->ground_less_flat.size;
+    auto array_ptr = ros_message->ground_less_flat.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
 
@@ -469,6 +506,17 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
+  // member: trans_form
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
   // member: corner_sharp
   {
     size_t array_size = 0;
@@ -507,25 +555,6 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: surf_flat
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-
-    for (size_t index = 0; index < array_size; ++index) {
-      bool inner_full_bounded;
-      bool inner_is_plain;
-      current_alignment +=
-        max_serialized_size_other_msgs__msg__Point(
-        inner_full_bounded, inner_is_plain, current_alignment);
-      full_bounded &= inner_full_bounded;
-      is_plain &= inner_is_plain;
-    }
-  }
   // member: surf_less_flat
   {
     size_t array_size = 0;
@@ -545,7 +574,26 @@ size_t max_serialized_size_other_msgs__msg__AllCloud(
       is_plain &= inner_is_plain;
     }
   }
-  // member: full_point_res
+  // member: ground_flat
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+
+    for (size_t index = 0; index < array_size; ++index) {
+      bool inner_full_bounded;
+      bool inner_is_plain;
+      current_alignment +=
+        max_serialized_size_other_msgs__msg__Point(
+        inner_full_bounded, inner_is_plain, current_alignment);
+      full_bounded &= inner_full_bounded;
+      is_plain &= inner_is_plain;
+    }
+  }
+  // member: ground_less_flat
   {
     size_t array_size = 0;
     full_bounded = false;

@@ -6,5 +6,5 @@ C_DEFINES = -DRCUTILS_ENABLE_FAULT_INJECTION -DROSIDL_GENERATOR_C_BUILDING_DLL_o
 
 C_INCLUDES = -I/home/evan/code/lidar_slam/lidar_slam/build/other_msgs/rosidl_generator_c -isystem /opt/ros/humble/include/std_msgs -isystem /opt/ros/humble/include/builtin_interfaces -isystem /opt/ros/humble/include/rosidl_runtime_c -isystem /opt/ros/humble/include/rcutils -isystem /opt/ros/humble/include/rosidl_typesupport_interface
 
-C_FLAGS = -O2 -g -DNDEBUG -fPIC -Wall -std=gnu11
+C_FLAGS = -fPIC -Wall -std=gnu11
 

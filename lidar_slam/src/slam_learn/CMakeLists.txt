@@ -17,6 +17,7 @@ find_package(Eigen3 REQUIRED)
 find_package(PCL REQUIRED)
 find_package(other_msgs REQUIRED)
 find_package(Ceres REQUIRED)
+find_package(GTSAM REQUIRED QUIET)
 
 include_directories(include/slam_learn)
 ament_export_include_directories(include)
@@ -44,6 +45,14 @@ target_link_libraries(front_end_node
 )
 ament_target_dependencies(front_end_node ${dependencies} Eigen3)
 
+add_executable(back_end_node src/back_end.cpp)
+target_link_libraries(back_end_node
+  ${PCL_LIBRARIES}
+  ${CERES_LIBRARIES}
+  gtsam
+)
+ament_target_dependencies(back_end_node ${dependencies} Eigen3)
+
 # test
 add_executable(data_process_test test/data_process_test.cpp)
 target_link_libraries(data_process_test
@@ -55,7 +64,8 @@ ament_target_dependencies(data_process_test ${dependencies})
 install(TARGETS
   data_process_node
   front_end_node
-
+  back_end_node
+  
   data_process_test
   DESTINATION lib/${PROJECT_NAME}
 )
