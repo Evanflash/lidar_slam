@@ -1,0 +1,157 @@
+[0.000000] (-) TimerEvent: {}
+[0.000704] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.000991] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.001046] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.019671] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.021038] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.022540] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2547'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2292,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2292'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/d6caa375_0139_4a79_9a9b_9bca74516ce5'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.XC6L71'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.112'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.091509] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target front_end_node\x1b[0m\n'}
+[0.099626] (-) TimerEvent: {}
+[0.109262] (slam_learn) StdoutLine: {'line': b'[ 33%] Built target data_process_test\n'}
+[0.113923] (slam_learn) StdoutLine: {'line': b'[ 66%] Built target data_process_node\n'}
+[0.129822] (slam_learn) StdoutLine: {'line': b'[ 83%] \x1b[32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o\x1b[0m\n'}
+[0.199748] (-) TimerEvent: {}
+[0.300093] (-) TimerEvent: {}
+[0.400418] (-) TimerEvent: {}
+[0.500716] (-) TimerEvent: {}
+[0.601032] (-) TimerEvent: {}
+[0.701324] (-) TimerEvent: {}
+[0.801589] (-) TimerEvent: {}
+[0.901965] (-) TimerEvent: {}
+[1.002294] (-) TimerEvent: {}
+[1.102633] (-) TimerEvent: {}
+[1.202967] (-) TimerEvent: {}
+[1.303288] (-) TimerEvent: {}
+[1.403625] (-) TimerEvent: {}
+[1.503940] (-) TimerEvent: {}
+[1.604374] (-) TimerEvent: {}
+[1.704728] (-) TimerEvent: {}
+[1.805122] (-) TimerEvent: {}
+[1.905491] (-) TimerEvent: {}
+[2.005758] (-) TimerEvent: {}
+[2.106037] (-) TimerEvent: {}
+[2.206390] (-) TimerEvent: {}
+[2.306711] (-) TimerEvent: {}
+[2.407025] (-) TimerEvent: {}
+[2.507338] (-) TimerEvent: {}
+[2.607732] (-) TimerEvent: {}
+[2.708109] (-) TimerEvent: {}
+[2.808525] (-) TimerEvent: {}
+[2.908893] (-) TimerEvent: {}
+[3.009243] (-) TimerEvent: {}
+[3.109678] (-) TimerEvent: {}
+[3.210048] (-) TimerEvent: {}
+[3.310407] (-) TimerEvent: {}
+[3.410691] (-) TimerEvent: {}
+[3.511004] (-) TimerEvent: {}
+[3.611341] (-) TimerEvent: {}
+[3.711655] (-) TimerEvent: {}
+[3.811992] (-) TimerEvent: {}
+[3.912304] (-) TimerEvent: {}
+[4.012587] (-) TimerEvent: {}
+[4.112919] (-) TimerEvent: {}
+[4.213234] (-) TimerEvent: {}
+[4.313567] (-) TimerEvent: {}
+[4.413857] (-) TimerEvent: {}
+[4.514170] (-) TimerEvent: {}
+[4.614521] (-) TimerEvent: {}
+[4.714809] (-) TimerEvent: {}
+[4.815128] (-) TimerEvent: {}
+[4.915448] (-) TimerEvent: {}
+[5.015815] (-) TimerEvent: {}
+[5.116148] (-) TimerEvent: {}
+[5.216433] (-) TimerEvent: {}
+[5.316744] (-) TimerEvent: {}
+[5.417071] (-) TimerEvent: {}
+[5.517415] (-) TimerEvent: {}
+[5.617717] (-) TimerEvent: {}
+[5.717997] (-) TimerEvent: {}
+[5.818340] (-) TimerEvent: {}
+[5.918651] (-) TimerEvent: {}
+[6.018957] (-) TimerEvent: {}
+[6.119243] (-) TimerEvent: {}
+[6.219587] (-) TimerEvent: {}
+[6.319898] (-) TimerEvent: {}
+[6.420240] (-) TimerEvent: {}
+[6.520534] (-) TimerEvent: {}
+[6.620852] (-) TimerEvent: {}
+[6.721173] (-) TimerEvent: {}
+[6.821492] (-) TimerEvent: {}
+[6.824907] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24\x1b[m\x1b[K,\n'}
+[6.825131] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[6.825220] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[6.825304] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[6.825375] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[6.825448] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[6.825519] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[6.825588] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[6.825657] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[6.825727] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[6.825795] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[6.825863] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:18\x1b[m\x1b[K,\n'}
+[6.825931] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[6.826013] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::FrontEnd::extractFeatures()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[6.826081] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:349:65:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kusing CloudTypePtr = using Ptr = class std::shared_ptr<pcl::PointCloud<pcl::PointXYZI> >\x1b[m\x1b[K\xe2\x80\x99 {aka \xe2\x80\x98\x1b[01m\x1b[Kclass std::shared_ptr<pcl::PointCloud<pcl::PointXYZI> >\x1b[m\x1b[K\xe2\x80\x99} has no member named \xe2\x80\x98\x1b[01m\x1b[Ksize\x1b[m\x1b[K\xe2\x80\x99\n'}
+[6.826183] (slam_learn) StderrLine: {'line': b'  349 |         RCLCPP_INFO(this -> get_logger(), "%ld", groundSurfFlat.\x1b[01;31m\x1b[Ksize\x1b[m\x1b[K());\n'}
+[6.826252] (slam_learn) StderrLine: {'line': b'      |                                                                 \x1b[01;31m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[6.921605] (-) TimerEvent: {}
+[7.021940] (-) TimerEvent: {}
+[7.122277] (-) TimerEvent: {}
+[7.222594] (-) TimerEvent: {}
+[7.322880] (-) TimerEvent: {}
+[7.423232] (-) TimerEvent: {}
+[7.523538] (-) TimerEvent: {}
+[7.623870] (-) TimerEvent: {}
+[7.724219] (-) TimerEvent: {}
+[7.824557] (-) TimerEvent: {}
+[7.924860] (-) TimerEvent: {}
+[8.025166] (-) TimerEvent: {}
+[8.125482] (-) TimerEvent: {}
+[8.225847] (-) TimerEvent: {}
+[8.326155] (-) TimerEvent: {}
+[8.426464] (-) TimerEvent: {}
+[8.526769] (-) TimerEvent: {}
+[8.627082] (-) TimerEvent: {}
+[8.727397] (-) TimerEvent: {}
+[8.827711] (-) TimerEvent: {}
+[8.928054] (-) TimerEvent: {}
+[9.028348] (-) TimerEvent: {}
+[9.128673] (-) TimerEvent: {}
+[9.228985] (-) TimerEvent: {}
+[9.329302] (-) TimerEvent: {}
+[9.429652] (-) TimerEvent: {}
+[9.529941] (-) TimerEvent: {}
+[9.630294] (-) TimerEvent: {}
+[9.730612] (-) TimerEvent: {}
+[9.830928] (-) TimerEvent: {}
+[9.931258] (-) TimerEvent: {}
+[10.031578] (-) TimerEvent: {}
+[10.131889] (-) TimerEvent: {}
+[10.232194] (-) TimerEvent: {}
+[10.332511] (-) TimerEvent: {}
+[10.432821] (-) TimerEvent: {}
+[10.533144] (-) TimerEvent: {}
+[10.633493] (-) TimerEvent: {}
+[10.733813] (-) TimerEvent: {}
+[10.834133] (-) TimerEvent: {}
+[10.934446] (-) TimerEvent: {}
+[11.034761] (-) TimerEvent: {}
+[11.135130] (-) TimerEvent: {}
+[11.235436] (-) TimerEvent: {}
+[11.335744] (-) TimerEvent: {}
+[11.436090] (-) TimerEvent: {}
+[11.536421] (-) TimerEvent: {}
+[11.636736] (-) TimerEvent: {}
+[11.737040] (-) TimerEvent: {}
+[11.837342] (-) TimerEvent: {}
+[11.937694] (-) TimerEvent: {}
+[12.038045] (-) TimerEvent: {}
+[12.138354] (-) TimerEvent: {}
+[12.238655] (-) TimerEvent: {}
+[12.274156] (slam_learn) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1\n'}
+[12.274520] (slam_learn) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2\n'}
+[12.274836] (slam_learn) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[12.277263] (slam_learn) CommandEnded: {'returncode': 2}
+[12.331647] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 2}
+[12.338777] (-) TimerEvent: {}
+[12.342606] (-) EventReactorShutdown: {}

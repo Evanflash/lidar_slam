@@ -13,6 +13,7 @@
 #include <unordered_set>
 #include <boost/circular_buffer.hpp>
 #include <Eigen/Dense>
+#include <thread>
 
 #include <rclcpp/rclcpp.hpp>
 #include <sensor_msgs/msg/point_cloud2.hpp>

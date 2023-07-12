@@ -55,13 +55,16 @@ private:
     std::queue<other_msgs::msg::SegCloud> segCloudQueue;
     std::mutex mtx;
 
+    // 子线程
+    std::thread run_thread;
+
     // 路径, 测试
     nav_msgs::msg::Path path;
 
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
     PubPointCloud pubtest;
     PubPointCloud pubtest2;
-
+    
 public:
     FrontEnd(const std::string &name)
         : Node(name),
@@ -98,9 +101,11 @@ public:
 
         // 初始化
         init();
-        if(rclcpp::ok()){
-            run();
-        }
+        run_thread = std::thread(&FrontEnd::run, this);
+        
+    }
+    ~FrontEnd(){
+        run_thread.join();
     }
 
     /**
@@ -133,7 +138,7 @@ public:
      * 循环运行
     */
     void run(){
-        while(1){
+        while(rclcpp::ok()){
             if(segCloudQueue.empty()){
                 //return;
                 sleep(1);
@@ -143,6 +148,7 @@ public:
             seg_msg = segCloudQueue.front();
             segCloudQueue.pop();
             mtx.unlock();
+            std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
             // 变量重置
             resetParameters();
             // 计算曲率
@@ -150,13 +156,12 @@ public:
             // 提取特征点
             extractFeatures();
             // 里程计
-            std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
             odometry();
-            std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-            std::chrono::duration<double> elapsed_seconds = end - start;
-            RCLCPP_INFO(this -> get_logger(), "odometry time: %f", elapsed_seconds.count() * 1000);
             // 发布消息
             publish();
+            std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end - start;
+            RCLCPP_INFO(this -> get_logger(), "whole time: %fms", elapsed_seconds.count() * 1000);
         }
         
     }
@@ -243,7 +248,7 @@ public:
                     if(segmentNeighborPicked[curInd] == 0 && 
                        segmentCurvature[k].curvature > edgeThreshold){
                         ++largestPickedNum;
-                        if(largestPickedNum <= 1){
+                        if(largestPickedNum <= 2){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
@@ -305,7 +310,7 @@ public:
                         tran(seg_msg.ground_cloud[curInd], point);
                         groundSurfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 2){
+                        if(++smallestPickedNum >= 1){
                             break;
                         }
                         
@@ -343,9 +348,13 @@ public:
         }
         
         sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*groundSurfLessFlat, msg);
+        pcl::toROSMsg(*groundSurfLast, msg);
         msg.header.frame_id = "map";
         pubtest -> publish(msg);
+        
+        pcl::toROSMsg(*groundSurfFlat, msg);
+        msg.header.frame_id = "map";
+        pubtest2 -> publish(msg);
     }
 
     /**
@@ -393,7 +402,7 @@ public:
             double t[3] = {0.0, 0.0, 0.0};
             int cornerSharpNum = cornerSharp -> size();
             int groundFlatNum = groundSurfFlat -> size();
-            std::chrono::time_point<std::chrono::system_clock> groundStr = std::chrono::system_clock::now();
+           
             // 地面点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
@@ -468,12 +477,9 @@ public:
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);
             }
-            std::chrono::time_point<std::chrono::system_clock> groundEnd = std::chrono::system_clock::now();
-            std::chrono::duration<double> elapsed_seconds = groundStr - groundEnd;
-            RCLCPP_INFO(this -> get_logger(), "ground time: %f", elapsed_seconds.count() * 1000);
-            // RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
-            //     t[0], t[1], t[2], q[0], q[1], q[2]);
-            std::chrono::time_point<std::chrono::system_clock> cornerStr = std::chrono::system_clock::now();
+            RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
+                t[0], t[1], t[2], q[0], q[1], q[2]);
+
             // 边缘点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
@@ -552,9 +558,6 @@ public:
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);            
             }
-            std::chrono::time_point<std::chrono::system_clock> cornerEnd = std::chrono::system_clock::now();
-            elapsed_seconds = cornerStr - cornerEnd;
-            RCLCPP_INFO(this -> get_logger(), "corner time: %f", elapsed_seconds.count() * 1000);
             // RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
             //     t[0], t[1], t[2], q[0], q[1], q[2]);
             Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], ::Eigen::Vector3d::UnitX()));
