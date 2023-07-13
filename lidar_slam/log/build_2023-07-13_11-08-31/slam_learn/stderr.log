@@ -1,0 +1,45 @@
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::BackEnd::saveKeyFramesAndFactor()[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:464:64:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgtsam::Vector gtsam::Rot3::quaternion() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  464 |             q_w_last.w() = [01;35m[KlatestEstimate.rotation().quaternion()[m[K.w();
+      |                            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/usr/local/include/gtsam/geometry/Pose3.h:24[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:4[m[K:
+[01m[K/usr/local/include/gtsam/geometry/Rot3.h:526:29:[m[K [01;36m[Knote: [m[Kdeclared here
+  526 |     Vector GTSAM_DEPRECATED [01;36m[Kquaternion[m[K() const;
+      |                             [01;36m[K^~~~~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:465:64:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgtsam::Vector gtsam::Rot3::quaternion() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  465 |             q_w_last.x() = [01;35m[KlatestEstimate.rotation().quaternion()[m[K.x();
+      |                            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/usr/local/include/gtsam/geometry/Pose3.h:24[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:4[m[K:
+[01m[K/usr/local/include/gtsam/geometry/Rot3.h:526:29:[m[K [01;36m[Knote: [m[Kdeclared here
+  526 |     Vector GTSAM_DEPRECATED [01;36m[Kquaternion[m[K() const;
+      |                             [01;36m[K^~~~~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:466:64:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgtsam::Vector gtsam::Rot3::quaternion() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  466 |             q_w_last.y() = [01;35m[KlatestEstimate.rotation().quaternion()[m[K.y();
+      |                            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/usr/local/include/gtsam/geometry/Pose3.h:24[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:4[m[K:
+[01m[K/usr/local/include/gtsam/geometry/Rot3.h:526:29:[m[K [01;36m[Knote: [m[Kdeclared here
+  526 |     Vector GTSAM_DEPRECATED [01;36m[Kquaternion[m[K() const;
+      |                             [01;36m[K^~~~~~~~~~[m[K
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:467:64:[m[K [01;35m[Kwarning: [m[K‘[01m[Kgtsam::Vector gtsam::Rot3::quaternion() const[m[K’ is deprecated [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wdeprecated-declarations-Wdeprecated-declarations]8;;[m[K]
+  467 |             q_w_last.z() = [01;35m[KlatestEstimate.rotation().quaternion()[m[K.z();
+      |                            [01;35m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/usr/local/include/gtsam/geometry/Pose3.h:24[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:4[m[K:
+[01m[K/usr/local/include/gtsam/geometry/Rot3.h:526:29:[m[K [01;36m[Knote: [m[Kdeclared here
+  526 |     Vector GTSAM_DEPRECATED [01;36m[Kquaternion[m[K() const;
+      |                             [01;36m[K^~~~~~~~~~[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:42[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1[m[K:
+/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h: In instantiation of ‘[01m[KDerived& Eigen::QuaternionBase<Derived>::operator=(const Eigen::MatrixBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<double, 3, 1>; Derived = Eigen::Quaternion<double>][m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:423:31:[m[K   required from here
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:583:59:[m[K [01;31m[Kerror: [m[Kincomplete type ‘[01m[KEigen::internal::quaternionbase_assign_impl<Eigen::Matrix<double, 3, 1>, 3, 1>[m[K’ used in nested name specifier
+  583 |   [01;31m[Kinternal::quaternionbase_assign_impl<MatrixDerived>::run(*this, xpr.derived())[m[K;
+      |   [01;31m[K~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/back_end_node.dir/build.make:76: CMakeFiles/back_end_node.dir/src/back_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/back_end_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

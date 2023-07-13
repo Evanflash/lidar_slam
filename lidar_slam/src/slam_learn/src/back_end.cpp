@@ -23,9 +23,12 @@ private:
     std::mutex mtx;
 
     double transformBefoMapped[6];
-    Eigen::Quaterniond q_odom;
-    Eigen::Vector3d t_odom;
     double transformAftrMapped[6];
+    Eigen::Quaterniond q_w_last;
+    Eigen::Vector3d t_w_last;
+
+    Eigen::Quaterniond q_keyframe_last;
+    Eigen::Vector3d t_keyframe_last;
 
     // 滑动窗口
     std::deque<CloudTypePtr> recentCornerKeyFrames;
@@ -61,6 +64,18 @@ private:
     pcl::VoxelGrid<PointType>::Ptr downSampleSurfFromMap;
     pcl::VoxelGrid<PointType>::Ptr downSampleGroundFromMap;
 
+    // 前一帧关键帧位姿
+    PointType previousPosPoint;
+
+    // 因子图
+    gtsam::NonlinearFactorGraph gtsamGraph;
+    gtsam::Values initialEstimate;
+    gtsam::ISAM2 *isam;
+    gtsam::Values isamCurrentEstimate;
+
+    // 所有关键帧位姿
+    CloudTypePtr allKeyFramePose;
+
     // 参数
     bool loop_closure_enabled;
     float surrounding_keyframe_search_radius;
@@ -68,8 +83,6 @@ private:
     float history_keyframe_search_radius;
     int history_keyframe_search_num;
     float history_search_fitness_score;
-
-    bool isFirstFrame;
 
     std::thread run_thread;
 
@@ -145,11 +158,6 @@ private:
         for(int i = 0; i < 6; ++i){
             transformBefoMapped[i] = all_cloud.trans_form[i];
         }
-        // x y z qx qy qz
-        q_odom = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
-                  Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
-                  Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
-        t_odom = Eigen::Vector3d(transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
 
         // 获得点云
         msgToPointCloud(cornerSharpLast, all_cloud.corner_sharp);
@@ -192,9 +200,7 @@ private:
      * 图优化
     */
     void scan2MapOptimization(){
-        if(isFirstFrame){
-            isFirstFrame = false;
-        }else{
+        if(!allKeyFramePose -> empty()){
             kdtreeCornerFromMap -> setInputCloud(laserCornerFromMap);
             kdtreeGroundFromMap -> setInputCloud(laserGroundFromMap);
 
@@ -361,13 +367,111 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
         }
+
+        // 将帧间变换参数转换为帧到地图的变换参数
+        // x y z qx qy qz
+        Eigen::Quaterniond q_odom = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
+                                     Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
+                                     Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
+        Eigen::Vector3d t_odom = Eigen::Vector3d(transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
+
+        t_w_last = q_w_last * t_odom + t_w_last;
+        q_w_last = q_w_last * q_odom;
     }
 
     /**
      * 增加新的约束并保存关键帧
     */
     void saveKeyFramesAndFactor(){
-        
+        PointType currentPosPoint(t_w_last.x(), t_w_last.x(), t_w_last.x());
+
+        // 噪声
+        gtsam::Vector6 Vector6(6);
+        Vector6 << 1e-6, 1e-6, 1e-6, 1e-8, 1e-8, 1e-6;
+        auto priorNoise = gtsam::noiseModel::Diagonal::Variances(Vector6);
+        auto odometryNoise = gtsam::noiseModel::Diagonal::Variances(Vector6);
+
+        // 根据距离判断是否为新的关键帧
+        bool saveThisKeyFrame = true;
+        if(sqrt((previousPosPoint.x - currentPosPoint.x) *
+                (previousPosPoint.x - currentPosPoint.x) +
+                (previousPosPoint.y - currentPosPoint.y) *
+                (previousPosPoint.y - currentPosPoint.y) +
+                (previousPosPoint.z - currentPosPoint.z) *
+                (previousPosPoint.z - currentPosPoint.z)) < 0.5){
+            saveThisKeyFrame = false;
+        }
+
+        // 是关键帧或第一帧，则保存并更新
+        if(saveThisKeyFrame == false && !allKeyFramePose -> empty()) return;
+
+        previousPosPoint = currentPosPoint;
+
+        // 更新gtsam graph
+        // 是第一帧
+        if(allKeyFramePose -> empty()){
+            gtsamGraph.add(gtsam::PriorFactor<gtsam::Pose3>(
+                0,
+                gtsam::Pose3(gtsam::Rot3::Quaternion(q_w_last.w(), q_w_last.x(), q_w_last.y(), q_w_last.z()),
+                             gtsam::Point3(t_w_last.x(), t_w_last.y(), t_w_last.z())),
+                priorNoise));
+            initialEstimate.insert(
+                0,
+                gtsam::Pose3(gtsam::Rot3::Quaternion(q_w_last.w(), q_w_last.x(), q_w_last.y(), q_w_last.z()),
+                             gtsam::Point3(t_w_last.x(), t_w_last.y(), t_w_last.z())));
+            q_keyframe_last = q_w_last;
+            t_keyframe_last = t_w_last;
+        }else{
+            gtsam::Pose3 poseFrom = gtsam::Pose3(
+                gtsam::Rot3::Quaternion(q_keyframe_last.w(), q_keyframe_last.x(), q_keyframe_last.y(), q_keyframe_last.z()),
+                gtsam::Point3(t_keyframe_last.x(), t_keyframe_last.y(), t_keyframe_last.z()));
+            gtsam::Pose3 poseTo = gtsam::Pose3(
+                gtsam::Rot3::Quaternion(q_w_last.w(), q_w_last.x(), q_w_last.y(), q_w_last.z()),
+                gtsam::Point3(t_w_last.x(), t_w_last.y(), t_w_last.z()));
+            // 加入因子图中
+            gtsamGraph.add(gtsam::BetweenFactor<gtsam::Pose3>(
+                allKeyFramePose -> size() - 1, allKeyFramePose -> size(),
+                poseFrom.between(poseTo), odometryNoise));
+            initialEstimate.insert(
+                allKeyFramePose -> size(),
+                gtsam::Pose3(
+                    gtsam::Rot3::Quaternion(q_keyframe_last.w(), q_keyframe_last.x(), q_keyframe_last.y(), q_keyframe_last.z()),
+                    gtsam::Point3(t_keyframe_last.x(), t_keyframe_last.y(), t_keyframe_last.z())));
+        }
+
+        // 更新isam
+        isam -> update(gtsamGraph, initialEstimate);
+        isam -> update();
+
+        gtsamGraph.resize(0);
+        initialEstimate.clear();
+
+        // 保存关键帧
+        PointType thisPose;
+        gtsam::Pose3 latestEstimate;
+
+        isamCurrentEstimate = isam -> calculateEstimate();
+        latestEstimate = isamCurrentEstimate.at<gtsam::Pose3>(isamCurrentEstimate.size() - 1);
+
+        thisPose.x = latestEstimate.translation().x();
+        thisPose.y = latestEstimate.translation().y();
+        thisPose.z = latestEstimate.translation().z();
+        thisPose.intensity = allKeyFramePose -> size();
+        allKeyFramePose -> push_back(thisPose);
+
+        // 保存变换矩阵
+        if(allKeyFramePose -> size() > 1){
+            q_w_last.w() = latestEstimate.rotation().quaternion().w();
+            q_w_last.x() = latestEstimate.rotation().quaternion().x();
+            q_w_last.y() = latestEstimate.rotation().quaternion().y();
+            q_w_last.z() = latestEstimate.rotation().quaternion().z();
+            t_w_last.x() = latestEstimate.translation().x();
+            t_w_last.y() = latestEstimate.translation().y();
+            t_w_last.z() = latestEstimate.translation().z();
+
+            q_keyframe_last = q_w_last;
+            t_keyframe_last = t_w_last;
+        }
     }
 
     /**
