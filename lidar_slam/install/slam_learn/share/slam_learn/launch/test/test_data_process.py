@@ -33,6 +33,12 @@ def generate_launch_description():
     parameters=[config_file]
   )
 
+  back_end_node = Node(
+    package='slam_learn',
+    executable='back_end_node',
+    output='screen',
+  )
+
   # Rviz
   rviz_node = Node(
     package='rviz2',
@@ -60,6 +66,7 @@ def generate_launch_description():
   ld.add_action(data)
   ld.add_action(data_process_node)
   ld.add_action(front_end_node)
+  ld.add_action(back_end_node)
   ld.add_action(rviz_node)
   ld.add_action(test_data_process)
 

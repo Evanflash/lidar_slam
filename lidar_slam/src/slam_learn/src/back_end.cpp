@@ -12,18 +12,28 @@
 #include <gtsam/nonlinear/ISAM2.h>
 
 namespace lidarslam{
+static double transformBefoMapped[6] = {0.0};
+
+
 class BackEnd : public rclcpp::Node{
 private:
     // 消息队列
     std::queue<other_msgs::msg::AllCloud> allCloudQueue;
-
     other_msgs::msg::AllCloud all_cloud;
+    rclcpp::Subscription<other_msgs::msg::AllCloud>::SharedPtr subAllCloud;
+
+    nav_msgs::msg::Path path;
+    rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
 
     // 互斥锁
     std::mutex mtx;
+    std::mutex globalMtx;
 
-    double transformBefoMapped[6];
-    double transformAftrMapped[6];
+    // 地图
+    std::queue<CloudTypePtr> globalMapQueue;
+    CloudTypePtr globalMap;
+    PubPointCloud pubGlobalMap;
+
     Eigen::Quaterniond q_w_last;
     Eigen::Vector3d t_w_last;
 
@@ -32,12 +42,10 @@ private:
 
     // 滑动窗口
     std::deque<CloudTypePtr> recentCornerKeyFrames;
-    std::deque<CloudTypePtr> recentSurfKeyFrames;
     std::deque<CloudTypePtr> recentGroundKeyFrames;
 
     // 子图
     CloudTypePtr laserCornerFromMap;
-    CloudTypePtr laserSurfFromMap;
     CloudTypePtr laserGroundFromMap;
 
     // kdtree
@@ -54,15 +62,13 @@ private:
     CloudTypePtr surfCloud;
     CloudTypePtr groundCloud;
 
-    // 当前帧下采样
-    pcl::VoxelGrid<PointType>::Ptr downSampleCornerCurr;
-    pcl::VoxelGrid<PointType>::Ptr downSampleSurfCurr;
-    pcl::VoxelGrid<PointType>::Ptr downSampleGroundCurr;
+    // 下采样滤波
+    pcl::VoxelGrid<PointType>::Ptr downSampleCorner;
+    pcl::VoxelGrid<PointType>::Ptr downSampleSurf;
+    pcl::VoxelGrid<PointType>::Ptr downSampleGround;
 
-    // 子图下采样滤波器
-    pcl::VoxelGrid<PointType>::Ptr downSampleCornerFromMap;
-    pcl::VoxelGrid<PointType>::Ptr downSampleSurfFromMap;
-    pcl::VoxelGrid<PointType>::Ptr downSampleGroundFromMap;
+    pcl::VoxelGrid<PointType>::Ptr downSampleGlobalMap;
+
 
     // 前一帧关键帧位姿
     PointType previousPosPoint;
@@ -88,9 +94,19 @@ private:
 
 public:
     BackEnd(const std::string &name)
-        : Node(name)
+        : Node(name),
+          q_w_last(1, 0, 0, 0),
+          t_w_last(0, 0, 0)
     {
-        
+        subAllCloud = this -> create_subscription<other_msgs::msg::AllCloud>(
+            "/all_cloud", 1, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
+
+        pubPath = this -> create_publisher<nav_msgs::msg::Path>("/global_path", 1);
+
+        pubGlobalMap = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/global_map", 1);
+
+
+
         init();
         // 开启子线程
         run_thread = std::thread(&BackEnd::run, this);
@@ -100,6 +116,22 @@ public:
     }
 
 private:
+    /**
+     * 接收消息
+    */
+    void getMsg(const other_msgs::msg::AllCloud &msg){
+        mtx.lock();
+        allCloudQueue.push(msg);
+        mtx.unlock();
+    }
+
+    /**
+     * 发布地图子线程
+    */
+    void publishGlobalMap(){
+
+    }
+
     /**
      * 子线程
     */
@@ -113,7 +145,7 @@ private:
             all_cloud = allCloudQueue.front();
             allCloudQueue.pop();
             mtx.unlock();
-
+            std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
             // 消息拆解
             msgAnalysis();
             // 提取子地图
@@ -128,6 +160,9 @@ private:
             publish();
             // 重置参数
             clearCloud();
+            std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+            std::chrono::duration<double> elapsed_seconds = end - start;
+            // RCLCPP_INFO(this -> get_logger(), "back end whole time: %fms", elapsed_seconds.count() * 1000);
         }
     }
 
@@ -135,7 +170,38 @@ private:
      * 初始化 
     */
     void init(){
+        globalMap.reset(new CloudType());
+        downSampleGlobalMap.reset(new pcl::VoxelGrid<PointType>());
+        downSampleGlobalMap -> setLeafSize(1.0, 1.0, 1.0);
 
+        laserCornerFromMap.reset(new CloudType());
+        laserGroundFromMap.reset(new CloudType());
+
+        kdtreeCornerFromMap.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeGroundFromMap.reset(new pcl::KdTreeFLANN<PointType>());
+
+        cornerSharpLast.reset(new CloudType());
+        groundSurfLast.reset(new CloudType());
+
+        cornerCloud.reset(new CloudType());
+        surfCloud.reset(new CloudType());
+        groundCloud.reset(new CloudType());
+
+        downSampleCorner.reset(new pcl::VoxelGrid<PointType>());
+        downSampleSurf.reset(new pcl::VoxelGrid<PointType>());
+        downSampleGround.reset(new pcl::VoxelGrid<PointType>());;
+
+        downSampleCorner -> setLeafSize(0.2, 0.2, 0.2);
+        downSampleSurf -> setLeafSize(0.4, 0.4, 0.4);
+        downSampleGround -> setLeafSize(0.4, 0.4, 0.4);
+
+        allKeyFramePose.reset(new CloudType());
+
+        gtsam::ISAM2Params parameters;
+        parameters.relinearizeThreshold = 0.01;
+        parameters.relinearizeSkip = 1;
+        parameters.factorization = gtsam::ISAM2Params::QR;
+        isam = new gtsam::ISAM2(parameters);
     }
 
     /**
@@ -154,10 +220,21 @@ private:
                 cloud -> push_back(point);
             }
         };
-        // 获得初始6自由度参数
+        // 初始6自由度参数
+        // x y z qx qy qz
         for(int i = 0; i < 6; ++i){
-            transformBefoMapped[i] = all_cloud.trans_form[i];
+            transformBefoMapped[i] = 0;
         }
+        Eigen::Quaterniond q_odom = (Eigen::AngleAxisd(all_cloud.trans_form[5], Eigen::Vector3d::UnitZ()) *
+                                     Eigen::AngleAxisd(all_cloud.trans_form[4], Eigen::Vector3d::UnitY()) *
+                                     Eigen::AngleAxisd(all_cloud.trans_form[3], Eigen::Vector3d::UnitX()));
+        Eigen::Vector3d t_odom = Eigen::Vector3d(all_cloud.trans_form[0], 
+                                                 all_cloud.trans_form[1], 
+                                                 all_cloud.trans_form[2]);
+        // 将帧间变换参数转换为帧到地图的变换参数
+        // RCLCPP_INFO(this -> get_logger(), "front end : x%f, y%f, z%f", t_odom.x(), t_odom.y(), t_odom.z());
+        t_w_last = q_w_last * t_odom + t_w_last;
+        q_w_last = q_w_last * q_odom;
 
         // 获得点云
         msgToPointCloud(cornerSharpLast, all_cloud.corner_sharp);
@@ -165,11 +242,12 @@ private:
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundSurfLast, all_cloud.ground_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
+        RCLCPP_INFO(this -> get_logger(), "corner:%ld, ground:%ld", cornerSharpLast -> size(), groundSurfLast -> size());
 
         // 下采样
-        downSamplePointCloud(cornerCloud, downSampleCornerCurr);
-        downSamplePointCloud(surfCloud, downSampleSurfCurr);
-        downSamplePointCloud(groundCloud, downSampleGroundCurr);
+        downSamplePointCloud(cornerCloud, downSampleCorner);
+        downSamplePointCloud(surfCloud, downSampleSurf);
+        downSamplePointCloud(groundCloud, downSampleGround);
     }
     /**
      * 下采样滤波
@@ -188,18 +266,25 @@ private:
     void extractSurroundingKeyFrames(){
         for(size_t i = 0; i < recentCornerKeyFrames.size(); ++i){
             *laserCornerFromMap += *recentCornerKeyFrames[i];
-            *laserSurfFromMap += *recentSurfKeyFrames[i];
-            *laserGroundFromMap += *recentCornerKeyFrames[i];
+            *laserGroundFromMap += *recentGroundKeyFrames[i];
         }
-        downSamplePointCloud(laserCornerFromMap, downSampleCornerFromMap);
-        downSamplePointCloud(laserSurfFromMap, downSampleSurfFromMap);
-        downSamplePointCloud(laserGroundFromMap, downSampleGroundFromMap);
+        downSamplePointCloud(laserCornerFromMap, downSampleCorner);
+        downSamplePointCloud(laserGroundFromMap, downSampleGround);
     }
 
     /**
      * 图优化
     */
     void scan2MapOptimization(){
+        auto trans = [&](const PointType &pointFrom, PointType &pointTo){
+            Eigen::Vector3d p(pointFrom.x, pointFrom.y, pointFrom.z);
+            p = q_w_last * p + t_w_last;
+            pointTo.x = p.x();
+            pointTo.y = p.y();
+            pointTo.z = p.z();
+            pointTo.intensity = pointFrom.intensity;
+        };
+
         if(!allKeyFramePose -> empty()){
             kdtreeCornerFromMap -> setInputCloud(laserCornerFromMap);
             kdtreeGroundFromMap -> setInputCloud(laserGroundFromMap);
@@ -226,7 +311,7 @@ private:
                 Eigen::Matrix<double, 3, 1> matX;
 
                 for(int i = 0; i < groundPointsNum; ++i){
-                    pointSel = groundSurfLast -> points[i];
+                    trans(groundSurfLast -> points[i], pointSel);
                     kdtreeGroundFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
@@ -291,15 +376,15 @@ private:
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(transformBefoMapped + 5, 2);
-                problem.AddParameterBlock(transformBefoMapped, 1);
+                problem.AddParameterBlock(transformBefoMapped + 5, 1);
+                problem.AddParameterBlock(transformBefoMapped, 2);
                 
                 Eigen::Matrix<double, 3, 3> matA;
                 Eigen::Vector3d matD;
                 Eigen::Matrix3d matV;
 
                 for(int i = 0; i < cornerPointsNum; ++i){
-                    pointSel = cornerSharpLast -> points[i];
+                    trans(cornerSharpLast -> points[i], pointSel);
                     kdtreeCornerFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
@@ -367,16 +452,20 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
         }
-
+       
         // 将帧间变换参数转换为帧到地图的变换参数
         // x y z qx qy qz
-        Eigen::Quaterniond q_odom = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
-                                     Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
-                                     Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
-        Eigen::Vector3d t_odom = Eigen::Vector3d(transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
+        Eigen::Quaterniond q_delta = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
+                                      Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
+                                      Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
+        Eigen::Vector3d t_delta = Eigen::Vector3d(transformBefoMapped[0], 
+                                                  transformBefoMapped[1], 
+                                                  transformBefoMapped[2]);
 
-        t_w_last = q_w_last * t_odom + t_w_last;
-        q_w_last = q_w_last * q_odom;
+        t_w_last = q_delta * t_w_last + t_delta;
+        q_w_last = q_delta * q_w_last;
+
+        RCLCPP_INFO(this -> get_logger(), "back end : x%f, y%f, z%f", t_w_last.x(), t_w_last.y(), t_w_last.z());
     }
 
     /**
@@ -459,18 +548,35 @@ private:
         thisPose.intensity = allKeyFramePose -> size();
         allKeyFramePose -> push_back(thisPose);
 
-        // 保存变换矩阵
+        // 更新变换矩阵
         if(allKeyFramePose -> size() > 1){
-            q_w_last.w() = latestEstimate.rotation().quaternion().w();
-            q_w_last.x() = latestEstimate.rotation().quaternion().x();
-            q_w_last.y() = latestEstimate.rotation().quaternion().y();
-            q_w_last.z() = latestEstimate.rotation().quaternion().z();
+            q_w_last.w() = latestEstimate.rotation().toQuaternion().w();
+            q_w_last.x() = latestEstimate.rotation().toQuaternion().x();
+            q_w_last.y() = latestEstimate.rotation().toQuaternion().y();
+            q_w_last.z() = latestEstimate.rotation().toQuaternion().z();
             t_w_last.x() = latestEstimate.translation().x();
             t_w_last.y() = latestEstimate.translation().y();
             t_w_last.z() = latestEstimate.translation().z();
 
             q_keyframe_last = q_w_last;
             t_keyframe_last = t_w_last;
+        }
+
+        // 将关键帧插入滑动窗口
+        CloudTypePtr newKeyFrameCorner = transformToMap(cornerCloud, q_w_last, t_w_last);
+        CloudTypePtr newKeyFrameGround = transformToMap(groundCloud, q_w_last, t_w_last);
+
+        // *globalMap += *newKeyFrameCorner;
+        // *globalMap += *newKeyFrameGround;
+        // downSamplePointCloud(globalMap, downSampleGlobalMap);
+
+        recentCornerKeyFrames.push_back(newKeyFrameCorner);
+        if(recentCornerKeyFrames.size() > 20){
+            recentCornerKeyFrames.pop_front();
+        }
+        recentGroundKeyFrames.push_back(newKeyFrameGround);
+        if(recentGroundKeyFrames.size() > 20){
+            recentGroundKeyFrames.pop_front();
         }
     }
 
@@ -485,7 +591,29 @@ private:
      * 发布位姿消息
     */
     void publish(){
+        nav_msgs::msg::Odometry laserOdometry;
+        laserOdometry.header.frame_id = "map";
+        laserOdometry.child_frame_id = "/global_map";
+        laserOdometry.pose.pose.orientation.x = q_w_last.x();
+        laserOdometry.pose.pose.orientation.y = q_w_last.y();
+        laserOdometry.pose.pose.orientation.z = q_w_last.z();
+        laserOdometry.pose.pose.orientation.w = q_w_last.w();
+        laserOdometry.pose.pose.position.x = t_w_last.x();
+        laserOdometry.pose.pose.position.y = t_w_last.y();
+        laserOdometry.pose.pose.position.z = t_w_last.z();
 
+        geometry_msgs::msg::PoseStamped laserPose;
+        laserPose.header = laserOdometry.header;
+        laserPose.pose = laserOdometry.pose.pose;
+        path.poses.push_back(laserPose);
+        path.header.frame_id = "map";
+        
+        pubPath -> publish(path);
+
+        sensor_msgs::msg::PointCloud2 map;
+        pcl::toROSMsg(*globalMap, map);
+        map.header.frame_id = "map";
+        pubGlobalMap -> publish(map);
     }
 
     /**
@@ -493,9 +621,32 @@ private:
     */
     void clearCloud(){
         laserCornerFromMap -> clear();
-        laserSurfFromMap -> clear();
         laserGroundFromMap -> clear();
     }
+
+    /**
+     * 点云位姿变换
+    */
+    CloudTypePtr transformToMap(CloudTypePtr cloud, const Eigen::Quaterniond &q, const Eigen::Vector3d &t){
+        CloudTypePtr tmp(new CloudType());
+        tmp -> reserve(cloud -> size());
+        Eigen::Vector3d point;
+        PointType p;
+        for(size_t i = 0; i < cloud -> size(); ++i){
+            point = Eigen::Vector3d(cloud -> points[i].x, 
+                                    cloud -> points[i].y,
+                                    cloud -> points[i].z);
+            point = q * point + t;
+            
+            p.x = point.x();
+            p.y = point.y();
+            p.z = point.z();
+            p.intensity = cloud -> points[i].intensity;
+            tmp -> push_back(p);
+        }
+        return tmp;
+    }
+
 
 }; // class BackEnd
 
