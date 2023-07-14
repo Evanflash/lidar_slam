@@ -1,0 +1,476 @@
+[0.000000] (-) TimerEvent: {}
+[0.000196] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.000230] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.001781] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.023496] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.024976] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.026439] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan/code'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2230'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2014,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2014'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/fb2010dd_d1ee_488b_ade0_ea2a8846b80f'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.779171'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.112'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.101879] (-) TimerEvent: {}
+[0.112026] (slam_learn) StdoutLine: {'line': b'[ 25%] Built target data_process_node\n'}
+[0.153145] (slam_learn) StdoutLine: {'line': b'[ 50%] Built target data_process_test\n'}
+[0.175357] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target back_end_node\x1b[0m\n'}
+[0.201975] (-) TimerEvent: {}
+[0.238950] (slam_learn) StdoutLine: {'line': b'[ 62%] \x1b[32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o\x1b[0m\n'}
+[0.302103] (-) TimerEvent: {}
+[0.402396] (-) TimerEvent: {}
+[0.502668] (-) TimerEvent: {}
+[0.603006] (-) TimerEvent: {}
+[0.703377] (-) TimerEvent: {}
+[0.803661] (-) TimerEvent: {}
+[0.903928] (-) TimerEvent: {}
+[1.004245] (-) TimerEvent: {}
+[1.104836] (-) TimerEvent: {}
+[1.205115] (-) TimerEvent: {}
+[1.305403] (-) TimerEvent: {}
+[1.405639] (-) TimerEvent: {}
+[1.505908] (-) TimerEvent: {}
+[1.606197] (-) TimerEvent: {}
+[1.706535] (-) TimerEvent: {}
+[1.806938] (-) TimerEvent: {}
+[1.907303] (-) TimerEvent: {}
+[2.007570] (-) TimerEvent: {}
+[2.107898] (-) TimerEvent: {}
+[2.208212] (-) TimerEvent: {}
+[2.308514] (-) TimerEvent: {}
+[2.408829] (-) TimerEvent: {}
+[2.509263] (-) TimerEvent: {}
+[2.610251] (-) TimerEvent: {}
+[2.710592] (-) TimerEvent: {}
+[2.810869] (-) TimerEvent: {}
+[2.911145] (-) TimerEvent: {}
+[3.011459] (-) TimerEvent: {}
+[3.111740] (-) TimerEvent: {}
+[3.212035] (-) TimerEvent: {}
+[3.312406] (-) TimerEvent: {}
+[3.412782] (-) TimerEvent: {}
+[3.513411] (-) TimerEvent: {}
+[3.613778] (-) TimerEvent: {}
+[3.714155] (-) TimerEvent: {}
+[3.814561] (-) TimerEvent: {}
+[3.915030] (-) TimerEvent: {}
+[4.015383] (-) TimerEvent: {}
+[4.115672] (-) TimerEvent: {}
+[4.215966] (-) TimerEvent: {}
+[4.316290] (-) TimerEvent: {}
+[4.417095] (-) TimerEvent: {}
+[4.517479] (-) TimerEvent: {}
+[4.617896] (-) TimerEvent: {}
+[4.718353] (-) TimerEvent: {}
+[4.818663] (-) TimerEvent: {}
+[4.919027] (-) TimerEvent: {}
+[5.019354] (-) TimerEvent: {}
+[5.119647] (-) TimerEvent: {}
+[5.220138] (-) TimerEvent: {}
+[5.320401] (-) TimerEvent: {}
+[5.420693] (-) TimerEvent: {}
+[5.520975] (-) TimerEvent: {}
+[5.621250] (-) TimerEvent: {}
+[5.721508] (-) TimerEvent: {}
+[5.821792] (-) TimerEvent: {}
+[5.922071] (-) TimerEvent: {}
+[6.022357] (-) TimerEvent: {}
+[6.122658] (-) TimerEvent: {}
+[6.222930] (-) TimerEvent: {}
+[6.323199] (-) TimerEvent: {}
+[6.423560] (-) TimerEvent: {}
+[6.524192] (-) TimerEvent: {}
+[6.624638] (-) TimerEvent: {}
+[6.725031] (-) TimerEvent: {}
+[6.825365] (-) TimerEvent: {}
+[6.925675] (-) TimerEvent: {}
+[7.025988] (-) TimerEvent: {}
+[7.126346] (-) TimerEvent: {}
+[7.226659] (-) TimerEvent: {}
+[7.326995] (-) TimerEvent: {}
+[7.427337] (-) TimerEvent: {}
+[7.527638] (-) TimerEvent: {}
+[7.627921] (-) TimerEvent: {}
+[7.728284] (-) TimerEvent: {}
+[7.828583] (-) TimerEvent: {}
+[7.928895] (-) TimerEvent: {}
+[8.029211] (-) TimerEvent: {}
+[8.129520] (-) TimerEvent: {}
+[8.229864] (-) TimerEvent: {}
+[8.330181] (-) TimerEvent: {}
+[8.430495] (-) TimerEvent: {}
+[8.530822] (-) TimerEvent: {}
+[8.631162] (-) TimerEvent: {}
+[8.731791] (-) TimerEvent: {}
+[8.832120] (-) TimerEvent: {}
+[8.932443] (-) TimerEvent: {}
+[9.032733] (-) TimerEvent: {}
+[9.133036] (-) TimerEvent: {}
+[9.233367] (-) TimerEvent: {}
+[9.333692] (-) TimerEvent: {}
+[9.434026] (-) TimerEvent: {}
+[9.534349] (-) TimerEvent: {}
+[9.634637] (-) TimerEvent: {}
+[9.734944] (-) TimerEvent: {}
+[9.835284] (-) TimerEvent: {}
+[9.935580] (-) TimerEvent: {}
+[10.035889] (-) TimerEvent: {}
+[10.136198] (-) TimerEvent: {}
+[10.236508] (-) TimerEvent: {}
+[10.336839] (-) TimerEvent: {}
+[10.437158] (-) TimerEvent: {}
+[10.537467] (-) TimerEvent: {}
+[10.637786] (-) TimerEvent: {}
+[10.738123] (-) TimerEvent: {}
+[10.838439] (-) TimerEvent: {}
+[10.938758] (-) TimerEvent: {}
+[11.039070] (-) TimerEvent: {}
+[11.139343] (-) TimerEvent: {}
+[11.239665] (-) TimerEvent: {}
+[11.340012] (-) TimerEvent: {}
+[11.440341] (-) TimerEvent: {}
+[11.540661] (-) TimerEvent: {}
+[11.641003] (-) TimerEvent: {}
+[11.741327] (-) TimerEvent: {}
+[11.841641] (-) TimerEvent: {}
+[11.941957] (-) TimerEvent: {}
+[12.042287] (-) TimerEvent: {}
+[12.142561] (-) TimerEvent: {}
+[12.242875] (-) TimerEvent: {}
+[12.343203] (-) TimerEvent: {}
+[12.443493] (-) TimerEvent: {}
+[12.543823] (-) TimerEvent: {}
+[12.644175] (-) TimerEvent: {}
+[12.744473] (-) TimerEvent: {}
+[12.844791] (-) TimerEvent: {}
+[12.945147] (-) TimerEvent: {}
+[13.045434] (-) TimerEvent: {}
+[13.145809] (-) TimerEvent: {}
+[13.246185] (-) TimerEvent: {}
+[13.346655] (-) TimerEvent: {}
+[13.447025] (-) TimerEvent: {}
+[13.547345] (-) TimerEvent: {}
+[13.647855] (-) TimerEvent: {}
+[13.748219] (-) TimerEvent: {}
+[13.848563] (-) TimerEvent: {}
+[13.948819] (-) TimerEvent: {}
+[14.049089] (-) TimerEvent: {}
+[14.149360] (-) TimerEvent: {}
+[14.249668] (-) TimerEvent: {}
+[14.349971] (-) TimerEvent: {}
+[14.450293] (-) TimerEvent: {}
+[14.550610] (-) TimerEvent: {}
+[14.650902] (-) TimerEvent: {}
+[14.751207] (-) TimerEvent: {}
+[14.851543] (-) TimerEvent: {}
+[14.951857] (-) TimerEvent: {}
+[15.052175] (-) TimerEvent: {}
+[15.152746] (-) TimerEvent: {}
+[15.253317] (-) TimerEvent: {}
+[15.353652] (-) TimerEvent: {}
+[15.453967] (-) TimerEvent: {}
+[15.554246] (-) TimerEvent: {}
+[15.654554] (-) TimerEvent: {}
+[15.754852] (-) TimerEvent: {}
+[15.855180] (-) TimerEvent: {}
+[15.955480] (-) TimerEvent: {}
+[16.055777] (-) TimerEvent: {}
+[16.156078] (-) TimerEvent: {}
+[16.256407] (-) TimerEvent: {}
+[16.356722] (-) TimerEvent: {}
+[16.457009] (-) TimerEvent: {}
+[16.557329] (-) TimerEvent: {}
+[16.657616] (-) TimerEvent: {}
+[16.757932] (-) TimerEvent: {}
+[16.858241] (-) TimerEvent: {}
+[16.958546] (-) TimerEvent: {}
+[17.058869] (-) TimerEvent: {}
+[17.159199] (-) TimerEvent: {}
+[17.259551] (-) TimerEvent: {}
+[17.359857] (-) TimerEvent: {}
+[17.460146] (-) TimerEvent: {}
+[17.560472] (-) TimerEvent: {}
+[17.660782] (-) TimerEvent: {}
+[17.761092] (-) TimerEvent: {}
+[17.861412] (-) TimerEvent: {}
+[17.961767] (-) TimerEvent: {}
+[18.062125] (-) TimerEvent: {}
+[18.162454] (-) TimerEvent: {}
+[18.262780] (-) TimerEvent: {}
+[18.363110] (-) TimerEvent: {}
+[18.463413] (-) TimerEvent: {}
+[18.563729] (-) TimerEvent: {}
+[18.664062] (-) TimerEvent: {}
+[18.764372] (-) TimerEvent: {}
+[18.864735] (-) TimerEvent: {}
+[18.965043] (-) TimerEvent: {}
+[19.065410] (-) TimerEvent: {}
+[19.165723] (-) TimerEvent: {}
+[19.266037] (-) TimerEvent: {}
+[19.366323] (-) TimerEvent: {}
+[19.466638] (-) TimerEvent: {}
+[19.566969] (-) TimerEvent: {}
+[19.667348] (-) TimerEvent: {}
+[19.767689] (-) TimerEvent: {}
+[19.867988] (-) TimerEvent: {}
+[19.968308] (-) TimerEvent: {}
+[20.068640] (-) TimerEvent: {}
+[20.168950] (-) TimerEvent: {}
+[20.269260] (-) TimerEvent: {}
+[20.369569] (-) TimerEvent: {}
+[20.469929] (-) TimerEvent: {}
+[20.570247] (-) TimerEvent: {}
+[20.670564] (-) TimerEvent: {}
+[20.770891] (-) TimerEvent: {}
+[20.871176] (-) TimerEvent: {}
+[20.971452] (-) TimerEvent: {}
+[21.071739] (-) TimerEvent: {}
+[21.172061] (-) TimerEvent: {}
+[21.272378] (-) TimerEvent: {}
+[21.372660] (-) TimerEvent: {}
+[21.472986] (-) TimerEvent: {}
+[21.573279] (-) TimerEvent: {}
+[21.673586] (-) TimerEvent: {}
+[21.773880] (-) TimerEvent: {}
+[21.874203] (-) TimerEvent: {}
+[21.974515] (-) TimerEvent: {}
+[22.074815] (-) TimerEvent: {}
+[22.175115] (-) TimerEvent: {}
+[22.275417] (-) TimerEvent: {}
+[22.375733] (-) TimerEvent: {}
+[22.476022] (-) TimerEvent: {}
+[22.576347] (-) TimerEvent: {}
+[22.676666] (-) TimerEvent: {}
+[22.776985] (-) TimerEvent: {}
+[22.877323] (-) TimerEvent: {}
+[22.977703] (-) TimerEvent: {}
+[23.078061] (-) TimerEvent: {}
+[23.178380] (-) TimerEvent: {}
+[23.278669] (-) TimerEvent: {}
+[23.378974] (-) TimerEvent: {}
+[23.479286] (-) TimerEvent: {}
+[23.579573] (-) TimerEvent: {}
+[23.679921] (-) TimerEvent: {}
+[23.780243] (-) TimerEvent: {}
+[23.880596] (-) TimerEvent: {}
+[23.980928] (-) TimerEvent: {}
+[24.081233] (-) TimerEvent: {}
+[24.181532] (-) TimerEvent: {}
+[24.281827] (-) TimerEvent: {}
+[24.382139] (-) TimerEvent: {}
+[24.482456] (-) TimerEvent: {}
+[24.582763] (-) TimerEvent: {}
+[24.683127] (-) TimerEvent: {}
+[24.783412] (-) TimerEvent: {}
+[24.883685] (-) TimerEvent: {}
+[24.983966] (-) TimerEvent: {}
+[25.084251] (-) TimerEvent: {}
+[25.184534] (-) TimerEvent: {}
+[25.284828] (-) TimerEvent: {}
+[25.385115] (-) TimerEvent: {}
+[25.485393] (-) TimerEvent: {}
+[25.585659] (-) TimerEvent: {}
+[25.685956] (-) TimerEvent: {}
+[25.786265] (-) TimerEvent: {}
+[25.886557] (-) TimerEvent: {}
+[25.986854] (-) TimerEvent: {}
+[26.087097] (-) TimerEvent: {}
+[26.187331] (-) TimerEvent: {}
+[26.287645] (-) TimerEvent: {}
+[26.387918] (-) TimerEvent: {}
+[26.488248] (-) TimerEvent: {}
+[26.588534] (-) TimerEvent: {}
+[26.688896] (-) TimerEvent: {}
+[26.789221] (-) TimerEvent: {}
+[26.889540] (-) TimerEvent: {}
+[26.989830] (-) TimerEvent: {}
+[27.090113] (-) TimerEvent: {}
+[27.190371] (-) TimerEvent: {}
+[27.290691] (-) TimerEvent: {}
+[27.390958] (-) TimerEvent: {}
+[27.491307] (-) TimerEvent: {}
+[27.591822] (-) TimerEvent: {}
+[27.692171] (-) TimerEvent: {}
+[27.792489] (-) TimerEvent: {}
+[27.892812] (-) TimerEvent: {}
+[27.993113] (-) TimerEvent: {}
+[28.093439] (-) TimerEvent: {}
+[28.193755] (-) TimerEvent: {}
+[28.294070] (-) TimerEvent: {}
+[28.394388] (-) TimerEvent: {}
+[28.494712] (-) TimerEvent: {}
+[28.595014] (-) TimerEvent: {}
+[28.695334] (-) TimerEvent: {}
+[28.795661] (-) TimerEvent: {}
+[28.896012] (-) TimerEvent: {}
+[28.996298] (-) TimerEvent: {}
+[29.096615] (-) TimerEvent: {}
+[29.196956] (-) TimerEvent: {}
+[29.297282] (-) TimerEvent: {}
+[29.397581] (-) TimerEvent: {}
+[29.497889] (-) TimerEvent: {}
+[29.598180] (-) TimerEvent: {}
+[29.698463] (-) TimerEvent: {}
+[29.798770] (-) TimerEvent: {}
+[29.899054] (-) TimerEvent: {}
+[29.999341] (-) TimerEvent: {}
+[30.099703] (-) TimerEvent: {}
+[30.199999] (-) TimerEvent: {}
+[30.300299] (-) TimerEvent: {}
+[30.400613] (-) TimerEvent: {}
+[30.500913] (-) TimerEvent: {}
+[30.601184] (-) TimerEvent: {}
+[30.701536] (-) TimerEvent: {}
+[30.801848] (-) TimerEvent: {}
+[30.902152] (-) TimerEvent: {}
+[31.002490] (-) TimerEvent: {}
+[31.102770] (-) TimerEvent: {}
+[31.203077] (-) TimerEvent: {}
+[31.303363] (-) TimerEvent: {}
+[31.403686] (-) TimerEvent: {}
+[31.504001] (-) TimerEvent: {}
+[31.604321] (-) TimerEvent: {}
+[31.704630] (-) TimerEvent: {}
+[31.804954] (-) TimerEvent: {}
+[31.905259] (-) TimerEvent: {}
+[32.005564] (-) TimerEvent: {}
+[32.105852] (-) TimerEvent: {}
+[32.206154] (-) TimerEvent: {}
+[32.306454] (-) TimerEvent: {}
+[32.406754] (-) TimerEvent: {}
+[32.507043] (-) TimerEvent: {}
+[32.607362] (-) TimerEvent: {}
+[32.707641] (-) TimerEvent: {}
+[32.807946] (-) TimerEvent: {}
+[32.908231] (-) TimerEvent: {}
+[33.008530] (-) TimerEvent: {}
+[33.108822] (-) TimerEvent: {}
+[33.209104] (-) TimerEvent: {}
+[33.309438] (-) TimerEvent: {}
+[33.409733] (-) TimerEvent: {}
+[33.510019] (-) TimerEvent: {}
+[33.610321] (-) TimerEvent: {}
+[33.710659] (-) TimerEvent: {}
+[33.810973] (-) TimerEvent: {}
+[33.911304] (-) TimerEvent: {}
+[34.011641] (-) TimerEvent: {}
+[34.111920] (-) TimerEvent: {}
+[34.212238] (-) TimerEvent: {}
+[34.312554] (-) TimerEvent: {}
+[34.412862] (-) TimerEvent: {}
+[34.513244] (-) TimerEvent: {}
+[34.613551] (-) TimerEvent: {}
+[34.713857] (-) TimerEvent: {}
+[34.814165] (-) TimerEvent: {}
+[34.914477] (-) TimerEvent: {}
+[35.014810] (-) TimerEvent: {}
+[35.115110] (-) TimerEvent: {}
+[35.215398] (-) TimerEvent: {}
+[35.315694] (-) TimerEvent: {}
+[35.415980] (-) TimerEvent: {}
+[35.516274] (-) TimerEvent: {}
+[35.616588] (-) TimerEvent: {}
+[35.716913] (-) TimerEvent: {}
+[35.817263] (-) TimerEvent: {}
+[35.917547] (-) TimerEvent: {}
+[36.017879] (-) TimerEvent: {}
+[36.118183] (-) TimerEvent: {}
+[36.218491] (-) TimerEvent: {}
+[36.318793] (-) TimerEvent: {}
+[36.419111] (-) TimerEvent: {}
+[36.519428] (-) TimerEvent: {}
+[36.619729] (-) TimerEvent: {}
+[36.720042] (-) TimerEvent: {}
+[36.820365] (-) TimerEvent: {}
+[36.920723] (-) TimerEvent: {}
+[37.021081] (-) TimerEvent: {}
+[37.121365] (-) TimerEvent: {}
+[37.221745] (-) TimerEvent: {}
+[37.322111] (-) TimerEvent: {}
+[37.422409] (-) TimerEvent: {}
+[37.522720] (-) TimerEvent: {}
+[37.623034] (-) TimerEvent: {}
+[37.723348] (-) TimerEvent: {}
+[37.823657] (-) TimerEvent: {}
+[37.923934] (-) TimerEvent: {}
+[38.024216] (-) TimerEvent: {}
+[38.124662] (-) TimerEvent: {}
+[38.225039] (-) TimerEvent: {}
+[38.325353] (-) TimerEvent: {}
+[38.425693] (-) TimerEvent: {}
+[38.525974] (-) TimerEvent: {}
+[38.625670] (slam_learn) StdoutLine: {'line': b'[ 75%] \x1b[32m\x1b[1mLinking CXX executable back_end_node\x1b[0m\n'}
+[38.626055] (-) TimerEvent: {}
+[38.726310] (-) TimerEvent: {}
+[38.826645] (-) TimerEvent: {}
+[38.926962] (-) TimerEvent: {}
+[39.027343] (-) TimerEvent: {}
+[39.127711] (-) TimerEvent: {}
+[39.228075] (-) TimerEvent: {}
+[39.328399] (-) TimerEvent: {}
+[39.428769] (-) TimerEvent: {}
+[39.529527] (-) TimerEvent: {}
+[39.629956] (-) TimerEvent: {}
+[39.730253] (-) TimerEvent: {}
+[39.830579] (-) TimerEvent: {}
+[39.930990] (-) TimerEvent: {}
+[40.031327] (-) TimerEvent: {}
+[40.131666] (-) TimerEvent: {}
+[40.232421] (-) TimerEvent: {}
+[40.332837] (-) TimerEvent: {}
+[40.433183] (-) TimerEvent: {}
+[40.533551] (-) TimerEvent: {}
+[40.633938] (-) TimerEvent: {}
+[40.734344] (-) TimerEvent: {}
+[40.834675] (-) TimerEvent: {}
+[40.935140] (-) TimerEvent: {}
+[41.035651] (-) TimerEvent: {}
+[41.136132] (-) TimerEvent: {}
+[41.236533] (-) TimerEvent: {}
+[41.336841] (-) TimerEvent: {}
+[41.437114] (-) TimerEvent: {}
+[41.537403] (-) TimerEvent: {}
+[41.637695] (-) TimerEvent: {}
+[41.737983] (-) TimerEvent: {}
+[41.838250] (-) TimerEvent: {}
+[41.938574] (-) TimerEvent: {}
+[42.038865] (-) TimerEvent: {}
+[42.139147] (-) TimerEvent: {}
+[42.239445] (-) TimerEvent: {}
+[42.322575] (slam_learn) StdoutLine: {'line': b'[ 75%] Built target back_end_node\n'}
+[42.339574] (-) TimerEvent: {}
+[42.364742] (slam_learn) StdoutLine: {'line': b'[100%] Built target front_end_node\n'}
+[42.378276] (slam_learn) CommandEnded: {'returncode': 0}
+[42.424706] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'install'}
+[42.435143] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--install', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan/code'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2230'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2014,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2014'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/fb2010dd_d1ee_488b_ade0_ea2a8846b80f'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.779171'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.112'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[42.439689] (-) TimerEvent: {}
+[42.455319] (slam_learn) StdoutLine: {'line': b'-- Install configuration: ""\n'}
+[42.455489] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/lib/slam_learn/data_process_node\n'}
+[42.455568] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/lib/slam_learn/front_end_node\n'}
+[42.455675] (slam_learn) StdoutLine: {'line': b'-- Installing: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/lib/slam_learn/back_end_node\n'}
+[42.469301] (slam_learn) StdoutLine: {'line': b'-- Set runtime path of "/home/evan/code/lidar_slam/lidar_slam/install/slam_learn/lib/slam_learn/back_end_node" to ""\n'}
+[42.473009] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/lib/slam_learn/data_process_test\n'}
+[42.473400] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/config\n'}
+[42.473518] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/config/config.yaml\n'}
+[42.473905] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/launch\n'}
+[42.474054] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/launch/test\n'}
+[42.474813] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/launch/test/__pycache__\n'}
+[42.475010] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/launch/test/__pycache__/test_data_process.cpython-310.pyc\n'}
+[42.475660] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/launch/test/test_data_process.py\n'}
+[42.475773] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/rviz\n'}
+[42.475853] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/rviz/test\n'}
+[42.475925] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/rviz/test/test_data_process.rviz\n'}
+[42.475995] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/ament_index/resource_index/package_run_dependencies/slam_learn\n'}
+[42.476065] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/ament_index/resource_index/parent_prefix_path/slam_learn\n'}
+[42.476133] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/environment/ament_prefix_path.sh\n'}
+[42.476201] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/environment/ament_prefix_path.dsv\n'}
+[42.476268] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/environment/path.sh\n'}
+[42.476335] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/environment/path.dsv\n'}
+[42.476403] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/local_setup.bash\n'}
+[42.476470] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/local_setup.sh\n'}
+[42.476538] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/local_setup.zsh\n'}
+[42.476606] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/local_setup.dsv\n'}
+[42.476674] (slam_learn) StdoutLine: {'line': b'-- Installing: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/package.dsv\n'}
+[42.476742] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/ament_index/resource_index/packages/slam_learn\n'}
+[42.476810] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/cmake/ament_cmake_export_include_directories-extras.cmake\n'}
+[42.476878] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/cmake/slam_learnConfig.cmake\n'}
+[42.476948] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/cmake/slam_learnConfig-version.cmake\n'}
+[42.477016] (slam_learn) StdoutLine: {'line': b'-- Up-to-date: /home/evan/code/lidar_slam/lidar_slam/install/slam_learn/share/slam_learn/package.xml\n'}
+[42.477086] (slam_learn) CommandEnded: {'returncode': 0}
+[42.539796] (-) TimerEvent: {}
+[42.571093] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 0}
+[42.572248] (-) EventReactorShutdown: {}

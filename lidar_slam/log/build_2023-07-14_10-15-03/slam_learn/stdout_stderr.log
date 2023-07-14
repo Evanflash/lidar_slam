@@ -1,0 +1,23 @@
+[35m[1mConsolidate compiler generated dependencies of target back_end_node[0m
+[ 12%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[ 37%] Built target data_process_node
+[ 62%] Built target data_process_test
+[ 75%] [32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o[0m
+In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:2[m[K:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In member function ‘[01m[Kbool lidarslam::GroundPlaneBack::operator()(const T*, const T*, T*) const[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:147:37:[m[K [01;31m[Kerror: [m[K‘[01m[Kqz[m[K’ was not declared in this scope; did you mean ‘[01m[Kqy[m[K’?
+  147 |         Eigen::Matrix<T, 3, 1> lp = [01;31m[Kqz[m[K * qy * qx * cp + txyz;
+      |                                     [01;31m[K^~[m[K
+      |                                     [32m[Kqy[m[K
+In file included from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:2[m[K:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:[m[K In member function ‘[01m[Kbool lidarslam::GroundPlaneBack::operator()(const T*, const T*, T*) const[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/lidar_factor.hpp:147:37:[m[K [01;31m[Kerror: [m[K‘[01m[Kqz[m[K’ was not declared in this scope; did you mean ‘[01m[Kqy[m[K’?
+  147 |         Eigen::Matrix<T, 3, 1> lp = [01;31m[Kqz[m[K * qy * qx * cp + txyz;
+      |                                     [01;31m[K^~[m[K
+      |                                     [32m[Kqy[m[K
+gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:169: CMakeFiles/front_end_node.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+gmake[2]: *** [CMakeFiles/back_end_node.dir/build.make:76: CMakeFiles/back_end_node.dir/src/back_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:195: CMakeFiles/back_end_node.dir/all] Error 2
+gmake: *** [Makefile:146: all] Error 2

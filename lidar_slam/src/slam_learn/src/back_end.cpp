@@ -242,12 +242,12 @@ private:
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundSurfLast, all_cloud.ground_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
-        RCLCPP_INFO(this -> get_logger(), "corner:%ld, ground:%ld", cornerSharpLast -> size(), groundSurfLast -> size());
-
+        RCLCPP_INFO(this -> get_logger(), "ground point size : %ld", groundCloud -> size());
         // 下采样
         downSamplePointCloud(cornerCloud, downSampleCorner);
         downSamplePointCloud(surfCloud, downSampleSurf);
         downSamplePointCloud(groundCloud, downSampleGround);
+        RCLCPP_INFO(this -> get_logger(), "ground point size : %ld", groundCloud -> size());
     }
     /**
      * 下采样滤波
@@ -255,9 +255,8 @@ private:
     void downSamplePointCloud(CloudTypePtr cloud_in, pcl::VoxelGrid<PointType>::Ptr downSampleFilter){
         CloudTypePtr cloud_tmp(new CloudType());
         downSampleFilter -> setInputCloud(cloud_in);
-        cloud_in.reset();
         downSampleFilter -> filter(*cloud_tmp);
-        cloud_in = cloud_tmp;
+        *cloud_in = *cloud_tmp;
     }
 
     /**
@@ -266,6 +265,8 @@ private:
     void extractSurroundingKeyFrames(){
         for(size_t i = 0; i < recentCornerKeyFrames.size(); ++i){
             *laserCornerFromMap += *recentCornerKeyFrames[i];
+        }
+        for(size_t i = 0; i < recentGroundKeyFrames.size(); ++i){
             *laserGroundFromMap += *recentGroundKeyFrames[i];
         }
         downSamplePointCloud(laserCornerFromMap, downSampleCorner);
@@ -303,7 +304,7 @@ private:
 
                 ceres::Problem problem(problem_options);
                 problem.AddParameterBlock(transformBefoMapped + 3, 3);
-                problem.AddParameterBlock(transformBefoMapped, 3);
+                problem.AddParameterBlock(transformBefoMapped + 2, 1);
 
                 Eigen::Matrix<double, 5, 1> matb;
                 matb.fill(-1);
@@ -351,7 +352,7 @@ private:
                             ceres::CostFunction *cost_function = 
                                 GroundPlaneBack::Create(pa, pb, pc, pd, pointSel);
                             problem.AddResidualBlock(
-                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped + 2);
                         }
                     }  
                 }
@@ -363,6 +364,9 @@ private:
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);
             }
+
+            RCLCPP_INFO(this -> get_logger(), "ground : x%f, y%f, z%f", 
+                transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
             
             // 计算 qyx
             Eigen::AngleAxisd roll(Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
@@ -452,6 +456,11 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
         }
+        if(transformBefoMapped[0] * transformBefoMapped[0] +
+           transformBefoMapped[1] * transformBefoMapped[1] +
+           transformBefoMapped[2] * transformBefoMapped[2] > 2){
+            return;
+        }
        
         // 将帧间变换参数转换为帧到地图的变换参数
         // x y z qx qy qz
@@ -465,7 +474,7 @@ private:
         t_w_last = q_delta * t_w_last + t_delta;
         q_w_last = q_delta * q_w_last;
 
-        RCLCPP_INFO(this -> get_logger(), "back end : x%f, y%f, z%f", t_w_last.x(), t_w_last.y(), t_w_last.z());
+        RCLCPP_INFO(this -> get_logger(), "delta : x%f, y%f, z%f", t_delta.x(), t_delta.y(), t_delta.z());
     }
 
     /**
@@ -566,16 +575,16 @@ private:
         CloudTypePtr newKeyFrameCorner = transformToMap(cornerCloud, q_w_last, t_w_last);
         CloudTypePtr newKeyFrameGround = transformToMap(groundCloud, q_w_last, t_w_last);
 
-        // *globalMap += *newKeyFrameCorner;
+        *globalMap += *newKeyFrameCorner;
         // *globalMap += *newKeyFrameGround;
-        // downSamplePointCloud(globalMap, downSampleGlobalMap);
+        downSamplePointCloud(globalMap, downSampleGlobalMap);
 
         recentCornerKeyFrames.push_back(newKeyFrameCorner);
         if(recentCornerKeyFrames.size() > 20){
             recentCornerKeyFrames.pop_front();
         }
         recentGroundKeyFrames.push_back(newKeyFrameGround);
-        if(recentGroundKeyFrames.size() > 20){
+        if(recentGroundKeyFrames.size() > 10){
             recentGroundKeyFrames.pop_front();
         }
     }

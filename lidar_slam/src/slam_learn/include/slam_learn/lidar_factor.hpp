@@ -45,8 +45,10 @@ struct GroundPlaneFactor{
         
 
         Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
+        // Eigen::Matrix<T, 3, 1> txyz{T(0), T(0), t[0]};
 
         Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
+        // Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
         
         residual[0] = (lp - lpj).dot(ljm);
         return true;
@@ -139,11 +141,13 @@ struct GroundPlaneBack{
               sz, cz, T(0.0),
               T(0.0), T(0.0), T(1.0);
     
-        Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
+        // Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
+        Eigen::Matrix<T, 3, 1> txyz{T(0), T(0), t[0]};
 
         Eigen::Matrix<T, 3, 1> cp{T(point.x), T(point.y), T(point.z)};
 
         Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
+        // Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
 
         residual[0] = (Eigen::Matrix<T, 1, 3>(T(pa), T(pb), T(pc))).dot(lp) + T(pd);
         residual[0] = residual[0] < 0 ? -residual[0] : residual[0];
@@ -151,7 +155,7 @@ struct GroundPlaneBack{
     }
 
     static ceres::CostFunction *Create(double _pa, double _pb, double _pc, double _pd, PointType _point){
-        return (new ceres::AutoDiffCostFunction<GroundPlaneBack, 1, 3, 3>
+        return (new ceres::AutoDiffCostFunction<GroundPlaneBack, 1, 3, 1>
             (new GroundPlaneBack(_pa, _pb, _pc, _pd, _point)));
     }
     

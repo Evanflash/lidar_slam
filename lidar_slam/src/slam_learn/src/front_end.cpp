@@ -260,11 +260,11 @@ public:
                     if(segmentNeighborPicked[curInd] == 0 && 
                        segmentCurvature[k].curvature > edgeThreshold){
                         ++largestPickedNum;
-                        if(largestPickedNum <= 1){
+                        if(largestPickedNum <= 2){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
-                        }else if(largestPickedNum <= 20){
+                        }else if(largestPickedNum <= 40){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerLessSharp -> push_back(point);
                         }else{
@@ -368,11 +368,11 @@ public:
         
         // 测试
         sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*groundSurfLast, msg);
+        pcl::toROSMsg(*cornerSharp, msg);
         msg.header.frame_id = "map";
         pubtest -> publish(msg);
         
-        pcl::toROSMsg(*groundSurfFlat, msg);
+        pcl::toROSMsg(*cornerLessSharp, msg);
         msg.header.frame_id = "map";
         pubtest2 -> publish(msg);
     }
@@ -437,7 +437,8 @@ public:
                 std::vector<float> pointSearchSqDis;
 
                 for(int i = 0; i < groundFlatNum; ++i){
-                    pointSel = transform(&groundSurfFlat -> points[i]);
+                    pointSel = groundSurfFlat -> points[i];
+                    // pointSel = transform(&groundSurfFlat -> points[i]);
                     kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
 
                     int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
@@ -519,7 +520,8 @@ public:
 
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
-                    pointSel = transform(&cornerSharp -> points[i]);
+                    pointSel = cornerSharp -> points[i];
+                    // pointSel = transform(&cornerSharp -> points[i]);
                     kdtreeCornerLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
                     int closestPointInd = -1, minPointInd2 = -1;
                     if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
