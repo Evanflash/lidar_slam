@@ -242,12 +242,11 @@ private:
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundSurfLast, all_cloud.ground_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
-        RCLCPP_INFO(this -> get_logger(), "ground point size : %ld", groundCloud -> size());
+        
         // 下采样
         downSamplePointCloud(cornerCloud, downSampleCorner);
         downSamplePointCloud(surfCloud, downSampleSurf);
         downSamplePointCloud(groundCloud, downSampleGround);
-        RCLCPP_INFO(this -> get_logger(), "ground point size : %ld", groundCloud -> size());
     }
     /**
      * 下采样滤波
@@ -271,6 +270,7 @@ private:
         }
         downSamplePointCloud(laserCornerFromMap, downSampleCorner);
         downSamplePointCloud(laserGroundFromMap, downSampleGround);
+
     }
 
     /**
@@ -303,7 +303,7 @@ private:
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(transformBefoMapped + 3, 3);
+                problem.AddParameterBlock(transformBefoMapped + 3, 2);
                 problem.AddParameterBlock(transformBefoMapped + 2, 1);
 
                 Eigen::Matrix<double, 5, 1> matb;
@@ -335,6 +335,7 @@ private:
                         pc /= ps;
                         pd /= ps;
 
+
                         // 判断平面是否合理
                         bool planeValid = true;
                         for(int j = 0; j < 5; ++j){
@@ -365,8 +366,9 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
 
-            RCLCPP_INFO(this -> get_logger(), "ground : x%f, y%f, z%f", 
-                transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2]);
+            RCLCPP_INFO(this -> get_logger(), "ground : x:%f, y:%f, z:%f, qx:%f, qy:%f, qz:%f", 
+                transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2], 
+                transformBefoMapped[3], transformBefoMapped[4], transformBefoMapped[5]);
             
             // 计算 qyx
             Eigen::AngleAxisd roll(Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
@@ -456,11 +458,11 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
         }
-        if(transformBefoMapped[0] * transformBefoMapped[0] +
-           transformBefoMapped[1] * transformBefoMapped[1] +
-           transformBefoMapped[2] * transformBefoMapped[2] > 2){
-            return;
-        }
+        // if(transformBefoMapped[0] * transformBefoMapped[0] +
+        //    transformBefoMapped[1] * transformBefoMapped[1] +
+        //    transformBefoMapped[2] * transformBefoMapped[2] > 2){
+        //     return;
+        // }
        
         // 将帧间变换参数转换为帧到地图的变换参数
         // x y z qx qy qz
@@ -474,7 +476,8 @@ private:
         t_w_last = q_delta * t_w_last + t_delta;
         q_w_last = q_delta * q_w_last;
 
-        RCLCPP_INFO(this -> get_logger(), "delta : x%f, y%f, z%f", t_delta.x(), t_delta.y(), t_delta.z());
+        RCLCPP_INFO(this -> get_logger(), "delta : x:%f, y:%f, z:%f", 
+            t_delta.x(), t_delta.y(), t_delta.z());
     }
 
     /**
@@ -576,15 +579,15 @@ private:
         CloudTypePtr newKeyFrameGround = transformToMap(groundCloud, q_w_last, t_w_last);
 
         *globalMap += *newKeyFrameCorner;
-        // *globalMap += *newKeyFrameGround;
+        *globalMap += *newKeyFrameGround;
         downSamplePointCloud(globalMap, downSampleGlobalMap);
 
         recentCornerKeyFrames.push_back(newKeyFrameCorner);
-        if(recentCornerKeyFrames.size() > 20){
+        if(recentCornerKeyFrames.size() > 50){
             recentCornerKeyFrames.pop_front();
         }
         recentGroundKeyFrames.push_back(newKeyFrameGround);
-        if(recentGroundKeyFrames.size() > 10){
+        if(recentGroundKeyFrames.size() > 50){
             recentGroundKeyFrames.pop_front();
         }
     }

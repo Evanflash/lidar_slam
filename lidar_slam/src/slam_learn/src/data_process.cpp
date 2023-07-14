@@ -261,7 +261,8 @@ private:
         for(int i = 0; i <= ground_scan_index; ++i){
             seg_msg.grd_ring_str_ind[i] = curInd;
             for(int j = 0; j < horizontal_scans; ++j){
-                if(ground_mat(i, j) == 1){
+                // 采样，只用少量地面点
+                if(ground_mat(i, j) == 1 && (j % 5) == 0){
                     other_msgs::msg::Point point_msg;
                     int ind = j + i * horizontal_scans;
                     point_msg.x = full_cloud -> points[ind].x;

@@ -27,8 +27,8 @@ struct GroundPlaneFactor{
         T sx = ceres::sin(q[0]);
         T cy = ceres::cos(q[1]);
         T sy = ceres::sin(q[1]);
-        T cz = ceres::cos(q[2]);
-        T sz = ceres::sin(q[2]);
+        // T cz = ceres::cos(q[2]);
+        // T sz = ceres::sin(q[2]);
         Eigen::Matrix<T, 3, 3> qx;
         qx << T(1.0), T(0.0), T(0.0),
               T(0.0), cx, -sx,
@@ -37,18 +37,18 @@ struct GroundPlaneFactor{
         qy << cy, T(0.0), sy,
               T(0.0), T(1.0), T(0.0),
               -sy, T(0.0), cy;
-        Eigen::Matrix<T, 3, 3> qz;
-        qz << cz, -sz, T(0.0),
-              sz, cz, T(0.0),
-              T(0.0), T(0.0), T(1.0);
+        // Eigen::Matrix<T, 3, 3> qz;
+        // qz << cz, -sz, T(0.0),
+        //       sz, cz, T(0.0),
+        //       T(0.0), T(0.0), T(1.0);
     
         
 
-        Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
-        // Eigen::Matrix<T, 3, 1> txyz{T(0), T(0), t[0]};
+        // Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
+        Eigen::Matrix<T, 3, 1> txyz{T(0), T(0), t[0]};
 
-        Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
-        // Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
+        // Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
+        Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
         
         residual[0] = (lp - lpj).dot(ljm);
         return true;
@@ -56,7 +56,7 @@ struct GroundPlaneFactor{
 
     static ceres::CostFunction *Create(Eigen::Vector3d curr_point_, Eigen::Vector3d point_j_,
                      Eigen::Vector3d point_l_, Eigen::Vector3d point_m_){
-        return (new ceres::AutoDiffCostFunction<GroundPlaneFactor, 1, 3, 3>
+        return (new ceres::AutoDiffCostFunction<GroundPlaneFactor, 1, 2, 1>
                 (new GroundPlaneFactor(curr_point_, point_j_, point_l_, point_m_)));
     }
     Eigen::Vector3d curr_point, point_j, point_l, point_m;
@@ -126,8 +126,8 @@ struct GroundPlaneBack{
         T sx = ceres::sin(q[0]);
         T cy = ceres::cos(q[1]);
         T sy = ceres::sin(q[1]);
-        T cz = ceres::cos(q[2]);
-        T sz = ceres::sin(q[2]);
+        // T cz = ceres::cos(q[2]);
+        // T sz = ceres::sin(q[2]);
         Eigen::Matrix<T, 3, 3> qx;
         qx << T(1.0), T(0.0), T(0.0),
               T(0.0), cx, -sx,
@@ -136,18 +136,18 @@ struct GroundPlaneBack{
         qy << cy, T(0.0), sy,
               T(0.0), T(1.0), T(0.0),
               -sy, T(0.0), cy;
-        Eigen::Matrix<T, 3, 3> qz;
-        qz << cz, -sz, T(0.0),
-              sz, cz, T(0.0),
-              T(0.0), T(0.0), T(1.0);
+        // Eigen::Matrix<T, 3, 3> qz;
+        // qz << cz, -sz, T(0.0),
+        //       sz, cz, T(0.0),
+        //       T(0.0), T(0.0), T(1.0);
     
         // Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], t[2]};
         Eigen::Matrix<T, 3, 1> txyz{T(0), T(0), t[0]};
 
         Eigen::Matrix<T, 3, 1> cp{T(point.x), T(point.y), T(point.z)};
 
-        Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
-        // Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
+        // Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + txyz;
+        Eigen::Matrix<T, 3, 1> lp = qy * qx * cp + txyz;
 
         residual[0] = (Eigen::Matrix<T, 1, 3>(T(pa), T(pb), T(pc))).dot(lp) + T(pd);
         residual[0] = residual[0] < 0 ? -residual[0] : residual[0];
@@ -155,7 +155,7 @@ struct GroundPlaneBack{
     }
 
     static ceres::CostFunction *Create(double _pa, double _pb, double _pc, double _pd, PointType _point){
-        return (new ceres::AutoDiffCostFunction<GroundPlaneBack, 1, 3, 1>
+        return (new ceres::AutoDiffCostFunction<GroundPlaneBack, 1, 2, 1>
             (new GroundPlaneBack(_pa, _pb, _pc, _pd, _point)));
     }
     

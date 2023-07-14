@@ -264,7 +264,7 @@ public:
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
-                        }else if(largestPickedNum <= 40){
+                        }else if(largestPickedNum <= 20){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerLessSharp -> push_back(point);
                         }else{
@@ -393,15 +393,6 @@ public:
             Eigen::Vector3d v(point.x, point.y, point.z);
             return v;
         };
-        // 使用初始位姿插值
-        auto transform = [&](const PointType *const pi){
-            Eigen::Quaterniond q_point_last = Eigen::Quaterniond::Identity().slerp(1.0, q_last_curr);
-            Eigen::Vector3d t_point_last = 1.0 * t_last_curr;
-            Eigen::Vector3d point(pi -> x, pi -> y, pi -> z);
-            Eigen::Vector3d un_point = q_point_last * point + t_point_last;
-            PointType p(un_point.x(), un_point.y(), un_point.z());
-            return p;
-        };
 
         // 降采样
         auto downSample = [](CloudTypePtr cloud_in){
@@ -429,8 +420,8 @@ public:
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(q, 3);
-                problem.AddParameterBlock(t, 3);
+                problem.AddParameterBlock(q, 2);
+                problem.AddParameterBlock(t + 2, 1);
 
                 PointType pointSel;
                 std::vector<int> pointSearchInd;
@@ -438,7 +429,6 @@ public:
 
                 for(int i = 0; i < groundFlatNum; ++i){
                     pointSel = groundSurfFlat -> points[i];
-                    // pointSel = transform(&groundSurfFlat -> points[i]);
                     kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
 
                     int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
@@ -486,7 +476,7 @@ public:
                             
                             ceres::CostFunction *cost_function = 
                                 GroundPlaneFactor::Create(curr_point, last_point_a, last_point_b, last_point_c);
-                            problem.AddResidualBlock(cost_function, loss_function, q, t);
+                            problem.AddResidualBlock(cost_function, loss_function, q, t + 2);
                         }
                     }
                 }
@@ -521,7 +511,6 @@ public:
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     pointSel = cornerSharp -> points[i];
-                    // pointSel = transform(&cornerSharp -> points[i]);
                     kdtreeCornerLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
                     int closestPointInd = -1, minPointInd2 = -1;
                     if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
@@ -604,11 +593,9 @@ public:
         
         // 更新上一帧点云
         CloudTypePtr cloudTmp;
-        
         cloudTmp = cornerLessSharp;
         cornerLessSharp = cornerLast;
         cornerLast = cloudTmp;
-        downSample(cornerLast);
 
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
