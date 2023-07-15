@@ -64,30 +64,6 @@ max_serialized_size_Point(
 }  // namespace msg
 }  // namespace other_msgs
 
-namespace other_msgs
-{
-namespace msg
-{
-namespace typesupport_fastrtps_cpp
-{
-bool cdr_serialize(
-  const other_msgs::msg::Point &,
-  eprosima::fastcdr::Cdr &);
-bool cdr_deserialize(
-  eprosima::fastcdr::Cdr &,
-  other_msgs::msg::Point &);
-size_t get_serialized_size(
-  const other_msgs::msg::Point &,
-  size_t current_alignment);
-size_t
-max_serialized_size_Point(
-  bool & full_bounded,
-  bool & is_plain,
-  size_t current_alignment);
-}  // namespace typesupport_fastrtps_cpp
-}  // namespace msg
-}  // namespace other_msgs
-
 
 namespace other_msgs
 {
@@ -130,27 +106,9 @@ cdr_serialize(
   {
     cdr << ros_message.seg_range;
   }
-  // Member: grd_ring_str_ind
+  // Member: is_ground
   {
-    cdr << ros_message.grd_ring_str_ind;
-  }
-  // Member: grd_ring_end_ind
-  {
-    cdr << ros_message.grd_ring_end_ind;
-  }
-  // Member: ground_cloud
-  {
-    size_t size = ros_message.ground_cloud.size();
-    cdr << static_cast<uint32_t>(size);
-    for (size_t i = 0; i < size; i++) {
-      other_msgs::msg::typesupport_fastrtps_cpp::cdr_serialize(
-        ros_message.ground_cloud[i],
-        cdr);
-    }
-  }
-  // Member: ground_range
-  {
-    cdr << ros_message.ground_range;
+    cdr << ros_message.is_ground;
   }
   return true;
 }
@@ -192,31 +150,9 @@ cdr_deserialize(
     cdr >> ros_message.seg_range;
   }
 
-  // Member: grd_ring_str_ind
+  // Member: is_ground
   {
-    cdr >> ros_message.grd_ring_str_ind;
-  }
-
-  // Member: grd_ring_end_ind
-  {
-    cdr >> ros_message.grd_ring_end_ind;
-  }
-
-  // Member: ground_cloud
-  {
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    ros_message.ground_cloud.resize(size);
-    for (size_t i = 0; i < size; i++) {
-      other_msgs::msg::typesupport_fastrtps_cpp::cdr_deserialize(
-        cdr, ros_message.ground_cloud[i]);
-    }
-  }
-
-  // Member: ground_range
-  {
-    cdr >> ros_message.ground_range;
+    cdr >> ros_message.is_ground;
   }
 
   return true;
@@ -283,46 +219,13 @@ get_serialized_size(
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
-  // Member: grd_ring_str_ind
+  // Member: is_ground
   {
-    size_t array_size = ros_message.grd_ring_str_ind.size();
+    size_t array_size = ros_message.is_ground.size();
 
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.grd_ring_str_ind[0]);
-    current_alignment += array_size * item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
-  // Member: grd_ring_end_ind
-  {
-    size_t array_size = ros_message.grd_ring_end_ind.size();
-
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.grd_ring_end_ind[0]);
-    current_alignment += array_size * item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
-  // Member: ground_cloud
-  {
-    size_t array_size = ros_message.ground_cloud.size();
-
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    for (size_t index = 0; index < array_size; ++index) {
-      current_alignment +=
-        other_msgs::msg::typesupport_fastrtps_cpp::get_serialized_size(
-        ros_message.ground_cloud[index], current_alignment);
-    }
-  }
-  // Member: ground_range
-  {
-    size_t array_size = ros_message.ground_range.size();
-
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    size_t item_size = sizeof(ros_message.ground_range[0]);
+    size_t item_size = sizeof(ros_message.is_ground[0]);
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -420,51 +323,7 @@ max_serialized_size_SegCloud(
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
   }
 
-  // Member: grd_ring_str_ind
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    current_alignment += array_size * sizeof(uint32_t) +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
-  }
-
-  // Member: grd_ring_end_ind
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    current_alignment += array_size * sizeof(uint32_t) +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
-  }
-
-  // Member: ground_cloud
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-
-    for (size_t index = 0; index < array_size; ++index) {
-      bool inner_full_bounded;
-      bool inner_is_plain;
-      current_alignment +=
-        other_msgs::msg::typesupport_fastrtps_cpp::max_serialized_size_Point(
-        inner_full_bounded, inner_is_plain, current_alignment);
-      full_bounded &= inner_full_bounded;
-      is_plain &= inner_is_plain;
-    }
-  }
-
-  // Member: ground_range
+  // Member: is_ground
   {
     size_t array_size = 0;
     full_bounded = false;

@@ -236,19 +236,6 @@ back_end_node/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/back_end_node.dir/build.make CMakeFiles/back_end_node.dir/build
 .PHONY : back_end_node/fast
 
-#=============================================================================
-# Target rules for targets named data_process_test
-
-# Build rule for target.
-data_process_test: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 data_process_test
-.PHONY : data_process_test
-
-# fast build rule for target.
-data_process_test/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/build
-.PHONY : data_process_test/fast
-
 src/back_end.o: src/back_end.cpp.o
 .PHONY : src/back_end.o
 
@@ -321,30 +308,6 @@ src/front_end.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/front_end_node.dir/build.make CMakeFiles/front_end_node.dir/src/front_end.cpp.s
 .PHONY : src/front_end.cpp.s
 
-test/data_process_test.o: test/data_process_test.cpp.o
-.PHONY : test/data_process_test.o
-
-# target to build an object file
-test/data_process_test.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.o
-.PHONY : test/data_process_test.cpp.o
-
-test/data_process_test.i: test/data_process_test.cpp.i
-.PHONY : test/data_process_test.i
-
-# target to preprocess a source file
-test/data_process_test.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.i
-.PHONY : test/data_process_test.cpp.i
-
-test/data_process_test.s: test/data_process_test.cpp.s
-.PHONY : test/data_process_test.s
-
-# target to generate assembly for a file
-test/data_process_test.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/data_process_test.dir/build.make CMakeFiles/data_process_test.dir/test/data_process_test.cpp.s
-.PHONY : test/data_process_test.cpp.s
-
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -362,7 +325,6 @@ help:
 	@echo "... uninstall"
 	@echo "... back_end_node"
 	@echo "... data_process_node"
-	@echo "... data_process_test"
 	@echo "... front_end_node"
 	@echo "... src/back_end.o"
 	@echo "... src/back_end.i"
@@ -373,9 +335,6 @@ help:
 	@echo "... src/front_end.o"
 	@echo "... src/front_end.i"
 	@echo "... src/front_end.s"
-	@echo "... test/data_process_test.o"
-	@echo "... test/data_process_test.i"
-	@echo "... test/data_process_test.s"
 .PHONY : help
 
 

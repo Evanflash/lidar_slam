@@ -19,7 +19,6 @@
 // Member 'header'
 #include "std_msgs/msg/detail/header__struct.hpp"
 // Member 'seg_cloud'
-// Member 'ground_cloud'
 #include "other_msgs/msg/detail/point__struct.hpp"
 
 #ifndef _WIN32
@@ -68,18 +67,9 @@ struct SegCloud_
   using _seg_range_type =
     std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
   _seg_range_type seg_range;
-  using _grd_ring_str_ind_type =
+  using _is_ground_type =
     std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
-  _grd_ring_str_ind_type grd_ring_str_ind;
-  using _grd_ring_end_ind_type =
-    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
-  _grd_ring_end_ind_type grd_ring_end_ind;
-  using _ground_cloud_type =
-    std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _ground_cloud_type ground_cloud;
-  using _ground_range_type =
-    std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
-  _ground_range_type ground_range;
+  _is_ground_type is_ground;
 
   // setters for named parameter idiom
   Type & set__header(
@@ -112,28 +102,10 @@ struct SegCloud_
     this->seg_range = _arg;
     return *this;
   }
-  Type & set__grd_ring_str_ind(
+  Type & set__is_ground(
     const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
   {
-    this->grd_ring_str_ind = _arg;
-    return *this;
-  }
-  Type & set__grd_ring_end_ind(
-    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
-  {
-    this->grd_ring_end_ind = _arg;
-    return *this;
-  }
-  Type & set__ground_cloud(
-    const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
-  {
-    this->ground_cloud = _arg;
-    return *this;
-  }
-  Type & set__ground_range(
-    const std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>> & _arg)
-  {
-    this->ground_range = _arg;
+    this->is_ground = _arg;
     return *this;
   }
 
@@ -194,16 +166,7 @@ struct SegCloud_
     if (this->seg_range != other.seg_range) {
       return false;
     }
-    if (this->grd_ring_str_ind != other.grd_ring_str_ind) {
-      return false;
-    }
-    if (this->grd_ring_end_ind != other.grd_ring_end_ind) {
-      return false;
-    }
-    if (this->ground_cloud != other.ground_cloud) {
-      return false;
-    }
-    if (this->ground_range != other.ground_range) {
+    if (this->is_ground != other.is_ground) {
       return false;
     }
     return true;

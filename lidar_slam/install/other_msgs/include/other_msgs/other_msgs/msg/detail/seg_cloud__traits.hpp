@@ -18,7 +18,6 @@
 // Member 'header'
 #include "std_msgs/msg/detail/header__traits.hpp"
 // Member 'seg_cloud'
-// Member 'ground_cloud'
 #include "other_msgs/msg/detail/point__traits.hpp"
 
 namespace other_msgs
@@ -111,68 +110,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: grd_ring_str_ind
+  // member: is_ground
   {
-    if (msg.grd_ring_str_ind.size() == 0) {
-      out << "grd_ring_str_ind: []";
+    if (msg.is_ground.size() == 0) {
+      out << "is_ground: []";
     } else {
-      out << "grd_ring_str_ind: [";
-      size_t pending_items = msg.grd_ring_str_ind.size();
-      for (auto item : msg.grd_ring_str_ind) {
-        rosidl_generator_traits::value_to_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
-  // member: grd_ring_end_ind
-  {
-    if (msg.grd_ring_end_ind.size() == 0) {
-      out << "grd_ring_end_ind: []";
-    } else {
-      out << "grd_ring_end_ind: [";
-      size_t pending_items = msg.grd_ring_end_ind.size();
-      for (auto item : msg.grd_ring_end_ind) {
-        rosidl_generator_traits::value_to_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
-  // member: ground_cloud
-  {
-    if (msg.ground_cloud.size() == 0) {
-      out << "ground_cloud: []";
-    } else {
-      out << "ground_cloud: [";
-      size_t pending_items = msg.ground_cloud.size();
-      for (auto item : msg.ground_cloud) {
-        to_flow_style_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
-  // member: ground_range
-  {
-    if (msg.ground_range.size() == 0) {
-      out << "ground_range: []";
-    } else {
-      out << "ground_range: [";
-      size_t pending_items = msg.ground_range.size();
-      for (auto item : msg.ground_range) {
+      out << "is_ground: [";
+      size_t pending_items = msg.is_ground.size();
+      for (auto item : msg.is_ground) {
         rosidl_generator_traits::value_to_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -276,75 +221,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: grd_ring_str_ind
+  // member: is_ground
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.grd_ring_str_ind.size() == 0) {
-      out << "grd_ring_str_ind: []\n";
+    if (msg.is_ground.size() == 0) {
+      out << "is_ground: []\n";
     } else {
-      out << "grd_ring_str_ind:\n";
-      for (auto item : msg.grd_ring_str_ind) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "- ";
-        rosidl_generator_traits::value_to_yaml(item, out);
-        out << "\n";
-      }
-    }
-  }
-
-  // member: grd_ring_end_ind
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.grd_ring_end_ind.size() == 0) {
-      out << "grd_ring_end_ind: []\n";
-    } else {
-      out << "grd_ring_end_ind:\n";
-      for (auto item : msg.grd_ring_end_ind) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "- ";
-        rosidl_generator_traits::value_to_yaml(item, out);
-        out << "\n";
-      }
-    }
-  }
-
-  // member: ground_cloud
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.ground_cloud.size() == 0) {
-      out << "ground_cloud: []\n";
-    } else {
-      out << "ground_cloud:\n";
-      for (auto item : msg.ground_cloud) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "-\n";
-        to_block_style_yaml(item, out, indentation + 2);
-      }
-    }
-  }
-
-  // member: ground_range
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.ground_range.size() == 0) {
-      out << "ground_range: []\n";
-    } else {
-      out << "ground_range:\n";
-      for (auto item : msg.ground_range) {
+      out << "is_ground:\n";
+      for (auto item : msg.is_ground) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

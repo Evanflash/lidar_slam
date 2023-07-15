@@ -24,12 +24,9 @@ extern "C"
 // Member 'seg_ring_str_ind'
 // Member 'seg_ring_end_ind'
 // Member 'seg_range'
-// Member 'grd_ring_str_ind'
-// Member 'grd_ring_end_ind'
-// Member 'ground_range'
+// Member 'is_ground'
 #include "rosidl_runtime_c/primitives_sequence.h"
 // Member 'seg_cloud'
-// Member 'ground_cloud'
 #include "other_msgs/msg/detail/point__struct.h"
 
 /// Struct defined in msg/SegCloud in the package other_msgs.
@@ -41,11 +38,7 @@ typedef struct other_msgs__msg__SegCloud
   rosidl_runtime_c__int32__Sequence seg_ring_end_ind;
   other_msgs__msg__Point__Sequence seg_cloud;
   rosidl_runtime_c__float__Sequence seg_range;
-  /// 地面点
-  rosidl_runtime_c__int32__Sequence grd_ring_str_ind;
-  rosidl_runtime_c__int32__Sequence grd_ring_end_ind;
-  other_msgs__msg__Point__Sequence ground_cloud;
-  rosidl_runtime_c__float__Sequence ground_range;
+  rosidl_runtime_c__int32__Sequence is_ground;
 } other_msgs__msg__SegCloud;
 
 // Struct for a sequence of other_msgs__msg__SegCloud.

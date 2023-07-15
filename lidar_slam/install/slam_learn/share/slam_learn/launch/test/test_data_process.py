@@ -68,6 +68,6 @@ def generate_launch_description():
   ld.add_action(front_end_node)
   # ld.add_action(back_end_node)
   ld.add_action(rviz_node)
-  ld.add_action(test_data_process)
+  # ld.add_action(test_data_process)
 
   return ld

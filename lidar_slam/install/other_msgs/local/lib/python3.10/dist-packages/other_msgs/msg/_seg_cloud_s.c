@@ -28,8 +28,6 @@ ROSIDL_GENERATOR_C_IMPORT
 PyObject * std_msgs__msg__header__convert_to_py(void * raw_ros_message);
 bool other_msgs__msg__point__convert_from_py(PyObject * _pymsg, void * _ros_message);
 PyObject * other_msgs__msg__point__convert_to_py(void * raw_ros_message);
-bool other_msgs__msg__point__convert_from_py(PyObject * _pymsg, void * _ros_message);
-PyObject * other_msgs__msg__point__convert_to_py(void * raw_ros_message);
 
 ROSIDL_GENERATOR_C_EXPORT
 bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_message)
@@ -294,8 +292,8 @@ bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
     }
     Py_DECREF(field);
   }
-  {  // grd_ring_str_ind
-    PyObject * field = PyObject_GetAttrString(_pymsg, "grd_ring_str_ind");
+  {  // is_ground
+    PyObject * field = PyObject_GetAttrString(_pymsg, "is_ground");
     if (!field) {
       return false;
     }
@@ -308,13 +306,13 @@ bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
         return false;
       }
       Py_ssize_t size = view.len / sizeof(int32_t);
-      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->grd_ring_str_ind), size)) {
+      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->is_ground), size)) {
         PyErr_SetString(PyExc_RuntimeError, "unable to create int32__Sequence ros_message");
         PyBuffer_Release(&view);
         Py_DECREF(field);
         return false;
       }
-      int32_t * dest = ros_message->grd_ring_str_ind.data;
+      int32_t * dest = ros_message->is_ground.data;
       rc = PyBuffer_ToContiguous(dest, &view, view.len, 'C');
       if (rc < 0) {
         PyBuffer_Release(&view);
@@ -323,7 +321,7 @@ bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
       }
       PyBuffer_Release(&view);
     } else {
-      PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'grd_ring_str_ind'");
+      PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'is_ground'");
       if (!seq_field) {
         Py_DECREF(field);
         return false;
@@ -334,13 +332,13 @@ bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
         Py_DECREF(field);
         return false;
       }
-      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->grd_ring_str_ind), size)) {
+      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->is_ground), size)) {
         PyErr_SetString(PyExc_RuntimeError, "unable to create int32__Sequence ros_message");
         Py_DECREF(seq_field);
         Py_DECREF(field);
         return false;
       }
-      int32_t * dest = ros_message->grd_ring_str_ind.data;
+      int32_t * dest = ros_message->is_ground.data;
       for (Py_ssize_t i = 0; i < size; ++i) {
         PyObject * item = PySequence_Fast_GET_ITEM(seq_field, i);
         if (!item) {
@@ -351,163 +349,6 @@ bool other_msgs__msg__seg_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
         assert(PyLong_Check(item));
         int32_t tmp = (int32_t)PyLong_AsLong(item);
         memcpy(&dest[i], &tmp, sizeof(int32_t));
-      }
-      Py_DECREF(seq_field);
-    }
-    Py_DECREF(field);
-  }
-  {  // grd_ring_end_ind
-    PyObject * field = PyObject_GetAttrString(_pymsg, "grd_ring_end_ind");
-    if (!field) {
-      return false;
-    }
-    if (PyObject_CheckBuffer(field)) {
-      // Optimization for converting arrays of primitives
-      Py_buffer view;
-      int rc = PyObject_GetBuffer(field, &view, PyBUF_SIMPLE);
-      if (rc < 0) {
-        Py_DECREF(field);
-        return false;
-      }
-      Py_ssize_t size = view.len / sizeof(int32_t);
-      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->grd_ring_end_ind), size)) {
-        PyErr_SetString(PyExc_RuntimeError, "unable to create int32__Sequence ros_message");
-        PyBuffer_Release(&view);
-        Py_DECREF(field);
-        return false;
-      }
-      int32_t * dest = ros_message->grd_ring_end_ind.data;
-      rc = PyBuffer_ToContiguous(dest, &view, view.len, 'C');
-      if (rc < 0) {
-        PyBuffer_Release(&view);
-        Py_DECREF(field);
-        return false;
-      }
-      PyBuffer_Release(&view);
-    } else {
-      PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'grd_ring_end_ind'");
-      if (!seq_field) {
-        Py_DECREF(field);
-        return false;
-      }
-      Py_ssize_t size = PySequence_Size(field);
-      if (-1 == size) {
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-      if (!rosidl_runtime_c__int32__Sequence__init(&(ros_message->grd_ring_end_ind), size)) {
-        PyErr_SetString(PyExc_RuntimeError, "unable to create int32__Sequence ros_message");
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-      int32_t * dest = ros_message->grd_ring_end_ind.data;
-      for (Py_ssize_t i = 0; i < size; ++i) {
-        PyObject * item = PySequence_Fast_GET_ITEM(seq_field, i);
-        if (!item) {
-          Py_DECREF(seq_field);
-          Py_DECREF(field);
-          return false;
-        }
-        assert(PyLong_Check(item));
-        int32_t tmp = (int32_t)PyLong_AsLong(item);
-        memcpy(&dest[i], &tmp, sizeof(int32_t));
-      }
-      Py_DECREF(seq_field);
-    }
-    Py_DECREF(field);
-  }
-  {  // ground_cloud
-    PyObject * field = PyObject_GetAttrString(_pymsg, "ground_cloud");
-    if (!field) {
-      return false;
-    }
-    PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'ground_cloud'");
-    if (!seq_field) {
-      Py_DECREF(field);
-      return false;
-    }
-    Py_ssize_t size = PySequence_Size(field);
-    if (-1 == size) {
-      Py_DECREF(seq_field);
-      Py_DECREF(field);
-      return false;
-    }
-    if (!other_msgs__msg__Point__Sequence__init(&(ros_message->ground_cloud), size)) {
-      PyErr_SetString(PyExc_RuntimeError, "unable to create other_msgs__msg__Point__Sequence ros_message");
-      Py_DECREF(seq_field);
-      Py_DECREF(field);
-      return false;
-    }
-    other_msgs__msg__Point * dest = ros_message->ground_cloud.data;
-    for (Py_ssize_t i = 0; i < size; ++i) {
-      if (!other_msgs__msg__point__convert_from_py(PySequence_Fast_GET_ITEM(seq_field, i), &dest[i])) {
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-    }
-    Py_DECREF(seq_field);
-    Py_DECREF(field);
-  }
-  {  // ground_range
-    PyObject * field = PyObject_GetAttrString(_pymsg, "ground_range");
-    if (!field) {
-      return false;
-    }
-    if (PyObject_CheckBuffer(field)) {
-      // Optimization for converting arrays of primitives
-      Py_buffer view;
-      int rc = PyObject_GetBuffer(field, &view, PyBUF_SIMPLE);
-      if (rc < 0) {
-        Py_DECREF(field);
-        return false;
-      }
-      Py_ssize_t size = view.len / sizeof(float);
-      if (!rosidl_runtime_c__float__Sequence__init(&(ros_message->ground_range), size)) {
-        PyErr_SetString(PyExc_RuntimeError, "unable to create float__Sequence ros_message");
-        PyBuffer_Release(&view);
-        Py_DECREF(field);
-        return false;
-      }
-      float * dest = ros_message->ground_range.data;
-      rc = PyBuffer_ToContiguous(dest, &view, view.len, 'C');
-      if (rc < 0) {
-        PyBuffer_Release(&view);
-        Py_DECREF(field);
-        return false;
-      }
-      PyBuffer_Release(&view);
-    } else {
-      PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'ground_range'");
-      if (!seq_field) {
-        Py_DECREF(field);
-        return false;
-      }
-      Py_ssize_t size = PySequence_Size(field);
-      if (-1 == size) {
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-      if (!rosidl_runtime_c__float__Sequence__init(&(ros_message->ground_range), size)) {
-        PyErr_SetString(PyExc_RuntimeError, "unable to create float__Sequence ros_message");
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-      float * dest = ros_message->ground_range.data;
-      for (Py_ssize_t i = 0; i < size; ++i) {
-        PyObject * item = PySequence_Fast_GET_ITEM(seq_field, i);
-        if (!item) {
-          Py_DECREF(seq_field);
-          Py_DECREF(field);
-          return false;
-        }
-        assert(PyFloat_Check(item));
-        float tmp = (float)PyFloat_AS_DOUBLE(item);
-        memcpy(&dest[i], &tmp, sizeof(float));
       }
       Py_DECREF(seq_field);
     }
@@ -748,9 +589,9 @@ PyObject * other_msgs__msg__seg_cloud__convert_to_py(void * raw_ros_message)
     }
     Py_DECREF(field);
   }
-  {  // grd_ring_str_ind
+  {  // is_ground
     PyObject * field = NULL;
-    field = PyObject_GetAttrString(_pymessage, "grd_ring_str_ind");
+    field = PyObject_GetAttrString(_pymessage, "is_ground");
     if (!field) {
       return NULL;
     }
@@ -787,154 +628,12 @@ PyObject * other_msgs__msg__seg_cloud__convert_to_py(void * raw_ros_message)
       }
       Py_DECREF(pop);
     }
-    if (ros_message->grd_ring_str_ind.size > 0) {
+    if (ros_message->is_ground.size > 0) {
       // populating the array.array using the frombytes method
       PyObject * frombytes = PyObject_GetAttrString(field, "frombytes");
       assert(frombytes != NULL);
-      int32_t * src = &(ros_message->grd_ring_str_ind.data[0]);
-      PyObject * data = PyBytes_FromStringAndSize((const char *)src, ros_message->grd_ring_str_ind.size * sizeof(int32_t));
-      assert(data != NULL);
-      PyObject * ret = PyObject_CallFunctionObjArgs(frombytes, data, NULL);
-      Py_DECREF(data);
-      Py_DECREF(frombytes);
-      if (!ret) {
-        Py_DECREF(field);
-        return NULL;
-      }
-      Py_DECREF(ret);
-    }
-    Py_DECREF(field);
-  }
-  {  // grd_ring_end_ind
-    PyObject * field = NULL;
-    field = PyObject_GetAttrString(_pymessage, "grd_ring_end_ind");
-    if (!field) {
-      return NULL;
-    }
-    assert(field->ob_type != NULL);
-    assert(field->ob_type->tp_name != NULL);
-    assert(strcmp(field->ob_type->tp_name, "array.array") == 0);
-    // ensure that itemsize matches the sizeof of the ROS message field
-    PyObject * itemsize_attr = PyObject_GetAttrString(field, "itemsize");
-    assert(itemsize_attr != NULL);
-    size_t itemsize = PyLong_AsSize_t(itemsize_attr);
-    Py_DECREF(itemsize_attr);
-    if (itemsize != sizeof(int32_t)) {
-      PyErr_SetString(PyExc_RuntimeError, "itemsize doesn't match expectation");
-      Py_DECREF(field);
-      return NULL;
-    }
-    // clear the array, poor approach to remove potential default values
-    Py_ssize_t length = PyObject_Length(field);
-    if (-1 == length) {
-      Py_DECREF(field);
-      return NULL;
-    }
-    if (length > 0) {
-      PyObject * pop = PyObject_GetAttrString(field, "pop");
-      assert(pop != NULL);
-      for (Py_ssize_t i = 0; i < length; ++i) {
-        PyObject * ret = PyObject_CallFunctionObjArgs(pop, NULL);
-        if (!ret) {
-          Py_DECREF(pop);
-          Py_DECREF(field);
-          return NULL;
-        }
-        Py_DECREF(ret);
-      }
-      Py_DECREF(pop);
-    }
-    if (ros_message->grd_ring_end_ind.size > 0) {
-      // populating the array.array using the frombytes method
-      PyObject * frombytes = PyObject_GetAttrString(field, "frombytes");
-      assert(frombytes != NULL);
-      int32_t * src = &(ros_message->grd_ring_end_ind.data[0]);
-      PyObject * data = PyBytes_FromStringAndSize((const char *)src, ros_message->grd_ring_end_ind.size * sizeof(int32_t));
-      assert(data != NULL);
-      PyObject * ret = PyObject_CallFunctionObjArgs(frombytes, data, NULL);
-      Py_DECREF(data);
-      Py_DECREF(frombytes);
-      if (!ret) {
-        Py_DECREF(field);
-        return NULL;
-      }
-      Py_DECREF(ret);
-    }
-    Py_DECREF(field);
-  }
-  {  // ground_cloud
-    PyObject * field = NULL;
-    size_t size = ros_message->ground_cloud.size;
-    field = PyList_New(size);
-    if (!field) {
-      return NULL;
-    }
-    other_msgs__msg__Point * item;
-    for (size_t i = 0; i < size; ++i) {
-      item = &(ros_message->ground_cloud.data[i]);
-      PyObject * pyitem = other_msgs__msg__point__convert_to_py(item);
-      if (!pyitem) {
-        Py_DECREF(field);
-        return NULL;
-      }
-      int rc = PyList_SetItem(field, i, pyitem);
-      (void)rc;
-      assert(rc == 0);
-    }
-    assert(PySequence_Check(field));
-    {
-      int rc = PyObject_SetAttrString(_pymessage, "ground_cloud", field);
-      Py_DECREF(field);
-      if (rc) {
-        return NULL;
-      }
-    }
-  }
-  {  // ground_range
-    PyObject * field = NULL;
-    field = PyObject_GetAttrString(_pymessage, "ground_range");
-    if (!field) {
-      return NULL;
-    }
-    assert(field->ob_type != NULL);
-    assert(field->ob_type->tp_name != NULL);
-    assert(strcmp(field->ob_type->tp_name, "array.array") == 0);
-    // ensure that itemsize matches the sizeof of the ROS message field
-    PyObject * itemsize_attr = PyObject_GetAttrString(field, "itemsize");
-    assert(itemsize_attr != NULL);
-    size_t itemsize = PyLong_AsSize_t(itemsize_attr);
-    Py_DECREF(itemsize_attr);
-    if (itemsize != sizeof(float)) {
-      PyErr_SetString(PyExc_RuntimeError, "itemsize doesn't match expectation");
-      Py_DECREF(field);
-      return NULL;
-    }
-    // clear the array, poor approach to remove potential default values
-    Py_ssize_t length = PyObject_Length(field);
-    if (-1 == length) {
-      Py_DECREF(field);
-      return NULL;
-    }
-    if (length > 0) {
-      PyObject * pop = PyObject_GetAttrString(field, "pop");
-      assert(pop != NULL);
-      for (Py_ssize_t i = 0; i < length; ++i) {
-        PyObject * ret = PyObject_CallFunctionObjArgs(pop, NULL);
-        if (!ret) {
-          Py_DECREF(pop);
-          Py_DECREF(field);
-          return NULL;
-        }
-        Py_DECREF(ret);
-      }
-      Py_DECREF(pop);
-    }
-    if (ros_message->ground_range.size > 0) {
-      // populating the array.array using the frombytes method
-      PyObject * frombytes = PyObject_GetAttrString(field, "frombytes");
-      assert(frombytes != NULL);
-      float * src = &(ros_message->ground_range.data[0]);
-      PyObject * data = PyBytes_FromStringAndSize((const char *)src, ros_message->ground_range.size * sizeof(float));
+      int32_t * src = &(ros_message->is_ground.data[0]);
+      PyObject * data = PyBytes_FromStringAndSize((const char *)src, ros_message->is_ground.size * sizeof(int32_t));
       assert(data != NULL);
       PyObject * ret = PyObject_CallFunctionObjArgs(frombytes, data, NULL);
       Py_DECREF(data);

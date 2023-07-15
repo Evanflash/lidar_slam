@@ -17,12 +17,9 @@
 // Member `seg_ring_str_ind`
 // Member `seg_ring_end_ind`
 // Member `seg_range`
-// Member `grd_ring_str_ind`
-// Member `grd_ring_end_ind`
-// Member `ground_range`
+// Member `is_ground`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 // Member `seg_cloud`
-// Member `ground_cloud`
 #include "other_msgs/msg/detail/point__functions.h"
 
 bool
@@ -56,23 +53,8 @@ other_msgs__msg__SegCloud__init(other_msgs__msg__SegCloud * msg)
     other_msgs__msg__SegCloud__fini(msg);
     return false;
   }
-  // grd_ring_str_ind
-  if (!rosidl_runtime_c__int32__Sequence__init(&msg->grd_ring_str_ind, 0)) {
-    other_msgs__msg__SegCloud__fini(msg);
-    return false;
-  }
-  // grd_ring_end_ind
-  if (!rosidl_runtime_c__int32__Sequence__init(&msg->grd_ring_end_ind, 0)) {
-    other_msgs__msg__SegCloud__fini(msg);
-    return false;
-  }
-  // ground_cloud
-  if (!other_msgs__msg__Point__Sequence__init(&msg->ground_cloud, 0)) {
-    other_msgs__msg__SegCloud__fini(msg);
-    return false;
-  }
-  // ground_range
-  if (!rosidl_runtime_c__float__Sequence__init(&msg->ground_range, 0)) {
+  // is_ground
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->is_ground, 0)) {
     other_msgs__msg__SegCloud__fini(msg);
     return false;
   }
@@ -95,14 +77,8 @@ other_msgs__msg__SegCloud__fini(other_msgs__msg__SegCloud * msg)
   other_msgs__msg__Point__Sequence__fini(&msg->seg_cloud);
   // seg_range
   rosidl_runtime_c__float__Sequence__fini(&msg->seg_range);
-  // grd_ring_str_ind
-  rosidl_runtime_c__int32__Sequence__fini(&msg->grd_ring_str_ind);
-  // grd_ring_end_ind
-  rosidl_runtime_c__int32__Sequence__fini(&msg->grd_ring_end_ind);
-  // ground_cloud
-  other_msgs__msg__Point__Sequence__fini(&msg->ground_cloud);
-  // ground_range
-  rosidl_runtime_c__float__Sequence__fini(&msg->ground_range);
+  // is_ground
+  rosidl_runtime_c__int32__Sequence__fini(&msg->is_ground);
 }
 
 bool
@@ -141,27 +117,9 @@ other_msgs__msg__SegCloud__are_equal(const other_msgs__msg__SegCloud * lhs, cons
   {
     return false;
   }
-  // grd_ring_str_ind
+  // is_ground
   if (!rosidl_runtime_c__int32__Sequence__are_equal(
-      &(lhs->grd_ring_str_ind), &(rhs->grd_ring_str_ind)))
-  {
-    return false;
-  }
-  // grd_ring_end_ind
-  if (!rosidl_runtime_c__int32__Sequence__are_equal(
-      &(lhs->grd_ring_end_ind), &(rhs->grd_ring_end_ind)))
-  {
-    return false;
-  }
-  // ground_cloud
-  if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->ground_cloud), &(rhs->ground_cloud)))
-  {
-    return false;
-  }
-  // ground_range
-  if (!rosidl_runtime_c__float__Sequence__are_equal(
-      &(lhs->ground_range), &(rhs->ground_range)))
+      &(lhs->is_ground), &(rhs->is_ground)))
   {
     return false;
   }
@@ -206,27 +164,9 @@ other_msgs__msg__SegCloud__copy(
   {
     return false;
   }
-  // grd_ring_str_ind
+  // is_ground
   if (!rosidl_runtime_c__int32__Sequence__copy(
-      &(input->grd_ring_str_ind), &(output->grd_ring_str_ind)))
-  {
-    return false;
-  }
-  // grd_ring_end_ind
-  if (!rosidl_runtime_c__int32__Sequence__copy(
-      &(input->grd_ring_end_ind), &(output->grd_ring_end_ind)))
-  {
-    return false;
-  }
-  // ground_cloud
-  if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->ground_cloud), &(output->ground_cloud)))
-  {
-    return false;
-  }
-  // ground_range
-  if (!rosidl_runtime_c__float__Sequence__copy(
-      &(input->ground_range), &(output->ground_range)))
+      &(input->is_ground), &(output->is_ground)))
   {
     return false;
   }

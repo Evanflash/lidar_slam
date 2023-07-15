@@ -29,10 +29,8 @@ private:
 
     // 曲率
     std::vector<smoothness> segmentCurvature;
-    std::vector<smoothness> groundCurvature;
     // 标记周围是否被选取
     std::vector<int> segmentNeighborPicked;
-    std::vector<int> groundNeighborPicked;
 
     // kd tree
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeCornerLast;
@@ -46,6 +44,7 @@ private:
 
     bool isFirstFrame;
 
+    // 位姿
     Eigen::Quaterniond q_last_curr;
     Eigen::Vector3d t_last_curr;
 
@@ -78,9 +77,11 @@ public:
         pubAllCloud = this -> create_publisher<other_msgs::msg::AllCloud>(
             "/all_cloud", 1);
 
+        // test
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
         pubtest = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test", 1);
         pubtest2 = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test2", 1);
+
         // 声明参数
         this -> declare_parameter(PARAM_VERTICAL_SCANS, vertical_scans);
         this -> declare_parameter(PARAM_EDGE_THRESHOLD, edgeThreshold);
@@ -165,7 +166,7 @@ public:
             publish();
             std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
             std::chrono::duration<double> elapsed_seconds = end - start;
-            // RCLCPP_INFO(this -> get_logger(), "whole time: %fms", elapsed_seconds.count() * 1000);
+            RCLCPP_INFO(this -> get_logger(), "whole time: %fms", elapsed_seconds.count() * 1000);
         }
         
     }
@@ -181,15 +182,9 @@ public:
         groundSurfLessFlat -> clear();
 
         // 曲率
-        segmentCurvature.clear();
-        segmentCurvature.resize(seg_msg.seg_cloud.size(), smoothness(0, 0));
-        groundCurvature.clear();
-        groundCurvature.resize(seg_msg.ground_cloud.size(), smoothness(0, 0));
+        segmentCurvature.assign(seg_msg.seg_cloud.size(), smoothness(0, 0));
         // 标志周围该点是否被选取
-        segmentNeighborPicked.clear();
-        segmentNeighborPicked.resize(seg_msg.seg_cloud.size(), 0);
-        groundNeighborPicked.clear();
-        groundNeighborPicked.resize(seg_msg.ground_cloud.size(), 0);
+        segmentNeighborPicked.assign(seg_msg.seg_cloud.size(), 0);
 
         // 消息重置
         all_cloud.trans_form.clear();
@@ -218,7 +213,6 @@ public:
                 curvatures[i] = sns;
             }
         };
-        cs(seg_msg.ground_cloud, seg_msg.ground_range, groundCurvature);
         cs(seg_msg.seg_cloud, seg_msg.seg_range, segmentCurvature);
     }
 
@@ -252,13 +246,14 @@ public:
                 if(sp >= ep) continue;
 
                 std::sort(segmentCurvature.begin() + sp, segmentCurvature.begin() + ep + 1, cmp);
+
                 // 从分割点云中提取边缘点和平面点
                 // 边缘点
                 int largestPickedNum = 0;
                 for(int k = ep; k >= sp; --k){
                     int curInd = segmentCurvature[k].index;
                     if(segmentNeighborPicked[curInd] == 0 && 
-                       segmentCurvature[k].curvature > edgeThreshold){
+                       segmentCurvature[k].curvature > edgeThreshold && seg_msg.is_ground[curInd] == 0){
                         ++largestPickedNum;
                         if(largestPickedNum <= 2){
                             tran(seg_msg.seg_cloud[curInd], point);
@@ -297,78 +292,68 @@ public:
                         }
 
                     }
-                }    
-            }
-        }
-        
-        // 地面点特征提取
-        for(int i = 0; i < vertical_scans; ++i){
-             for(int j = 0; j < 6; ++j){
-                int sp = seg_msg.grd_ring_str_ind[i] + 
-                    (seg_msg.grd_ring_end_ind[i] - seg_msg.grd_ring_str_ind[i]) * j / 6;
-                int ep = seg_msg.grd_ring_str_ind[i] +
-                    (seg_msg.grd_ring_end_ind[i] - seg_msg.grd_ring_str_ind[i]) * (j + 1) / 6 - 1;
-
-                if(sp >= ep) continue;
-
-                std::sort(groundCurvature.begin() + sp, groundCurvature.begin() + ep + 1, cmp);
+                }
 
                 // 平面点
                 int smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
-                    int curInd = groundCurvature[k].index;
-                    if(groundNeighborPicked[curInd] == 0 && 
-                       groundCurvature[k].curvature < surfThreshold){
-                        tran(seg_msg.ground_cloud[curInd], point);
+                    int curInd = segmentCurvature[k].index;
+                    if(segmentNeighborPicked[curInd] == 0 && 
+                       segmentCurvature[k].curvature < surfThreshold && seg_msg.is_ground[curInd] == 1){
+                        tran(seg_msg.seg_cloud[curInd], point);
                         groundSurfFlat -> push_back(point);
 
                         if(++smallestPickedNum >= 2){
                             break;
                         }
                         
-                        groundNeighborPicked[curInd] = 1;
+                        segmentNeighborPicked[curInd] = 1;
                         for(int l = 1; l <= 5; ++l){
-                            float dx = seg_msg.ground_cloud[curInd + l].x -
-                                       seg_msg.ground_cloud[curInd + l - 1].x;
-                            float dy = seg_msg.ground_cloud[curInd + l].y -
-                                       seg_msg.ground_cloud[curInd + l - 1].y;
-                            float dz = seg_msg.ground_cloud[curInd + l].z -
-                                       seg_msg.ground_cloud[curInd + l - 1].z;
+                            float dx = seg_msg.seg_cloud[curInd + l].x -
+                                       seg_msg.seg_cloud[curInd + l - 1].x;
+                            float dy = seg_msg.seg_cloud[curInd + l].y -
+                                       seg_msg.seg_cloud[curInd + l - 1].y;
+                            float dz = seg_msg.seg_cloud[curInd + l].z -
+                                       seg_msg.seg_cloud[curInd + l - 1].z;
                             
                             if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                            groundNeighborPicked[curInd + l] = 1;
+                                segmentNeighborPicked[curInd + l] = 1;
                         }
                         for(int l = -1; l >= -5; --l){
-                            float dx = seg_msg.ground_cloud[curInd + l].x -
-                                       seg_msg.ground_cloud[curInd + l + 1].x;
-                            float dy = seg_msg.ground_cloud[curInd + l].y -
-                                       seg_msg.ground_cloud[curInd + l + 1].y;
-                            float dz = seg_msg.ground_cloud[curInd + l].z -
-                                       seg_msg.ground_cloud[curInd + l + 1].z;
+                            float dx = seg_msg.seg_cloud[curInd + l].x -
+                                       seg_msg.seg_cloud[curInd + l + 1].x;
+                            float dy = seg_msg.seg_cloud[curInd + l].y -
+                                       seg_msg.seg_cloud[curInd + l + 1].y;
+                            float dz = seg_msg.seg_cloud[curInd + l].z -
+                                       seg_msg.seg_cloud[curInd + l + 1].z;
                             
                             if(dx * dx + dy * dy + dz * dz > 0.05) break;
-                            groundNeighborPicked[curInd + l] = 1;
+                                segmentNeighborPicked[curInd + l] = 1;
                         }
                     }
-                }    
+                }     
             }
         }
+        
 
-        for(int i = 0; i < int(seg_msg.ground_cloud.size()); ++i){
-            tran(seg_msg.ground_cloud[i], point);
-            groundSurfLessFlat -> push_back(point);
+        for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
+            if(seg_msg.is_ground[i] == 1){
+                tran(seg_msg.seg_cloud[i], point);
+                groundSurfLessFlat -> push_back(point);
+                all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[i]);
+            } else{
+                all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[i]);
+            }
         }
 
         // 组装all_cloud消息
         pointType2MsgPoint(cornerSharp, all_cloud.corner_sharp);
         pointType2MsgPoint(cornerLessSharp, all_cloud.corner_less_sharp);
-        all_cloud.surf_less_flat = seg_msg.seg_cloud;
         pointType2MsgPoint(groundSurfFlat, all_cloud.ground_flat);
-        all_cloud.ground_less_flat = seg_msg.ground_cloud;
         
         // 测试
         sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*cornerSharp, msg);
+        pcl::toROSMsg(*groundSurfLessFlat, msg);
         msg.header.frame_id = "map";
         pubtest -> publish(msg);
         
@@ -398,7 +383,7 @@ public:
         auto downSample = [](CloudTypePtr cloud_in){
             CloudTypePtr tmp(new CloudType());
             pcl::VoxelGrid<PointType> downSampleFilter;
-            downSampleFilter.setLeafSize(0.5, 0.5, 0.5);
+            downSampleFilter.setLeafSize(0.2, 0.2, 0.2);
             downSampleFilter.setInputCloud(cloud_in);
             downSampleFilter.filter(*tmp);
             *cloud_in = *tmp;
@@ -596,11 +581,13 @@ public:
         cloudTmp = cornerLessSharp;
         cornerLessSharp = cornerLast;
         cornerLast = cloudTmp;
-
+        RCLCPP_INFO(this -> get_logger(), "%ld", groundSurfLessFlat -> size());
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
         downSample(groundSurfLast);
+        RCLCPP_INFO(this -> get_logger(), "%ld", groundSurfLast -> size());
+
 
         kdtreeCornerLast -> setInputCloud(cornerLast);
         kdtreeGroundLast -> setInputCloud(groundSurfLast);

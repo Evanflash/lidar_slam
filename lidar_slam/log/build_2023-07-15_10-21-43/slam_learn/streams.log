@@ -1,0 +1,36 @@
+[0.117s] Invoking command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
+[1.200s] [ 12%] [32mBuilding CXX object CMakeFiles/data_process_test.dir/test/data_process_test.cpp.o[0m
+[1.234s] [ 25%] [32mBuilding CXX object CMakeFiles/data_process_node.dir/src/data_process.cpp.o[0m
+[1.298s] [35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[1.337s] [ 37%] [32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o[0m
+[1.344s] [ 50%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[10.240s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:[m[K In member function ‘[01m[Kvoid DataProcessTest::publishPointCloud(const SegCloud&)[m[K’:
+[10.241s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:25:40:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.241s]    25 |         groundCloud -> reserve(seg_msg.[01;31m[Kground_cloud[m[K.size());
+[10.241s]       |                                        [01;31m[K^~~~~~~~~~~~[m[K
+[10.242s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:34:39:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.242s]    34 |         for(size_t i = 0; i < seg_msg.[01;31m[Kground_cloud[m[K.size(); ++i){
+[10.243s]       |                                       [01;31m[K^~~~~~~~~~~~[m[K
+[10.243s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:36:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.244s]    36 |             point.x = seg_msg.[01;31m[Kground_cloud[m[K[i].x;
+[10.245s]       |                               [01;31m[K^~~~~~~~~~~~[m[K
+[10.246s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:37:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.246s]    37 |             point.y = seg_msg.[01;31m[Kground_cloud[m[K[i].y;
+[10.247s]       |                               [01;31m[K^~~~~~~~~~~~[m[K
+[10.247s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:38:31:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.248s]    38 |             point.z = seg_msg.[01;31m[Kground_cloud[m[K[i].z;
+[10.248s]       |                               [01;31m[K^~~~~~~~~~~~[m[K
+[10.249s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/test/data_process_test.cpp:39:39:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst SegCloud[m[K’ {aka ‘[01m[Kconst struct other_msgs::msg::SegCloud_<std::allocator<void> >[m[K’} has no member named ‘[01m[Kground_cloud[m[K’
+[10.249s]    39 |             point.intensity = seg_msg.[01;31m[Kground_cloud[m[K[i].i;
+[10.250s]       |                                       [01;31m[K^~~~~~~~~~~~[m[K
+[15.792s] gmake[2]: *** [CMakeFiles/data_process_test.dir/build.make:76: CMakeFiles/data_process_test.dir/test/data_process_test.cpp.o] Error 1
+[15.793s] gmake[1]: *** [CMakeFiles/Makefile2:221: CMakeFiles/data_process_test.dir/all] Error 2
+[15.793s] gmake[1]: *** Waiting for unfinished jobs....
+[24.542s] [ 62%] [32m[1mLinking CXX executable data_process_node[0m
+[28.082s] [ 75%] [32m[1mLinking CXX executable front_end_node[0m
+[34.135s] [ 75%] Built target data_process_node
+[35.724s] [ 75%] Built target front_end_node
+[47.418s] [ 87%] [32m[1mLinking CXX executable back_end_node[0m
+[51.269s] [ 87%] Built target back_end_node
+[51.270s] gmake: *** [Makefile:146: all] Error 2
+[51.273s] Invoked command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn' returned '2': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4

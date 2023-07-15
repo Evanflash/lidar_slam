@@ -34,9 +34,9 @@ extern "C"
 {
 #endif
 
-#include "other_msgs/msg/detail/point__functions.h"  // ground_cloud, seg_cloud
-#include "rosidl_runtime_c/primitives_sequence.h"  // grd_ring_end_ind, grd_ring_str_ind, ground_range, seg_range, seg_ring_end_ind, seg_ring_str_ind
-#include "rosidl_runtime_c/primitives_sequence_functions.h"  // grd_ring_end_ind, grd_ring_str_ind, ground_range, seg_range, seg_ring_end_ind, seg_ring_str_ind
+#include "other_msgs/msg/detail/point__functions.h"  // seg_cloud
+#include "rosidl_runtime_c/primitives_sequence.h"  // is_ground, seg_range, seg_ring_end_ind, seg_ring_str_ind
+#include "rosidl_runtime_c/primitives_sequence_functions.h"  // is_ground, seg_range, seg_ring_end_ind, seg_ring_str_ind
 #include "std_msgs/msg/detail/header__functions.h"  // header
 
 // forward declare type support functions
@@ -135,45 +135,10 @@ static bool _SegCloud__cdr_serialize(
     cdr.serializeArray(array_ptr, size);
   }
 
-  // Field name: grd_ring_str_ind
+  // Field name: is_ground
   {
-    size_t size = ros_message->grd_ring_str_ind.size;
-    auto array_ptr = ros_message->grd_ring_str_ind.data;
-    cdr << static_cast<uint32_t>(size);
-    cdr.serializeArray(array_ptr, size);
-  }
-
-  // Field name: grd_ring_end_ind
-  {
-    size_t size = ros_message->grd_ring_end_ind.size;
-    auto array_ptr = ros_message->grd_ring_end_ind.data;
-    cdr << static_cast<uint32_t>(size);
-    cdr.serializeArray(array_ptr, size);
-  }
-
-  // Field name: ground_cloud
-  {
-    const message_type_support_callbacks_t * callbacks =
-      static_cast<const message_type_support_callbacks_t *>(
-      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
-      )()->data);
-    size_t size = ros_message->ground_cloud.size;
-    auto array_ptr = ros_message->ground_cloud.data;
-    cdr << static_cast<uint32_t>(size);
-    for (size_t i = 0; i < size; ++i) {
-      if (!callbacks->cdr_serialize(
-          &array_ptr[i], cdr))
-      {
-        return false;
-      }
-    }
-  }
-
-  // Field name: ground_range
-  {
-    size_t size = ros_message->ground_range.size;
-    auto array_ptr = ros_message->ground_range.data;
+    size_t size = ros_message->is_ground.size;
+    auto array_ptr = ros_message->is_ground.data;
     cdr << static_cast<uint32_t>(size);
     cdr.serializeArray(array_ptr, size);
   }
@@ -279,78 +244,19 @@ static bool _SegCloud__cdr_deserialize(
     cdr.deserializeArray(array_ptr, size);
   }
 
-  // Field name: grd_ring_str_ind
+  // Field name: is_ground
   {
     uint32_t cdrSize;
     cdr >> cdrSize;
     size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->grd_ring_str_ind.data) {
-      rosidl_runtime_c__int32__Sequence__fini(&ros_message->grd_ring_str_ind);
+    if (ros_message->is_ground.data) {
+      rosidl_runtime_c__int32__Sequence__fini(&ros_message->is_ground);
     }
-    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->grd_ring_str_ind, size)) {
-      fprintf(stderr, "failed to create array for field 'grd_ring_str_ind'");
+    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->is_ground, size)) {
+      fprintf(stderr, "failed to create array for field 'is_ground'");
       return false;
     }
-    auto array_ptr = ros_message->grd_ring_str_ind.data;
-    cdr.deserializeArray(array_ptr, size);
-  }
-
-  // Field name: grd_ring_end_ind
-  {
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->grd_ring_end_ind.data) {
-      rosidl_runtime_c__int32__Sequence__fini(&ros_message->grd_ring_end_ind);
-    }
-    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->grd_ring_end_ind, size)) {
-      fprintf(stderr, "failed to create array for field 'grd_ring_end_ind'");
-      return false;
-    }
-    auto array_ptr = ros_message->grd_ring_end_ind.data;
-    cdr.deserializeArray(array_ptr, size);
-  }
-
-  // Field name: ground_cloud
-  {
-    const message_type_support_callbacks_t * callbacks =
-      static_cast<const message_type_support_callbacks_t *>(
-      ROSIDL_TYPESUPPORT_INTERFACE__MESSAGE_SYMBOL_NAME(
-        rosidl_typesupport_fastrtps_c, other_msgs, msg, Point
-      )()->data);
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->ground_cloud.data) {
-      other_msgs__msg__Point__Sequence__fini(&ros_message->ground_cloud);
-    }
-    if (!other_msgs__msg__Point__Sequence__init(&ros_message->ground_cloud, size)) {
-      fprintf(stderr, "failed to create array for field 'ground_cloud'");
-      return false;
-    }
-    auto array_ptr = ros_message->ground_cloud.data;
-    for (size_t i = 0; i < size; ++i) {
-      if (!callbacks->cdr_deserialize(
-          cdr, &array_ptr[i]))
-      {
-        return false;
-      }
-    }
-  }
-
-  // Field name: ground_range
-  {
-    uint32_t cdrSize;
-    cdr >> cdrSize;
-    size_t size = static_cast<size_t>(cdrSize);
-    if (ros_message->ground_range.data) {
-      rosidl_runtime_c__float__Sequence__fini(&ros_message->ground_range);
-    }
-    if (!rosidl_runtime_c__float__Sequence__init(&ros_message->ground_range, size)) {
-      fprintf(stderr, "failed to create array for field 'ground_range'");
-      return false;
-    }
-    auto array_ptr = ros_message->ground_range.data;
+    auto array_ptr = ros_message->is_ground.data;
     cdr.deserializeArray(array_ptr, size);
   }
 
@@ -420,44 +326,10 @@ size_t get_serialized_size_other_msgs__msg__SegCloud(
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
-  // field.name grd_ring_str_ind
+  // field.name is_ground
   {
-    size_t array_size = ros_message->grd_ring_str_ind.size;
-    auto array_ptr = ros_message->grd_ring_str_ind.data;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    (void)array_ptr;
-    size_t item_size = sizeof(array_ptr[0]);
-    current_alignment += array_size * item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
-  // field.name grd_ring_end_ind
-  {
-    size_t array_size = ros_message->grd_ring_end_ind.size;
-    auto array_ptr = ros_message->grd_ring_end_ind.data;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-    (void)array_ptr;
-    size_t item_size = sizeof(array_ptr[0]);
-    current_alignment += array_size * item_size +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
-  }
-  // field.name ground_cloud
-  {
-    size_t array_size = ros_message->ground_cloud.size;
-    auto array_ptr = ros_message->ground_cloud.data;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    for (size_t index = 0; index < array_size; ++index) {
-      current_alignment += get_serialized_size_other_msgs__msg__Point(
-        &array_ptr[index], current_alignment);
-    }
-  }
-  // field.name ground_range
-  {
-    size_t array_size = ros_message->ground_range.size;
-    auto array_ptr = ros_message->ground_range.data;
+    size_t array_size = ros_message->is_ground.size;
+    auto array_ptr = ros_message->is_ground.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     (void)array_ptr;
@@ -559,48 +431,7 @@ size_t max_serialized_size_other_msgs__msg__SegCloud(
     current_alignment += array_size * sizeof(uint32_t) +
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
   }
-  // member: grd_ring_str_ind
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    current_alignment += array_size * sizeof(uint32_t) +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
-  }
-  // member: grd_ring_end_ind
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-    current_alignment += array_size * sizeof(uint32_t) +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
-  }
-  // member: ground_cloud
-  {
-    size_t array_size = 0;
-    full_bounded = false;
-    is_plain = false;
-    current_alignment += padding +
-      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
-
-
-    for (size_t index = 0; index < array_size; ++index) {
-      bool inner_full_bounded;
-      bool inner_is_plain;
-      current_alignment +=
-        max_serialized_size_other_msgs__msg__Point(
-        inner_full_bounded, inner_is_plain, current_alignment);
-      full_bounded &= inner_full_bounded;
-      is_plain &= inner_is_plain;
-    }
-  }
-  // member: ground_range
+  // member: is_ground
   {
     size_t array_size = 0;
     full_bounded = false;

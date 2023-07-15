@@ -20,15 +20,7 @@ module other_msgs {
 
       sequence<float> seg_range;
 
-      @verbatim (language="comment", text=
-        "地面点")
-      sequence<int32> grd_ring_str_ind;
-
-      sequence<int32> grd_ring_end_ind;
-
-      sequence<other_msgs::msg::Point> ground_cloud;
-
-      sequence<float> ground_range;
+      sequence<int32> is_ground;
     };
   };
 };
