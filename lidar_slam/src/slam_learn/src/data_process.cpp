@@ -19,6 +19,9 @@ private:
     SubPointCloud subLaserCloudIn;
     rclcpp::Publisher<other_msgs::msg::SegCloud>::SharedPtr pubSegCloud;
 
+    PubPointCloud showSegCloud;
+    CloudTypePtr cloud;
+
     // 消息
     other_msgs::msg::SegCloud seg_msg;
 
@@ -55,6 +58,10 @@ public:
             "/seg_cloud", 1);
         subLaserCloudIn = this -> create_subscription<sensor_msgs::msg::PointCloud2>(
             "/velodyne_points", 1, std::bind(&DataProcess::run, this, std::placeholders::_1));
+
+        showSegCloud = this -> create_publisher<sensor_msgs::msg::PointCloud2>(
+            "/showseg", 1
+        );
 
         // 声明参数
         this -> declare_parameter(PARAM_VERTICAL_SCANS, vertical_scans);
@@ -143,6 +150,8 @@ private:
         range_mat.resize(vertical_scans, horizontal_scans);
         ground_mat.resize(vertical_scans, horizontal_scans);
         label_mat.resize(vertical_scans, horizontal_scans);
+
+        cloud.reset(new CloudType());
     }
 
     /**
@@ -188,7 +197,7 @@ private:
                                curPoint.z * curPoint.z);
 
             // 排除距离过近的点 或 距离过远的点
-            if(range < 0.2){
+            if(range < 2.0){
                 continue;
             }
 
@@ -282,6 +291,9 @@ private:
                     seg_msg.seg_range[curInd] = range_mat(i, j);
                     seg_msg.is_ground[curInd] = (ground_mat(i, j) == 1);
                     ++curInd;
+
+                    cloud -> push_back(full_cloud -> points[ind]);
+                    
                 }
             }
             seg_msg.seg_ring_end_ind[i] = curInd - 1 - 5;
@@ -357,6 +369,12 @@ private:
         if(pubSegCloud -> get_subscription_count() != 0){
             pubSegCloud -> publish(seg_msg);
         }
+        sensor_msgs::msg::PointCloud2 m;
+        pcl::toROSMsg(*cloud, m);
+        m.header.frame_id = "map";
+        showSegCloud -> publish(m);
+        // RCLCPP_INFO(this -> get_logger(), "data process: %ld", cloud -> size());
+        cloud -> clear();
     }
 
 };

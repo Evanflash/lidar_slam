@@ -55,12 +55,18 @@ private:
     std::vector<pose> allKeyFramesPoses;
 
     // 子图
+    CloudTypePtr laserSurfFromMap;
+    CloudTypePtr laserGroundFromMap;
     CloudTypePtr keyPointsFromMap;
 
     // kdtree
+    pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfPoints;
+    pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundPoints;
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeKeyPoints;
 
     // 新一帧特征点
+    CloudTypePtr surfFlatLast;
+    CloudTypePtr groundFlatLast;
     CloudTypePtr keyPointsLast;
 
     // 新一帧点云
@@ -201,22 +207,35 @@ private:
      * 初始化 
     */
     void init(){
+        // 全局地图初始化
         globalMap.reset(new CloudType());
         downSampleGlobalMap.reset(new pcl::VoxelGrid<PointType>());
         downSampleGlobalMap -> setLeafSize(1.0, 1.0, 1.0);
 
+        // submap
         keyPointsFromMap.reset(new CloudType());
+        laserSurfFromMap.reset(new CloudType());
+        laserGroundFromMap.reset(new CloudType());
 
+        // kdtree
         kdtreeKeyPoints.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeSurfPoints.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeGroundPoints.reset(new pcl::KdTreeFLANN<PointType>());
 
+        // 特征点
         keyPointsLast.reset(new CloudType());
-
+        surfFlatLast.reset(new CloudType());
+        groundCloud.reset(new CloudType());
+        
+        // 最新一帧点云
         surfCloud.reset(new CloudType());
         groundCloud.reset(new CloudType());
 
+        // 下采样滤波
         downSampleAllCloud.reset(new pcl::VoxelGrid<PointType>());
         downSampleAllCloud -> setLeafSize(0.4, 0.4, 0.4);
-
+        
+        // 因子图
         gtsam::ISAM2Params parameters;
         parameters.relinearizeThreshold = 0.01;
         parameters.relinearizeSkip = 1;
@@ -259,7 +278,7 @@ private:
         q_front_end = q_odom;
         t_front_end = t_odom;
 
-        // 获得点云
+        // 获得点云特征点
         keyPointsLast -> clear();
         CloudTypePtr tmp(new CloudType());
         msgToPointCloud(tmp, all_cloud.surf_flat);
@@ -267,7 +286,6 @@ private:
         tmp -> clear();
         msgToPointCloud(tmp, all_cloud.ground_flat);
         *keyPointsLast += *tmp;
-        RCLCPP_INFO(this -> get_logger(), "key points size: %ld", keyPointsLast -> size());
 
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
@@ -379,231 +397,6 @@ private:
                 ceres::Solve(options, &problem, &summary);
             }
         }
-
-        // if(!allKeyFramesPoses.empty()){
-        //     kdtreeCornerFromMap -> setInputCloud(laserCornerFromMap);
-        //     kdtreeGroundFromMap -> setInputCloud(laserGroundFromMap);
-
-        //     int cornerPointsNum = cornerSharpLast -> size();
-        //     int groundPointsNum = groundSurfLast -> size();
-
-        //     PointType pointSel;
-        //     std::vector<int> pointSearchInd;
-        //     std::vector<float> pointSearchSqDis;
-
-        //     // 地面点优化
-        //     for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
-        //         ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
-        //         ceres::Problem::Options problem_options;
-
-        //         ceres::Problem problem(problem_options);
-        //         problem.AddParameterBlock(transformBefoMapped + 3, 2);
-        //         problem.AddParameterBlock(transformBefoMapped + 2, 1);
-
-        //         Eigen::Matrix<double, 5, 1> matb;
-        //         matb.fill(-1);
-        //         Eigen::Matrix<double, 5, 3> matA;
-        //         Eigen::Matrix<double, 3, 1> matX;
-
-        //         for(int i = 0; i < groundPointsNum; ++i){
-        //             trans(groundSurfLast -> points[i], pointSel);
-        //             kdtreeGroundFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
-
-        //             if(pointSearchSqDis[4] < 1.0){
-        //                 for(int j = 0; j < 5; ++j){
-        //                     matA(j, 0) = laserGroundFromMap -> points[pointSearchInd[j]].x;
-        //                     matA(j, 1) = laserGroundFromMap -> points[pointSearchInd[j]].y;
-        //                     matA(j, 2) = laserGroundFromMap -> points[pointSearchInd[j]].z;
-        //                 }
-        //                 // 求解Ax = b得到平面方程
-        //                 matX = matA.colPivHouseholderQr().solve(matb);
-
-        //                 double pa = matX(0, 0);
-        //                 double pb = matX(1, 0);
-        //                 double pc = matX(2, 0);
-        //                 double pd = 1;
-        //                 // 归一化
-        //                 double ps = sqrt(pa * pa + pb * pb + pc * pc);
-        //                 pa /= ps;
-        //                 pb /= ps;
-        //                 pc /= ps;
-        //                 pd /= ps;
-
-
-        //                 // 判断平面是否合理
-        //                 bool planeValid = true;
-        //                 for(int j = 0; j < 5; ++j){
-        //                     if(abs(pa * laserGroundFromMap -> points[pointSearchInd[j]].x +
-        //                            pb * laserGroundFromMap -> points[pointSearchInd[j]].y +
-        //                            pc * laserGroundFromMap -> points[pointSearchInd[j]].z +
-        //                            pd) > 0.2){
-        //                         planeValid = false;
-        //                         break;
-        //                     }
-        //                 }
-
-        //                 // 若平面合理，则优化
-        //                 if(planeValid == true){
-        //                     ceres::CostFunction *cost_function = 
-        //                         GroundPlaneBack::Create(pa, pb, pc, pd, pointSel);
-        //                     problem.AddResidualBlock(
-        //                         cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped + 2);
-        //                 }
-        //             }  
-        //         }
-        //         // 求解
-        //         ceres::Solver::Options options;
-        //         options.linear_solver_type = ceres::DENSE_QR;
-        //         options.max_num_iterations = 4;
-        //         options.minimizer_progress_to_stdout = false;
-        //         ceres::Solver::Summary summary;
-        //         ceres::Solve(options, &problem, &summary);
-        //     }
-
-        //     // RCLCPP_INFO(this -> get_logger(), "ground : x:%f, y:%f, z:%f, qx:%f, qy:%f, qz:%f", 
-        //     //     transformBefoMapped[0], transformBefoMapped[1], transformBefoMapped[2], 
-        //     //     transformBefoMapped[3], transformBefoMapped[4], transformBefoMapped[5]);
-            
-        //     // 计算 qyx
-        //     Eigen::AngleAxisd roll(Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
-        //     Eigen::AngleAxisd pitch(Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()));
-        //     Eigen::Matrix3d qyx;
-        //     qyx = pitch * roll;
-
-        //     // 边缘点优化
-        //     for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
-        //         ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
-        //         ceres::Problem::Options problem_options;
-
-        //         ceres::Problem problem(problem_options);
-        //         problem.AddParameterBlock(transformBefoMapped + 5, 1);
-        //         problem.AddParameterBlock(transformBefoMapped, 2);
-                
-        //         // Eigen::Matrix<double, 3, 3> matA;
-        //         // Eigen::Vector3d matD;
-        //         // Eigen::Matrix3d matV;
-
-        //         Eigen::Matrix<double, 5, 1> matb;
-        //         matb.fill(-1);
-        //         Eigen::Matrix<double, 5, 3> matA;
-        //         Eigen::Matrix<double, 3, 1> matX;
-
-        //         for(int i = 0; i < cornerPointsNum; ++i){
-        //             trans(cornerSharpLast -> points[i], pointSel);
-        //             kdtreeCornerFromMap -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
-
-        //             if(pointSearchSqDis[4] < 1.0){
-        //                 for(int j = 0; j < 5; ++j){
-        //                     matA(j, 0) = laserCornerFromMap -> points[pointSearchInd[j]].x;
-        //                     matA(j, 1) = laserCornerFromMap -> points[pointSearchInd[j]].y;
-        //                     matA(j, 2) = laserCornerFromMap -> points[pointSearchInd[j]].z;
-        //                 }
-        //                 // 求解Ax = b得到平面方程
-        //                 matX = matA.colPivHouseholderQr().solve(matb);
-
-        //                 double pa = matX(0, 0);
-        //                 double pb = matX(1, 0);
-        //                 double pc = matX(2, 0);
-        //                 double pd = 1;
-        //                 // 归一化
-        //                 double ps = sqrt(pa * pa + pb * pb + pc * pc);
-        //                 pa /= ps;
-        //                 pb /= ps;
-        //                 pc /= ps;
-        //                 pd /= ps;
-
-
-        //                 // 判断平面是否合理
-        //                 bool planeValid = true;
-        //                 for(int j = 0; j < 5; ++j){
-        //                     if(abs(pa * laserCornerFromMap -> points[pointSearchInd[j]].x +
-        //                            pb * laserCornerFromMap -> points[pointSearchInd[j]].y +
-        //                            pc * laserCornerFromMap -> points[pointSearchInd[j]].z +
-        //                            pd) > 0.2){
-        //                         planeValid = false;
-        //                         break;
-        //                     }
-        //                 }
-
-        //                 // 若平面合理，则优化
-        //                 if(planeValid == true){
-        //                     ceres::CostFunction *cost_function = 
-        //                         CornerPlaneBack::Create(pa, pb, pc, pd, qyx, transformBefoMapped[2], pointSel);
-        //                     problem.AddResidualBlock(
-        //                         cost_function, loss_function, transformBefoMapped + 5, transformBefoMapped);
-        //                 }
-        //             }
-
-        //             // if(pointSearchSqDis[4] < 1.0){
-        //             //     float cx = 0, cy = 0, cz = 0;
-        //             //     for(int j = 0; j < 5; ++j){
-        //             //         cx += laserCornerFromMap -> points[pointSearchInd[j]].x;
-        //             //         cy += laserCornerFromMap -> points[pointSearchInd[j]].y;
-        //             //         cz += laserCornerFromMap -> points[pointSearchInd[j]].z;
-        //             //     }
-        //             //     cx /= 5;
-        //             //     cy /= 5;
-        //             //     cz /= 5;
-
-        //             //     float a11 = 0, a12 = 0, a13 = 0, a22 = 0, a23 = 0, a33 = 0;
-        //             //     for(int j = 0; j < 5; ++j){
-        //             //         float ax = laserCornerFromMap -> points[pointSearchInd[j]].x - cx;
-        //             //         float ay = laserCornerFromMap -> points[pointSearchInd[j]].y - cy;
-        //             //         float az = laserCornerFromMap -> points[pointSearchInd[j]].z - cz;
-
-        //             //         a11 += ax * ax;
-        //             //         a12 += ax * ay;
-        //             //         a13 += ax * az;
-        //             //         a22 += ay * ay;
-        //             //         a23 += ay * az;
-        //             //         a33 += az * az;
-        //             //     }
-        //             //     a11 /= 5;
-        //             //     a12 /= 5;
-        //             //     a13 /= 5;
-        //             //     a22 /= 5;
-        //             //     a23 /= 5;
-        //             //     a33 /= 5;
-
-        //             //     matA << a11, a12, a13,
-        //             //             a12, a22, a23,
-        //             //             a13, a23, a33;
-        //             //     Eigen::SelfAdjointEigenSolver<Eigen::Matrix3d> esolver(matA);
-        //             //     matD = esolver.eigenvalues().real();
-        //             //     matV = esolver.eigenvectors().real();
-
-        //             //     // 判断是否为直线
-        //             //     if(matD[2] > 3 * matD[1]){
-        //             //         Eigen::Vector3d point_a{cx + 0.1 * matV(2, 0),
-        //             //                                 cy + 0.1 * matV(2, 1),
-        //             //                                 cz + 0.1 * matV(2, 2)};
-        //             //         Eigen::Vector3d point_b{cx - 0.1 * matV(2, 0),
-        //             //                                 cy - 0.1 * matV(2, 1),
-        //             //                                 cz - 0.1 * matV(2, 2)};
-        //             //         Eigen::Vector3d curr_point{pointSel.x, pointSel.y, pointSel.z};
-        //             //         RCLCPP_INFO(this -> get_logger(), "%f, %f, %f", matV(0, 0), matV(0, 1), matV(0, 2));
-        //             //         ceres::CostFunction *cost_function = 
-        //             //             CornerFactor::Create(curr_point, point_a, point_b, qyx, transformBefoMapped[2]);
-        //             //         problem.AddResidualBlock(
-        //             //             cost_function, loss_function, transformBefoMapped + 5, transformBefoMapped);
-        //             //     }
-        //             // }
-                     
-        //         }
-        //         // 求解
-        //         ceres::Solver::Options options;
-        //         options.linear_solver_type = ceres::DENSE_QR;
-        //         options.max_num_iterations = 4;
-        //         options.minimizer_progress_to_stdout = false;
-        //         ceres::Solver::Summary summary;
-        //         ceres::Solve(options, &problem, &summary);
-        //     }
-        // }
-        // // if(transformBefoMapped[0] * transformBefoMapped[0] +
-        // //    transformBefoMapped[1] * transformBefoMapped[1] +
-        // //    transformBefoMapped[2] * transformBefoMapped[2] > 2){
-        // //     return;
-        // // }
        
         // 将帧间变换参数转换为帧到地图的变换参数
         // x y z qx qy qz
@@ -620,8 +413,8 @@ private:
         t_front_end = q_delta * t_front_end + t_delta;
         q_front_end = q_delta * q_front_end;
 
-        RCLCPP_INFO(this -> get_logger(), "back end : x:%f, y:%f, z:%f", 
-            t_front_end.x(), t_front_end.y(), t_front_end.z());
+        // RCLCPP_INFO(this -> get_logger(), "back end : x:%f, y:%f, z:%f", 
+        //     t_front_end.x(), t_front_end.y(), t_front_end.z());
     }
 
     /**
@@ -680,8 +473,8 @@ private:
             initialEstimate.insert(
                 allKeyFramesPoses.size(),
                 gtsam::Pose3(
-                    gtsam::Rot3::Quaternion(q_keyframe_last.w(), q_keyframe_last.x(), q_keyframe_last.y(), q_keyframe_last.z()),
-                    gtsam::Point3(t_keyframe_last.x(), t_keyframe_last.y(), t_keyframe_last.z())));
+                    gtsam::Rot3::Quaternion(q_w_last.w(), q_w_last.x(), q_w_last.y(), q_w_last.z()),
+                    gtsam::Point3(t_w_last.x(), t_w_last.y(), t_w_last.z())));
         }
 
         // 更新isam

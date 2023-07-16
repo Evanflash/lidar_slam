@@ -239,6 +239,9 @@ public:
 
         PointType point;
 
+        CloudTypePtr surfFlatShow(new CloudType());
+        CloudTypePtr surfLessFlatShow(new CloudType());
+
         // 分割点云特征提取
         for(int i = 0; i < vertical_scans; ++i){
             for(int j = 0; j < 6; ++j){
@@ -338,7 +341,6 @@ public:
                 }
 
 
-                /********************************/
                 smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
@@ -346,6 +348,8 @@ public:
                        segmentCurvature[k].curvature < surfThreshold && seg_msg.is_ground[curInd] == 0){
                         tran(seg_msg.seg_cloud[curInd], point);
                         surfFlat -> push_back(point);
+                        point.intensity = 255;
+                        surfFlatShow -> push_back(point);
 
                         if(++smallestPickedNum >= 4){
                             break;
@@ -375,20 +379,26 @@ public:
                                 segmentNeighborPicked[curInd + l] = 1;
                         }
                     }
-                }      
+                }
+
+                for(int k = sp; k <= ep; ++k){
+                    int curInd = segmentCurvature[k].index;
+                    if(seg_msg.is_ground[curInd] == 1){
+                        tran(seg_msg.seg_cloud[curInd], point);
+                        groundSurfLessFlat -> push_back(point);
+                        all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[curInd]);
+                    } else if(segmentCurvature[k].curvature < surfThreshold){
+                        all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[curInd]);
+                        tran(seg_msg.seg_cloud[curInd], point);
+                        point.intensity = 100;
+                        surfLessFlatShow -> push_back(point);
+                    }
+                }
             }
         }
         
-
-        for(int i = 0; i < int(seg_msg.seg_cloud.size()); ++i){
-            if(seg_msg.is_ground[i] == 1){
-                tran(seg_msg.seg_cloud[i], point);
-                groundSurfLessFlat -> push_back(point);
-                all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[i]);
-            } else{
-                all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[i]);
-            }
-        }
+        
+        
 
         // 组装all_cloud消息
         pointType2MsgPoint(surfFlat, all_cloud.surf_flat);
@@ -396,13 +406,14 @@ public:
         
         // 测试
         sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*groundSurfLessFlat, msg);
+        pcl::toROSMsg(*surfLessFlatShow, msg);
         msg.header.frame_id = "map";
         pubtest -> publish(msg);
         
-        pcl::toROSMsg(*cornerLessSharp, msg);
+        pcl::toROSMsg(*groundSurfLessFlat, msg);
         msg.header.frame_id = "map";
         pubtest2 -> publish(msg);
+
     }
 
     /**
