@@ -82,90 +82,45 @@ void resize_function__AllCloud__trans_form(void * untyped_member, size_t size)
   member->resize(size);
 }
 
-size_t size_function__AllCloud__corner_sharp(const void * untyped_member)
+size_t size_function__AllCloud__surf_flat(const void * untyped_member)
 {
   const auto * member = reinterpret_cast<const std::vector<other_msgs::msg::Point> *>(untyped_member);
   return member->size();
 }
 
-const void * get_const_function__AllCloud__corner_sharp(const void * untyped_member, size_t index)
+const void * get_const_function__AllCloud__surf_flat(const void * untyped_member, size_t index)
 {
   const auto & member =
     *reinterpret_cast<const std::vector<other_msgs::msg::Point> *>(untyped_member);
   return &member[index];
 }
 
-void * get_function__AllCloud__corner_sharp(void * untyped_member, size_t index)
+void * get_function__AllCloud__surf_flat(void * untyped_member, size_t index)
 {
   auto & member =
     *reinterpret_cast<std::vector<other_msgs::msg::Point> *>(untyped_member);
   return &member[index];
 }
 
-void fetch_function__AllCloud__corner_sharp(
+void fetch_function__AllCloud__surf_flat(
   const void * untyped_member, size_t index, void * untyped_value)
 {
   const auto & item = *reinterpret_cast<const other_msgs::msg::Point *>(
-    get_const_function__AllCloud__corner_sharp(untyped_member, index));
+    get_const_function__AllCloud__surf_flat(untyped_member, index));
   auto & value = *reinterpret_cast<other_msgs::msg::Point *>(untyped_value);
   value = item;
 }
 
-void assign_function__AllCloud__corner_sharp(
+void assign_function__AllCloud__surf_flat(
   void * untyped_member, size_t index, const void * untyped_value)
 {
   auto & item = *reinterpret_cast<other_msgs::msg::Point *>(
-    get_function__AllCloud__corner_sharp(untyped_member, index));
+    get_function__AllCloud__surf_flat(untyped_member, index));
   const auto & value = *reinterpret_cast<const other_msgs::msg::Point *>(untyped_value);
   item = value;
 }
 
-void resize_function__AllCloud__corner_sharp(void * untyped_member, size_t size)
-{
-  auto * member =
-    reinterpret_cast<std::vector<other_msgs::msg::Point> *>(untyped_member);
-  member->resize(size);
-}
-
-size_t size_function__AllCloud__corner_less_sharp(const void * untyped_member)
-{
-  const auto * member = reinterpret_cast<const std::vector<other_msgs::msg::Point> *>(untyped_member);
-  return member->size();
-}
-
-const void * get_const_function__AllCloud__corner_less_sharp(const void * untyped_member, size_t index)
-{
-  const auto & member =
-    *reinterpret_cast<const std::vector<other_msgs::msg::Point> *>(untyped_member);
-  return &member[index];
-}
-
-void * get_function__AllCloud__corner_less_sharp(void * untyped_member, size_t index)
-{
-  auto & member =
-    *reinterpret_cast<std::vector<other_msgs::msg::Point> *>(untyped_member);
-  return &member[index];
-}
-
-void fetch_function__AllCloud__corner_less_sharp(
-  const void * untyped_member, size_t index, void * untyped_value)
-{
-  const auto & item = *reinterpret_cast<const other_msgs::msg::Point *>(
-    get_const_function__AllCloud__corner_less_sharp(untyped_member, index));
-  auto & value = *reinterpret_cast<other_msgs::msg::Point *>(untyped_value);
-  value = item;
-}
-
-void assign_function__AllCloud__corner_less_sharp(
-  void * untyped_member, size_t index, const void * untyped_value)
-{
-  auto & item = *reinterpret_cast<other_msgs::msg::Point *>(
-    get_function__AllCloud__corner_less_sharp(untyped_member, index));
-  const auto & value = *reinterpret_cast<const other_msgs::msg::Point *>(untyped_value);
-  item = value;
-}
-
-void resize_function__AllCloud__corner_less_sharp(void * untyped_member, size_t size)
+void resize_function__AllCloud__surf_flat(void * untyped_member, size_t size)
 {
   auto * member =
     reinterpret_cast<std::vector<other_msgs::msg::Point> *>(untyped_member);
@@ -307,7 +262,7 @@ void resize_function__AllCloud__ground_less_flat(void * untyped_member, size_t s
   member->resize(size);
 }
 
-static const ::rosidl_typesupport_introspection_cpp::MessageMember AllCloud_message_member_array[7] = {
+static const ::rosidl_typesupport_introspection_cpp::MessageMember AllCloud_message_member_array[6] = {
   {
     "header",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
@@ -343,38 +298,21 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember AllCloud_mess
     resize_function__AllCloud__trans_form  // resize(index) function pointer
   },
   {
-    "corner_sharp",  // name
+    "surf_flat",  // name
     ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
     0,  // upper bound of string
     ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<other_msgs::msg::Point>(),  // members of sub message
     true,  // is array
     0,  // array size
     false,  // is upper bound
-    offsetof(other_msgs::msg::AllCloud, corner_sharp),  // bytes offset in struct
+    offsetof(other_msgs::msg::AllCloud, surf_flat),  // bytes offset in struct
     nullptr,  // default value
-    size_function__AllCloud__corner_sharp,  // size() function pointer
-    get_const_function__AllCloud__corner_sharp,  // get_const(index) function pointer
-    get_function__AllCloud__corner_sharp,  // get(index) function pointer
-    fetch_function__AllCloud__corner_sharp,  // fetch(index, &value) function pointer
-    assign_function__AllCloud__corner_sharp,  // assign(index, value) function pointer
-    resize_function__AllCloud__corner_sharp  // resize(index) function pointer
-  },
-  {
-    "corner_less_sharp",  // name
-    ::rosidl_typesupport_introspection_cpp::ROS_TYPE_MESSAGE,  // type
-    0,  // upper bound of string
-    ::rosidl_typesupport_introspection_cpp::get_message_type_support_handle<other_msgs::msg::Point>(),  // members of sub message
-    true,  // is array
-    0,  // array size
-    false,  // is upper bound
-    offsetof(other_msgs::msg::AllCloud, corner_less_sharp),  // bytes offset in struct
-    nullptr,  // default value
-    size_function__AllCloud__corner_less_sharp,  // size() function pointer
-    get_const_function__AllCloud__corner_less_sharp,  // get_const(index) function pointer
-    get_function__AllCloud__corner_less_sharp,  // get(index) function pointer
-    fetch_function__AllCloud__corner_less_sharp,  // fetch(index, &value) function pointer
-    assign_function__AllCloud__corner_less_sharp,  // assign(index, value) function pointer
-    resize_function__AllCloud__corner_less_sharp  // resize(index) function pointer
+    size_function__AllCloud__surf_flat,  // size() function pointer
+    get_const_function__AllCloud__surf_flat,  // get_const(index) function pointer
+    get_function__AllCloud__surf_flat,  // get(index) function pointer
+    fetch_function__AllCloud__surf_flat,  // fetch(index, &value) function pointer
+    assign_function__AllCloud__surf_flat,  // assign(index, value) function pointer
+    resize_function__AllCloud__surf_flat  // resize(index) function pointer
   },
   {
     "surf_less_flat",  // name
@@ -432,7 +370,7 @@ static const ::rosidl_typesupport_introspection_cpp::MessageMember AllCloud_mess
 static const ::rosidl_typesupport_introspection_cpp::MessageMembers AllCloud_message_members = {
   "other_msgs::msg",  // message namespace
   "AllCloud",  // message name
-  7,  // number of fields
+  6,  // number of fields
   sizeof(other_msgs::msg::AllCloud),
   AllCloud_message_member_array,  // message members
   AllCloud_init_function,  // function to initialize message memory (memory has to be allocated)

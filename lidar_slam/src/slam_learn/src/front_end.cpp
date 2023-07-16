@@ -64,6 +64,8 @@ private:
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
     PubPointCloud pubtest;
     PubPointCloud pubtest2;
+
+    CloudTypePtr surfFlat;
     
 public:
     FrontEnd(const std::string &name)
@@ -127,6 +129,7 @@ public:
 
         isFirstFrame = true;
 
+        surfFlat.reset(new CloudType());
     }
 
     /**
@@ -166,7 +169,7 @@ public:
             publish();
             std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
             std::chrono::duration<double> elapsed_seconds = end - start;
-            RCLCPP_INFO(this -> get_logger(), "whole time: %fms", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "whole time: %fms", elapsed_seconds.count() * 1000);
         }
         
     }
@@ -181,6 +184,8 @@ public:
         groundSurfFlat -> clear();
         groundSurfLessFlat -> clear();
 
+        surfFlat -> clear();
+
         // 曲率
         segmentCurvature.assign(seg_msg.seg_cloud.size(), smoothness(0, 0));
         // 标志周围该点是否被选取
@@ -188,8 +193,7 @@ public:
 
         // 消息重置
         all_cloud.trans_form.clear();
-        all_cloud.corner_sharp.clear();
-        all_cloud.corner_less_sharp.clear();
+        all_cloud.surf_flat.clear();
         all_cloud.surf_less_flat.clear();
         all_cloud.ground_flat.clear();
         all_cloud.ground_less_flat.clear();
@@ -303,7 +307,7 @@ public:
                         tran(seg_msg.seg_cloud[curInd], point);
                         groundSurfFlat -> push_back(point);
 
-                        if(++smallestPickedNum >= 2){
+                        if(++smallestPickedNum >= 4){
                             break;
                         }
                         
@@ -331,7 +335,47 @@ public:
                                 segmentNeighborPicked[curInd + l] = 1;
                         }
                     }
-                }     
+                }
+
+
+                /********************************/
+                smallestPickedNum = 0;
+                for(int k = sp; k <= ep; ++k){
+                    int curInd = segmentCurvature[k].index;
+                    if(segmentNeighborPicked[curInd] == 0 && 
+                       segmentCurvature[k].curvature < surfThreshold && seg_msg.is_ground[curInd] == 0){
+                        tran(seg_msg.seg_cloud[curInd], point);
+                        surfFlat -> push_back(point);
+
+                        if(++smallestPickedNum >= 4){
+                            break;
+                        }
+                        
+                        segmentNeighborPicked[curInd] = 1;
+                        for(int l = 1; l <= 5; ++l){
+                            float dx = seg_msg.seg_cloud[curInd + l].x -
+                                       seg_msg.seg_cloud[curInd + l - 1].x;
+                            float dy = seg_msg.seg_cloud[curInd + l].y -
+                                       seg_msg.seg_cloud[curInd + l - 1].y;
+                            float dz = seg_msg.seg_cloud[curInd + l].z -
+                                       seg_msg.seg_cloud[curInd + l - 1].z;
+                            
+                            if(dx * dx + dy * dy + dz * dz > 0.05) break;
+                                segmentNeighborPicked[curInd + l] = 1;
+                        }
+                        for(int l = -1; l >= -5; --l){
+                            float dx = seg_msg.seg_cloud[curInd + l].x -
+                                       seg_msg.seg_cloud[curInd + l + 1].x;
+                            float dy = seg_msg.seg_cloud[curInd + l].y -
+                                       seg_msg.seg_cloud[curInd + l + 1].y;
+                            float dz = seg_msg.seg_cloud[curInd + l].z -
+                                       seg_msg.seg_cloud[curInd + l + 1].z;
+                            
+                            if(dx * dx + dy * dy + dz * dz > 0.05) break;
+                                segmentNeighborPicked[curInd + l] = 1;
+                        }
+                    }
+                }      
             }
         }
         
@@ -347,8 +391,7 @@ public:
         }
 
         // 组装all_cloud消息
-        pointType2MsgPoint(cornerSharp, all_cloud.corner_sharp);
-        pointType2MsgPoint(cornerLessSharp, all_cloud.corner_less_sharp);
+        pointType2MsgPoint(surfFlat, all_cloud.surf_flat);
         pointType2MsgPoint(groundSurfFlat, all_cloud.ground_flat);
         
         // 测试
@@ -398,7 +441,7 @@ public:
         }else{
             int cornerSharpNum = cornerSharp -> size();
             int groundFlatNum = groundSurfFlat -> size();
-           
+            std::chrono::time_point<std::chrono::system_clock> groundStr = std::chrono::system_clock::now();
             // 地面点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
@@ -475,7 +518,9 @@ public:
             }
             // RCLCPP_INFO(this -> get_logger(), "x%f, y%f, z%f, qx%f, qy%f, qz%F", 
             //     t[0], t[1], t[2], q[0], q[1], q[2]);
-
+            std::chrono::time_point<std::chrono::system_clock> groundEnd = std::chrono::system_clock::now();
+            // std::chrono::duration<double> ground_time = groundEnd - groundStr;
+            // RCLCPP_INFO(this -> get_logger(), "ground time: %fms", ground_time.count() * 1000);
             // 边缘点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
@@ -488,6 +533,7 @@ public:
                 PointType pointSel;
                 std::vector<int> pointSearchInd;
                 std::vector<float> pointSearchSqDis;
+                // qyx
                 Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], Eigen::Vector3d::UnitX()));
                 Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], Eigen::Vector3d::UnitY()));
                 Eigen::Matrix3d qyx;
@@ -556,7 +602,9 @@ public:
             }
             // RCLCPP_INFO(this -> get_logger(), "front end : x%f, y%f, z%f, qx%f, qy%f, qz%F", 
             //     t[0], t[1], t[2], q[0], q[1], q[2]);
-            
+            std::chrono::time_point<std::chrono::system_clock> cornerEnd = std::chrono::system_clock::now();
+            std::chrono::duration<double> corner_time = cornerEnd - groundEnd;
+            // RCLCPP_INFO(this -> get_logger(), "corner time: %fms", corner_time.count() * 1000);
         }
         // 消息中加入位姿
         all_cloud.trans_form.push_back(t[0]);
@@ -581,13 +629,11 @@ public:
         cloudTmp = cornerLessSharp;
         cornerLessSharp = cornerLast;
         cornerLast = cloudTmp;
-        RCLCPP_INFO(this -> get_logger(), "%ld", groundSurfLessFlat -> size());
+
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
         downSample(groundSurfLast);
-        RCLCPP_INFO(this -> get_logger(), "%ld", groundSurfLast -> size());
-
 
         kdtreeCornerLast -> setInputCloud(cornerLast);
         kdtreeGroundLast -> setInputCloud(groundSurfLast);

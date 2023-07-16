@@ -16,8 +16,7 @@
 #include "std_msgs/msg/detail/header__functions.h"
 // Member `trans_form`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
-// Member `corner_sharp`
-// Member `corner_less_sharp`
+// Member `surf_flat`
 // Member `surf_less_flat`
 // Member `ground_flat`
 // Member `ground_less_flat`
@@ -39,13 +38,8 @@ other_msgs__msg__AllCloud__init(other_msgs__msg__AllCloud * msg)
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
-  // corner_sharp
-  if (!other_msgs__msg__Point__Sequence__init(&msg->corner_sharp, 0)) {
-    other_msgs__msg__AllCloud__fini(msg);
-    return false;
-  }
-  // corner_less_sharp
-  if (!other_msgs__msg__Point__Sequence__init(&msg->corner_less_sharp, 0)) {
+  // surf_flat
+  if (!other_msgs__msg__Point__Sequence__init(&msg->surf_flat, 0)) {
     other_msgs__msg__AllCloud__fini(msg);
     return false;
   }
@@ -77,10 +71,8 @@ other_msgs__msg__AllCloud__fini(other_msgs__msg__AllCloud * msg)
   std_msgs__msg__Header__fini(&msg->header);
   // trans_form
   rosidl_runtime_c__float__Sequence__fini(&msg->trans_form);
-  // corner_sharp
-  other_msgs__msg__Point__Sequence__fini(&msg->corner_sharp);
-  // corner_less_sharp
-  other_msgs__msg__Point__Sequence__fini(&msg->corner_less_sharp);
+  // surf_flat
+  other_msgs__msg__Point__Sequence__fini(&msg->surf_flat);
   // surf_less_flat
   other_msgs__msg__Point__Sequence__fini(&msg->surf_less_flat);
   // ground_flat
@@ -107,15 +99,9 @@ other_msgs__msg__AllCloud__are_equal(const other_msgs__msg__AllCloud * lhs, cons
   {
     return false;
   }
-  // corner_sharp
+  // surf_flat
   if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->corner_sharp), &(rhs->corner_sharp)))
-  {
-    return false;
-  }
-  // corner_less_sharp
-  if (!other_msgs__msg__Point__Sequence__are_equal(
-      &(lhs->corner_less_sharp), &(rhs->corner_less_sharp)))
+      &(lhs->surf_flat), &(rhs->surf_flat)))
   {
     return false;
   }
@@ -160,15 +146,9 @@ other_msgs__msg__AllCloud__copy(
   {
     return false;
   }
-  // corner_sharp
+  // surf_flat
   if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->corner_sharp), &(output->corner_sharp)))
-  {
-    return false;
-  }
-  // corner_less_sharp
-  if (!other_msgs__msg__Point__Sequence__copy(
-      &(input->corner_less_sharp), &(output->corner_less_sharp)))
+      &(input->surf_flat), &(output->surf_flat)))
   {
     return false;
   }

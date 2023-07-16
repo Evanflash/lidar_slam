@@ -187,8 +187,8 @@ private:
                                curPoint.y * curPoint.y +
                                curPoint.z * curPoint.z);
 
-            // 排除距离过近的点
-            if(range < 2.0){
+            // 排除距离过近的点 或 距离过远的点
+            if(range < 0.2){
                 continue;
             }
 

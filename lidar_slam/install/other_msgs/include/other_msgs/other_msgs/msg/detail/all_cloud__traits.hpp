@@ -17,8 +17,7 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__traits.hpp"
-// Member 'corner_sharp'
-// Member 'corner_less_sharp'
+// Member 'surf_flat'
 // Member 'surf_less_flat'
 // Member 'ground_flat'
 // Member 'ground_less_flat'
@@ -60,32 +59,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: corner_sharp
+  // member: surf_flat
   {
-    if (msg.corner_sharp.size() == 0) {
-      out << "corner_sharp: []";
+    if (msg.surf_flat.size() == 0) {
+      out << "surf_flat: []";
     } else {
-      out << "corner_sharp: [";
-      size_t pending_items = msg.corner_sharp.size();
-      for (auto item : msg.corner_sharp) {
-        to_flow_style_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
-  // member: corner_less_sharp
-  {
-    if (msg.corner_less_sharp.size() == 0) {
-      out << "corner_less_sharp: []";
-    } else {
-      out << "corner_less_sharp: [";
-      size_t pending_items = msg.corner_less_sharp.size();
-      for (auto item : msg.corner_less_sharp) {
+      out << "surf_flat: [";
+      size_t pending_items = msg.surf_flat.size();
+      for (auto item : msg.surf_flat) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -184,35 +165,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: corner_sharp
+  // member: surf_flat
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.corner_sharp.size() == 0) {
-      out << "corner_sharp: []\n";
+    if (msg.surf_flat.size() == 0) {
+      out << "surf_flat: []\n";
     } else {
-      out << "corner_sharp:\n";
-      for (auto item : msg.corner_sharp) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "-\n";
-        to_block_style_yaml(item, out, indentation + 2);
-      }
-    }
-  }
-
-  // member: corner_less_sharp
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.corner_less_sharp.size() == 0) {
-      out << "corner_less_sharp: []\n";
-    } else {
-      out << "corner_less_sharp:\n";
-      for (auto item : msg.corner_less_sharp) {
+      out << "surf_flat:\n";
+      for (auto item : msg.surf_flat) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

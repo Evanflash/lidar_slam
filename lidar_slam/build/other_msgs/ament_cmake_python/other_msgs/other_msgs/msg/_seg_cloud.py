@@ -8,9 +8,7 @@
 # Member 'seg_ring_str_ind'
 # Member 'seg_ring_end_ind'
 # Member 'seg_range'
-# Member 'grd_ring_str_ind'
-# Member 'grd_ring_end_ind'
-# Member 'ground_range'
+# Member 'is_ground'
 import array  # noqa: E402, I100
 
 import builtins  # noqa: E402, I100
@@ -78,10 +76,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         '_seg_ring_end_ind',
         '_seg_cloud',
         '_seg_range',
-        '_grd_ring_str_ind',
-        '_grd_ring_end_ind',
-        '_ground_cloud',
-        '_ground_range',
+        '_is_ground',
     ]
 
     _fields_and_field_types = {
@@ -90,10 +85,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         'seg_ring_end_ind': 'sequence<int32>',
         'seg_cloud': 'sequence<other_msgs/Point>',
         'seg_range': 'sequence<float>',
-        'grd_ring_str_ind': 'sequence<int32>',
-        'grd_ring_end_ind': 'sequence<int32>',
-        'ground_cloud': 'sequence<other_msgs/Point>',
-        'ground_range': 'sequence<float>',
+        'is_ground': 'sequence<int32>',
     }
 
     SLOT_TYPES = (
@@ -103,9 +95,6 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
-        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
-        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
-        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
     )
 
     def __init__(self, **kwargs):
@@ -118,10 +107,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         self.seg_ring_end_ind = array.array('i', kwargs.get('seg_ring_end_ind', []))
         self.seg_cloud = kwargs.get('seg_cloud', [])
         self.seg_range = array.array('f', kwargs.get('seg_range', []))
-        self.grd_ring_str_ind = array.array('i', kwargs.get('grd_ring_str_ind', []))
-        self.grd_ring_end_ind = array.array('i', kwargs.get('grd_ring_end_ind', []))
-        self.ground_cloud = kwargs.get('ground_cloud', [])
-        self.ground_range = array.array('f', kwargs.get('ground_range', []))
+        self.is_ground = array.array('i', kwargs.get('is_ground', []))
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -162,13 +148,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
             return False
         if self.seg_range != other.seg_range:
             return False
-        if self.grd_ring_str_ind != other.grd_ring_str_ind:
-            return False
-        if self.grd_ring_end_ind != other.grd_ring_end_ind:
-            return False
-        if self.ground_cloud != other.ground_cloud:
-            return False
-        if self.ground_range != other.ground_range:
+        if self.is_ground != other.is_ground:
             return False
         return True
 
@@ -300,16 +280,16 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         self._seg_range = array.array('f', value)
 
     @builtins.property
-    def grd_ring_str_ind(self):
-        """Message field 'grd_ring_str_ind'."""
-        return self._grd_ring_str_ind
+    def is_ground(self):
+        """Message field 'is_ground'."""
+        return self._is_ground
 
-    @grd_ring_str_ind.setter
-    def grd_ring_str_ind(self, value):
+    @is_ground.setter
+    def is_ground(self, value):
         if isinstance(value, array.array):
             assert value.typecode == 'i', \
-                "The 'grd_ring_str_ind' array.array() must have the type code of 'i'"
-            self._grd_ring_str_ind = value
+                "The 'is_ground' array.array() must have the type code of 'i'"
+            self._is_ground = value
             return
         if __debug__:
             from collections.abc import Sequence
@@ -324,85 +304,5 @@ class SegCloud(metaclass=Metaclass_SegCloud):
                  not isinstance(value, UserString) and
                  all(isinstance(v, int) for v in value) and
                  all(val >= -2147483648 and val < 2147483648 for val in value)), \
-                "The 'grd_ring_str_ind' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
-        self._grd_ring_str_ind = array.array('i', value)
-
-    @builtins.property
-    def grd_ring_end_ind(self):
-        """Message field 'grd_ring_end_ind'."""
-        return self._grd_ring_end_ind
-
-    @grd_ring_end_ind.setter
-    def grd_ring_end_ind(self, value):
-        if isinstance(value, array.array):
-            assert value.typecode == 'i', \
-                "The 'grd_ring_end_ind' array.array() must have the type code of 'i'"
-            self._grd_ring_end_ind = value
-            return
-        if __debug__:
-            from collections.abc import Sequence
-            from collections.abc import Set
-            from collections import UserList
-            from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 all(isinstance(v, int) for v in value) and
-                 all(val >= -2147483648 and val < 2147483648 for val in value)), \
-                "The 'grd_ring_end_ind' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
-        self._grd_ring_end_ind = array.array('i', value)
-
-    @builtins.property
-    def ground_cloud(self):
-        """Message field 'ground_cloud'."""
-        return self._ground_cloud
-
-    @ground_cloud.setter
-    def ground_cloud(self, value):
-        if __debug__:
-            from other_msgs.msg import Point
-            from collections.abc import Sequence
-            from collections.abc import Set
-            from collections import UserList
-            from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 all(isinstance(v, Point) for v in value) and
-                 True), \
-                "The 'ground_cloud' field must be a set or sequence and each value of type 'Point'"
-        self._ground_cloud = value
-
-    @builtins.property
-    def ground_range(self):
-        """Message field 'ground_range'."""
-        return self._ground_range
-
-    @ground_range.setter
-    def ground_range(self, value):
-        if isinstance(value, array.array):
-            assert value.typecode == 'f', \
-                "The 'ground_range' array.array() must have the type code of 'f'"
-            self._ground_range = value
-            return
-        if __debug__:
-            from collections.abc import Sequence
-            from collections.abc import Set
-            from collections import UserList
-            from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 all(isinstance(v, float) for v in value) and
-                 all(not (val < -3.402823466e+38 or val > 3.402823466e+38) or math.isinf(val) for val in value)), \
-                "The 'ground_range' field must be a set or sequence and each value of type 'float' and each float in [-340282346600000016151267322115014000640.000000, 340282346600000016151267322115014000640.000000]"
-        self._ground_range = array.array('f', value)
+                "The 'is_ground' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
+        self._is_ground = array.array('i', value)

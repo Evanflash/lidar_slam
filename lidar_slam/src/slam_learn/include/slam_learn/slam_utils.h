@@ -53,6 +53,11 @@ struct smoothness{
     int index;          // 序号
 };
 
+struct pose{
+    Eigen::Quaterniond q;
+    Eigen::Vector3d t;
+};
+
 } // namespace lidarslam
 
 #endif // _LIDAR_SLAM_UTILS_H
