@@ -209,9 +209,10 @@ private:
             }
 
             float horizonAngle = std::atan2(curPoint.x, curPoint.y);
-            int colInd = -round((horizonAngle - M_PI_2) / x_resolution) + horizontal_scans * 0.5;
+            int colInd = (horizonAngle + 2 * M_PI) / x_resolution;
+            //-round((horizonAngle - M_PI_2) / x_resolution) + horizontal_scans * 0.5;
             if(colInd >= horizontal_scans){
-                colInd -= horizontal_scans;
+                colInd -= horizontal_scans / 2;
             }
             if(colInd < 0 || colInd >= horizontal_scans){
                 continue;
@@ -276,7 +277,7 @@ private:
         // 提取分割后点云
         int curInd = 0;
         for(int i = 0; i < vertical_scans; ++i){
-            seg_msg.seg_ring_str_ind[i] = curInd;
+            seg_msg.seg_ring_str_ind[i] = curInd - 1 + 5;
             for(int j = 0; j < horizontal_scans; ++j){
                 if((label_mat(i, j) > 0 && label_mat(i, j) != 999999) || ground_mat(i, j) == 1){
                     if(ground_mat(i, j) == 1 && j % 5 != 0) 
@@ -298,6 +299,8 @@ private:
             }
             seg_msg.seg_ring_end_ind[i] = curInd - 1 - 5;
         }
+
+        // RCLCPP_INFO(this -> get_logger(), "%ld", seg_msg.seg_cloud.size());
     }
 
    /**
@@ -350,7 +353,7 @@ private:
         }
 
         // 判断分割点云是否合法
-        if((all_pushed.size() >= 30 && static_cast<int>(lineHash.size()) >= 3)|| 
+        if((all_pushed.size() >= 30)|| 
             (static_cast<int>(all_pushed.size()) >= segment_valid_point_num && 
              static_cast<int>(lineHash.size()) >= segment_valid_line_num)){
             ++label_count;

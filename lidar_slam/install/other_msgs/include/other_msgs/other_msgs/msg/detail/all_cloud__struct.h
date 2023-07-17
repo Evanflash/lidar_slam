@@ -23,9 +23,8 @@ extern "C"
 #include "std_msgs/msg/detail/header__struct.h"
 // Member 'trans_form'
 #include "rosidl_runtime_c/primitives_sequence.h"
-// Member 'surf_flat'
+// Member 'corner_less_sharp'
 // Member 'surf_less_flat'
-// Member 'ground_flat'
 // Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__struct.h"
 
@@ -38,13 +37,11 @@ typedef struct other_msgs__msg__AllCloud
   std_msgs__msg__Header header;
   /// 6自由度参数，x y z qx qy qz
   rosidl_runtime_c__float__Sequence trans_form;
-  /// 平面特征点
-  other_msgs__msg__Point__Sequence surf_flat;
-  /// 所有平面点
+  /// 边缘点
+  other_msgs__msg__Point__Sequence corner_less_sharp;
+  /// 平面点
   other_msgs__msg__Point__Sequence surf_less_flat;
-  /// 地面特征点
-  other_msgs__msg__Point__Sequence ground_flat;
-  /// 所有地面点
+  /// 地面点
   other_msgs__msg__Point__Sequence ground_less_flat;
 } other_msgs__msg__AllCloud;
 

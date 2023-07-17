@@ -1,0 +1,397 @@
+[0.000000] (-) TimerEvent: {}
+[0.000404] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.000706] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.000768] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.099671] (-) TimerEvent: {}
+[0.200016] (-) TimerEvent: {}
+[0.300283] (-) TimerEvent: {}
+[0.308775] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.365919] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.367170] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2146'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2118,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2118'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/10f89d2a_1992_4871_8b28_e566ecaec669'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.1H9371'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.1241'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.405120] (-) TimerEvent: {}
+[0.505351] (-) TimerEvent: {}
+[0.605655] (-) TimerEvent: {}
+[0.705966] (-) TimerEvent: {}
+[0.806273] (-) TimerEvent: {}
+[0.906573] (-) TimerEvent: {}
+[1.006884] (-) TimerEvent: {}
+[1.107140] (-) TimerEvent: {}
+[1.207431] (-) TimerEvent: {}
+[1.307705] (-) TimerEvent: {}
+[1.407977] (-) TimerEvent: {}
+[1.508267] (-) TimerEvent: {}
+[1.608519] (-) TimerEvent: {}
+[1.708786] (-) TimerEvent: {}
+[1.713090] (slam_learn) StdoutLine: {'line': b'[ 33%] Built target data_process_node\n'}
+[1.808874] (-) TimerEvent: {}
+[1.875396] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target back_end_node\x1b[0m\n'}
+[1.908967] (-) TimerEvent: {}
+[1.951477] (slam_learn) StdoutLine: {'line': b'[ 50%] \x1b[32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o\x1b[0m\n'}
+[2.009077] (-) TimerEvent: {}
+[2.109364] (-) TimerEvent: {}
+[2.209649] (-) TimerEvent: {}
+[2.309926] (-) TimerEvent: {}
+[2.410205] (-) TimerEvent: {}
+[2.510476] (-) TimerEvent: {}
+[2.610731] (-) TimerEvent: {}
+[2.710965] (-) TimerEvent: {}
+[2.811223] (-) TimerEvent: {}
+[2.911478] (-) TimerEvent: {}
+[3.011750] (-) TimerEvent: {}
+[3.112018] (-) TimerEvent: {}
+[3.212285] (-) TimerEvent: {}
+[3.312535] (-) TimerEvent: {}
+[3.412833] (-) TimerEvent: {}
+[3.513163] (-) TimerEvent: {}
+[3.613477] (-) TimerEvent: {}
+[3.713740] (-) TimerEvent: {}
+[3.814043] (-) TimerEvent: {}
+[3.914320] (-) TimerEvent: {}
+[4.014605] (-) TimerEvent: {}
+[4.114905] (-) TimerEvent: {}
+[4.215261] (-) TimerEvent: {}
+[4.315524] (-) TimerEvent: {}
+[4.415803] (-) TimerEvent: {}
+[4.516109] (-) TimerEvent: {}
+[4.616369] (-) TimerEvent: {}
+[4.716682] (-) TimerEvent: {}
+[4.816937] (-) TimerEvent: {}
+[4.917229] (-) TimerEvent: {}
+[5.017518] (-) TimerEvent: {}
+[5.117805] (-) TimerEvent: {}
+[5.218140] (-) TimerEvent: {}
+[5.318436] (-) TimerEvent: {}
+[5.418804] (-) TimerEvent: {}
+[5.519109] (-) TimerEvent: {}
+[5.619553] (-) TimerEvent: {}
+[5.719951] (-) TimerEvent: {}
+[5.820307] (-) TimerEvent: {}
+[5.920616] (-) TimerEvent: {}
+[6.020883] (-) TimerEvent: {}
+[6.121171] (-) TimerEvent: {}
+[6.221490] (-) TimerEvent: {}
+[6.321776] (-) TimerEvent: {}
+[6.422128] (-) TimerEvent: {}
+[6.522497] (-) TimerEvent: {}
+[6.622888] (-) TimerEvent: {}
+[6.723185] (-) TimerEvent: {}
+[6.823491] (-) TimerEvent: {}
+[6.923788] (-) TimerEvent: {}
+[7.024088] (-) TimerEvent: {}
+[7.124363] (-) TimerEvent: {}
+[7.224674] (-) TimerEvent: {}
+[7.325033] (-) TimerEvent: {}
+[7.425327] (-) TimerEvent: {}
+[7.525610] (-) TimerEvent: {}
+[7.625921] (-) TimerEvent: {}
+[7.726178] (-) TimerEvent: {}
+[7.826454] (-) TimerEvent: {}
+[7.926753] (-) TimerEvent: {}
+[8.027036] (-) TimerEvent: {}
+[8.127386] (-) TimerEvent: {}
+[8.227671] (-) TimerEvent: {}
+[8.327926] (-) TimerEvent: {}
+[8.428248] (-) TimerEvent: {}
+[8.528544] (-) TimerEvent: {}
+[8.628834] (-) TimerEvent: {}
+[8.729116] (-) TimerEvent: {}
+[8.829397] (-) TimerEvent: {}
+[8.929742] (-) TimerEvent: {}
+[9.030011] (-) TimerEvent: {}
+[9.130298] (-) TimerEvent: {}
+[9.230593] (-) TimerEvent: {}
+[9.330935] (-) TimerEvent: {}
+[9.431241] (-) TimerEvent: {}
+[9.531565] (-) TimerEvent: {}
+[9.631843] (-) TimerEvent: {}
+[9.732128] (-) TimerEvent: {}
+[9.832394] (-) TimerEvent: {}
+[9.932677] (-) TimerEvent: {}
+[10.032963] (-) TimerEvent: {}
+[10.133221] (-) TimerEvent: {}
+[10.233485] (-) TimerEvent: {}
+[10.333773] (-) TimerEvent: {}
+[10.434077] (-) TimerEvent: {}
+[10.534418] (-) TimerEvent: {}
+[10.634717] (-) TimerEvent: {}
+[10.734991] (-) TimerEvent: {}
+[10.835285] (-) TimerEvent: {}
+[10.935566] (-) TimerEvent: {}
+[11.035857] (-) TimerEvent: {}
+[11.136177] (-) TimerEvent: {}
+[11.236486] (-) TimerEvent: {}
+[11.336811] (-) TimerEvent: {}
+[11.437072] (-) TimerEvent: {}
+[11.537394] (-) TimerEvent: {}
+[11.637669] (-) TimerEvent: {}
+[11.737941] (-) TimerEvent: {}
+[11.838225] (-) TimerEvent: {}
+[11.938521] (-) TimerEvent: {}
+[12.038794] (-) TimerEvent: {}
+[12.139062] (-) TimerEvent: {}
+[12.239337] (-) TimerEvent: {}
+[12.339639] (-) TimerEvent: {}
+[12.439910] (-) TimerEvent: {}
+[12.540161] (-) TimerEvent: {}
+[12.640465] (-) TimerEvent: {}
+[12.740768] (-) TimerEvent: {}
+[12.841084] (-) TimerEvent: {}
+[12.941365] (-) TimerEvent: {}
+[13.041648] (-) TimerEvent: {}
+[13.141931] (-) TimerEvent: {}
+[13.242198] (-) TimerEvent: {}
+[13.342482] (-) TimerEvent: {}
+[13.442754] (-) TimerEvent: {}
+[13.543029] (-) TimerEvent: {}
+[13.643334] (-) TimerEvent: {}
+[13.743583] (-) TimerEvent: {}
+[13.843852] (-) TimerEvent: {}
+[13.944189] (-) TimerEvent: {}
+[14.044471] (-) TimerEvent: {}
+[14.144770] (-) TimerEvent: {}
+[14.245063] (-) TimerEvent: {}
+[14.345344] (-) TimerEvent: {}
+[14.445614] (-) TimerEvent: {}
+[14.545949] (-) TimerEvent: {}
+[14.646236] (-) TimerEvent: {}
+[14.746518] (-) TimerEvent: {}
+[14.846834] (-) TimerEvent: {}
+[14.947162] (-) TimerEvent: {}
+[15.047427] (-) TimerEvent: {}
+[15.147711] (-) TimerEvent: {}
+[15.247992] (-) TimerEvent: {}
+[15.348289] (-) TimerEvent: {}
+[15.448568] (-) TimerEvent: {}
+[15.548841] (-) TimerEvent: {}
+[15.649111] (-) TimerEvent: {}
+[15.749450] (-) TimerEvent: {}
+[15.849757] (-) TimerEvent: {}
+[15.950038] (-) TimerEvent: {}
+[16.050322] (-) TimerEvent: {}
+[16.150607] (-) TimerEvent: {}
+[16.250881] (-) TimerEvent: {}
+[16.351153] (-) TimerEvent: {}
+[16.451416] (-) TimerEvent: {}
+[16.551706] (-) TimerEvent: {}
+[16.652012] (-) TimerEvent: {}
+[16.752284] (-) TimerEvent: {}
+[16.852575] (-) TimerEvent: {}
+[16.952840] (-) TimerEvent: {}
+[17.053116] (-) TimerEvent: {}
+[17.153425] (-) TimerEvent: {}
+[17.253710] (-) TimerEvent: {}
+[17.353988] (-) TimerEvent: {}
+[17.454331] (-) TimerEvent: {}
+[17.554617] (-) TimerEvent: {}
+[17.654905] (-) TimerEvent: {}
+[17.755211] (-) TimerEvent: {}
+[17.855516] (-) TimerEvent: {}
+[17.955780] (-) TimerEvent: {}
+[18.056055] (-) TimerEvent: {}
+[18.156322] (-) TimerEvent: {}
+[18.256605] (-) TimerEvent: {}
+[18.356898] (-) TimerEvent: {}
+[18.457166] (-) TimerEvent: {}
+[18.557501] (-) TimerEvent: {}
+[18.657793] (-) TimerEvent: {}
+[18.758073] (-) TimerEvent: {}
+[18.858371] (-) TimerEvent: {}
+[18.958648] (-) TimerEvent: {}
+[19.058951] (-) TimerEvent: {}
+[19.159260] (-) TimerEvent: {}
+[19.259538] (-) TimerEvent: {}
+[19.359849] (-) TimerEvent: {}
+[19.460137] (-) TimerEvent: {}
+[19.560425] (-) TimerEvent: {}
+[19.660703] (-) TimerEvent: {}
+[19.761019] (-) TimerEvent: {}
+[19.861302] (-) TimerEvent: {}
+[19.961610] (-) TimerEvent: {}
+[20.061908] (-) TimerEvent: {}
+[20.162175] (-) TimerEvent: {}
+[20.262472] (-) TimerEvent: {}
+[20.362747] (-) TimerEvent: {}
+[20.463023] (-) TimerEvent: {}
+[20.563323] (-) TimerEvent: {}
+[20.663628] (-) TimerEvent: {}
+[20.763925] (-) TimerEvent: {}
+[20.864253] (-) TimerEvent: {}
+[20.964545] (-) TimerEvent: {}
+[21.064857] (-) TimerEvent: {}
+[21.165157] (-) TimerEvent: {}
+[21.265443] (-) TimerEvent: {}
+[21.365771] (-) TimerEvent: {}
+[21.466049] (-) TimerEvent: {}
+[21.566334] (-) TimerEvent: {}
+[21.666645] (-) TimerEvent: {}
+[21.766909] (-) TimerEvent: {}
+[21.867218] (-) TimerEvent: {}
+[21.967481] (-) TimerEvent: {}
+[22.067795] (-) TimerEvent: {}
+[22.168091] (-) TimerEvent: {}
+[22.268353] (-) TimerEvent: {}
+[22.368686] (-) TimerEvent: {}
+[22.468969] (-) TimerEvent: {}
+[22.569296] (-) TimerEvent: {}
+[22.669582] (-) TimerEvent: {}
+[22.769902] (-) TimerEvent: {}
+[22.870223] (-) TimerEvent: {}
+[22.970506] (-) TimerEvent: {}
+[23.070781] (-) TimerEvent: {}
+[23.171102] (-) TimerEvent: {}
+[23.271394] (-) TimerEvent: {}
+[23.371658] (-) TimerEvent: {}
+[23.471964] (-) TimerEvent: {}
+[23.572216] (-) TimerEvent: {}
+[23.672523] (-) TimerEvent: {}
+[23.772780] (-) TimerEvent: {}
+[23.873102] (-) TimerEvent: {}
+[23.973389] (-) TimerEvent: {}
+[24.073679] (-) TimerEvent: {}
+[24.173948] (-) TimerEvent: {}
+[24.274238] (-) TimerEvent: {}
+[24.374504] (-) TimerEvent: {}
+[24.380953] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Core:164\x1b[m\x1b[K,\n'}
+[24.381249] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/usr/include/eigen3/Eigen/Dense:1\x1b[m\x1b[K,\n'}
+[24.381342] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16\x1b[m\x1b[K,\n'}
+[24.381420] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:1\x1b[m\x1b[K:\n'}
+[24.381503] (slam_learn) StderrLine: {'line': b'/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::Matrix<float, 3, 3>; Func = Eigen::internal::assign_op<double, float>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[24.381582] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:858:27:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&, const Func&, typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::Matrix<float, 3, 3>; Func = Eigen::internal::assign_op<double, float>; typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type = void*; typename Eigen::internal::evaluator_traits<SrcXprType>::Shape = Eigen::DenseShape]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.381674] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:836:18:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::Matrix<float, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.381749] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:779:32:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KDerived& Eigen::PlainObjectBase<Derived>::_set(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<float, 3, 3>; Derived = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.381824] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:225:24:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::DenseBase<OtherDerived>&) [with OtherDerived = Eigen::Matrix<float, 3, 3>; _Scalar = double; int _Rows = 3; int _Cols = 3; int _Options = 0; int _MaxRows = 3; int _MaxCols = 3]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.381910] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h:437:13:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::SelfAdjointEigenSolver<MatrixType>& Eigen::SelfAdjointEigenSolver<_MatrixType>::compute(const Eigen::EigenBase<OtherDerived>&, int) [with InputType = Eigen::Matrix<float, 3, 3>; _MatrixType = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.381986] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h:181:14:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::SelfAdjointEigenSolver<_MatrixType>::SelfAdjointEigenSolver(const Eigen::EigenBase<OtherDerived>&, int) [with InputType = Eigen::Matrix<float, 3, 3>; _MatrixType = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.382056] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:405:84:\x1b[m\x1b[K   required from here\n'}
+[24.382134] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kstatic assertion failed: YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY\n'}
+[24.382206] (slam_learn) StderrLine: {'line': b'  888 |   \x1b[01;31m\x1b[KEIGEN_CHECK_BINARY_COMPATIBILIY\x1b[m\x1b[K(Func,typename ActualDstTypeCleaned::Scalar,typename Src::Scalar);\n'}
+[24.382274] (slam_learn) StderrLine: {'line': b'      |   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[24.382433] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KEigen::internal::has_ReturnType<Eigen::ScalarBinaryOpTraits<double, float, Eigen::internal::assign_op<double, float> > >::value\x1b[m\x1b[K\xe2\x80\x99 evaluates to false\n'}
+[24.474612] (-) TimerEvent: {}
+[24.574912] (-) TimerEvent: {}
+[24.675213] (-) TimerEvent: {}
+[24.721599] (slam_learn) StderrLine: {'line': b'/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h: In instantiation of \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment_no_alias(Dst&, const Src&, const Func&) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>; Func = Eigen::internal::assign_op<double, float>]\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[24.721807] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:858:27:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&, const Func&, typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>; Func = Eigen::internal::assign_op<double, float>; typename Eigen::internal::enable_if<(! Eigen::internal::evaluator_assume_aliasing<Src>::value), void*>::type = void*; typename Eigen::internal::evaluator_traits<SrcXprType>::Shape = Eigen::TriangularShape]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.721920] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:836:18:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[Kvoid Eigen::internal::call_assignment(Dst&, const Src&) [with Dst = Eigen::Matrix<double, 3, 3>; Src = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.721996] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Assign.h:75:28:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KDerived& Eigen::MatrixBase<Derived>::operator=(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>; Derived = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.722068] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/PlainObjectBase.h:628:22:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KDerived& Eigen::PlainObjectBase<Derived>::operator=(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>; Derived = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.722138] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/Matrix.h:238:29:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>& Eigen::Matrix<_Scalar, _Rows, _Cols, _Options, _MaxRows, _MaxCols>::operator=(const Eigen::EigenBase<OtherDerived>&) [with OtherDerived = Eigen::TriangularView<const Eigen::Matrix<float, 3, 3>, 1>; _Scalar = double; int _Rows = 3; int _Cols = 3; int _Options = 0; int _MaxRows = 3; int _MaxCols = 3]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.722212] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h:452:7:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::SelfAdjointEigenSolver<MatrixType>& Eigen::SelfAdjointEigenSolver<_MatrixType>::compute(const Eigen::EigenBase<OtherDerived>&, int) [with InputType = Eigen::Matrix<float, 3, 3>; _MatrixType = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.722279] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Eigenvalues/SelfAdjointEigenSolver.h:181:14:\x1b[m\x1b[K   required from \xe2\x80\x98\x1b[01m\x1b[KEigen::SelfAdjointEigenSolver<_MatrixType>::SelfAdjointEigenSolver(const Eigen::EigenBase<OtherDerived>&, int) [with InputType = Eigen::Matrix<float, 3, 3>; _MatrixType = Eigen::Matrix<double, 3, 3>]\x1b[m\x1b[K\xe2\x80\x99\n'}
+[24.722347] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:405:84:\x1b[m\x1b[K   required from here\n'}
+[24.722414] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kstatic assertion failed: YOU_MIXED_DIFFERENT_NUMERIC_TYPES__YOU_NEED_TO_USE_THE_CAST_METHOD_OF_MATRIXBASE_TO_CAST_NUMERIC_TYPES_EXPLICITLY\n'}
+[24.722487] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/usr/include/eigen3/Eigen/src/Core/AssignEvaluator.h:888:3:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KEigen::internal::has_ReturnType<Eigen::ScalarBinaryOpTraits<double, float, Eigen::internal::assign_op<double, float> > >::value\x1b[m\x1b[K\xe2\x80\x99 evaluates to false\n'}
+[24.775295] (-) TimerEvent: {}
+[24.875578] (-) TimerEvent: {}
+[24.975863] (-) TimerEvent: {}
+[25.076156] (-) TimerEvent: {}
+[25.176447] (-) TimerEvent: {}
+[25.276768] (-) TimerEvent: {}
+[25.377065] (-) TimerEvent: {}
+[25.477363] (-) TimerEvent: {}
+[25.577671] (-) TimerEvent: {}
+[25.677953] (-) TimerEvent: {}
+[25.778242] (-) TimerEvent: {}
+[25.878500] (-) TimerEvent: {}
+[25.978784] (-) TimerEvent: {}
+[26.079058] (-) TimerEvent: {}
+[26.179323] (-) TimerEvent: {}
+[26.279584] (-) TimerEvent: {}
+[26.379853] (-) TimerEvent: {}
+[26.480160] (-) TimerEvent: {}
+[26.580449] (-) TimerEvent: {}
+[26.680725] (-) TimerEvent: {}
+[26.780996] (-) TimerEvent: {}
+[26.881256] (-) TimerEvent: {}
+[26.981497] (-) TimerEvent: {}
+[27.081807] (-) TimerEvent: {}
+[27.182140] (-) TimerEvent: {}
+[27.282402] (-) TimerEvent: {}
+[27.382695] (-) TimerEvent: {}
+[27.482965] (-) TimerEvent: {}
+[27.583281] (-) TimerEvent: {}
+[27.683567] (-) TimerEvent: {}
+[27.783853] (-) TimerEvent: {}
+[27.884169] (-) TimerEvent: {}
+[27.984442] (-) TimerEvent: {}
+[28.084741] (-) TimerEvent: {}
+[28.185018] (-) TimerEvent: {}
+[28.285306] (-) TimerEvent: {}
+[28.385580] (-) TimerEvent: {}
+[28.485836] (-) TimerEvent: {}
+[28.586125] (-) TimerEvent: {}
+[28.686390] (-) TimerEvent: {}
+[28.786661] (-) TimerEvent: {}
+[28.886975] (-) TimerEvent: {}
+[28.987251] (-) TimerEvent: {}
+[29.087595] (-) TimerEvent: {}
+[29.187886] (-) TimerEvent: {}
+[29.288199] (-) TimerEvent: {}
+[29.388468] (-) TimerEvent: {}
+[29.488719] (-) TimerEvent: {}
+[29.588989] (-) TimerEvent: {}
+[29.689326] (-) TimerEvent: {}
+[29.789630] (-) TimerEvent: {}
+[29.889946] (-) TimerEvent: {}
+[29.990219] (-) TimerEvent: {}
+[30.090543] (-) TimerEvent: {}
+[30.190862] (-) TimerEvent: {}
+[30.291159] (-) TimerEvent: {}
+[30.391442] (-) TimerEvent: {}
+[30.491727] (-) TimerEvent: {}
+[30.592028] (-) TimerEvent: {}
+[30.692292] (-) TimerEvent: {}
+[30.792597] (-) TimerEvent: {}
+[30.892894] (-) TimerEvent: {}
+[30.993177] (-) TimerEvent: {}
+[31.093507] (-) TimerEvent: {}
+[31.193796] (-) TimerEvent: {}
+[31.294080] (-) TimerEvent: {}
+[31.394354] (-) TimerEvent: {}
+[31.494641] (-) TimerEvent: {}
+[31.594967] (-) TimerEvent: {}
+[31.695245] (-) TimerEvent: {}
+[31.795536] (-) TimerEvent: {}
+[31.895835] (-) TimerEvent: {}
+[31.996148] (-) TimerEvent: {}
+[32.096465] (-) TimerEvent: {}
+[32.196726] (-) TimerEvent: {}
+[32.297031] (-) TimerEvent: {}
+[32.397305] (-) TimerEvent: {}
+[32.497624] (-) TimerEvent: {}
+[32.597914] (-) TimerEvent: {}
+[32.698228] (-) TimerEvent: {}
+[32.798547] (-) TimerEvent: {}
+[32.898838] (-) TimerEvent: {}
+[32.999066] (-) TimerEvent: {}
+[33.099330] (-) TimerEvent: {}
+[33.199614] (-) TimerEvent: {}
+[33.299921] (-) TimerEvent: {}
+[33.400213] (-) TimerEvent: {}
+[33.500470] (-) TimerEvent: {}
+[33.600772] (-) TimerEvent: {}
+[33.701064] (-) TimerEvent: {}
+[33.801379] (-) TimerEvent: {}
+[33.901648] (-) TimerEvent: {}
+[34.002008] (-) TimerEvent: {}
+[34.102319] (-) TimerEvent: {}
+[34.202603] (-) TimerEvent: {}
+[34.302888] (-) TimerEvent: {}
+[34.403203] (-) TimerEvent: {}
+[34.503511] (-) TimerEvent: {}
+[34.603851] (-) TimerEvent: {}
+[34.704134] (-) TimerEvent: {}
+[34.804467] (-) TimerEvent: {}
+[34.904733] (-) TimerEvent: {}
+[35.005047] (-) TimerEvent: {}
+[35.105352] (-) TimerEvent: {}
+[35.205658] (-) TimerEvent: {}
+[35.222014] (slam_learn) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/back_end_node.dir/build.make:76: CMakeFiles/back_end_node.dir/src/back_end.cpp.o] Error 1\n'}
+[35.222543] (slam_learn) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:193: CMakeFiles/back_end_node.dir/all] Error 2\n'}
+[35.222795] (slam_learn) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[35.225733] (slam_learn) CommandEnded: {'returncode': 2}
+[35.305729] (-) TimerEvent: {}
+[35.405976] (-) TimerEvent: {}
+[35.506261] (-) TimerEvent: {}
+[35.576436] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 2}
+[35.587203] (-) EventReactorShutdown: {}

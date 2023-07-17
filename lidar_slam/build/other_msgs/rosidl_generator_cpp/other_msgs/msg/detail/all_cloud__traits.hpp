@@ -17,9 +17,8 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__traits.hpp"
-// Member 'surf_flat'
+// Member 'corner_less_sharp'
 // Member 'surf_less_flat'
-// Member 'ground_flat'
 // Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__traits.hpp"
 
@@ -59,14 +58,14 @@ inline void to_flow_style_yaml(
     out << ", ";
   }
 
-  // member: surf_flat
+  // member: corner_less_sharp
   {
-    if (msg.surf_flat.size() == 0) {
-      out << "surf_flat: []";
+    if (msg.corner_less_sharp.size() == 0) {
+      out << "corner_less_sharp: []";
     } else {
-      out << "surf_flat: [";
-      size_t pending_items = msg.surf_flat.size();
-      for (auto item : msg.surf_flat) {
+      out << "corner_less_sharp: [";
+      size_t pending_items = msg.corner_less_sharp.size();
+      for (auto item : msg.corner_less_sharp) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -85,24 +84,6 @@ inline void to_flow_style_yaml(
       out << "surf_less_flat: [";
       size_t pending_items = msg.surf_less_flat.size();
       for (auto item : msg.surf_less_flat) {
-        to_flow_style_yaml(item, out);
-        if (--pending_items > 0) {
-          out << ", ";
-        }
-      }
-      out << "]";
-    }
-    out << ", ";
-  }
-
-  // member: ground_flat
-  {
-    if (msg.ground_flat.size() == 0) {
-      out << "ground_flat: []";
-    } else {
-      out << "ground_flat: [";
-      size_t pending_items = msg.ground_flat.size();
-      for (auto item : msg.ground_flat) {
         to_flow_style_yaml(item, out);
         if (--pending_items > 0) {
           out << ", ";
@@ -165,16 +146,16 @@ inline void to_block_style_yaml(
     }
   }
 
-  // member: surf_flat
+  // member: corner_less_sharp
   {
     if (indentation > 0) {
       out << std::string(indentation, ' ');
     }
-    if (msg.surf_flat.size() == 0) {
-      out << "surf_flat: []\n";
+    if (msg.corner_less_sharp.size() == 0) {
+      out << "corner_less_sharp: []\n";
     } else {
-      out << "surf_flat:\n";
-      for (auto item : msg.surf_flat) {
+      out << "corner_less_sharp:\n";
+      for (auto item : msg.corner_less_sharp) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }
@@ -194,25 +175,6 @@ inline void to_block_style_yaml(
     } else {
       out << "surf_less_flat:\n";
       for (auto item : msg.surf_less_flat) {
-        if (indentation > 0) {
-          out << std::string(indentation, ' ');
-        }
-        out << "-\n";
-        to_block_style_yaml(item, out, indentation + 2);
-      }
-    }
-  }
-
-  // member: ground_flat
-  {
-    if (indentation > 0) {
-      out << std::string(indentation, ' ');
-    }
-    if (msg.ground_flat.size() == 0) {
-      out << "ground_flat: []\n";
-    } else {
-      out << "ground_flat:\n";
-      for (auto item : msg.ground_flat) {
         if (indentation > 0) {
           out << std::string(indentation, ' ');
         }

@@ -17,19 +17,15 @@ module other_msgs {
       sequence<float> trans_form;
 
       @verbatim (language="comment", text=
-        "平面特征点")
-      sequence<other_msgs::msg::Point> surf_flat;
+        "边缘点")
+      sequence<other_msgs::msg::Point> corner_less_sharp;
 
       @verbatim (language="comment", text=
-        "所有平面点")
+        "平面点")
       sequence<other_msgs::msg::Point> surf_less_flat;
 
       @verbatim (language="comment", text=
-        "地面特征点")
-      sequence<other_msgs::msg::Point> ground_flat;
-
-      @verbatim (language="comment", text=
-        "所有地面点")
+        "地面点")
       sequence<other_msgs::msg::Point> ground_less_flat;
     };
   };

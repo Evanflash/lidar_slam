@@ -37,15 +37,15 @@ private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_ground_flat
+class Init_AllCloud_surf_less_flat
 {
 public:
-  explicit Init_AllCloud_ground_flat(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_surf_less_flat(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_ground_less_flat ground_flat(::other_msgs::msg::AllCloud::_ground_flat_type arg)
+  Init_AllCloud_ground_less_flat surf_less_flat(::other_msgs::msg::AllCloud::_surf_less_flat_type arg)
   {
-    msg_.ground_flat = std::move(arg);
+    msg_.surf_less_flat = std::move(arg);
     return Init_AllCloud_ground_less_flat(msg_);
   }
 
@@ -53,31 +53,15 @@ private:
   ::other_msgs::msg::AllCloud msg_;
 };
 
-class Init_AllCloud_surf_less_flat
+class Init_AllCloud_corner_less_sharp
 {
 public:
-  explicit Init_AllCloud_surf_less_flat(::other_msgs::msg::AllCloud & msg)
+  explicit Init_AllCloud_corner_less_sharp(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_ground_flat surf_less_flat(::other_msgs::msg::AllCloud::_surf_less_flat_type arg)
+  Init_AllCloud_surf_less_flat corner_less_sharp(::other_msgs::msg::AllCloud::_corner_less_sharp_type arg)
   {
-    msg_.surf_less_flat = std::move(arg);
-    return Init_AllCloud_ground_flat(msg_);
-  }
-
-private:
-  ::other_msgs::msg::AllCloud msg_;
-};
-
-class Init_AllCloud_surf_flat
-{
-public:
-  explicit Init_AllCloud_surf_flat(::other_msgs::msg::AllCloud & msg)
-  : msg_(msg)
-  {}
-  Init_AllCloud_surf_less_flat surf_flat(::other_msgs::msg::AllCloud::_surf_flat_type arg)
-  {
-    msg_.surf_flat = std::move(arg);
+    msg_.corner_less_sharp = std::move(arg);
     return Init_AllCloud_surf_less_flat(msg_);
   }
 
@@ -91,10 +75,10 @@ public:
   explicit Init_AllCloud_trans_form(::other_msgs::msg::AllCloud & msg)
   : msg_(msg)
   {}
-  Init_AllCloud_surf_flat trans_form(::other_msgs::msg::AllCloud::_trans_form_type arg)
+  Init_AllCloud_corner_less_sharp trans_form(::other_msgs::msg::AllCloud::_trans_form_type arg)
   {
     msg_.trans_form = std::move(arg);
-    return Init_AllCloud_surf_flat(msg_);
+    return Init_AllCloud_corner_less_sharp(msg_);
   }
 
 private:

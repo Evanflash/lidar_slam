@@ -70,28 +70,22 @@ class AllCloud(metaclass=Metaclass_AllCloud):
     __slots__ = [
         '_header',
         '_trans_form',
-        '_corner_sharp',
         '_corner_less_sharp',
         '_surf_less_flat',
-        '_ground_flat',
         '_ground_less_flat',
     ]
 
     _fields_and_field_types = {
         'header': 'std_msgs/Header',
         'trans_form': 'sequence<float>',
-        'corner_sharp': 'sequence<other_msgs/Point>',
         'corner_less_sharp': 'sequence<other_msgs/Point>',
         'surf_less_flat': 'sequence<other_msgs/Point>',
-        'ground_flat': 'sequence<other_msgs/Point>',
         'ground_less_flat': 'sequence<other_msgs/Point>',
     }
 
     SLOT_TYPES = (
         rosidl_parser.definition.NamespacedType(['std_msgs', 'msg'], 'Header'),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
-        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
-        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
@@ -104,10 +98,8 @@ class AllCloud(metaclass=Metaclass_AllCloud):
         from std_msgs.msg import Header
         self.header = kwargs.get('header', Header())
         self.trans_form = array.array('f', kwargs.get('trans_form', []))
-        self.corner_sharp = kwargs.get('corner_sharp', [])
         self.corner_less_sharp = kwargs.get('corner_less_sharp', [])
         self.surf_less_flat = kwargs.get('surf_less_flat', [])
-        self.ground_flat = kwargs.get('ground_flat', [])
         self.ground_less_flat = kwargs.get('ground_less_flat', [])
 
     def __repr__(self):
@@ -143,13 +135,9 @@ class AllCloud(metaclass=Metaclass_AllCloud):
             return False
         if self.trans_form != other.trans_form:
             return False
-        if self.corner_sharp != other.corner_sharp:
-            return False
         if self.corner_less_sharp != other.corner_less_sharp:
             return False
         if self.surf_less_flat != other.surf_less_flat:
-            return False
-        if self.ground_flat != other.ground_flat:
             return False
         if self.ground_less_flat != other.ground_less_flat:
             return False
@@ -203,30 +191,6 @@ class AllCloud(metaclass=Metaclass_AllCloud):
         self._trans_form = array.array('f', value)
 
     @builtins.property
-    def corner_sharp(self):
-        """Message field 'corner_sharp'."""
-        return self._corner_sharp
-
-    @corner_sharp.setter
-    def corner_sharp(self, value):
-        if __debug__:
-            from other_msgs.msg import Point
-            from collections.abc import Sequence
-            from collections.abc import Set
-            from collections import UserList
-            from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 all(isinstance(v, Point) for v in value) and
-                 True), \
-                "The 'corner_sharp' field must be a set or sequence and each value of type 'Point'"
-        self._corner_sharp = value
-
-    @builtins.property
     def corner_less_sharp(self):
         """Message field 'corner_less_sharp'."""
         return self._corner_less_sharp
@@ -273,30 +237,6 @@ class AllCloud(metaclass=Metaclass_AllCloud):
                  True), \
                 "The 'surf_less_flat' field must be a set or sequence and each value of type 'Point'"
         self._surf_less_flat = value
-
-    @builtins.property
-    def ground_flat(self):
-        """Message field 'ground_flat'."""
-        return self._ground_flat
-
-    @ground_flat.setter
-    def ground_flat(self, value):
-        if __debug__:
-            from other_msgs.msg import Point
-            from collections.abc import Sequence
-            from collections.abc import Set
-            from collections import UserList
-            from collections import UserString
-            assert \
-                ((isinstance(value, Sequence) or
-                  isinstance(value, Set) or
-                  isinstance(value, UserList)) and
-                 not isinstance(value, str) and
-                 not isinstance(value, UserString) and
-                 all(isinstance(v, Point) for v in value) and
-                 True), \
-                "The 'ground_flat' field must be a set or sequence and each value of type 'Point'"
-        self._ground_flat = value
 
     @builtins.property
     def ground_less_flat(self):

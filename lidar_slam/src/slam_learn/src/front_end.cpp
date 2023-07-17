@@ -193,9 +193,8 @@ public:
 
         // 消息重置
         all_cloud.trans_form.clear();
-        all_cloud.surf_flat.clear();
+        all_cloud.corner_less_sharp.clear();
         all_cloud.surf_less_flat.clear();
-        all_cloud.ground_flat.clear();
         all_cloud.ground_less_flat.clear();
     }
 
@@ -380,27 +379,29 @@ public:
                         }
                     }
                 }
-
+                CloudTypePtr ground(new CloudType());
+                CloudTypePtr surf(new CloudType());
+                pcl::VoxelGrid<PointType>::Ptr filter(new pcl::VoxelGrid<PointType>());
+                filter -> setLeafSize(0.2, 0.2, 0.2);
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
                     if(seg_msg.is_ground[curInd] == 1 && k % 2 == 0){
                         tran(seg_msg.seg_cloud[curInd], point);
                         groundSurfLessFlat -> push_back(point);
                         all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[curInd]);
-                    } else if(seg_msg.is_ground[curInd] == 0 && segmentCurvature[k].curvature < 0.1){
+                    } else if(seg_msg.is_ground[curInd] == 0 && segmentCurvature[k].curvature < 0.3){
                         all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[curInd]);
                         tran(seg_msg.seg_cloud[curInd], point);
                         point.intensity = 100;
                         surfLessFlatShow -> push_back(point);
                     }
                 }
+
             }
         }
-        
-        
+         
         // 组装all_cloud消息
-        pointType2MsgPoint(surfFlat, all_cloud.surf_flat);
-        pointType2MsgPoint(groundSurfFlat, all_cloud.ground_flat);
+        pointType2MsgPoint(cornerLessSharp, all_cloud.corner_less_sharp);
         
         // 测试
         sensor_msgs::msg::PointCloud2 msg;

@@ -32,8 +32,6 @@ bool other_msgs__msg__point__convert_from_py(PyObject * _pymsg, void * _ros_mess
 PyObject * other_msgs__msg__point__convert_to_py(void * raw_ros_message);
 bool other_msgs__msg__point__convert_from_py(PyObject * _pymsg, void * _ros_message);
 PyObject * other_msgs__msg__point__convert_to_py(void * raw_ros_message);
-bool other_msgs__msg__point__convert_from_py(PyObject * _pymsg, void * _ros_message);
-PyObject * other_msgs__msg__point__convert_to_py(void * raw_ros_message);
 
 ROSIDL_GENERATOR_C_EXPORT
 bool other_msgs__msg__all_cloud__convert_from_py(PyObject * _pymsg, void * _ros_message)
@@ -141,12 +139,12 @@ bool other_msgs__msg__all_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
     }
     Py_DECREF(field);
   }
-  {  // surf_flat
-    PyObject * field = PyObject_GetAttrString(_pymsg, "surf_flat");
+  {  // corner_less_sharp
+    PyObject * field = PyObject_GetAttrString(_pymsg, "corner_less_sharp");
     if (!field) {
       return false;
     }
-    PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'surf_flat'");
+    PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'corner_less_sharp'");
     if (!seq_field) {
       Py_DECREF(field);
       return false;
@@ -157,13 +155,13 @@ bool other_msgs__msg__all_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
       Py_DECREF(field);
       return false;
     }
-    if (!other_msgs__msg__Point__Sequence__init(&(ros_message->surf_flat), size)) {
+    if (!other_msgs__msg__Point__Sequence__init(&(ros_message->corner_less_sharp), size)) {
       PyErr_SetString(PyExc_RuntimeError, "unable to create other_msgs__msg__Point__Sequence ros_message");
       Py_DECREF(seq_field);
       Py_DECREF(field);
       return false;
     }
-    other_msgs__msg__Point * dest = ros_message->surf_flat.data;
+    other_msgs__msg__Point * dest = ros_message->corner_less_sharp.data;
     for (Py_ssize_t i = 0; i < size; ++i) {
       if (!other_msgs__msg__point__convert_from_py(PySequence_Fast_GET_ITEM(seq_field, i), &dest[i])) {
         Py_DECREF(seq_field);
@@ -197,39 +195,6 @@ bool other_msgs__msg__all_cloud__convert_from_py(PyObject * _pymsg, void * _ros_
       return false;
     }
     other_msgs__msg__Point * dest = ros_message->surf_less_flat.data;
-    for (Py_ssize_t i = 0; i < size; ++i) {
-      if (!other_msgs__msg__point__convert_from_py(PySequence_Fast_GET_ITEM(seq_field, i), &dest[i])) {
-        Py_DECREF(seq_field);
-        Py_DECREF(field);
-        return false;
-      }
-    }
-    Py_DECREF(seq_field);
-    Py_DECREF(field);
-  }
-  {  // ground_flat
-    PyObject * field = PyObject_GetAttrString(_pymsg, "ground_flat");
-    if (!field) {
-      return false;
-    }
-    PyObject * seq_field = PySequence_Fast(field, "expected a sequence in 'ground_flat'");
-    if (!seq_field) {
-      Py_DECREF(field);
-      return false;
-    }
-    Py_ssize_t size = PySequence_Size(field);
-    if (-1 == size) {
-      Py_DECREF(seq_field);
-      Py_DECREF(field);
-      return false;
-    }
-    if (!other_msgs__msg__Point__Sequence__init(&(ros_message->ground_flat), size)) {
-      PyErr_SetString(PyExc_RuntimeError, "unable to create other_msgs__msg__Point__Sequence ros_message");
-      Py_DECREF(seq_field);
-      Py_DECREF(field);
-      return false;
-    }
-    other_msgs__msg__Point * dest = ros_message->ground_flat.data;
     for (Py_ssize_t i = 0; i < size; ++i) {
       if (!other_msgs__msg__point__convert_from_py(PySequence_Fast_GET_ITEM(seq_field, i), &dest[i])) {
         Py_DECREF(seq_field);
@@ -366,16 +331,16 @@ PyObject * other_msgs__msg__all_cloud__convert_to_py(void * raw_ros_message)
     }
     Py_DECREF(field);
   }
-  {  // surf_flat
+  {  // corner_less_sharp
     PyObject * field = NULL;
-    size_t size = ros_message->surf_flat.size;
+    size_t size = ros_message->corner_less_sharp.size;
     field = PyList_New(size);
     if (!field) {
       return NULL;
     }
     other_msgs__msg__Point * item;
     for (size_t i = 0; i < size; ++i) {
-      item = &(ros_message->surf_flat.data[i]);
+      item = &(ros_message->corner_less_sharp.data[i]);
       PyObject * pyitem = other_msgs__msg__point__convert_to_py(item);
       if (!pyitem) {
         Py_DECREF(field);
@@ -387,7 +352,7 @@ PyObject * other_msgs__msg__all_cloud__convert_to_py(void * raw_ros_message)
     }
     assert(PySequence_Check(field));
     {
-      int rc = PyObject_SetAttrString(_pymessage, "surf_flat", field);
+      int rc = PyObject_SetAttrString(_pymessage, "corner_less_sharp", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;
@@ -416,34 +381,6 @@ PyObject * other_msgs__msg__all_cloud__convert_to_py(void * raw_ros_message)
     assert(PySequence_Check(field));
     {
       int rc = PyObject_SetAttrString(_pymessage, "surf_less_flat", field);
-      Py_DECREF(field);
-      if (rc) {
-        return NULL;
-      }
-    }
-  }
-  {  // ground_flat
-    PyObject * field = NULL;
-    size_t size = ros_message->ground_flat.size;
-    field = PyList_New(size);
-    if (!field) {
-      return NULL;
-    }
-    other_msgs__msg__Point * item;
-    for (size_t i = 0; i < size; ++i) {
-      item = &(ros_message->ground_flat.data[i]);
-      PyObject * pyitem = other_msgs__msg__point__convert_to_py(item);
-      if (!pyitem) {
-        Py_DECREF(field);
-        return NULL;
-      }
-      int rc = PyList_SetItem(field, i, pyitem);
-      (void)rc;
-      assert(rc == 0);
-    }
-    assert(PySequence_Check(field));
-    {
-      int rc = PyObject_SetAttrString(_pymessage, "ground_flat", field);
       Py_DECREF(field);
       if (rc) {
         return NULL;

@@ -37,9 +37,6 @@ private:
     Eigen::Quaterniond q_w_last;
     Eigen::Vector3d t_w_last;
 
-    // test
-    Eigen::Quaterniond q_front_end;
-    Eigen::Vector3d t_front_end;
 
     Eigen::Quaterniond q_keyframe_last;
     Eigen::Vector3d t_keyframe_last;
@@ -48,25 +45,26 @@ private:
     std::deque<int> recentKeyFrames;
 
     // 所有点云
-    std::vector<CloudTypePtr> allSegCloudKeyFrames;
+    std::vector<CloudTypePtr> allCornerKeyFramse;
+    std::vector<CloudTypePtr> allSurfKeyFrames;
     std::vector<CloudTypePtr> allGroundKeyFrames;
 
     // 对应位姿
     std::vector<pose> allKeyFramesPoses;
 
     // 子图
+    CloudTypePtr laserCornerFromMap;
     CloudTypePtr laserSurfFromMap;
     CloudTypePtr laserGroundFromMap;
 
     // kdtree
+    pcl::KdTreeFLANN<PointType>::Ptr kdtreeCornerPoints;
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfPoints;
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundPoints;
 
-    // 新一帧特征点
-    // CloudTypePtr surfFlatLast;
-    // CloudTypePtr groundFlatLast;
 
     // 新一帧点云
+    CloudTypePtr cornerCloud;
     CloudTypePtr surfCloud;
     CloudTypePtr groundCloud;
 
@@ -153,7 +151,9 @@ private:
             globalMtx.unlock();
 
             for(size_t i = 0; i < curPubCloud.size(); ++i){
-                *globalMap += transformPointCloud(allSegCloudKeyFrames[curPubCloud[i]],
+                *globalMap += transformPointCloud(allCornerKeyFramse[curPubCloud[i]],
+                                                  allKeyFramesPoses[curPubCloud[i]]);
+                *globalMap += transformPointCloud(allSurfKeyFrames[curPubCloud[i]],
                                                   allKeyFramesPoses[curPubCloud[i]]);
                 // *globalMap += transformPointCloud(allGroundKeyFrames[curPubCloud[i]],
                 //                                   allKeyFramesPoses[curPubCloud[i]]);
@@ -208,21 +208,20 @@ private:
         // 全局地图初始化
         globalMap.reset(new CloudType());
         downSampleGlobalMap.reset(new pcl::VoxelGrid<PointType>());
-        downSampleGlobalMap -> setLeafSize(1.0, 1.0, 1.0);
+        downSampleGlobalMap -> setLeafSize(0.5, 0.5, 0.5);
 
         // submap
+        laserCornerFromMap.reset(new CloudType());
         laserSurfFromMap.reset(new CloudType());
         laserGroundFromMap.reset(new CloudType());
 
         // kdtree
+        kdtreeCornerPoints.reset(new pcl::KdTreeFLANN<PointType>());
         kdtreeSurfPoints.reset(new pcl::KdTreeFLANN<PointType>());
         kdtreeGroundPoints.reset(new pcl::KdTreeFLANN<PointType>());
-
-        // 特征点
-        // surfFlatLast.reset(new CloudType());
-        // groundFlatLast.reset(new CloudType());
         
         // 最新一帧点云
+        cornerCloud.reset(new CloudType());
         surfCloud.reset(new CloudType());
         groundCloud.reset(new CloudType());
 
@@ -272,44 +271,35 @@ private:
         t_w_last = q_w_last * t_odom + t_w_last;
         q_w_last = q_w_last * q_odom;
 
-        q_front_end = q_odom;
-        t_front_end = t_odom;
-
-        // 获得点云特征点
-        // surfFlatLast -> clear();
-        // groundFlatLast -> clear();
-        // CloudTypePtr tmp(new CloudType());
-        // msgToPointCloud(tmp, all_cloud.surf_flat);
-        // *surfFlatLast += *tmp;
-
-        // tmp -> clear();
-        // msgToPointCloud(tmp, all_cloud.ground_flat);
-        // *groundFlatLast += *tmp;
-
+        // 获得新一帧点云
+        msgToPointCloud(cornerCloud, all_cloud.corner_less_sharp);
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
 
         // 下采样
-        // downSamplePointCloud(surfFlatLast, downSampleKeyPoints);
-        // downSamplePointCloud(groundFlatLast, downSampleKeyPoints);
+        downSamplePointCloud(cornerCloud, downSampleKeyPoints);
         downSamplePointCloud(surfCloud, downSampleKeyPoints);
         downSamplePointCloud(groundCloud, downSampleKeyPoints);
-
+        RCLCPP_INFO(this -> get_logger(), "%ld", cornerCloud -> size());
     }
     
     /**
      * 提取关键帧
     */
     void extractSurroundingKeyFrames(){
+        laserCornerFromMap -> clear();
         laserSurfFromMap -> clear();
         laserGroundFromMap -> clear();
         for(size_t i = 0; i < recentKeyFrames.size(); ++i){
-            *laserSurfFromMap += transformPointCloud(allSegCloudKeyFrames[recentKeyFrames[i]],
+            *laserCornerFromMap += transformPointCloud(allCornerKeyFramse[recentKeyFrames[i]],
+                                                       allKeyFramesPoses[recentKeyFrames[i]]);
+            *laserSurfFromMap += transformPointCloud(allSurfKeyFrames[recentKeyFrames[i]],
                                                        allKeyFramesPoses[recentKeyFrames[i]]);
             *laserGroundFromMap += transformPointCloud(allGroundKeyFrames[recentKeyFrames[i]],
                                                        allKeyFramesPoses[recentKeyFrames[i]]);                
         }
 
+        downSamplePointCloud(laserCornerFromMap, downSampleSubMap);
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
         
@@ -338,11 +328,11 @@ private:
         };
 
         if(!allKeyFramesPoses.empty()){
+            kdtreeCornerPoints -> setInputCloud(laserCornerFromMap);
             kdtreeSurfPoints -> setInputCloud(laserSurfFromMap);
             kdtreeGroundPoints -> setInputCloud(laserGroundFromMap);
 
-            // int surfFlatNum = surfFlatLast -> size();
-            // int groundFlatNum = groundFlatLast -> size();
+            int cornerSharpNum = cornerCloud -> size();
             int surfFlatNum = surfCloud -> size();
             int groundFlatNum = groundCloud -> size();
 
@@ -360,17 +350,90 @@ private:
                 problem.AddParameterBlock(transformBefoMapped + 3, 3);
                 problem.AddParameterBlock(transformBefoMapped, 3);
 
-                Eigen::Matrix<double, 5, 1> matb;
-                matb.fill(-1);
-                Eigen::Matrix<double, 5, 3> matA;
-                Eigen::Matrix<double, 3, 1> matX;
+                // // 边缘点
+                for(int i = 0; i < cornerSharpNum; ++i){
+                    trans(cornerCloud -> points[i], pointSel);
+                    kdtreeCornerPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
+
+                    if(pointSearchSqDis[4] < 1.0){
+                        Eigen::Matrix3f matA;
+                        Eigen::Matrix<float, 1, 3> matD;
+                        Eigen::Matrix3f matV;
+
+                        float cx = 0, cy = 0, cz = 0;
+                        for(int j = 0; j < 5; ++j){
+                            cx += laserCornerFromMap -> points[pointSearchInd[j]].x;
+                            cy += laserCornerFromMap -> points[pointSearchInd[j]].y;
+                            cz += laserCornerFromMap -> points[pointSearchInd[j]].z;
+                        }
+                        cx /= 5;
+                        cy /= 5;
+                        cz /= 5;
+
+                        float a11 = 0, a12 = 0, a13 = 0, a22 = 0, a23 = 0, a33 = 0;
+                        for(int j = 0; j < 5; ++j){
+                            float ax = laserCornerFromMap -> points[pointSearchInd[j]].x - cx;
+                            float ay = laserCornerFromMap -> points[pointSearchInd[j]].y - cy;
+                            float az = laserCornerFromMap -> points[pointSearchInd[j]].z - cz;
+
+                            a11 += ax * ax;
+                            a12 += ax * ay;
+                            a13 += ax * az;
+                            a22 += ay * ay;
+                            a23 += ay * az;
+                            a33 += az * az;
+                        }
+                        a11 /= 5;
+                        a12 /= 5;
+                        a13 /= 5;
+                        a22 /= 5;
+                        a23 /= 5;
+                        a33 /= 5;
+
+                        matA(0, 0) = a11;
+                        matA(0, 1) = a12;
+                        matA(0, 2) = a13;
+                        matA(1, 0) = a12;
+                        matA(1, 1) = a22;
+                        matA(1, 2) = a23;
+                        matA(2, 0) = a13;
+                        matA(2, 1) = a12;
+                        matA(2, 2) = a33;
+
+                        Eigen::SelfAdjointEigenSolver<Eigen::Matrix3f> esolver(matA);
+
+                        matD = esolver.eigenvalues().real();
+                        matV = esolver.eigenvectors().real();
+
+                        if(matD[2] > 3 * matD[1]){
+                            Eigen::Vector3d curr_p{pointSel.x, pointSel.y, pointSel.z};
+                            Eigen::Vector3d point_a{cx + 0.1 * matV(2, 0),
+                                                    cy + 0.1 * matV(2, 1),
+                                                    cz + 0.1 * matV(2, 2)};
+                            Eigen::Vector3d point_b{cx - 0.1 * matV(2, 0),
+                                                    cy - 0.1 * matV(2, 1),
+                                                    cz - 0.1 * matV(2, 2)};
+                            ceres::CostFunction *cost_function = 
+                                EdgeFatorBack::Create(curr_p, point_a, point_b);
+                            problem.AddResidualBlock(
+                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                        }
+                    }
+                    
+                }
 
                 // 平面点
+                /*
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfCloud -> points[i], pointSel);
                     kdtreeSurfPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
+                        Eigen::Matrix<double, 5, 1> matb;
+                        matb.fill(-1);
+                        Eigen::Matrix<double, 5, 3> matA;
+                        Eigen::Matrix<double, 3, 1> matX;
+
                         for(int j = 0; j < 5; ++j){
                             matA(j, 0) = laserSurfFromMap -> points[pointSearchInd[j]].x;
                             matA(j, 1) = laserSurfFromMap -> points[pointSearchInd[j]].y;
@@ -412,13 +475,18 @@ private:
                         }
                     }  
                 }
-
+                */
                 // 地面点
                 for(int i = 0; i < groundFlatNum; ++i){
                     trans(groundCloud -> points[i], pointSel);
                     kdtreeGroundPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
+                        Eigen::Matrix<double, 5, 1> matb;
+                        matb.fill(-1);
+                        Eigen::Matrix<double, 5, 3> matA;
+                        Eigen::Matrix<double, 3, 1> matX;
+
                         for(int j = 0; j < 5; ++j){
                             matA(j, 0) = laserGroundFromMap -> points[pointSearchInd[j]].x;
                             matA(j, 1) = laserGroundFromMap -> points[pointSearchInd[j]].y;
@@ -482,12 +550,6 @@ private:
 
         t_w_last = q_delta * t_w_last + t_delta;
         q_w_last = q_delta * q_w_last;
-
-        t_front_end = q_delta * t_front_end + t_delta;
-        q_front_end = q_delta * q_front_end;
-
-        RCLCPP_INFO(this -> get_logger(), "back end : x:%f, y:%f, z:%f", 
-            t_front_end.x(), t_front_end.y(), t_front_end.z());
     }
 
     /**
@@ -585,15 +647,15 @@ private:
 
         // 将关键帧插入滑动窗口
         
-        allSegCloudKeyFrames.push_back(surfCloud);
+        allCornerKeyFramse.push_back(cornerCloud);
+        cornerCloud.reset(new CloudType());
+        allSurfKeyFrames.push_back(surfCloud);
         surfCloud.reset(new CloudType());
         allGroundKeyFrames.push_back(groundCloud);
         groundCloud.reset(new CloudType());
 
-        if(allSegCloudKeyFrames.size() != allGroundKeyFrames.size()){
-            RCLCPP_WARN(this -> get_logger(), "segcloud size != groundcloud size!");
-        }
-        int size = allSegCloudKeyFrames.size();
+
+        int size = allSurfKeyFrames.size();
 
         recentKeyFrames.push_back(size - 1);
         if(recentKeyFrames.size() > 60){

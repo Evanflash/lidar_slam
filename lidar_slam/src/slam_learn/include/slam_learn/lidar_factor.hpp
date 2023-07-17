@@ -164,6 +164,64 @@ struct PlaneFactorBack{
     PointType point;
 };
 
+// 后端边缘点残差
+struct EdgeFatorBack{
+    EdgeFatorBack(Eigen::Vector3d curr_point_, Eigen::Vector3d last_point_a_, Eigen::Vector3d last_point_b_)
+		: curr_point(curr_point_), last_point_a(last_point_a_), last_point_b(last_point_b_){}
+
+	template <typename T>
+	bool operator()(const T *q, const T *t, T *residual) const
+	{
+
+		Eigen::Matrix<T, 3, 1> cp{T(curr_point.x()), T(curr_point.y()), T(curr_point.z())};
+		Eigen::Matrix<T, 3, 1> lpa{T(last_point_a.x()), T(last_point_a.y()), T(last_point_a.z())};
+		Eigen::Matrix<T, 3, 1> lpb{T(last_point_b.x()), T(last_point_b.y()), T(last_point_b.z())};
+
+		T cx = ceres::cos(q[0]);
+        T sx = ceres::sin(q[0]);
+        T cy = ceres::cos(q[1]);
+        T sy = ceres::sin(q[1]);
+        T cz = ceres::cos(q[2]);
+        T sz = ceres::sin(q[2]);
+        Eigen::Matrix<T, 3, 3> qx;
+        qx << T(1.0), T(0.0), T(0.0),
+              T(0.0), cx, -sx,
+              T(0.0), sx, cx;
+        Eigen::Matrix<T, 3, 3> qy;
+        qy << cy, T(0.0), sy,
+              T(0.0), T(1.0), T(0.0),
+              -sy, T(0.0), cy;
+        Eigen::Matrix<T, 3, 3> qz;
+        qz << cz, -sz, T(0.0),
+              sz, cz, T(0.0),
+              T(0.0), T(0.0), T(1.0);
+
+        // 平移矩阵
+		Eigen::Matrix<T, 3, 1> t_last_curr{t[0], t[1], t[2]};
+        // 变换后的点坐标
+		Eigen::Matrix<T, 3, 1> lp = qz * qy * qx * cp + t_last_curr;
+
+		Eigen::Matrix<T, 3, 1> nu = (lp - lpa).cross(lp - lpb);
+		Eigen::Matrix<T, 3, 1> de = lpa - lpb;
+
+		residual[0] = nu.x() / de.norm();
+		residual[1] = nu.y() / de.norm();
+		residual[2] = nu.z() / de.norm();
+
+		return true;
+	}
+
+	static ceres::CostFunction *Create(const Eigen::Vector3d curr_point_, const Eigen::Vector3d last_point_a_,
+									   const Eigen::Vector3d last_point_b_)
+	{
+		return (new ceres::AutoDiffCostFunction<
+				EdgeFatorBack, 3, 3, 3>(
+			new EdgeFatorBack(curr_point_, last_point_a_, last_point_b_)));
+	}
+
+	Eigen::Vector3d curr_point, last_point_a, last_point_b;
+};
+
 // 后端地面残差
 struct GroundPlaneBack{
     GroundPlaneBack(double _pa, double _pb, double _pc, double _pd, PointType _point)

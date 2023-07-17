@@ -18,9 +18,8 @@
 // Include directives for member types
 // Member 'header'
 #include "std_msgs/msg/detail/header__struct.hpp"
-// Member 'surf_flat'
+// Member 'corner_less_sharp'
 // Member 'surf_less_flat'
-// Member 'ground_flat'
 // Member 'ground_less_flat'
 #include "other_msgs/msg/detail/point__struct.hpp"
 
@@ -61,15 +60,12 @@ struct AllCloud_
   using _trans_form_type =
     std::vector<float, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<float>>;
   _trans_form_type trans_form;
-  using _surf_flat_type =
+  using _corner_less_sharp_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _surf_flat_type surf_flat;
+  _corner_less_sharp_type corner_less_sharp;
   using _surf_less_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _surf_less_flat_type surf_less_flat;
-  using _ground_flat_type =
-    std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
-  _ground_flat_type ground_flat;
   using _ground_less_flat_type =
     std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>>;
   _ground_less_flat_type ground_less_flat;
@@ -87,22 +83,16 @@ struct AllCloud_
     this->trans_form = _arg;
     return *this;
   }
-  Type & set__surf_flat(
+  Type & set__corner_less_sharp(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
-    this->surf_flat = _arg;
+    this->corner_less_sharp = _arg;
     return *this;
   }
   Type & set__surf_less_flat(
     const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
   {
     this->surf_less_flat = _arg;
-    return *this;
-  }
-  Type & set__ground_flat(
-    const std::vector<other_msgs::msg::Point_<ContainerAllocator>, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<other_msgs::msg::Point_<ContainerAllocator>>> & _arg)
-  {
-    this->ground_flat = _arg;
     return *this;
   }
   Type & set__ground_less_flat(
@@ -160,13 +150,10 @@ struct AllCloud_
     if (this->trans_form != other.trans_form) {
       return false;
     }
-    if (this->surf_flat != other.surf_flat) {
+    if (this->corner_less_sharp != other.corner_less_sharp) {
       return false;
     }
     if (this->surf_less_flat != other.surf_less_flat) {
-      return false;
-    }
-    if (this->ground_flat != other.ground_flat) {
       return false;
     }
     if (this->ground_less_flat != other.ground_less_flat) {
