@@ -57,24 +57,22 @@ private:
     // 子图
     CloudTypePtr laserSurfFromMap;
     CloudTypePtr laserGroundFromMap;
-    CloudTypePtr keyPointsFromMap;
 
     // kdtree
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfPoints;
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundPoints;
-    pcl::KdTreeFLANN<PointType>::Ptr kdtreeKeyPoints;
 
     // 新一帧特征点
     CloudTypePtr surfFlatLast;
     CloudTypePtr groundFlatLast;
-    CloudTypePtr keyPointsLast;
 
     // 新一帧点云
     CloudTypePtr surfCloud;
     CloudTypePtr groundCloud;
 
     // 下采样滤波
-    pcl::VoxelGrid<PointType>::Ptr downSampleAllCloud;
+    pcl::VoxelGrid<PointType>::Ptr downSampleSubMap;
+    pcl::VoxelGrid<PointType>::Ptr downSampleKeyPoints;
     pcl::VoxelGrid<PointType>::Ptr downSampleGlobalMap;
 
     // 前一帧关键帧位姿
@@ -157,8 +155,8 @@ private:
             for(size_t i = 0; i < curPubCloud.size(); ++i){
                 *globalMap += transformPointCloud(allSegCloudKeyFrames[curPubCloud[i]],
                                                   allKeyFramesPoses[curPubCloud[i]]);
-                *globalMap += transformPointCloud(allGroundKeyFrames[curPubCloud[i]],
-                                                  allKeyFramesPoses[curPubCloud[i]]);
+                // *globalMap += transformPointCloud(allGroundKeyFrames[curPubCloud[i]],
+                //                                   allKeyFramesPoses[curPubCloud[i]]);
             }
             downSamplePointCloud(globalMap, downSampleGlobalMap);
 
@@ -213,27 +211,26 @@ private:
         downSampleGlobalMap -> setLeafSize(1.0, 1.0, 1.0);
 
         // submap
-        keyPointsFromMap.reset(new CloudType());
         laserSurfFromMap.reset(new CloudType());
         laserGroundFromMap.reset(new CloudType());
 
         // kdtree
-        kdtreeKeyPoints.reset(new pcl::KdTreeFLANN<PointType>());
         kdtreeSurfPoints.reset(new pcl::KdTreeFLANN<PointType>());
         kdtreeGroundPoints.reset(new pcl::KdTreeFLANN<PointType>());
 
         // 特征点
-        keyPointsLast.reset(new CloudType());
         surfFlatLast.reset(new CloudType());
-        groundCloud.reset(new CloudType());
+        groundFlatLast.reset(new CloudType());
         
         // 最新一帧点云
         surfCloud.reset(new CloudType());
         groundCloud.reset(new CloudType());
 
         // 下采样滤波
-        downSampleAllCloud.reset(new pcl::VoxelGrid<PointType>());
-        downSampleAllCloud -> setLeafSize(0.4, 0.4, 0.4);
+        downSampleSubMap.reset(new pcl::VoxelGrid<PointType>());
+        downSampleSubMap -> setLeafSize(0.4, 0.4, 0.4);
+        downSampleKeyPoints.reset(new pcl::VoxelGrid<PointType>());
+        downSampleKeyPoints -> setLeafSize(0.1, 0.1, 0.1);
         
         // 因子图
         gtsam::ISAM2Params parameters;
@@ -279,16 +276,22 @@ private:
         t_front_end = t_odom;
 
         // 获得点云特征点
-        keyPointsLast -> clear();
+        surfFlatLast -> clear();
+        groundFlatLast -> clear();
         CloudTypePtr tmp(new CloudType());
         msgToPointCloud(tmp, all_cloud.surf_flat);
-        *keyPointsLast += *tmp;
+        *surfFlatLast += *tmp;
+
         tmp -> clear();
         msgToPointCloud(tmp, all_cloud.ground_flat);
-        *keyPointsLast += *tmp;
+        *groundFlatLast += *tmp;
 
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
+
+        // 下采样
+        downSamplePointCloud(surfFlatLast, downSampleKeyPoints);
+        downSamplePointCloud(groundFlatLast, downSampleKeyPoints);
 
     }
     
@@ -296,15 +299,20 @@ private:
      * 提取关键帧
     */
     void extractSurroundingKeyFrames(){
-        keyPointsFromMap -> clear();
+        laserSurfFromMap -> clear();
+        laserGroundFromMap -> clear();
         for(size_t i = 0; i < recentKeyFrames.size(); ++i){
-            *keyPointsFromMap += transformPointCloud(allSegCloudKeyFrames[recentKeyFrames[i]],
+            *laserSurfFromMap += transformPointCloud(allSegCloudKeyFrames[recentKeyFrames[i]],
                                                        allKeyFramesPoses[recentKeyFrames[i]]);
-            *keyPointsFromMap += transformPointCloud(allGroundKeyFrames[recentKeyFrames[i]],
+            *laserGroundFromMap += transformPointCloud(allGroundKeyFrames[recentKeyFrames[i]],
                                                        allKeyFramesPoses[recentKeyFrames[i]]);                
         }
-
-        downSamplePointCloud(keyPointsFromMap, downSampleAllCloud);
+        RCLCPP_INFO(this -> get_logger(), "ground cloud before: %ld, surf cloud before: %ld", 
+            laserGroundFromMap -> size(), laserSurfFromMap -> size());
+        downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
+        downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
+        RCLCPP_INFO(this -> get_logger(), "ground cloud after: %ld, surf cloud after: %ld", 
+            laserGroundFromMap -> size(), laserSurfFromMap -> size());
     }
 
     /**
@@ -321,9 +329,11 @@ private:
         };
 
         if(!allKeyFramesPoses.empty()){
-            kdtreeKeyPoints -> setInputCloud(keyPointsFromMap);
+            kdtreeSurfPoints -> setInputCloud(laserSurfFromMap);
+            kdtreeGroundPoints -> setInputCloud(laserGroundFromMap);
 
-            int keyPointsNum = keyPointsLast -> size();
+            int surfFlatNum = surfFlatLast -> size();
+            int groundFlatNum = groundFlatLast -> size();
 
             PointType pointSel;
             std::vector<int> pointSearchInd;
@@ -334,7 +344,7 @@ private:
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(transformBefoMapped, 3);
+                problem.AddParameterBlock(transformBefoMapped + 3, 3);
                 problem.AddParameterBlock(transformBefoMapped, 3);
 
                 Eigen::Matrix<double, 5, 1> matb;
@@ -342,15 +352,16 @@ private:
                 Eigen::Matrix<double, 5, 3> matA;
                 Eigen::Matrix<double, 3, 1> matX;
 
-                for(int i = 0; i < keyPointsNum; ++i){
-                    trans(keyPointsLast -> points[i], pointSel);
-                    kdtreeKeyPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
+                // 平面点
+                for(int i = 0; i < surfFlatNum; ++i){
+                    trans(surfFlatLast -> points[i], pointSel);
+                    kdtreeSurfPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
                         for(int j = 0; j < 5; ++j){
-                            matA(j, 0) = keyPointsFromMap -> points[pointSearchInd[j]].x;
-                            matA(j, 1) = keyPointsFromMap -> points[pointSearchInd[j]].y;
-                            matA(j, 2) = keyPointsFromMap -> points[pointSearchInd[j]].z;
+                            matA(j, 0) = laserSurfFromMap -> points[pointSearchInd[j]].x;
+                            matA(j, 1) = laserSurfFromMap -> points[pointSearchInd[j]].y;
+                            matA(j, 2) = laserSurfFromMap -> points[pointSearchInd[j]].z;
                         }
                         // 求解Ax = b得到平面方程
                         matX = matA.colPivHouseholderQr().solve(matb);
@@ -370,9 +381,9 @@ private:
                         // 判断平面是否合理
                         bool planeValid = true;
                         for(int j = 0; j < 5; ++j){
-                            if(abs(pa * keyPointsFromMap -> points[pointSearchInd[j]].x +
-                                   pb * keyPointsFromMap -> points[pointSearchInd[j]].y +
-                                   pc * keyPointsFromMap -> points[pointSearchInd[j]].z +
+                            if(abs(pa * laserSurfFromMap -> points[pointSearchInd[j]].x +
+                                   pb * laserSurfFromMap -> points[pointSearchInd[j]].y +
+                                   pc * laserSurfFromMap -> points[pointSearchInd[j]].z +
                                    pd) > 0.2){
                                 planeValid = false;
                                 break;
@@ -388,6 +399,55 @@ private:
                         }
                     }  
                 }
+
+                // 地面点
+                for(int i = 0; i < groundFlatNum; ++i){
+                    trans(groundFlatLast -> points[i], pointSel);
+                    kdtreeGroundPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
+
+                    if(pointSearchSqDis[4] < 1.0){
+                        for(int j = 0; j < 5; ++j){
+                            matA(j, 0) = laserGroundFromMap -> points[pointSearchInd[j]].x;
+                            matA(j, 1) = laserGroundFromMap -> points[pointSearchInd[j]].y;
+                            matA(j, 2) = laserGroundFromMap -> points[pointSearchInd[j]].z;
+                        }
+                        // 求解Ax = b得到平面方程
+                        matX = matA.colPivHouseholderQr().solve(matb);
+
+                        double pa = matX(0, 0);
+                        double pb = matX(1, 0);
+                        double pc = matX(2, 0);
+                        double pd = 1;
+                        // 归一化
+                        double ps = sqrt(pa * pa + pb * pb + pc * pc);
+                        pa /= ps;
+                        pb /= ps;
+                        pc /= ps;
+                        pd /= ps;
+
+
+                        // 判断平面是否合理
+                        bool planeValid = true;
+                        for(int j = 0; j < 5; ++j){
+                            if(abs(pa * laserGroundFromMap -> points[pointSearchInd[j]].x +
+                                   pb * laserGroundFromMap -> points[pointSearchInd[j]].y +
+                                   pc * laserGroundFromMap -> points[pointSearchInd[j]].z +
+                                   pd) > 0.2){
+                                planeValid = false;
+                                break;
+                            }
+                        }
+
+                        // 若平面合理，则优化
+                        if(planeValid == true){
+                            ceres::CostFunction *cost_function = 
+                                PlaneFactorBack::Create(pa, pb, pc, pd, pointSel);
+                            problem.AddResidualBlock(
+                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                        }
+                    }  
+                }
+
                 // 求解
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
