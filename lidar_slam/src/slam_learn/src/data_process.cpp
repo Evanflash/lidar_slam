@@ -350,7 +350,7 @@ private:
         }
 
         // 判断分割点云是否合法
-        if(all_pushed.size() >= 30 || 
+        if((all_pushed.size() >= 30 && static_cast<int>(lineHash.size()) >= 3)|| 
             (static_cast<int>(all_pushed.size()) >= segment_valid_point_num && 
              static_cast<int>(lineHash.size()) >= segment_valid_line_num)){
             ++label_count;

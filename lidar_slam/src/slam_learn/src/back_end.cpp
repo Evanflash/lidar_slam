@@ -63,8 +63,8 @@ private:
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundPoints;
 
     // 新一帧特征点
-    CloudTypePtr surfFlatLast;
-    CloudTypePtr groundFlatLast;
+    // CloudTypePtr surfFlatLast;
+    // CloudTypePtr groundFlatLast;
 
     // 新一帧点云
     CloudTypePtr surfCloud;
@@ -219,8 +219,8 @@ private:
         kdtreeGroundPoints.reset(new pcl::KdTreeFLANN<PointType>());
 
         // 特征点
-        surfFlatLast.reset(new CloudType());
-        groundFlatLast.reset(new CloudType());
+        // surfFlatLast.reset(new CloudType());
+        // groundFlatLast.reset(new CloudType());
         
         // 最新一帧点云
         surfCloud.reset(new CloudType());
@@ -230,7 +230,7 @@ private:
         downSampleSubMap.reset(new pcl::VoxelGrid<PointType>());
         downSampleSubMap -> setLeafSize(0.4, 0.4, 0.4);
         downSampleKeyPoints.reset(new pcl::VoxelGrid<PointType>());
-        downSampleKeyPoints -> setLeafSize(0.1, 0.1, 0.1);
+        downSampleKeyPoints -> setLeafSize(0.4, 0.4, 0.4);
         
         // 因子图
         gtsam::ISAM2Params parameters;
@@ -276,22 +276,24 @@ private:
         t_front_end = t_odom;
 
         // 获得点云特征点
-        surfFlatLast -> clear();
-        groundFlatLast -> clear();
-        CloudTypePtr tmp(new CloudType());
-        msgToPointCloud(tmp, all_cloud.surf_flat);
-        *surfFlatLast += *tmp;
+        // surfFlatLast -> clear();
+        // groundFlatLast -> clear();
+        // CloudTypePtr tmp(new CloudType());
+        // msgToPointCloud(tmp, all_cloud.surf_flat);
+        // *surfFlatLast += *tmp;
 
-        tmp -> clear();
-        msgToPointCloud(tmp, all_cloud.ground_flat);
-        *groundFlatLast += *tmp;
+        // tmp -> clear();
+        // msgToPointCloud(tmp, all_cloud.ground_flat);
+        // *groundFlatLast += *tmp;
 
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
         msgToPointCloud(groundCloud, all_cloud.ground_less_flat);
 
         // 下采样
-        downSamplePointCloud(surfFlatLast, downSampleKeyPoints);
-        downSamplePointCloud(groundFlatLast, downSampleKeyPoints);
+        // downSamplePointCloud(surfFlatLast, downSampleKeyPoints);
+        // downSamplePointCloud(groundFlatLast, downSampleKeyPoints);
+        downSamplePointCloud(surfCloud, downSampleKeyPoints);
+        downSamplePointCloud(groundCloud, downSampleKeyPoints);
 
     }
     
@@ -307,12 +309,19 @@ private:
             *laserGroundFromMap += transformPointCloud(allGroundKeyFrames[recentKeyFrames[i]],
                                                        allKeyFramesPoses[recentKeyFrames[i]]);                
         }
-        RCLCPP_INFO(this -> get_logger(), "ground cloud before: %ld, surf cloud before: %ld", 
-            laserGroundFromMap -> size(), laserSurfFromMap -> size());
+
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
-        RCLCPP_INFO(this -> get_logger(), "ground cloud after: %ld, surf cloud after: %ld", 
-            laserGroundFromMap -> size(), laserSurfFromMap -> size());
+        
+        // globalMap -> clear();
+        // *globalMap += *laserSurfFromMap;
+        // *globalMap += *laserGroundFromMap;
+        // sensor_msgs::msg::PointCloud2 gl_map;
+        // pcl::toROSMsg(*globalMap, gl_map);
+
+        // gl_map.header.frame_id = "map";
+        // gl_map.header.stamp = this -> now();
+        // pubGlobalMap -> publish(gl_map);
     }
 
     /**
@@ -332,8 +341,12 @@ private:
             kdtreeSurfPoints -> setInputCloud(laserSurfFromMap);
             kdtreeGroundPoints -> setInputCloud(laserGroundFromMap);
 
-            int surfFlatNum = surfFlatLast -> size();
-            int groundFlatNum = groundFlatLast -> size();
+            // int surfFlatNum = surfFlatLast -> size();
+            // int groundFlatNum = groundFlatLast -> size();
+            int surfFlatNum = surfCloud -> size();
+            int groundFlatNum = groundCloud -> size();
+
+            // RCLCPP_INFO(this -> get_logger(), "surf:%d, ground:%d", surfFlatNum, groundFlatNum);
 
             PointType pointSel;
             std::vector<int> pointSearchInd;
@@ -354,7 +367,7 @@ private:
 
                 // 平面点
                 for(int i = 0; i < surfFlatNum; ++i){
-                    trans(surfFlatLast -> points[i], pointSel);
+                    trans(surfCloud -> points[i], pointSel);
                     kdtreeSurfPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
@@ -402,7 +415,7 @@ private:
 
                 // 地面点
                 for(int i = 0; i < groundFlatNum; ++i){
-                    trans(groundFlatLast -> points[i], pointSel);
+                    trans(groundCloud -> points[i], pointSel);
                     kdtreeGroundPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
 
                     if(pointSearchSqDis[4] < 1.0){
@@ -473,8 +486,8 @@ private:
         t_front_end = q_delta * t_front_end + t_delta;
         q_front_end = q_delta * q_front_end;
 
-        // RCLCPP_INFO(this -> get_logger(), "back end : x:%f, y:%f, z:%f", 
-        //     t_front_end.x(), t_front_end.y(), t_front_end.z());
+        RCLCPP_INFO(this -> get_logger(), "back end : x:%f, y:%f, z:%f", 
+            t_front_end.x(), t_front_end.y(), t_front_end.z());
     }
 
     /**
@@ -583,7 +596,7 @@ private:
         int size = allSegCloudKeyFrames.size();
 
         recentKeyFrames.push_back(size - 1);
-        if(recentKeyFrames.size() > 50){
+        if(recentKeyFrames.size() > 60){
             recentKeyFrames.pop_front();
         }
         
