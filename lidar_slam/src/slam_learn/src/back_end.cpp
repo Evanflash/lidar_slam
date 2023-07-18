@@ -12,9 +12,6 @@
 #include <gtsam/nonlinear/ISAM2.h>
 
 namespace lidarslam{
-static double transformBefoMapped[6] = {0.0};
-
-
 class BackEnd : public rclcpp::Node{
 private:
     // 消息队列
@@ -101,7 +98,7 @@ public:
           t_w_last(0, 0, 0)
     {
         subAllCloud = this -> create_subscription<other_msgs::msg::AllCloud>(
-            "/all_cloud", 1, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
+            "/all_cloud", 10, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
 
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/global_path", 1);
 
@@ -112,11 +109,11 @@ public:
         init();
         // 开启子线程
         run_thread = std::thread(&BackEnd::run, this);
-        pub_global_map_thread = std::thread(&BackEnd::publishGlobalMap, this);
+        // pub_global_map_thread = std::thread(&BackEnd::publishGlobalMap, this);
     }
     ~BackEnd(){
         run_thread.join();
-        pub_global_map_thread.join();
+        // pub_global_map_thread.join();
     }
 
 private:
@@ -155,8 +152,8 @@ private:
                                                   allKeyFramesPoses[curPubCloud[i]]);
                 *globalMap += transformPointCloud(allSurfKeyFrames[curPubCloud[i]],
                                                   allKeyFramesPoses[curPubCloud[i]]);
-                // *globalMap += transformPointCloud(allGroundKeyFrames[curPubCloud[i]],
-                //                                   allKeyFramesPoses[curPubCloud[i]]);
+                *globalMap += transformPointCloud(allGroundKeyFrames[curPubCloud[i]],
+                                                  allKeyFramesPoses[curPubCloud[i]]);
             }
             downSamplePointCloud(globalMap, downSampleGlobalMap);
 
@@ -182,22 +179,38 @@ private:
             all_cloud = allCloudQueue.front();
             allCloudQueue.pop();
             mtx.unlock();
-            std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+
+            std::chrono::duration<double> elapsed_seconds;
+
+            std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
             // 消息拆解
             msgAnalysis();
+            std::chrono::time_point<std::chrono::system_clock> t2 = std::chrono::system_clock::now();
+            elapsed_seconds = t2 - t1;
+            RCLCPP_INFO(this -> get_logger(), "msg analysis time: %fms", elapsed_seconds.count() * 1000);
             // 提取子地图
             extractSurroundingKeyFrames();
+            std::chrono::time_point<std::chrono::system_clock> t3 = std::chrono::system_clock::now();
+            elapsed_seconds = t3 - t2;
+            RCLCPP_INFO(this -> get_logger(), "extract sub map time: %fms", elapsed_seconds.count() * 1000);
             // 图优化
             scan2MapOptimization();
+            std::chrono::time_point<std::chrono::system_clock> t4 = std::chrono::system_clock::now();
+            elapsed_seconds = t4 - t3;
+            RCLCPP_INFO(this -> get_logger(), "map optimiazation time: %fms", elapsed_seconds.count() * 1000);
             // 增加约束，保存关键帧
             saveKeyFramesAndFactor();
+            std::chrono::time_point<std::chrono::system_clock> t5 = std::chrono::system_clock::now();
+            elapsed_seconds = t5 - t4;
+            RCLCPP_INFO(this -> get_logger(), "save key frames time: %fms", elapsed_seconds.count() * 1000);
             // 检测是否存在回环，若存在则更新
             correctPoses();
             // 发布消息
             publish();
-            std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
-            std::chrono::duration<double> elapsed_seconds = end - start;
-            // RCLCPP_INFO(this -> get_logger(), "back end whole time: %fms", elapsed_seconds.count() * 1000);
+            std::chrono::time_point<std::chrono::system_clock> t6 = std::chrono::system_clock::now();
+            elapsed_seconds = t6 - t1;
+            // std::chrono::duration<double> elapsed_seconds = t - t;
+            RCLCPP_INFO(this -> get_logger(), "back end whole time: %fms", elapsed_seconds.count() * 1000);
         }
     }
 
@@ -237,6 +250,11 @@ private:
         parameters.relinearizeSkip = 1;
         parameters.factorization = gtsam::ISAM2Params::QR;
         isam = new gtsam::ISAM2(parameters);
+
+        // 初始化前一帧位姿
+        previousPosPoint.x = 0;
+        previousPosPoint.y = 0;
+        previousPosPoint.z = 0;
     }
 
     /**
@@ -257,9 +275,6 @@ private:
         };
         // 初始6自由度参数
         // x y z qx qy qz
-        for(int i = 0; i < 6; ++i){
-            transformBefoMapped[i] = 0;
-        }
         Eigen::Quaterniond q_odom = (Eigen::AngleAxisd(all_cloud.trans_form[5], Eigen::Vector3d::UnitZ()) *
                                      Eigen::AngleAxisd(all_cloud.trans_form[4], Eigen::Vector3d::UnitY()) *
                                      Eigen::AngleAxisd(all_cloud.trans_form[3], Eigen::Vector3d::UnitX()));
@@ -280,8 +295,8 @@ private:
         downSamplePointCloud(cornerCloud, downSampleKeyPoints);
         downSamplePointCloud(surfCloud, downSampleKeyPoints);
         downSamplePointCloud(groundCloud, downSampleKeyPoints);
-        RCLCPP_INFO(this -> get_logger(), "corner size : %ld, surf size : %ld, ground size : %ld", 
-            cornerCloud -> size(), surfCloud -> size(), groundCloud -> size());
+        // RCLCPP_INFO(this -> get_logger(), "corner size : %ld, surf size : %ld, ground size : %ld", 
+        //     cornerCloud -> size(), surfCloud -> size(), groundCloud -> size());
     }
     
     /**
@@ -304,15 +319,18 @@ private:
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
         
-        // globalMap -> clear();
-        // *globalMap += *laserSurfFromMap;
-        // *globalMap += *laserGroundFromMap;
-        // sensor_msgs::msg::PointCloud2 gl_map;
-        // pcl::toROSMsg(*globalMap, gl_map);
+        RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
+            laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
 
-        // gl_map.header.frame_id = "map";
-        // gl_map.header.stamp = this -> now();
-        // pubGlobalMap -> publish(gl_map);
+        globalMap -> clear();
+        *globalMap += *laserSurfFromMap;
+        *globalMap += *laserGroundFromMap;
+        sensor_msgs::msg::PointCloud2 gl_map;
+        pcl::toROSMsg(*globalMap, gl_map);
+
+        gl_map.header.frame_id = "map";
+        gl_map.header.stamp = this -> now();
+        pubGlobalMap -> publish(gl_map);
     }
 
     /**
@@ -327,6 +345,12 @@ private:
             pointTo.z = p.z();
             pointTo.intensity = pointFrom.intensity;
         };
+
+        // 待优化四元数与偏移
+        double q_[4] = {0.0, 0.0, 0.0, 1.0};
+        double t_[3] = {0.0, 0.0, 0.0};
+        Eigen::Map<Eigen::Quaterniond> q_delta(q_);
+        Eigen::Map<Eigen::Vector3d> t_delta(t_);
 
         if(!allKeyFramesPoses.empty()){
             kdtreeCornerPoints -> setInputCloud(laserCornerFromMap);
@@ -348,10 +372,12 @@ private:
                 ceres::Problem::Options problem_options;
 
                 ceres::Problem problem(problem_options);
-                problem.AddParameterBlock(transformBefoMapped + 3, 3);
-                problem.AddParameterBlock(transformBefoMapped, 3);
+                ceres::Manifold *q_manifold = new ceres::EigenQuaternionManifold;
+                problem.AddParameterBlock(q_, 4, q_manifold);
+                problem.AddParameterBlock(t_, 3);
 
-                // // 边缘点
+                /*
+                // 边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     trans(cornerCloud -> points[i], pointSel);
                     kdtreeCornerPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
@@ -415,16 +441,16 @@ private:
                                                     cy - 0.1 * matV(2, 1),
                                                     cz - 0.1 * matV(2, 2)};
                             ceres::CostFunction *cost_function = 
-                                EdgeFatorBack::Create(curr_p, point_a, point_b);
+                                LidarEdgeFactor::Create(curr_p, point_a, point_b);
                             problem.AddResidualBlock(
-                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                                cost_function, loss_function, q_, t_);
                         }
                     }
                     
                 }
+                */
 
                 // 平面点
-                
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfCloud -> points[i], pointSel);
                     kdtreeSurfPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
@@ -470,9 +496,9 @@ private:
                         // 若平面合理，则优化
                         if(planeValid == true){
                             ceres::CostFunction *cost_function = 
-                                PlaneFactorBack::Create(pa, pb, pc, pd, pointSel);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, pointSel);
                             problem.AddResidualBlock(
-                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                                cost_function, loss_function, q_, t_);
                         }
                     }  
                 }
@@ -523,32 +549,28 @@ private:
                         // 若平面合理，则优化
                         if(planeValid == true){
                             ceres::CostFunction *cost_function = 
-                                PlaneFactorBack::Create(pa, pb, pc, pd, pointSel);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, pointSel);
                             problem.AddResidualBlock(
-                                cost_function, loss_function, transformBefoMapped + 3, transformBefoMapped);
+                                cost_function, loss_function, q_, t_);
                         }
                     }  
                 }
 
                 // 求解
+                std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
-                options.max_num_iterations = 4;
+                options.max_num_iterations = 5;
                 options.minimizer_progress_to_stdout = false;
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);
+                std::chrono::time_point<std::chrono::system_clock> t2 = std::chrono::system_clock::now();
+                std::chrono::duration<double> elapsed_seconds = t2 - t1;
+                RCLCPP_INFO(this -> get_logger(), "scan2map time: %fms", elapsed_seconds.count() * 1000);
             }
         }
        
-        // 将帧间变换参数转换为帧到地图的变换参数
-        // x y z qx qy qz
-        Eigen::Quaterniond q_delta = (Eigen::AngleAxisd(transformBefoMapped[5], Eigen::Vector3d::UnitZ()) *
-                                      Eigen::AngleAxisd(transformBefoMapped[4], Eigen::Vector3d::UnitY()) *
-                                      Eigen::AngleAxisd(transformBefoMapped[3], Eigen::Vector3d::UnitX()));
-        Eigen::Vector3d t_delta = Eigen::Vector3d(transformBefoMapped[0], 
-                                                  transformBefoMapped[1], 
-                                                  transformBefoMapped[2]);
-
+        // 矫正位姿
         t_w_last = q_delta * t_w_last + t_delta;
         q_w_last = q_delta * q_w_last;
     }
@@ -557,7 +579,7 @@ private:
      * 增加新的约束并保存关键帧
     */
     void saveKeyFramesAndFactor(){
-        PointType currentPosPoint(t_w_last.x(), t_w_last.x(), t_w_last.x());
+        PointType currentPosPoint(t_w_last.x(), t_w_last.y(), t_w_last.z());
 
         // 噪声
         gtsam::Vector6 Vector6(6);
@@ -659,7 +681,7 @@ private:
         int size = allSurfKeyFrames.size();
 
         recentKeyFrames.push_back(size - 1);
-        if(recentKeyFrames.size() > 60){
+        if(recentKeyFrames.size() > 20){
             recentKeyFrames.pop_front();
         }
         

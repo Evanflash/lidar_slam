@@ -74,10 +74,10 @@ public:
           t_w_curr(0, 0, 0)
     {
         subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
-            "/seg_cloud", 1, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
+            "/seg_cloud", 10, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
         
         pubAllCloud = this -> create_publisher<other_msgs::msg::AllCloud>(
-            "/all_cloud", 1);
+            "/all_cloud", 10);
 
         // test
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
@@ -431,7 +431,7 @@ public:
                 filter -> setLeafSize(0.2, 0.2, 0.2);
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
-                    if(seg_msg.is_ground[curInd] == 1 && k % 2 == 0){
+                    if(seg_msg.is_ground[curInd] == 1 && k % 5 == 0){
                         tran(seg_msg.seg_cloud[curInd], point);
                         groundSurfLessFlat -> push_back(point);
                         all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[curInd]);
