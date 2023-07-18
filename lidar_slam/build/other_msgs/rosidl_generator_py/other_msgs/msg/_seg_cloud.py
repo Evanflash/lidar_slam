@@ -9,6 +9,7 @@
 # Member 'seg_ring_end_ind'
 # Member 'seg_range'
 # Member 'is_ground'
+# Member 'seg_cloud_col_ind'
 import array  # noqa: E402, I100
 
 import builtins  # noqa: E402, I100
@@ -77,6 +78,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         '_seg_cloud',
         '_seg_range',
         '_is_ground',
+        '_seg_cloud_col_ind',
     ]
 
     _fields_and_field_types = {
@@ -86,6 +88,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         'seg_cloud': 'sequence<other_msgs/Point>',
         'seg_range': 'sequence<float>',
         'is_ground': 'sequence<int32>',
+        'seg_cloud_col_ind': 'sequence<int32>',
     }
 
     SLOT_TYPES = (
@@ -94,6 +97,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.NamespacedType(['other_msgs', 'msg'], 'Point')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('float')),  # noqa: E501
+        rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
         rosidl_parser.definition.UnboundedSequence(rosidl_parser.definition.BasicType('int32')),  # noqa: E501
     )
 
@@ -108,6 +112,7 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         self.seg_cloud = kwargs.get('seg_cloud', [])
         self.seg_range = array.array('f', kwargs.get('seg_range', []))
         self.is_ground = array.array('i', kwargs.get('is_ground', []))
+        self.seg_cloud_col_ind = array.array('i', kwargs.get('seg_cloud_col_ind', []))
 
     def __repr__(self):
         typename = self.__class__.__module__.split('.')
@@ -149,6 +154,8 @@ class SegCloud(metaclass=Metaclass_SegCloud):
         if self.seg_range != other.seg_range:
             return False
         if self.is_ground != other.is_ground:
+            return False
+        if self.seg_cloud_col_ind != other.seg_cloud_col_ind:
             return False
         return True
 
@@ -306,3 +313,31 @@ class SegCloud(metaclass=Metaclass_SegCloud):
                  all(val >= -2147483648 and val < 2147483648 for val in value)), \
                 "The 'is_ground' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
         self._is_ground = array.array('i', value)
+
+    @builtins.property
+    def seg_cloud_col_ind(self):
+        """Message field 'seg_cloud_col_ind'."""
+        return self._seg_cloud_col_ind
+
+    @seg_cloud_col_ind.setter
+    def seg_cloud_col_ind(self, value):
+        if isinstance(value, array.array):
+            assert value.typecode == 'i', \
+                "The 'seg_cloud_col_ind' array.array() must have the type code of 'i'"
+            self._seg_cloud_col_ind = value
+            return
+        if __debug__:
+            from collections.abc import Sequence
+            from collections.abc import Set
+            from collections import UserList
+            from collections import UserString
+            assert \
+                ((isinstance(value, Sequence) or
+                  isinstance(value, Set) or
+                  isinstance(value, UserList)) and
+                 not isinstance(value, str) and
+                 not isinstance(value, UserString) and
+                 all(isinstance(v, int) for v in value) and
+                 all(val >= -2147483648 and val < 2147483648 for val in value)), \
+                "The 'seg_cloud_col_ind' field must be a set or sequence and each value of type 'int' and each integer in [-2147483648, 2147483647]"
+        self._seg_cloud_col_ind = array.array('i', value)

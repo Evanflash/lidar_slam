@@ -11,16 +11,29 @@ module other_msgs {
       std_msgs::msg::Header header;
 
       @verbatim (language="comment", text=
-        "聚类点")
+        "聚类点" "\n"
+        "每束激光线开始")
       sequence<int32> seg_ring_str_ind;
 
+      @verbatim (language="comment", text=
+        "每束激光线结束")
       sequence<int32> seg_ring_end_ind;
 
+      @verbatim (language="comment", text=
+        "滤波后点云")
       sequence<other_msgs::msg::Point> seg_cloud;
 
+      @verbatim (language="comment", text=
+        "每个点深度")
       sequence<float> seg_range;
 
+      @verbatim (language="comment", text=
+        "标记是否为地面点")
       sequence<int32> is_ground;
+
+      @verbatim (language="comment", text=
+        "点在二维图像中的纵坐标")
+      sequence<int32> seg_cloud_col_ind;
     };
   };
 };

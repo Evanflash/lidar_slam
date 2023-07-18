@@ -21,6 +21,7 @@
 // Member `seg_ring_end_ind`
 // Member `seg_range`
 // Member `is_ground`
+// Member `seg_cloud_col_ind`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 // Member `seg_cloud`
 #include "other_msgs/msg/point.h"
@@ -321,7 +322,62 @@ bool other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__resize_funct
   return rosidl_runtime_c__int32__Sequence__init(member, size);
 }
 
-static rosidl_typesupport_introspection_c__MessageMember other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__SegCloud_message_member_array[6] = {
+size_t other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__size_function__SegCloud__seg_cloud_col_ind(
+  const void * untyped_member)
+{
+  const rosidl_runtime_c__int32__Sequence * member =
+    (const rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return member->size;
+}
+
+const void * other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_const_function__SegCloud__seg_cloud_col_ind(
+  const void * untyped_member, size_t index)
+{
+  const rosidl_runtime_c__int32__Sequence * member =
+    (const rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void * other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_function__SegCloud__seg_cloud_col_ind(
+  void * untyped_member, size_t index)
+{
+  rosidl_runtime_c__int32__Sequence * member =
+    (rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  return &member->data[index];
+}
+
+void other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__fetch_function__SegCloud__seg_cloud_col_ind(
+  const void * untyped_member, size_t index, void * untyped_value)
+{
+  const int32_t * item =
+    ((const int32_t *)
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_const_function__SegCloud__seg_cloud_col_ind(untyped_member, index));
+  int32_t * value =
+    (int32_t *)(untyped_value);
+  *value = *item;
+}
+
+void other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__assign_function__SegCloud__seg_cloud_col_ind(
+  void * untyped_member, size_t index, const void * untyped_value)
+{
+  int32_t * item =
+    ((int32_t *)
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_function__SegCloud__seg_cloud_col_ind(untyped_member, index));
+  const int32_t * value =
+    (const int32_t *)(untyped_value);
+  *item = *value;
+}
+
+bool other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__resize_function__SegCloud__seg_cloud_col_ind(
+  void * untyped_member, size_t size)
+{
+  rosidl_runtime_c__int32__Sequence * member =
+    (rosidl_runtime_c__int32__Sequence *)(untyped_member);
+  rosidl_runtime_c__int32__Sequence__fini(member);
+  return rosidl_runtime_c__int32__Sequence__init(member, size);
+}
+
+static rosidl_typesupport_introspection_c__MessageMember other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__SegCloud_message_member_array[7] = {
   {
     "header",  // name
     rosidl_typesupport_introspection_c__ROS_TYPE_MESSAGE,  // type
@@ -423,13 +479,30 @@ static rosidl_typesupport_introspection_c__MessageMember other_msgs__msg__SegClo
     other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__fetch_function__SegCloud__is_ground,  // fetch(index, &value) function pointer
     other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__assign_function__SegCloud__is_ground,  // assign(index, value) function pointer
     other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__resize_function__SegCloud__is_ground  // resize(index) function pointer
+  },
+  {
+    "seg_cloud_col_ind",  // name
+    rosidl_typesupport_introspection_c__ROS_TYPE_INT32,  // type
+    0,  // upper bound of string
+    NULL,  // members of sub message
+    true,  // is array
+    0,  // array size
+    false,  // is upper bound
+    offsetof(other_msgs__msg__SegCloud, seg_cloud_col_ind),  // bytes offset in struct
+    NULL,  // default value
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__size_function__SegCloud__seg_cloud_col_ind,  // size() function pointer
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_const_function__SegCloud__seg_cloud_col_ind,  // get_const(index) function pointer
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__get_function__SegCloud__seg_cloud_col_ind,  // get(index) function pointer
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__fetch_function__SegCloud__seg_cloud_col_ind,  // fetch(index, &value) function pointer
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__assign_function__SegCloud__seg_cloud_col_ind,  // assign(index, value) function pointer
+    other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__resize_function__SegCloud__seg_cloud_col_ind  // resize(index) function pointer
   }
 };
 
 static const rosidl_typesupport_introspection_c__MessageMembers other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__SegCloud_message_members = {
   "other_msgs__msg",  // message namespace
   "SegCloud",  // message name
-  6,  // number of fields
+  7,  // number of fields
   sizeof(other_msgs__msg__SegCloud),
   other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__SegCloud_message_member_array,  // message members
   other_msgs__msg__SegCloud__rosidl_typesupport_introspection_c__SegCloud_init_function,  // function to initialize message memory (memory has to be allocated)

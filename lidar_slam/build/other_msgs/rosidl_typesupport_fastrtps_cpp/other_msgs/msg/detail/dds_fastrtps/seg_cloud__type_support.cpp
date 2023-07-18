@@ -110,6 +110,10 @@ cdr_serialize(
   {
     cdr << ros_message.is_ground;
   }
+  // Member: seg_cloud_col_ind
+  {
+    cdr << ros_message.seg_cloud_col_ind;
+  }
   return true;
 }
 
@@ -153,6 +157,11 @@ cdr_deserialize(
   // Member: is_ground
   {
     cdr >> ros_message.is_ground;
+  }
+
+  // Member: seg_cloud_col_ind
+  {
+    cdr >> ros_message.seg_cloud_col_ind;
   }
 
   return true;
@@ -226,6 +235,16 @@ get_serialized_size(
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     size_t item_size = sizeof(ros_message.is_ground[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // Member: seg_cloud_col_ind
+  {
+    size_t array_size = ros_message.seg_cloud_col_ind.size();
+
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    size_t item_size = sizeof(ros_message.seg_cloud_col_ind[0]);
     current_alignment += array_size * item_size +
       eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
   }
@@ -324,6 +343,18 @@ max_serialized_size_SegCloud(
   }
 
   // Member: is_ground
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+
+  // Member: seg_cloud_col_ind
   {
     size_t array_size = 0;
     full_bounded = false;

@@ -280,7 +280,8 @@ private:
         downSamplePointCloud(cornerCloud, downSampleKeyPoints);
         downSamplePointCloud(surfCloud, downSampleKeyPoints);
         downSamplePointCloud(groundCloud, downSampleKeyPoints);
-        RCLCPP_INFO(this -> get_logger(), "%ld", cornerCloud -> size());
+        RCLCPP_INFO(this -> get_logger(), "corner size : %ld, surf size : %ld, ground size : %ld", 
+            cornerCloud -> size(), surfCloud -> size(), groundCloud -> size());
     }
     
     /**
@@ -423,7 +424,7 @@ private:
                 }
 
                 // 平面点
-                /*
+                
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfCloud -> points[i], pointSel);
                     kdtreeSurfPoints -> nearestKSearch(pointSel, 5, pointSearchInd, pointSearchSqDis);
@@ -475,7 +476,7 @@ private:
                         }
                     }  
                 }
-                */
+                
                 // 地面点
                 for(int i = 0; i < groundFlatNum; ++i){
                     trans(groundCloud -> points[i], pointSel);

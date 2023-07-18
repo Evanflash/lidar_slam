@@ -25,6 +25,7 @@ extern "C"
 // Member 'seg_ring_end_ind'
 // Member 'seg_range'
 // Member 'is_ground'
+// Member 'seg_cloud_col_ind'
 #include "rosidl_runtime_c/primitives_sequence.h"
 // Member 'seg_cloud'
 #include "other_msgs/msg/detail/point__struct.h"
@@ -34,11 +35,18 @@ typedef struct other_msgs__msg__SegCloud
 {
   std_msgs__msg__Header header;
   /// 聚类点
+  /// 每束激光线开始
   rosidl_runtime_c__int32__Sequence seg_ring_str_ind;
+  /// 每束激光线结束
   rosidl_runtime_c__int32__Sequence seg_ring_end_ind;
+  /// 滤波后点云
   other_msgs__msg__Point__Sequence seg_cloud;
+  /// 每个点深度
   rosidl_runtime_c__float__Sequence seg_range;
+  /// 标记是否为地面点
   rosidl_runtime_c__int32__Sequence is_ground;
+  /// 点在二维图像中的纵坐标
+  rosidl_runtime_c__int32__Sequence seg_cloud_col_ind;
 } other_msgs__msg__SegCloud;
 
 // Struct for a sequence of other_msgs__msg__SegCloud.

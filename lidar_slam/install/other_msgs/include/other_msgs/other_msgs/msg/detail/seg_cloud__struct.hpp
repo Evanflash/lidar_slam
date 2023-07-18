@@ -70,6 +70,9 @@ struct SegCloud_
   using _is_ground_type =
     std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
   _is_ground_type is_ground;
+  using _seg_cloud_col_ind_type =
+    std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>>;
+  _seg_cloud_col_ind_type seg_cloud_col_ind;
 
   // setters for named parameter idiom
   Type & set__header(
@@ -106,6 +109,12 @@ struct SegCloud_
     const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
   {
     this->is_ground = _arg;
+    return *this;
+  }
+  Type & set__seg_cloud_col_ind(
+    const std::vector<int32_t, typename std::allocator_traits<ContainerAllocator>::template rebind_alloc<int32_t>> & _arg)
+  {
+    this->seg_cloud_col_ind = _arg;
     return *this;
   }
 
@@ -167,6 +176,9 @@ struct SegCloud_
       return false;
     }
     if (this->is_ground != other.is_ground) {
+      return false;
+    }
+    if (this->seg_cloud_col_ind != other.seg_cloud_col_ind) {
       return false;
     }
     return true;

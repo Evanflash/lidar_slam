@@ -178,6 +178,7 @@ private:
         seg_msg.is_ground.assign(cloud_size, 0);
         seg_msg.seg_ring_str_ind.assign(vertical_scans, 0);
         seg_msg.seg_ring_end_ind.assign(vertical_scans, 0);
+        seg_msg.seg_cloud_col_ind.assign(cloud_size, 0);
 
         // 重置聚类标签
         label_count = 1;
@@ -291,6 +292,7 @@ private:
                     seg_msg.seg_cloud.push_back(point_msg);
                     seg_msg.seg_range[curInd] = range_mat(i, j);
                     seg_msg.is_ground[curInd] = (ground_mat(i, j) == 1);
+                    seg_msg.seg_cloud_col_ind[curInd] = j;
                     ++curInd;
 
                     cloud -> push_back(full_cloud -> points[ind]);

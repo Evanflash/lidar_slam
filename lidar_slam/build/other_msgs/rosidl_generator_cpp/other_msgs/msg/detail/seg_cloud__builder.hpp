@@ -21,16 +21,32 @@ namespace msg
 namespace builder
 {
 
+class Init_SegCloud_seg_cloud_col_ind
+{
+public:
+  explicit Init_SegCloud_seg_cloud_col_ind(::other_msgs::msg::SegCloud & msg)
+  : msg_(msg)
+  {}
+  ::other_msgs::msg::SegCloud seg_cloud_col_ind(::other_msgs::msg::SegCloud::_seg_cloud_col_ind_type arg)
+  {
+    msg_.seg_cloud_col_ind = std::move(arg);
+    return std::move(msg_);
+  }
+
+private:
+  ::other_msgs::msg::SegCloud msg_;
+};
+
 class Init_SegCloud_is_ground
 {
 public:
   explicit Init_SegCloud_is_ground(::other_msgs::msg::SegCloud & msg)
   : msg_(msg)
   {}
-  ::other_msgs::msg::SegCloud is_ground(::other_msgs::msg::SegCloud::_is_ground_type arg)
+  Init_SegCloud_seg_cloud_col_ind is_ground(::other_msgs::msg::SegCloud::_is_ground_type arg)
   {
     msg_.is_ground = std::move(arg);
-    return std::move(msg_);
+    return Init_SegCloud_seg_cloud_col_ind(msg_);
   }
 
 private:

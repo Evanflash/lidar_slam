@@ -35,8 +35,8 @@ extern "C"
 #endif
 
 #include "other_msgs/msg/detail/point__functions.h"  // seg_cloud
-#include "rosidl_runtime_c/primitives_sequence.h"  // is_ground, seg_range, seg_ring_end_ind, seg_ring_str_ind
-#include "rosidl_runtime_c/primitives_sequence_functions.h"  // is_ground, seg_range, seg_ring_end_ind, seg_ring_str_ind
+#include "rosidl_runtime_c/primitives_sequence.h"  // is_ground, seg_cloud_col_ind, seg_range, seg_ring_end_ind, seg_ring_str_ind
+#include "rosidl_runtime_c/primitives_sequence_functions.h"  // is_ground, seg_cloud_col_ind, seg_range, seg_ring_end_ind, seg_ring_str_ind
 #include "std_msgs/msg/detail/header__functions.h"  // header
 
 // forward declare type support functions
@@ -139,6 +139,14 @@ static bool _SegCloud__cdr_serialize(
   {
     size_t size = ros_message->is_ground.size;
     auto array_ptr = ros_message->is_ground.data;
+    cdr << static_cast<uint32_t>(size);
+    cdr.serializeArray(array_ptr, size);
+  }
+
+  // Field name: seg_cloud_col_ind
+  {
+    size_t size = ros_message->seg_cloud_col_ind.size;
+    auto array_ptr = ros_message->seg_cloud_col_ind.data;
     cdr << static_cast<uint32_t>(size);
     cdr.serializeArray(array_ptr, size);
   }
@@ -260,6 +268,22 @@ static bool _SegCloud__cdr_deserialize(
     cdr.deserializeArray(array_ptr, size);
   }
 
+  // Field name: seg_cloud_col_ind
+  {
+    uint32_t cdrSize;
+    cdr >> cdrSize;
+    size_t size = static_cast<size_t>(cdrSize);
+    if (ros_message->seg_cloud_col_ind.data) {
+      rosidl_runtime_c__int32__Sequence__fini(&ros_message->seg_cloud_col_ind);
+    }
+    if (!rosidl_runtime_c__int32__Sequence__init(&ros_message->seg_cloud_col_ind, size)) {
+      fprintf(stderr, "failed to create array for field 'seg_cloud_col_ind'");
+      return false;
+    }
+    auto array_ptr = ros_message->seg_cloud_col_ind.data;
+    cdr.deserializeArray(array_ptr, size);
+  }
+
   return true;
 }  // NOLINT(readability/fn_size)
 
@@ -330,6 +354,17 @@ size_t get_serialized_size_other_msgs__msg__SegCloud(
   {
     size_t array_size = ros_message->is_ground.size;
     auto array_ptr = ros_message->is_ground.data;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+    (void)array_ptr;
+    size_t item_size = sizeof(array_ptr[0]);
+    current_alignment += array_size * item_size +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, item_size);
+  }
+  // field.name seg_cloud_col_ind
+  {
+    size_t array_size = ros_message->seg_cloud_col_ind.size;
+    auto array_ptr = ros_message->seg_cloud_col_ind.data;
     current_alignment += padding +
       eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
     (void)array_ptr;
@@ -432,6 +467,17 @@ size_t max_serialized_size_other_msgs__msg__SegCloud(
       eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
   }
   // member: is_ground
+  {
+    size_t array_size = 0;
+    full_bounded = false;
+    is_plain = false;
+    current_alignment += padding +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, padding);
+
+    current_alignment += array_size * sizeof(uint32_t) +
+      eprosima::fastcdr::Cdr::alignment(current_alignment, sizeof(uint32_t));
+  }
+  // member: seg_cloud_col_ind
   {
     size_t array_size = 0;
     full_bounded = false;

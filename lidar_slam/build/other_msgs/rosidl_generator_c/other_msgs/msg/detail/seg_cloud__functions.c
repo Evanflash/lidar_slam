@@ -18,6 +18,7 @@
 // Member `seg_ring_end_ind`
 // Member `seg_range`
 // Member `is_ground`
+// Member `seg_cloud_col_ind`
 #include "rosidl_runtime_c/primitives_sequence_functions.h"
 // Member `seg_cloud`
 #include "other_msgs/msg/detail/point__functions.h"
@@ -58,6 +59,11 @@ other_msgs__msg__SegCloud__init(other_msgs__msg__SegCloud * msg)
     other_msgs__msg__SegCloud__fini(msg);
     return false;
   }
+  // seg_cloud_col_ind
+  if (!rosidl_runtime_c__int32__Sequence__init(&msg->seg_cloud_col_ind, 0)) {
+    other_msgs__msg__SegCloud__fini(msg);
+    return false;
+  }
   return true;
 }
 
@@ -79,6 +85,8 @@ other_msgs__msg__SegCloud__fini(other_msgs__msg__SegCloud * msg)
   rosidl_runtime_c__float__Sequence__fini(&msg->seg_range);
   // is_ground
   rosidl_runtime_c__int32__Sequence__fini(&msg->is_ground);
+  // seg_cloud_col_ind
+  rosidl_runtime_c__int32__Sequence__fini(&msg->seg_cloud_col_ind);
 }
 
 bool
@@ -120,6 +128,12 @@ other_msgs__msg__SegCloud__are_equal(const other_msgs__msg__SegCloud * lhs, cons
   // is_ground
   if (!rosidl_runtime_c__int32__Sequence__are_equal(
       &(lhs->is_ground), &(rhs->is_ground)))
+  {
+    return false;
+  }
+  // seg_cloud_col_ind
+  if (!rosidl_runtime_c__int32__Sequence__are_equal(
+      &(lhs->seg_cloud_col_ind), &(rhs->seg_cloud_col_ind)))
   {
     return false;
   }
@@ -167,6 +181,12 @@ other_msgs__msg__SegCloud__copy(
   // is_ground
   if (!rosidl_runtime_c__int32__Sequence__copy(
       &(input->is_ground), &(output->is_ground)))
+  {
+    return false;
+  }
+  // seg_cloud_col_ind
+  if (!rosidl_runtime_c__int32__Sequence__copy(
+      &(input->seg_cloud_col_ind), &(output->seg_cloud_col_ind)))
   {
     return false;
   }

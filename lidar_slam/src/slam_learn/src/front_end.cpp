@@ -161,6 +161,8 @@ public:
             resetParameters();
             // 计算曲率
             calculateSmoothness();
+            // 去除不合适的点
+            removeUselessPoints();
             // 提取特征点
             extractFeatures();
             // 里程计
@@ -217,6 +219,49 @@ public:
             }
         };
         cs(seg_msg.seg_cloud, seg_msg.seg_range, segmentCurvature);
+    }
+
+    /**
+     * 去除不适合的点
+    */
+    void removeUselessPoints(){
+        int size = seg_msg.seg_cloud.size();
+        static int num = 0;
+        // 去除遮挡点
+        for(int i = 5; i < size - 6; ++i){
+            float d1 = seg_msg.seg_range[i];
+            float d2 = seg_msg.seg_range[i + 1];
+            int colDiff = std::abs(int(seg_msg.seg_cloud_col_ind[i + 1] - seg_msg.seg_cloud_col_ind[i]));
+
+            if(colDiff < 10){
+                if(d1 - d2 > 0.3){
+                    segmentNeighborPicked[i - 5] = 1;
+                    segmentNeighborPicked[i - 4] = 1;
+                    segmentNeighborPicked[i - 3] = 1;
+                    segmentNeighborPicked[i - 2] = 1;
+                    segmentNeighborPicked[i - 1] = 1;
+                    segmentNeighborPicked[i] = 1;
+                    num += 6;
+                }else if(d2 - d1 > 0.3){
+                    segmentNeighborPicked[i + 1] = 1;
+                    segmentNeighborPicked[i + 2] = 1;
+                    segmentNeighborPicked[i + 3] = 1;
+                    segmentNeighborPicked[i + 4] = 1;
+                    segmentNeighborPicked[i + 5] = 1;
+                    segmentNeighborPicked[i + 6] = 1;
+                    num += 6;
+                }
+            }
+
+            float diff1 = std::abs(float(seg_msg.seg_range[i - 1] - seg_msg.seg_range[i]));
+            float diff2 = std::abs(float(seg_msg.seg_range[i + 1] - seg_msg.seg_range[i]));
+            if(diff1 > 0.02 * seg_msg.seg_range[i] &&
+               diff2 > 0.02 * seg_msg.seg_range[i]){
+                segmentNeighborPicked[i] = 1;
+            }
+        }
+        // RCLCPP_INFO(this -> get_logger(), "cloud size:%d, remove size:%d", size, num);
+        num = 0;
     }
 
     /**
@@ -339,7 +384,7 @@ public:
                     }
                 }
 
-
+                /*
                 smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
@@ -378,7 +423,8 @@ public:
                                 segmentNeighborPicked[curInd + l] = 1;
                         }
                     }
-                }
+                    
+                }*/
                 CloudTypePtr ground(new CloudType());
                 CloudTypePtr surf(new CloudType());
                 pcl::VoxelGrid<PointType>::Ptr filter(new pcl::VoxelGrid<PointType>());
