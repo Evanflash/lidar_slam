@@ -213,7 +213,7 @@ private:
             int colInd = (horizonAngle + 2 * M_PI) / x_resolution;
             //-round((horizonAngle - M_PI_2) / x_resolution) + horizontal_scans * 0.5;
             if(colInd >= horizontal_scans){
-                colInd -= horizontal_scans / 2;
+                colInd -= horizontal_scans;
             }
             if(colInd < 0 || colInd >= horizontal_scans){
                 continue;

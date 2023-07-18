@@ -306,11 +306,11 @@ public:
                     if(segmentNeighborPicked[curInd] == 0 && 
                        segmentCurvature[k].curvature > edgeThreshold && seg_msg.is_ground[curInd] == 0){
                         ++largestPickedNum;
-                        if(largestPickedNum <= 2){
+                        if(largestPickedNum <= 1){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
-                        }else if(largestPickedNum <= 20){
+                        }else if(largestPickedNum <= 10){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerLessSharp -> push_back(point);
                         }else{
@@ -436,13 +436,17 @@ public:
                         groundSurfLessFlat -> push_back(point);
                         all_cloud.ground_less_flat.push_back(seg_msg.seg_cloud[curInd]);
                     } else if(seg_msg.is_ground[curInd] == 0 && segmentCurvature[k].curvature < 0.3){
-                        all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[curInd]);
+                        // all_cloud.surf_less_flat.push_back(seg_msg.seg_cloud[curInd]);
                         tran(seg_msg.seg_cloud[curInd], point);
-                        point.intensity = 100;
-                        surfLessFlatShow -> push_back(point);
+                        surf -> push_back(point);
+                        // point.intensity = 100;
+                        // surfLessFlatShow -> push_back(point);
                     }
                 }
-
+                filter -> setInputCloud(surf);
+                filter -> filter(*ground);
+                *surfLessFlatShow += *ground;
+                pointType2MsgPoint(ground, all_cloud.surf_less_flat);
             }
         }
          
@@ -455,7 +459,7 @@ public:
         msg.header.frame_id = "map";
         pubtest -> publish(msg);
         
-        pcl::toROSMsg(*groundSurfLessFlat, msg);
+        pcl::toROSMsg(*cornerLessSharp, msg);
         msg.header.frame_id = "map";
         pubtest2 -> publish(msg);
 
