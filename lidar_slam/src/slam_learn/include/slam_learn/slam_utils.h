@@ -51,6 +51,7 @@ struct smoothness{
     smoothness(){}
     float curvature;    // 曲率
     int index;          // 序号
+    int isflat;         // 是否为平面点
 };
 
 struct pose{

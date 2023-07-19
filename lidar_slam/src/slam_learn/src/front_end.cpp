@@ -39,6 +39,7 @@ private:
 
     // kd tree
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeCornerLast;
+    pcl::KdTreeFLANN<PointType>::Ptr kdtreeSurfLast;
     pcl::KdTreeFLANN<PointType>::Ptr kdtreeGroundLast;
 
     // 参数
@@ -145,6 +146,7 @@ public:
         groundSurfLast.reset(new CloudType());
 
         kdtreeCornerLast.reset(new pcl::KdTreeFLANN<PointType>());
+        kdtreeSurfLast.reset(new pcl::KdTreeFLANN<PointType>());
         kdtreeGroundLast.reset(new pcl::KdTreeFLANN<PointType>());
 
         isFirstFrame = true;
@@ -240,6 +242,7 @@ public:
                 smoothness sns;
                 sns.curvature = diffRange * diffRange;
                 sns.index = i;
+                sns.isflat = 0;
                 curvatures[i] = sns;
             }
         };
@@ -302,9 +305,11 @@ public:
         };
 
         PointType point;
+        CloudTypePtr surf(new CloudType());
+        CloudTypePtr ground(new CloudType());
+        pcl::VoxelGrid<PointType>::Ptr downsamplefilter(new pcl::VoxelGrid<PointType>());
+        downsamplefilter -> setLeafSize(0.2, 0.2, 0.2);
 
-        CloudTypePtr surfFlatShow(new CloudType());
-        CloudTypePtr surfLessFlatShow(new CloudType());
 
         // 分割点云特征提取
         for(int i = 0; i < vertical_scans; ++i){
@@ -326,13 +331,15 @@ public:
                     if(segmentNeighborPicked[curInd] == 0 && 
                        segmentCurvature[k].curvature > edgeThreshold && seg_msg.is_ground[curInd] == 0){
                         ++largestPickedNum;
-                        if(largestPickedNum <= 1){
+                        if(largestPickedNum <= 2){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerSharp -> push_back(point);
                             cornerLessSharp -> push_back(point);
-                        }else if(largestPickedNum <= 10){
+                            segmentCurvature[k].isflat = 1;
+                        }else if(largestPickedNum <= 20){
                             tran(seg_msg.seg_cloud[curInd], point);
                             cornerLessSharp -> push_back(point);
+                            segmentCurvature[k].isflat = 2;
                         }else{
                             break;
                         }
@@ -404,7 +411,6 @@ public:
                     }
                 }
 
-                /*
                 smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
@@ -412,8 +418,6 @@ public:
                        segmentCurvature[k].curvature < surfThreshold && seg_msg.is_ground[curInd] == 0){
                         tran(seg_msg.seg_cloud[curInd], point);
                         surfFlat -> push_back(point);
-                        point.intensity = 255;
-                        surfFlatShow -> push_back(point);
 
                         if(++smallestPickedNum >= 4){
                             break;
@@ -444,30 +448,42 @@ public:
                         }
                     }
                     
-                }*/
+                }
                 
+                CloudTypePtr surfFiltered(new CloudType());
+                CloudTypePtr groundFiltered(new CloudType());
                 for(int k = sp; k <= ep; ++k){
-                    int curInd = segmentCurvature[k].index;
-                    if(seg_msg.is_ground[curInd] == 1 && k % 5 == 0){
-                        tran(seg_msg.seg_cloud[curInd], point);
-                        groundSurfLessFlat -> push_back(point);
-                    } else if(seg_msg.is_ground[curInd] == 0 && segmentCurvature[k].curvature < 0.1){
-                        tran(seg_msg.seg_cloud[curInd], point);
-                        surfLessFlat -> push_back(point);
+                    if(segmentCurvature[k].isflat <= 0){
+                        int curInd = segmentCurvature[k].index;
+                        if(seg_msg.is_ground[curInd] == 1 && k % 5 == 0){
+                            tran(seg_msg.seg_cloud[curInd], point);
+                            ground -> push_back(point);
+                        } else if(seg_msg.is_ground[curInd] == 0 ){
+                            tran(seg_msg.seg_cloud[curInd], point);
+                            surf -> push_back(point);
+                        }
                     }
                 }
+
+                downsamplefilter -> setInputCloud(surf);
+                downsamplefilter -> filter(*surfFiltered);
+                *surfLessFlat += *surfFiltered;
+
+                downsamplefilter -> setInputCloud(ground);
+                downsamplefilter -> filter(*groundFiltered);
+                *groundSurfLessFlat += *groundFiltered;
             }
         }
          
         // 测试
-        sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*surfLessFlatShow, msg);
-        msg.header.frame_id = "map";
-        pubtest -> publish(msg);
+        // sensor_msgs::msg::PointCloud2 msg;
+        // pcl::toROSMsg(*cornerSharp, msg);
+        // msg.header.frame_id = "map";
+        // pubtest -> publish(msg);
         
-        pcl::toROSMsg(*cornerLessSharp, msg);
-        msg.header.frame_id = "map";
-        pubtest2 -> publish(msg);
+        // pcl::toROSMsg(*cornerLessSharp, msg);
+        // msg.header.frame_id = "map";
+        // pubtest2 -> publish(msg);
 
     }
 
@@ -475,6 +491,11 @@ public:
      * 里程计
     */
     void odometry(){
+        // q: [qx, qy, qz]
+        // t: [tx, ty, tz]
+        double q[3] = {0.0, 0.0, 0.0};
+        double t[3] = {0.0, 0.0, 0.0};
+        Eigen::Map<Eigen::Vector3d> t_odom(t);
         // 计算俩点之间的距离
         auto dis = [](const PointType &p1, const PointType &p2){
             double d = (p1.x - p2.x) * (p1.x - p2.x) +
@@ -487,25 +508,24 @@ public:
             Eigen::Vector3d v(point.x, point.y, point.z);
             return v;
         };
-
-        // 降采样
-        auto downSample = [](CloudTypePtr cloud_in){
-            CloudTypePtr tmp(new CloudType());
-            pcl::VoxelGrid<PointType> downSampleFilter;
-            downSampleFilter.setLeafSize(0.2, 0.2, 0.2);
-            downSampleFilter.setInputCloud(cloud_in);
-            downSampleFilter.filter(*tmp);
-            *cloud_in = *tmp;
+        // 将当前点变换到前一帧坐标系下
+        auto trans = [&](PointType &pi, PointType &po){
+            Eigen::Quaterniond q_odom = Eigen::AngleAxisd(q[2], Eigen::Vector3d::UnitZ()) *
+                                        Eigen::AngleAxisd(q[1], Eigen::Vector3d::UnitY()) *
+                                        Eigen::AngleAxisd(q[0], Eigen::Vector3d::UnitX());
+            Eigen::Vector3d point_in(pi.x, pi.y, pi.z);
+            point_in = q_odom * point_in + t_odom;
+            po.x = point_in.x();
+            po.y = point_in.y();
+            po.z = point_in.z();
+            po.intensity = pi.intensity;
         };
 
-        // q: [qx, qy, qz]
-        // t: [tx, ty, tz]
-        double q[3] = {0.0, 0.0, 0.0};
-        double t[3] = {0.0, 0.0, 0.0};
         if(isFirstFrame == true){
             isFirstFrame = false;
         }else{
             int cornerSharpNum = cornerSharp -> size();
+            int surfFlatNum = surfFlat -> size();
             int groundFlatNum = groundSurfFlat -> size();
             // 地面点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
@@ -521,7 +541,7 @@ public:
                 std::vector<float> pointSearchSqDis;
 
                 for(int i = 0; i < groundFlatNum; ++i){
-                    pointSel = groundSurfFlat -> points[i];
+                    trans(groundSurfFlat -> points[i], pointSel);
                     kdtreeGroundLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
 
                     int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
@@ -599,10 +619,10 @@ public:
                 Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], Eigen::Vector3d::UnitY()));
                 Eigen::Matrix3d qyx;
                 qyx = pitch * roll;
-
+                
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
-                    pointSel = cornerSharp -> points[i];
+                    trans(cornerSharp -> points[i], pointSel);
                     kdtreeCornerLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
                     int closestPointInd = -1, minPointInd2 = -1;
                     if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
@@ -653,6 +673,63 @@ public:
                         }
                     }
                 }
+                
+                // 分割点云的平面点
+                for(int i = 0; i < surfFlatNum; ++i){
+                    trans(surfFlat -> points[i], pointSel);
+                    kdtreeSurfLast -> nearestKSearch(pointSel, 1, pointSearchInd, pointSearchSqDis);
+
+                    int closestPointInd = -1, minPointInd2 = -1, minPointInd3 = -1;
+                    if(pointSearchSqDis[0] < nearest_feature_dist_sqr){
+                        closestPointInd = pointSearchInd[0];
+                        int closestPointScanID = int(surfLast -> points[closestPointInd].intensity);
+                        
+                        double minPointSqDis2 = nearest_feature_dist_sqr, minPointSqDis3 = nearest_feature_dist_sqr;
+                        for(int j = closestPointInd + 1; j < int(surfLast -> size()); ++j){
+                            if(int(surfLast -> points[j].intensity) > closestPointScanID + 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(surfLast -> points[j], pointSel);
+                            if(int(surfLast -> points[j].intensity) <= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(surfLast -> points[j].intensity) > closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+                        for(int j = closestPointInd - 1; j >= 0; --j){
+                            if(int(surfLast -> points[j].intensity) > closestPointScanID - 2.5)
+                                break;
+                            
+                            double pointSqDis = dis(surfLast -> points[j], pointSel);
+                            if(int(surfLast -> points[j].intensity) >= closestPointScanID &&
+                                    pointSqDis < minPointSqDis2){
+                                minPointSqDis2 = pointSqDis;
+                                minPointInd2 = j;
+                            }else if(int(surfLast -> points[j].intensity) < closestPointScanID &&
+                                        pointSqDis < minPointSqDis3){
+                                minPointSqDis3 = pointSqDis;
+                                minPointInd3 = j;
+                            }
+                        }
+
+                        if(minPointInd2 >= 0 && minPointInd3 >= 0){
+                            Eigen::Vector3d curr_point = pointxyziToVector3d(surfFlat -> points[i]);
+                            Eigen::Vector3d last_point_a = pointxyziToVector3d(surfLast -> points[closestPointInd]);
+                            Eigen::Vector3d last_point_b = pointxyziToVector3d(surfLast -> points[minPointInd2]);
+                            Eigen::Vector3d last_point_c = pointxyziToVector3d(surfLast -> points[minPointInd3]);
+                            
+                            ceres::CostFunction *cost_function = 
+                                SurfFactor::Create(
+                                    curr_point, last_point_a, last_point_b, last_point_c, qyx, t[2]);
+                            problem.AddResidualBlock(cost_function, loss_function, q + 2, t);
+                        }
+                    }
+                }
+                
                 // 求解
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
@@ -691,9 +768,9 @@ public:
         cloudTmp = groundSurfLessFlat;
         groundSurfLessFlat = groundSurfLast;
         groundSurfLast = cloudTmp;
-        downSample(groundSurfLast);
 
         kdtreeCornerLast -> setInputCloud(cornerLast);
+        kdtreeSurfLast -> setInputCloud(surfLast);
         kdtreeGroundLast -> setInputCloud(groundSurfLast);
     }
 
@@ -745,6 +822,13 @@ public:
         path.header.frame_id = "map";
         
         pubPath -> publish(path);
+
+        // static CloudTypePtr cloud(new CloudType());
+        // *cloud += cloudToWorld(surfLast);
+        // sensor_msgs::msg::PointCloud2 msg;
+        // pcl::toROSMsg(*cloud, msg);
+        // msg.header.frame_id = "map";
+        // pubtest -> publish(msg);
     }
 
 
@@ -760,6 +844,24 @@ public:
             p.i = cloud -> points[i].intensity;
             pointMsg.push_back(p);
         }
+    }
+
+    /**
+     * 将当前帧变换到世界坐标系下 
+    */
+    CloudType cloudToWorld(CloudTypePtr cloud){
+        CloudType cloud_out;
+        PointType point;
+        for(size_t i = 0; i < cloud -> size(); ++i){
+            Eigen::Vector3d p(cloud -> points[i].x, cloud -> points[i].y, cloud -> points[i].z);
+            p = q_w_curr * p + t_w_curr;
+            point.x = p.x();
+            point.y = p.y();
+            point.z = p.z();
+            point.intensity = cloud -> points[i].intensity;
+            cloud_out.push_back(point);
+        }
+        return cloud_out;
     }
 
 

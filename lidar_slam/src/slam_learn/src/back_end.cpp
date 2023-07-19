@@ -241,7 +241,7 @@ private:
 
         // 下采样滤波
         downSampleSubMap.reset(new pcl::VoxelGrid<PointType>());
-        downSampleSubMap -> setLeafSize(0.2, 0.2, 0.2);
+        downSampleSubMap -> setLeafSize(0.4, 0.4, 0.4);
         downSampleKeyPoints.reset(new pcl::VoxelGrid<PointType>());
         downSampleKeyPoints -> setLeafSize(0.2, 0.2, 0.2);
         
@@ -318,8 +318,8 @@ private:
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
         
-        // RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
-        //     laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
+        RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
+            laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
 
         // globalMap -> clear();
         // *globalMap += *laserSurfFromMap;
@@ -336,20 +336,20 @@ private:
      * 图优化
     */
     void scan2MapOptimization(){
-        auto trans = [&](const PointType &pointFrom, PointType &pointTo){
-            Eigen::Vector3d p(pointFrom.x, pointFrom.y, pointFrom.z);
-            p = q_w_last * p + t_w_last;
-            pointTo.x = p.x();
-            pointTo.y = p.y();
-            pointTo.z = p.z();
-            pointTo.intensity = pointFrom.intensity;
-        };
-
         // 待优化四元数与偏移
         double q_[4] = {0.0, 0.0, 0.0, 1.0};
         double t_[3] = {0.0, 0.0, 0.0};
         Eigen::Map<Eigen::Quaterniond> q_delta(q_);
         Eigen::Map<Eigen::Vector3d> t_delta(t_);
+        
+        auto trans = [&](const PointType &pointFrom, PointType &pointTo){
+            Eigen::Vector3d p(pointFrom.x, pointFrom.y, pointFrom.z);
+            p = q_delta * (q_w_last * p + t_w_last) + t_delta;
+            pointTo.x = p.x();
+            pointTo.y = p.y();
+            pointTo.z = p.z();
+            pointTo.intensity = pointFrom.intensity;
+        };
 
         if(!allKeyFramesPoses.empty()){
             kdtreeCornerPoints -> setInputCloud(laserCornerFromMap);
@@ -360,7 +360,8 @@ private:
             int surfFlatNum = surfCloud -> size();
             int groundFlatNum = groundCloud -> size();
 
-            // RCLCPP_INFO(this -> get_logger(), "surf:%d, ground:%d", surfFlatNum, groundFlatNum);
+            RCLCPP_INFO(this -> get_logger(), "corner:%d, surf:%d, ground:%d", 
+                cornerSharpNum, surfFlatNum, groundFlatNum);
 
             PointType pointSel;
             std::vector<int> pointSearchInd;
@@ -375,7 +376,6 @@ private:
                 problem.AddParameterBlock(q_, 4, q_manifold);
                 problem.AddParameterBlock(t_, 3);
 
-                /*
                 // 边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     trans(cornerCloud -> points[i], pointSel);
@@ -447,7 +447,6 @@ private:
                     }
                     
                 }
-                */
 
                 // 平面点
                 for(int i = 0; i < surfFlatNum; ++i){
@@ -554,7 +553,7 @@ private:
                         }
                     }  
                 }
-
+                
                 // 求解
                 std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
                 ceres::Solver::Options options;
@@ -572,6 +571,7 @@ private:
         // 矫正位姿
         t_w_last = q_delta * t_w_last + t_delta;
         q_w_last = q_delta * q_w_last;
+        RCLCPP_INFO(this -> get_logger(), "x:%f, y:%f, z:%f", t_delta.x(), t_delta.y(), t_delta.z());
     }
 
     /**
@@ -579,8 +579,6 @@ private:
     */
     void saveKeyFramesAndFactor(){
         PointType currentPosPoint(t_w_last.x(), t_w_last.y(), t_w_last.z());
-        RCLCPP_INFO(this -> get_logger(), "x:%f, y:%f, z:%f", 
-            currentPosPoint.x, currentPosPoint.y, currentPosPoint.z);
 
         // 噪声
         gtsam::Vector6 Vector6(6);
@@ -683,7 +681,6 @@ private:
 
         recentKeyFrames.push_back(size - 1);
         if(recentKeyFrames.size() > 50){
-            // sleep(100);
             recentKeyFrames.pop_front();
         }
         

@@ -112,6 +112,55 @@ struct CornerFactor{
     double _z;
 };
 
+// 平面点残差计算
+struct SurfFactor{
+    SurfFactor(Eigen::Vector3d curr_point_, Eigen::Vector3d point_j_,
+               Eigen::Vector3d point_l_, Eigen::Vector3d point_m_,
+               Eigen::Matrix<double, 3, 3> qyx_, double z_)
+        : curr_point(curr_point_), point_j(point_j_), point_l(point_l_), point_m(point_m_),
+        _qyx(qyx_), _z(z_)
+        {
+            ljm_norm = (point_j - point_l).cross(point_j - point_m);
+            ljm_norm.normalize();
+        }
+    // qz, tx, ty
+    template<typename T>
+    bool operator()(const T* q, const T* t, T* residual) const {
+        Eigen::Matrix<T, 3, 1> cp{T(curr_point.x()), T(curr_point.y()), T(curr_point.z())};
+        Eigen::Matrix<T, 3, 1> lpj{T(point_j.x()), T(point_j.y()), T(point_j.z())};
+        Eigen::Matrix<T, 3, 1> ljm{T(ljm_norm.x()), T(ljm_norm.y()), T(ljm_norm.z())};
+
+        T cz = ceres::cos(q[0]);
+        T sz = ceres::sin(q[0]);
+        Eigen::Matrix<T, 3, 3> qz;
+        qz << cz, -sz, T(0.0),
+              sz, cz, T(0.0),
+              T(0.0), T(0.0), T(1.0);
+        Eigen::Matrix<T, 3, 3> qyx;
+        qyx << T(_qyx(0, 0)), T(_qyx(0, 1)), T(_qyx(0, 2)), 
+               T(_qyx(1, 0)), T(_qyx(1, 1)), T(_qyx(1, 2)), 
+               T(_qyx(2, 0)), T(_qyx(2, 1)), T(_qyx(2, 2));
+
+        Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], T(_z)};      
+        Eigen::Matrix<T, 3, 1> lp = qz * qyx * cp + txyz;
+
+        residual[0] = (lp - lpj).dot(ljm);
+        return true;
+    }
+
+    static ceres::CostFunction *Create(Eigen::Vector3d curr_point_, Eigen::Vector3d point_j_,
+                                       Eigen::Vector3d point_l_, Eigen::Vector3d point_m_,
+                                       Eigen::Matrix<double, 3, 3> qyx_, double z_){
+        return (new ceres::AutoDiffCostFunction<SurfFactor, 1, 1, 2>
+            (new SurfFactor(curr_point_, point_j_, point_l_, point_m_, qyx_, z_)));
+    }
+
+    Eigen::Vector3d curr_point, point_j, point_l, point_m;
+    Eigen::Vector3d ljm_norm;
+    Eigen::Matrix<double, 3, 3> _qyx;
+    double _z;
+};
+
 // 后端残差
 struct PlaneFactorBack{
     PlaneFactorBack(double _pa, double _pb, double _pc, double _pd, PointType _point)
