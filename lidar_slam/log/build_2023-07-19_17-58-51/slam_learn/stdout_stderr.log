@@ -1,0 +1,61 @@
+[ 16%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[ 50%] Built target data_process_node
+[35m[1mConsolidate compiler generated dependencies of target back_end_node[0m
+[ 66%] [32mBuilding CXX object CMakeFiles/back_end_node.dir/src/back_end.cpp.o[0m
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In constructor ‘[01m[Klidarslam::FrontEnd::FrontEnd(const string&)[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:86:27:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Map<Eigen::Quaternion<double>, 0>::Map()[m[K’
+   86 |           t_w_curr(0, 0, 0[01;31m[K)[m[K
+      |                           [01;31m[K^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:42[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:458:52:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Map(Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Scalar*) [with _Scalar = double; int _Options = 0; Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Scalar = double][m[K’
+  458 |     EIGEN_DEVICE_FUNC explicit EIGEN_STRONG_INLINE [01;36m[KMap[m[K(Scalar* coeffs) : m_coeffs(coeffs) {}
+      |                                                    [01;36m[K^~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:458:52:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:449:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Map(const Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>&) [with _Scalar = double; int _Options = 0][m[K’
+  449 |     [01;36m[KEIGEN_INHERIT_ASSIGNMENT_OPERATORS[m[K(Map)
+      |     [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:449:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:86:27:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Map<Eigen::Matrix<double, 3, 1>, 0, Eigen::Stride<0, 0> >::Map()[m[K’
+   86 |           t_w_curr(0, 0, 0[01;31m[K)[m[K
+      |                           [01;31m[K^[m[K
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:162:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<MatrixType, MapOptions, StrideType>::Map(const Eigen::Map<MatrixType, MapOptions, StrideType>&) [with PlainObjectType = Eigen::Matrix<double, 3, 1>; int MapOptions = 0; StrideType = Eigen::Stride<0, 0>][m[K’
+  162 |     [01;36m[KEIGEN_INHERIT_ASSIGNMENT_OPERATORS[m[K(Map)
+      |     [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:162:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 0 provided
+In file included from [01m[K/usr/include/eigen3/Eigen/Core:307[m[K,
+                 from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+                 from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:156:12:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<MatrixType, MapOptions, StrideType>::Map(Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType, Eigen::Index, Eigen::Index, const StrideType&) [with PlainObjectType = Eigen::Matrix<double, 3, 1>; int MapOptions = 0; StrideType = Eigen::Stride<0, 0>; Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType = double*; Eigen::Index = long int][m[K’
+  156 |     inline [01;36m[KMap[m[K(PointerArgType dataPtr, Index rows, Index cols, const StrideType& stride = StrideType())
+      |            [01;36m[K^~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:156:12:[m[K [01;36m[Knote: [m[K  candidate expects 4 arguments, 0 provided
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:142:12:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<MatrixType, MapOptions, StrideType>::Map(Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType, Eigen::Index, const StrideType&) [with PlainObjectType = Eigen::Matrix<double, 3, 1>; int MapOptions = 0; StrideType = Eigen::Stride<0, 0>; Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType = double*; Eigen::Index = long int][m[K’
+  142 |     inline [01;36m[KMap[m[K(PointerArgType dataPtr, Index size, const StrideType& stride = StrideType())
+      |            [01;36m[K^~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:142:12:[m[K [01;36m[Knote: [m[K  candidate expects 3 arguments, 0 provided
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:129:21:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<MatrixType, MapOptions, StrideType>::Map(Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType, const StrideType&) [with PlainObjectType = Eigen::Matrix<double, 3, 1>; int MapOptions = 0; StrideType = Eigen::Stride<0, 0>; Eigen::Map<MatrixType, MapOptions, StrideType>::PointerArgType = double*][m[K’
+  129 |     explicit inline [01;36m[KMap[m[K(PointerArgType dataPtr, const StrideType& stride = StrideType())
+      |                     [01;36m[K^~~[m[K
+[01m[K/usr/include/eigen3/Eigen/src/Core/Map.h:129:21:[m[K [01;36m[Knote: [m[K  candidate expects 2 arguments, 0 provided
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:[m[K In member function ‘[01m[Kvoid lidarslam::BackEnd::scan2MapOptimization()[m[K’:
+[01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/back_end.cpp:362:17:[m[K [01;35m[Kwarning: [m[Kunused variable ‘[01m[KcornerSharpNum[m[K’ [[01;35m[K]8;;https://gcc.gnu.org/onlinedocs/gcc/Warning-Options.html#index-Wunused-variable-Wunused-variable]8;;[m[K]
+  362 |             int [01;35m[KcornerSharpNum[m[K = cornerCloud -> size();
+      |                 [01;35m[K^~~~~~~~~~~~~~[m[K
+gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+gmake[1]: *** Waiting for unfinished jobs....
+[ 83%] [32m[1mLinking CXX executable back_end_node[0m
+[ 83%] Built target back_end_node
+gmake: *** [Makefile:146: all] Error 2

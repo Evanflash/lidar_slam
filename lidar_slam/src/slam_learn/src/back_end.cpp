@@ -109,11 +109,11 @@ public:
         init();
         // 开启子线程
         run_thread = std::thread(&BackEnd::run, this);
-        // pub_global_map_thread = std::thread(&BackEnd::publishGlobalMap, this);
+        pub_global_map_thread = std::thread(&BackEnd::publishGlobalMap, this);
     }
     ~BackEnd(){
         run_thread.join();
-        // pub_global_map_thread.join();
+        pub_global_map_thread.join();
     }
 
 private:
@@ -187,22 +187,23 @@ private:
             msgAnalysis();
             std::chrono::time_point<std::chrono::system_clock> t2 = std::chrono::system_clock::now();
             elapsed_seconds = t2 - t1;
-            RCLCPP_INFO(this -> get_logger(), "msg analysis time: %fms", elapsed_seconds.count() * 1000);
+
+            // RCLCPP_INFO(this -> get_logger(), "msg analysis time: %fms", elapsed_seconds.count() * 1000);
             // 提取子地图
             extractSurroundingKeyFrames();
             std::chrono::time_point<std::chrono::system_clock> t3 = std::chrono::system_clock::now();
             elapsed_seconds = t3 - t2;
-            RCLCPP_INFO(this -> get_logger(), "extract sub map time: %fms", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "extract sub map time: %fms", elapsed_seconds.count() * 1000);
             // 图优化
             scan2MapOptimization();
             std::chrono::time_point<std::chrono::system_clock> t4 = std::chrono::system_clock::now();
             elapsed_seconds = t4 - t3;
-            RCLCPP_INFO(this -> get_logger(), "map optimiazation time: %fms", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "map optimiazation time: %fms", elapsed_seconds.count() * 1000);
             // 增加约束，保存关键帧
             saveKeyFramesAndFactor();
             std::chrono::time_point<std::chrono::system_clock> t5 = std::chrono::system_clock::now();
             elapsed_seconds = t5 - t4;
-            RCLCPP_INFO(this -> get_logger(), "save key frames time: %fms", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "save key frames time: %fms", elapsed_seconds.count() * 1000);
             // 检测是否存在回环，若存在则更新
             correctPoses();
             // 发布消息
@@ -210,7 +211,7 @@ private:
             std::chrono::time_point<std::chrono::system_clock> t6 = std::chrono::system_clock::now();
             elapsed_seconds = t6 - t1;
             // std::chrono::duration<double> elapsed_seconds = t - t;
-            RCLCPP_INFO(this -> get_logger(), "back end whole time: %fms", elapsed_seconds.count() * 1000);
+            // RCLCPP_INFO(this -> get_logger(), "back end whole time: %fms", elapsed_seconds.count() * 1000);
         }
     }
 
@@ -240,9 +241,9 @@ private:
 
         // 下采样滤波
         downSampleSubMap.reset(new pcl::VoxelGrid<PointType>());
-        downSampleSubMap -> setLeafSize(0.4, 0.4, 0.4);
+        downSampleSubMap -> setLeafSize(0.2, 0.2, 0.2);
         downSampleKeyPoints.reset(new pcl::VoxelGrid<PointType>());
-        downSampleKeyPoints -> setLeafSize(0.4, 0.4, 0.4);
+        downSampleKeyPoints -> setLeafSize(0.2, 0.2, 0.2);
         
         // 因子图
         gtsam::ISAM2Params parameters;
@@ -274,15 +275,12 @@ private:
             }
         };
         // 初始6自由度参数
-        // x y z qx qy qz
-        Eigen::Quaterniond q_odom = (Eigen::AngleAxisd(all_cloud.trans_form[5], Eigen::Vector3d::UnitZ()) *
-                                     Eigen::AngleAxisd(all_cloud.trans_form[4], Eigen::Vector3d::UnitY()) *
-                                     Eigen::AngleAxisd(all_cloud.trans_form[3], Eigen::Vector3d::UnitX()));
+        Eigen::Quaterniond q_odom{all_cloud.trans_form[6], all_cloud.trans_form[3], 
+            all_cloud.trans_form[4], all_cloud.trans_form[5]};
         Eigen::Vector3d t_odom = Eigen::Vector3d(all_cloud.trans_form[0], 
                                                  all_cloud.trans_form[1], 
                                                  all_cloud.trans_form[2]);
         // 将帧间变换参数转换为帧到地图的变换参数
-        // RCLCPP_INFO(this -> get_logger(), "front end : x%f, y%f, z%f", t_odom.x(), t_odom.y(), t_odom.z());
         t_w_last = q_w_last * t_odom + t_w_last;
         q_w_last = q_w_last * q_odom;
 
@@ -295,6 +293,7 @@ private:
         downSamplePointCloud(cornerCloud, downSampleKeyPoints);
         downSamplePointCloud(surfCloud, downSampleKeyPoints);
         downSamplePointCloud(groundCloud, downSampleKeyPoints);
+
         // RCLCPP_INFO(this -> get_logger(), "corner size : %ld, surf size : %ld, ground size : %ld", 
         //     cornerCloud -> size(), surfCloud -> size(), groundCloud -> size());
     }
@@ -319,18 +318,18 @@ private:
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
         
-        RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
-            laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
+        // RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
+        //     laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
 
-        globalMap -> clear();
-        *globalMap += *laserSurfFromMap;
-        *globalMap += *laserGroundFromMap;
-        sensor_msgs::msg::PointCloud2 gl_map;
-        pcl::toROSMsg(*globalMap, gl_map);
+        // globalMap -> clear();
+        // *globalMap += *laserSurfFromMap;
+        // *globalMap += *laserGroundFromMap;
+        // sensor_msgs::msg::PointCloud2 gl_map;
+        // pcl::toROSMsg(*globalMap, gl_map);
 
-        gl_map.header.frame_id = "map";
-        gl_map.header.stamp = this -> now();
-        pubGlobalMap -> publish(gl_map);
+        // gl_map.header.frame_id = "map";
+        // gl_map.header.stamp = this -> now();
+        // pubGlobalMap -> publish(gl_map);
     }
 
     /**
@@ -566,7 +565,7 @@ private:
                 ceres::Solve(options, &problem, &summary);
                 std::chrono::time_point<std::chrono::system_clock> t2 = std::chrono::system_clock::now();
                 std::chrono::duration<double> elapsed_seconds = t2 - t1;
-                RCLCPP_INFO(this -> get_logger(), "scan2map time: %fms", elapsed_seconds.count() * 1000);
+                // RCLCPP_INFO(this -> get_logger(), "scan2map time: %fms", elapsed_seconds.count() * 1000);
             }
         }
        
@@ -580,6 +579,8 @@ private:
     */
     void saveKeyFramesAndFactor(){
         PointType currentPosPoint(t_w_last.x(), t_w_last.y(), t_w_last.z());
+        RCLCPP_INFO(this -> get_logger(), "x:%f, y:%f, z:%f", 
+            currentPosPoint.x, currentPosPoint.y, currentPosPoint.z);
 
         // 噪声
         gtsam::Vector6 Vector6(6);
@@ -678,10 +679,11 @@ private:
         groundCloud.reset(new CloudType());
 
 
-        int size = allSurfKeyFrames.size();
+        int size = allKeyFramesPoses.size();
 
         recentKeyFrames.push_back(size - 1);
-        if(recentKeyFrames.size() > 20){
+        if(recentKeyFrames.size() > 50){
+            // sleep(100);
             recentKeyFrames.pop_front();
         }
         

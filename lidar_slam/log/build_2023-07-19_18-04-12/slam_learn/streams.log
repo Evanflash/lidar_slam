@@ -1,0 +1,29 @@
+[0.024s] Invoking command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
+[0.089s] [35m[1mConsolidate compiler generated dependencies of target front_end_node[0m
+[0.107s] [ 33%] Built target data_process_node
+[0.116s] [ 66%] Built target back_end_node
+[0.131s] [ 83%] [32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o[0m
+[6.935s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:[m[K In constructor ‘[01m[Klidarslam::FrontEnd::FrontEnd(const string&)[m[K’:
+[6.935s] [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:87:11:[m[K [01;31m[Kerror: [m[Kno matching function for call to ‘[01m[KEigen::Map<Eigen::Quaternion<double>, 0>::Map(int, int, int, int)[m[K’
+[6.935s]    87 |           [01;31m[Kq_for_map(1, 0, 0, 0)[m[K,
+[6.935s]       |           [01;31m[K^~~~~~~~~~~~~~~~~~~~~[m[K
+[6.935s] In file included from [01m[K/usr/include/eigen3/Eigen/Geometry:42[m[K,
+[6.935s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:6[m[K,
+[6.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+[6.935s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[6.935s] [01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:458:52:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Map(Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Scalar*) [with _Scalar = double; int _Options = 0; Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Scalar = double][m[K’
+[6.935s]   458 |     EIGEN_DEVICE_FUNC explicit EIGEN_STRONG_INLINE [01;36m[KMap[m[K(Scalar* coeffs) : m_coeffs(coeffs) {}
+[6.935s]       |                                                    [01;36m[K^~~[m[K
+[6.935s] [01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:458:52:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 4 provided
+[6.936s] In file included from [01m[K/usr/include/eigen3/Eigen/Core:19[m[K,
+[6.936s]                  from [01m[K/usr/include/eigen3/Eigen/Dense:1[m[K,
+[6.936s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:16[m[K,
+[6.936s]                  from [01m[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1[m[K:
+[6.936s] [01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:449:5:[m[K [01;36m[Knote: [m[Kcandidate: ‘[01m[KEigen::Map<Eigen::Quaternion<_Scalar>, _Options>::Map(const Eigen::Map<Eigen::Quaternion<_Scalar>, _Options>&) [with _Scalar = double; int _Options = 0][m[K’
+[6.936s]   449 |     [01;36m[KEIGEN_INHERIT_ASSIGNMENT_OPERATORS[m[K(Map)
+[6.936s]       |     [01;36m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[6.936s] [01m[K/usr/include/eigen3/Eigen/src/Geometry/Quaternion.h:449:5:[m[K [01;36m[Knote: [m[K  candidate expects 1 argument, 4 provided
+[13.224s] gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1
+[13.224s] gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2
+[13.224s] gmake: *** [Makefile:146: all] Error 2
+[13.227s] Invoked command in '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn' returned '2': CMAKE_PREFIX_PATH=/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble /usr/bin/cmake --build /home/evan/code/lidar_slam/lidar_slam/build/slam_learn -- -j4 -l4
