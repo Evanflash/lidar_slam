@@ -71,12 +71,18 @@ private:
     CloudTypePtr surfForMap;
     CloudTypePtr groundForMap;
 
+    // 前端地图
+    CloudTypePtr frontEndGlobalMap;
+    PubPointCloud pubFrontEndGlobalMap;
+    pcl::VoxelGrid<PointType>::Ptr frontEndGlobalMapFilter;
+
+
     // 路径, 测试
     nav_msgs::msg::Path path;
 
     rclcpp::Publisher<nav_msgs::msg::Path>::SharedPtr pubPath;
-    PubPointCloud pubtest;
     PubPointCloud pubtest2;
+
     
 public:
     FrontEnd(const std::string &name)
@@ -92,9 +98,12 @@ public:
         pubAllCloud = this -> create_publisher<other_msgs::msg::AllCloud>(
             "/all_cloud", 10);
 
+        pubFrontEndGlobalMap = this -> create_publisher<sensor_msgs::msg::PointCloud2>(
+            "/front_end_global_map", 1);
+
+
         // test
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/path", 1);
-        pubtest = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test", 1);
         pubtest2 = this -> create_publisher<sensor_msgs::msg::PointCloud2>("/test2", 1);
 
         // 声明参数
@@ -156,6 +165,11 @@ public:
         cornerForMap.reset(new CloudType());
         surfForMap.reset(new CloudType());
         groundForMap.reset(new CloudType());
+
+        // 地图
+        frontEndGlobalMap.reset(new CloudType());
+        frontEndGlobalMapFilter.reset(new pcl::VoxelGrid<PointType>());
+        frontEndGlobalMapFilter -> setLeafSize(0.5, 0.5, 0.5);
     }
 
     /**
@@ -458,7 +472,7 @@ public:
                         if(seg_msg.is_ground[curInd] == 1 && k % 5 == 0){
                             tran(seg_msg.seg_cloud[curInd], point);
                             ground -> push_back(point);
-                        } else if(seg_msg.is_ground[curInd] == 0 ){
+                        } else if(seg_msg.is_ground[curInd] == 0 && segmentCurvature[k].curvature < 0.3){
                             tran(seg_msg.seg_cloud[curInd], point);
                             surf -> push_back(point);
                         }
@@ -524,6 +538,8 @@ public:
         if(isFirstFrame == true){
             isFirstFrame = false;
         }else{
+            static int num = 1;
+            RCLCPP_INFO(this -> get_logger(), "********************pose%d**********************", num++);
             int cornerSharpNum = cornerSharp -> size();
             int surfFlatNum = surfFlat -> size();
             int groundFlatNum = groundSurfFlat -> size();
@@ -619,7 +635,8 @@ public:
                 Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], Eigen::Vector3d::UnitY()));
                 Eigen::Matrix3d qyx;
                 qyx = pitch * roll;
-                
+                int corner = 0;
+                int surf = 0;
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     trans(cornerSharp -> points[i], pointSel);
@@ -670,6 +687,7 @@ public:
                             ceres::CostFunction *cost_function = 
                                 CornerFactor::Create(curr_point, last_point_a, last_point_b, qyx, t[2]);
                             problem.AddResidualBlock(cost_function, loss_function, q + 2, t);
+                            corner++;
                         }
                     }
                 }
@@ -726,6 +744,7 @@ public:
                                 SurfFactor::Create(
                                     curr_point, last_point_a, last_point_b, last_point_c, qyx, t[2]);
                             problem.AddResidualBlock(cost_function, loss_function, q + 2, t);
+                            surf++;
                         }
                     }
                 }
@@ -733,10 +752,15 @@ public:
                 // 求解
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
-                options.max_num_iterations = 4;
+                options.max_num_iterations = 10;
                 options.minimizer_progress_to_stdout = false;
                 ceres::Solver::Summary summary;
-                ceres::Solve(options, &problem, &summary);            
+                ceres::Solve(options, &problem, &summary);
+                
+                RCLCPP_INFO(this -> get_logger(), "corner Total num:%d, surf Total num:%d",
+                    cornerSharpNum, surfFlatNum);
+                RCLCPP_INFO(this -> get_logger(), "corner num:%d, surf num:%d", corner, surf);
+                RCLCPP_INFO_STREAM(this -> get_logger(), summary.BriefReport());       
             }
         }
 
@@ -802,7 +826,23 @@ public:
 
             pubAllCloud -> publish(all_cloud);
         }
-        // pubAllCloud -> publish(all_cloud);
+        // 前端地图
+        *frontEndGlobalMap += cloudToWorld(surfLast);
+        *frontEndGlobalMap += cloudToWorld(groundSurfLast);
+        CloudTypePtr globalMapFiltered(new CloudType());
+        frontEndGlobalMapFilter -> setInputCloud(frontEndGlobalMap);
+        // frontEndGlobalMap -> clear();
+        frontEndGlobalMapFilter -> filter(*globalMapFiltered);
+        *frontEndGlobalMap = *globalMapFiltered;
+
+        if(pubFrontEndGlobalMap -> get_subscription_count() != 0){
+            sensor_msgs::msg::PointCloud2 msg;
+            pcl::toROSMsg(*frontEndGlobalMap, msg);
+            msg.header.frame_id = "map";
+            pubFrontEndGlobalMap -> publish(msg);
+        }
+
+        
 
         nav_msgs::msg::Odometry laserOdometry;
         laserOdometry.header.frame_id = "map";
@@ -823,12 +863,6 @@ public:
         
         pubPath -> publish(path);
 
-        // static CloudTypePtr cloud(new CloudType());
-        // *cloud += cloudToWorld(surfLast);
-        // sensor_msgs::msg::PointCloud2 msg;
-        // pcl::toROSMsg(*cloud, msg);
-        // msg.header.frame_id = "map";
-        // pubtest -> publish(msg);
     }
 
 

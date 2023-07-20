@@ -12,6 +12,9 @@
 #include <gtsam/nonlinear/ISAM2.h>
 
 namespace lidarslam{
+static double q_[4] = {0, 0, 0, 1};
+static double t_[3] = {0, 0, 0};
+
 class BackEnd : public rclcpp::Node{
 private:
     // 消息队列
@@ -34,9 +37,11 @@ private:
     Eigen::Quaterniond q_w_last;
     Eigen::Vector3d t_w_last;
 
-
     Eigen::Quaterniond q_keyframe_last;
     Eigen::Vector3d t_keyframe_last;
+
+    Eigen::Quaterniond q_delta;
+    Eigen::Vector3d t_delta;
 
     // 滑动窗口
     std::deque<int> recentKeyFrames;
@@ -95,7 +100,9 @@ public:
     BackEnd(const std::string &name)
         : Node(name),
           q_w_last(1, 0, 0, 0),
-          t_w_last(0, 0, 0)
+          t_w_last(0, 0, 0),
+          q_delta(q_),
+          t_delta(t_)
     {
         subAllCloud = this -> create_subscription<other_msgs::msg::AllCloud>(
             "/all_cloud", 10, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
@@ -275,14 +282,9 @@ private:
             }
         };
         // 初始6自由度参数
-        Eigen::Quaterniond q_odom{all_cloud.trans_form[6], all_cloud.trans_form[3], 
-            all_cloud.trans_form[4], all_cloud.trans_form[5]};
-        Eigen::Vector3d t_odom = Eigen::Vector3d(all_cloud.trans_form[0], 
-                                                 all_cloud.trans_form[1], 
-                                                 all_cloud.trans_form[2]);
-        // 将帧间变换参数转换为帧到地图的变换参数
-        t_w_last = q_w_last * t_odom + t_w_last;
-        q_w_last = q_w_last * q_odom;
+        q_delta = Eigen::Quaterniond(all_cloud.trans_form[6], all_cloud.trans_form[3],
+            all_cloud.trans_form[4], all_cloud.trans_form[5]);
+        t_delta = Eigen::Vector3d(all_cloud.trans_form[0], all_cloud.trans_form[1], all_cloud.trans_form[2]);
 
         // 获得新一帧点云
         msgToPointCloud(cornerCloud, all_cloud.corner_less_sharp);
@@ -318,8 +320,8 @@ private:
         downSamplePointCloud(laserSurfFromMap, downSampleSubMap);
         downSamplePointCloud(laserGroundFromMap, downSampleSubMap);
         
-        RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
-            laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
+        // RCLCPP_INFO(this -> get_logger(), "corner map:%ld, surf map:%ld, ground map:%ld", 
+        //     laserCornerFromMap -> size(), laserSurfFromMap -> size(), laserGroundFromMap -> size());
 
         // globalMap -> clear();
         // *globalMap += *laserSurfFromMap;
@@ -337,14 +339,9 @@ private:
     */
     void scan2MapOptimization(){
         // 待优化四元数与偏移
-        double q_[4] = {0.0, 0.0, 0.0, 1.0};
-        double t_[3] = {0.0, 0.0, 0.0};
-        Eigen::Map<Eigen::Quaterniond> q_delta(q_);
-        Eigen::Map<Eigen::Vector3d> t_delta(t_);
-        
         auto trans = [&](const PointType &pointFrom, PointType &pointTo){
             Eigen::Vector3d p(pointFrom.x, pointFrom.y, pointFrom.z);
-            p = q_delta * (q_w_last * p + t_w_last) + t_delta;
+            p = q_w_last * (q_delta * p + t_delta) + t_w_last;
             pointTo.x = p.x();
             pointTo.y = p.y();
             pointTo.z = p.z();
@@ -360,8 +357,8 @@ private:
             int surfFlatNum = surfCloud -> size();
             int groundFlatNum = groundCloud -> size();
 
-            RCLCPP_INFO(this -> get_logger(), "corner:%d, surf:%d, ground:%d", 
-                cornerSharpNum, surfFlatNum, groundFlatNum);
+            // RCLCPP_INFO(this -> get_logger(), "corner:%d, surf:%d, ground:%d", 
+            //     cornerSharpNum, surfFlatNum, groundFlatNum);
 
             PointType pointSel;
             std::vector<int> pointSearchInd;
@@ -432,7 +429,9 @@ private:
                         matV = esolver.eigenvectors().real();
 
                         if(matD[2] > 3 * matD[1]){
-                            Eigen::Vector3d curr_p{pointSel.x, pointSel.y, pointSel.z};
+                            Eigen::Vector3d curr_p{cornerCloud -> points[i].x, 
+                                                   cornerCloud -> points[i].y, 
+                                                   cornerCloud -> points[i].z};
                             Eigen::Vector3d point_a{cx + 0.1 * matV(2, 0),
                                                     cy + 0.1 * matV(2, 1),
                                                     cz + 0.1 * matV(2, 2)};
@@ -494,7 +493,7 @@ private:
                         // 若平面合理，则优化
                         if(planeValid == true){
                             ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(pa, pb, pc, pd, pointSel);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, surfCloud -> points[i]);
                             problem.AddResidualBlock(
                                 cost_function, loss_function, q_, t_);
                         }
@@ -547,7 +546,7 @@ private:
                         // 若平面合理，则优化
                         if(planeValid == true){
                             ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(pa, pb, pc, pd, pointSel);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, groundCloud -> points[i]);
                             problem.AddResidualBlock(
                                 cost_function, loss_function, q_, t_);
                         }
@@ -565,12 +564,13 @@ private:
                 std::chrono::time_point<std::chrono::system_clock> t2 = std::chrono::system_clock::now();
                 std::chrono::duration<double> elapsed_seconds = t2 - t1;
                 // RCLCPP_INFO(this -> get_logger(), "scan2map time: %fms", elapsed_seconds.count() * 1000);
+                RCLCPP_INFO_STREAM(this -> get_logger(), "brief report" << summary.BriefReport());
             }
         }
-       
+        
         // 矫正位姿
-        t_w_last = q_delta * t_w_last + t_delta;
-        q_w_last = q_delta * q_w_last;
+        t_w_last = t_w_last + q_w_last * t_delta;
+        q_w_last = q_w_last * q_delta;
         RCLCPP_INFO(this -> get_logger(), "x:%f, y:%f, z:%f", t_delta.x(), t_delta.y(), t_delta.z());
     }
 
