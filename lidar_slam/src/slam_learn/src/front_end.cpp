@@ -93,10 +93,10 @@ public:
           t_for_map(0, 0, 0)
     {
         subSegMsg = this -> create_subscription<other_msgs::msg::SegCloud>(
-            "/seg_cloud", 10, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
+            "/seg_cloud", 100, std::bind(&FrontEnd::pushQueue, this, std::placeholders::_1));
         
         pubAllCloud = this -> create_publisher<other_msgs::msg::AllCloud>(
-            "/all_cloud", 10);
+            "/all_cloud", 1);
 
         pubFrontEndGlobalMap = this -> create_publisher<sensor_msgs::msg::PointCloud2>(
             "/front_end_global_map", 1);
@@ -268,6 +268,7 @@ public:
     */
     void removeUselessPoints(){
         int size = seg_msg.seg_cloud.size();
+        // RCLCPP_INFO(this -> get_logger(), "%d", size);
         // 去除遮挡点
         for(int i = 5; i < size - 6; ++i){
             float d1 = seg_msg.seg_range[i];
@@ -464,8 +465,7 @@ public:
                     
                 }
                 
-                CloudTypePtr surfFiltered(new CloudType());
-                CloudTypePtr groundFiltered(new CloudType());
+                
                 for(int k = sp; k <= ep; ++k){
                     if(segmentCurvature[k].isflat <= 0){
                         int curInd = segmentCurvature[k].index;
@@ -478,26 +478,24 @@ public:
                         }
                     }
                 }
-
-                downsamplefilter -> setInputCloud(surf);
-                downsamplefilter -> filter(*surfFiltered);
-                *surfLessFlat += *surfFiltered;
-
-                downsamplefilter -> setInputCloud(ground);
-                downsamplefilter -> filter(*groundFiltered);
-                *groundSurfLessFlat += *groundFiltered;
+  
             }
+            CloudTypePtr surfFiltered(new CloudType());
+            CloudTypePtr groundFiltered(new CloudType());
+            downsamplefilter -> setInputCloud(surf);
+            downsamplefilter -> filter(*surfFiltered);
+            *surfLessFlat += *surfFiltered;
+
+            downsamplefilter -> setInputCloud(ground);
+            downsamplefilter -> filter(*groundFiltered);
+            *groundSurfLessFlat += *groundFiltered;
         }
          
         // 测试
-        // sensor_msgs::msg::PointCloud2 msg;
-        // pcl::toROSMsg(*cornerSharp, msg);
-        // msg.header.frame_id = "map";
-        // pubtest -> publish(msg);
-        
-        // pcl::toROSMsg(*cornerLessSharp, msg);
-        // msg.header.frame_id = "map";
-        // pubtest2 -> publish(msg);
+        sensor_msgs::msg::PointCloud2 msg;
+        pcl::toROSMsg(*cornerSharp, msg);
+        msg.header.frame_id = "map";
+        pubtest2 -> publish(msg);
 
     }
 
@@ -538,8 +536,7 @@ public:
         if(isFirstFrame == true){
             isFirstFrame = false;
         }else{
-            static int num = 1;
-            RCLCPP_INFO(this -> get_logger(), "********************pose%d**********************", num++);
+            // RCLCPP_INFO(this -> get_logger(), "********************pose%d**********************", num++);
             int cornerSharpNum = cornerSharp -> size();
             int surfFlatNum = surfFlat -> size();
             int groundFlatNum = groundSurfFlat -> size();
@@ -617,7 +614,7 @@ public:
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);
             }
-
+            
             // 边缘点优化
             for(size_t opti_counter = 0; opti_counter < 2; ++opti_counter){
                 ceres::LossFunction *loss_function = new ceres::HuberLoss(0.1);
@@ -637,6 +634,7 @@ public:
                 qyx = pitch * roll;
                 int corner = 0;
                 int surf = 0;
+
                 // 分割点云的边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     trans(cornerSharp -> points[i], pointSel);
@@ -691,7 +689,7 @@ public:
                         }
                     }
                 }
-                
+                /*
                 // 分割点云的平面点
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfFlat -> points[i], pointSel);
@@ -748,7 +746,7 @@ public:
                         }
                     }
                 }
-                
+                */
                 // 求解
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
@@ -757,10 +755,10 @@ public:
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);
                 
-                RCLCPP_INFO(this -> get_logger(), "corner Total num:%d, surf Total num:%d",
-                    cornerSharpNum, surfFlatNum);
-                RCLCPP_INFO(this -> get_logger(), "corner num:%d, surf num:%d", corner, surf);
-                RCLCPP_INFO_STREAM(this -> get_logger(), summary.BriefReport());       
+                // RCLCPP_INFO(this -> get_logger(), "corner Total num:%d, surf Total num:%d",
+                //     cornerSharpNum, surfFlatNum);
+                // RCLCPP_INFO(this -> get_logger(), "corner num:%d, surf num:%d", corner, surf);
+                // RCLCPP_INFO_STREAM(this -> get_logger(), summary.BriefReport());       
             }
         }
 

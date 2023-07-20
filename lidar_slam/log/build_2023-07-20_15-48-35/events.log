@@ -1,0 +1,431 @@
+[0.000000] (-) TimerEvent: {}
+[0.000140] (-) JobUnselected: {'identifier': 'other_msgs'}
+[0.000288] (slam_learn) JobQueued: {'identifier': 'slam_learn', 'dependencies': OrderedDict([('other_msgs', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs')])}
+[0.001250] (slam_learn) JobStarted: {'identifier': 'slam_learn'}
+[0.022794] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'cmake'}
+[0.023955] (slam_learn) JobProgress: {'identifier': 'slam_learn', 'progress': 'build'}
+[0.024016] (slam_learn) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', '--', '-j4', '-l4'], 'cwd': '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn', 'env': OrderedDict([('LESSOPEN', '| /usr/bin/lesspipe %s'), ('LANGUAGE', 'en_GB:en'), ('USER', 'evan'), ('LC_TIME', 'zh_CN.UTF-8'), ('XDG_SESSION_TYPE', 'wayland'), ('GIT_ASKPASS', '/usr/share/code/resources/app/extensions/git/dist/askpass.sh'), ('SHLVL', '2'), ('LD_LIBRARY_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/lib:/home/evan/code/lego-loam/lego/install/cloud_msgs/lib:/home/evan/code/ndt-loc/install/cloud_msgs/lib:/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib:/usr/local/lib:/usr/local/lib'), ('HOME', '/home/evan'), ('CHROME_DESKTOP', 'code-url-handler.desktop'), ('OLDPWD', '/home/evan/code/A-LOAM-devel'), ('TERM_PROGRAM_VERSION', '1.77.3'), ('DESKTOP_SESSION', 'ubuntu'), ('ROS_PYTHON_VERSION', '3'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('VSCODE_GIT_ASKPASS_MAIN', '/usr/share/code/resources/app/extensions/git/dist/askpass-main.js'), ('LC_MONETARY', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_NODE', '/usr/share/code/code'), ('SYSTEMD_EXEC_PID', '2057'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('COLORTERM', 'truecolor'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install:/home/evan/code/lego-loam/lego/install:/home/evan/code/ndt-loc/install'), ('ROS_DISTRO', 'humble'), ('LOGNAME', 'evan'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'evan'), ('TERM', 'xterm-256color'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd:/usr/lib/java/jdk1.6.0_45/bin:~/mycomd'), ('SESSION_MANAGER', 'local/evan-RESCUER-R720-15IKBN:@/tmp/.ICE-unix/2029,unix/evan-RESCUER-R720-15IKBN:/tmp/.ICE-unix/2029'), ('PAPERSIZE', 'a4'), ('XDG_MENU_PREFIX', 'gnome-'), ('LC_ADDRESS', 'zh_CN.UTF-8'), ('GNOME_TERMINAL_SCREEN', '/org/gnome/Terminal/screen/0b852ea3_fa47_4ad8_adc5_6684d9bf5785'), ('GNOME_SETUP_DISPLAY', ':1'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('GDK_BACKEND', 'x11'), ('DISPLAY', ':0'), ('LANG', 'en_GB.UTF-8'), ('XDG_CURRENT_DESKTOP', 'Unity'), ('LC_TELEPHONE', 'zh_CN.UTF-8'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/.mutter-Xwaylandauth.CHZC81'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('VSCODE_GIT_IPC_HANDLE', '/run/user/1000/vscode-git-9ba6c15ddf.sock'), ('GNOME_TERMINAL_SERVICE', ':1.119'), ('TERM_PROGRAM', 'vscode'), ('SSH_AGENT_LAUNCHER', 'gnome-keyring'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble'), ('ORIGINAL_XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('SHELL', '/bin/zsh'), ('LC_NAME', 'zh_CN.UTF-8'), ('QT_ACCESSIBILITY', '1'), ('NO_AT_BRIDGE', '1'), ('GDMSESSION', 'ubuntu'), ('LESSCLOSE', '/usr/bin/lesspipe %s %s'), ('LC_MEASUREMENT', 'zh_CN.UTF-8'), ('LC_IDENTIFICATION', 'zh_CN.UTF-8'), ('VSCODE_GIT_ASKPASS_EXTRA_ARGS', '--ms-enable-electron-run-as-node'), ('QT_IM_MODULE', 'ibus'), ('JAVA_HOME', '/usr/lib/java/jdk1.6.0_45'), ('PWD', '/home/evan/code/lidar_slam/lidar_slam/build/slam_learn'), ('XDG_DATA_DIRS', '/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('PYTHONPATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs/local/lib/python3.10/dist-packages:/home/evan/code/lego-loam/lego/install/cloud_msgs/local/lib/python3.10/dist-packages:/home/evan/code/ndt-loc/install/cloud_msgs/local/lib/python3.10/dist-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('LC_NUMERIC', 'zh_CN.UTF-8'), ('LC_PAPER', 'zh_CN.UTF-8'), ('COLCON', '1'), ('VTE_VERSION', '6800'), ('CMAKE_PREFIX_PATH', '/home/evan/code/lidar_slam/lidar_slam/install/other_msgs:/home/evan/code/lidar_slam/lidar_slam/install/slam_learn:/home/evan/code/lego-loam/lego/install/lego_loam_sr:/home/evan/code/lego-loam/lego/install/cloud_msgs:/home/evan/code/ndt-loc/install/radar-odometry:/home/evan/code/ndt-loc/install/radar-data:/home/evan/code/ndt-loc/install/ndt-lidar-radar:/home/evan/code/ndt-loc/install/map:/home/evan/code/ndt-loc/install/data-publisher:/home/evan/code/ndt-loc/install/cloud_msgs:/home/evan/code/ndt-loc/install/a-loam:/opt/ros/humble')]), 'shell': False}
+[0.092471] (slam_learn) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target front_end_node\x1b[0m\n'}
+[0.101352] (-) TimerEvent: {}
+[0.141992] (slam_learn) StdoutLine: {'line': b'[ 16%] \x1b[32mBuilding CXX object CMakeFiles/front_end_node.dir/src/front_end.cpp.o\x1b[0m\n'}
+[0.144518] (slam_learn) StdoutLine: {'line': b'[ 50%] Built target data_process_node\n'}
+[0.150455] (slam_learn) StdoutLine: {'line': b'[ 83%] Built target back_end_node\n'}
+[0.201464] (-) TimerEvent: {}
+[0.304435] (-) TimerEvent: {}
+[0.404700] (-) TimerEvent: {}
+[0.504976] (-) TimerEvent: {}
+[0.605280] (-) TimerEvent: {}
+[0.705565] (-) TimerEvent: {}
+[0.805866] (-) TimerEvent: {}
+[0.906171] (-) TimerEvent: {}
+[1.006444] (-) TimerEvent: {}
+[1.106745] (-) TimerEvent: {}
+[1.207049] (-) TimerEvent: {}
+[1.307377] (-) TimerEvent: {}
+[1.407677] (-) TimerEvent: {}
+[1.507946] (-) TimerEvent: {}
+[1.608248] (-) TimerEvent: {}
+[1.708555] (-) TimerEvent: {}
+[1.808859] (-) TimerEvent: {}
+[1.909174] (-) TimerEvent: {}
+[2.009465] (-) TimerEvent: {}
+[2.109763] (-) TimerEvent: {}
+[2.210061] (-) TimerEvent: {}
+[2.310358] (-) TimerEvent: {}
+[2.410659] (-) TimerEvent: {}
+[2.510961] (-) TimerEvent: {}
+[2.611268] (-) TimerEvent: {}
+[2.711572] (-) TimerEvent: {}
+[2.811872] (-) TimerEvent: {}
+[2.912174] (-) TimerEvent: {}
+[3.012474] (-) TimerEvent: {}
+[3.112774] (-) TimerEvent: {}
+[3.213107] (-) TimerEvent: {}
+[3.313384] (-) TimerEvent: {}
+[3.413696] (-) TimerEvent: {}
+[3.514014] (-) TimerEvent: {}
+[3.614303] (-) TimerEvent: {}
+[3.714582] (-) TimerEvent: {}
+[3.814879] (-) TimerEvent: {}
+[3.915169] (-) TimerEvent: {}
+[4.015463] (-) TimerEvent: {}
+[4.115762] (-) TimerEvent: {}
+[4.216064] (-) TimerEvent: {}
+[4.316419] (-) TimerEvent: {}
+[4.416793] (-) TimerEvent: {}
+[4.517182] (-) TimerEvent: {}
+[4.617532] (-) TimerEvent: {}
+[4.717921] (-) TimerEvent: {}
+[4.818318] (-) TimerEvent: {}
+[4.918691] (-) TimerEvent: {}
+[5.019062] (-) TimerEvent: {}
+[5.119446] (-) TimerEvent: {}
+[5.219825] (-) TimerEvent: {}
+[5.320204] (-) TimerEvent: {}
+[5.420573] (-) TimerEvent: {}
+[5.520957] (-) TimerEvent: {}
+[5.621275] (-) TimerEvent: {}
+[5.721594] (-) TimerEvent: {}
+[5.821907] (-) TimerEvent: {}
+[5.922226] (-) TimerEvent: {}
+[6.022529] (-) TimerEvent: {}
+[6.122857] (-) TimerEvent: {}
+[6.223179] (-) TimerEvent: {}
+[6.323491] (-) TimerEvent: {}
+[6.423796] (-) TimerEvent: {}
+[6.524108] (-) TimerEvent: {}
+[6.624416] (-) TimerEvent: {}
+[6.724702] (-) TimerEvent: {}
+[6.825049] (-) TimerEvent: {}
+[6.925409] (-) TimerEvent: {}
+[7.025709] (-) TimerEvent: {}
+[7.126029] (-) TimerEvent: {}
+[7.153866] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:768:54:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.154423] (slam_learn) StderrLine: {'line': b'  768 |         Eigen::AngleAxisd roll(Eigen::AngleAxisd\x1b[34m\x1b[K(\x1b[m\x1b[Kq[0]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitX()));\n'}
+[7.154530] (slam_learn) StderrLine: {'line': b'      |                                                 \x1b[34m\x1b[K~\x1b[m\x1b[K    \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.154612] (slam_learn) StderrLine: {'line': b'      |                                                      \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.154687] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:768:54:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.154760] (slam_learn) StderrLine: {'line': b'  768 |         Eigen::AngleAxisd roll\x1b[34m\x1b[K(\x1b[m\x1b[KEigen::AngleAxisd(q[0]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitX()));\n'}
+[7.154830] (slam_learn) StderrLine: {'line': b'      |                               \x1b[34m\x1b[K~\x1b[m\x1b[K                      \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.154899] (slam_learn) StderrLine: {'line': b'      |                                                      \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.154966] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:768:56:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kcannot declare member function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<double, 3, 1>::UnitX\x1b[m\x1b[K\xe2\x80\x99 within \xe2\x80\x98\x1b[01m\x1b[Klidarslam::FrontEnd\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.155036] (slam_learn) StderrLine: {'line': b'  768 |         Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], \x1b[01;31m\x1b[K::\x1b[m\x1b[KEigen::Vector3d::UnitX()));\n'}
+[7.155105] (slam_learn) StderrLine: {'line': b'      |                                                        \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[7.155173] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:768:81:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 at end of member declaration\n'}
+[7.155252] (slam_learn) StderrLine: {'line': b'  768 |         Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], ::Eigen::Vector3d::UnitX(\x1b[01;31m\x1b[K)\x1b[m\x1b[K));\n'}
+[7.155333] (slam_learn) StderrLine: {'line': b'      |                                                                                 \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.155399] (slam_learn) StderrLine: {'line': b'      |                                                                                  \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[7.155465] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:768:82:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected unqualified-id before \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.155533] (slam_learn) StderrLine: {'line': b'  768 |         Eigen::AngleAxisd roll(Eigen::AngleAxisd(q[0], ::Eigen::Vector3d::UnitX()\x1b[01;31m\x1b[K)\x1b[m\x1b[K);\n'}
+[7.155599] (slam_learn) StderrLine: {'line': b'      |                                                                                  \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.155943] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:769:55:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.156043] (slam_learn) StderrLine: {'line': b'  769 |         Eigen::AngleAxisd pitch(Eigen::AngleAxisd\x1b[34m\x1b[K(\x1b[m\x1b[Kq[1]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitY()));\n'}
+[7.156114] (slam_learn) StderrLine: {'line': b'      |                                                  \x1b[34m\x1b[K~\x1b[m\x1b[K    \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.156181] (slam_learn) StderrLine: {'line': b'      |                                                       \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.156247] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:769:55:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.156327] (slam_learn) StderrLine: {'line': b'  769 |         Eigen::AngleAxisd pitch\x1b[34m\x1b[K(\x1b[m\x1b[KEigen::AngleAxisd(q[1]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitY()));\n'}
+[7.156394] (slam_learn) StderrLine: {'line': b'      |                                \x1b[34m\x1b[K~\x1b[m\x1b[K                      \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.156471] (slam_learn) StderrLine: {'line': b'      |                                                       \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.156535] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:769:57:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kcannot declare member function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<double, 3, 1>::UnitY\x1b[m\x1b[K\xe2\x80\x99 within \xe2\x80\x98\x1b[01m\x1b[Klidarslam::FrontEnd\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.156603] (slam_learn) StderrLine: {'line': b'  769 |         Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], \x1b[01;31m\x1b[K::\x1b[m\x1b[KEigen::Vector3d::UnitY()));\n'}
+[7.156667] (slam_learn) StderrLine: {'line': b'      |                                                         \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[7.156730] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:769:82:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 at end of member declaration\n'}
+[7.156799] (slam_learn) StderrLine: {'line': b'  769 |         Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], ::Eigen::Vector3d::UnitY(\x1b[01;31m\x1b[K)\x1b[m\x1b[K));\n'}
+[7.156863] (slam_learn) StderrLine: {'line': b'      |                                                                                  \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.156934] (slam_learn) StderrLine: {'line': b'      |                                                                                   \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[7.157002] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:769:83:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected unqualified-id before \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.157069] (slam_learn) StderrLine: {'line': b'  769 |         Eigen::AngleAxisd pitch(Eigen::AngleAxisd(q[1], ::Eigen::Vector3d::UnitY()\x1b[01;31m\x1b[K)\x1b[m\x1b[K);\n'}
+[7.157178] (slam_learn) StderrLine: {'line': b'      |                                                                                   \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.157243] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:770:53:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.157306] (slam_learn) StderrLine: {'line': b'  770 |         Eigen::AngleAxisd yaw(Eigen::AngleAxisd\x1b[34m\x1b[K(\x1b[m\x1b[Kq[2]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitZ()));\n'}
+[7.157370] (slam_learn) StderrLine: {'line': b'      |                                                \x1b[34m\x1b[K~\x1b[m\x1b[K    \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.157433] (slam_learn) StderrLine: {'line': b'      |                                                     \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.157496] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:770:53:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 before \xe2\x80\x98\x1b[01m\x1b[K,\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.157561] (slam_learn) StderrLine: {'line': b'  770 |         Eigen::AngleAxisd yaw\x1b[34m\x1b[K(\x1b[m\x1b[KEigen::AngleAxisd(q[2]\x1b[01;31m\x1b[K,\x1b[m\x1b[K ::Eigen::Vector3d::UnitZ()));\n'}
+[7.157624] (slam_learn) StderrLine: {'line': b'      |                              \x1b[34m\x1b[K~\x1b[m\x1b[K                      \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.157688] (slam_learn) StderrLine: {'line': b'      |                                                     \x1b[32m\x1b[K)\x1b[m\x1b[K\n'}
+[7.157751] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:770:55:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kcannot declare member function \xe2\x80\x98\x1b[01m\x1b[KEigen::Matrix<double, 3, 1>::UnitZ\x1b[m\x1b[K\xe2\x80\x99 within \xe2\x80\x98\x1b[01m\x1b[Klidarslam::FrontEnd\x1b[m\x1b[K\xe2\x80\x99\n'}
+[7.157816] (slam_learn) StderrLine: {'line': b'  770 |         Eigen::AngleAxisd yaw(Eigen::AngleAxisd(q[2], \x1b[01;31m\x1b[K::\x1b[m\x1b[KEigen::Vector3d::UnitZ()));\n'}
+[7.157880] (slam_learn) StderrLine: {'line': b'      |                                                       \x1b[01;31m\x1b[K^~\x1b[m\x1b[K\n'}
+[7.157944] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:770:80:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 at end of member declaration\n'}
+[7.158007] (slam_learn) StderrLine: {'line': b'  770 |         Eigen::AngleAxisd yaw(Eigen::AngleAxisd(q[2], ::Eigen::Vector3d::UnitZ(\x1b[01;31m\x1b[K)\x1b[m\x1b[K));\n'}
+[7.158071] (slam_learn) StderrLine: {'line': b'      |                                                                                \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.158135] (slam_learn) StderrLine: {'line': b'      |                                                                                 \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[7.158212] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:770:81:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected unqualified-id before \xe2\x80\x98\x1b[01m\x1b[K)\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.158301] (slam_learn) StderrLine: {'line': b'  770 |         Eigen::AngleAxisd yaw(Eigen::AngleAxisd(q[2], ::Eigen::Vector3d::UnitZ()\x1b[01;31m\x1b[K)\x1b[m\x1b[K);\n'}
+[7.158369] (slam_learn) StderrLine: {'line': b'      |                                                                                 \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.162296] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:771:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_last_curr\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.162467] (slam_learn) StderrLine: {'line': b'  771 |         \x1b[01;31m\x1b[Kq_last_curr\x1b[m\x1b[K = yaw * pitch * roll;\n'}
+[7.162548] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.170859] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:772:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_last_curr\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.171087] (slam_learn) StderrLine: {'line': b'  772 |         \x1b[01;31m\x1b[Kt_last_curr\x1b[m\x1b[K = Eigen::Vector3d(t[0], t[1], t[2]);\n'}
+[7.171173] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.176923] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:775:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_for_map\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.177105] (slam_learn) StderrLine: {'line': b'  775 |         \x1b[01;31m\x1b[Kt_for_map\x1b[m\x1b[K = t_for_map + q_for_map * t_last_curr;\n'}
+[7.177189] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.183336] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:776:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_for_map\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.183553] (slam_learn) StderrLine: {'line': b'  776 |         \x1b[01;31m\x1b[Kq_for_map\x1b[m\x1b[K = q_for_map * q_last_curr;\n'}
+[7.183656] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.187985] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:779:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_w_curr\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.188178] (slam_learn) StderrLine: {'line': b'  779 |         \x1b[01;31m\x1b[Kt_w_curr\x1b[m\x1b[K = t_w_curr + q_w_curr * t_last_curr;\n'}
+[7.188269] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.192550] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:780:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_w_curr\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.192742] (slam_learn) StderrLine: {'line': b'  780 |         \x1b[01;31m\x1b[Kq_w_curr\x1b[m\x1b[K = q_w_curr * q_last_curr;\n'}
+[7.192821] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.196012] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:784:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcloudTmp\x1b[m\x1b[K\xe2\x80\x99 does not name a type; did you mean \xe2\x80\x98\x1b[01m\x1b[KCloudType\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.196208] (slam_learn) StderrLine: {'line': b'  784 |         \x1b[01;31m\x1b[KcloudTmp\x1b[m\x1b[K = cornerLessSharp;\n'}
+[7.196309] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.196383] (slam_learn) StderrLine: {'line': b'      |         \x1b[32m\x1b[KCloudType\x1b[m\x1b[K\n'}
+[7.207362] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:785:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcornerLessSharp\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.207553] (slam_learn) StderrLine: {'line': b'  785 |         \x1b[01;31m\x1b[KcornerLessSharp\x1b[m\x1b[K = cornerLast;\n'}
+[7.207633] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.212193] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:786:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcornerLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type; did you mean \xe2\x80\x98\x1b[01m\x1b[KCornerFactor\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.212381] (slam_learn) StderrLine: {'line': b'  786 |         \x1b[01;31m\x1b[KcornerLast\x1b[m\x1b[K = cloudTmp;\n'}
+[7.212461] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.212532] (slam_learn) StderrLine: {'line': b'      |         \x1b[32m\x1b[KCornerFactor\x1b[m\x1b[K\n'}
+[7.215489] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:788:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcloudTmp\x1b[m\x1b[K\xe2\x80\x99 does not name a type; did you mean \xe2\x80\x98\x1b[01m\x1b[KCloudType\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.215707] (slam_learn) StderrLine: {'line': b'  788 |         \x1b[01;31m\x1b[KcloudTmp\x1b[m\x1b[K = surfLessFlat;\n'}
+[7.215801] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.215877] (slam_learn) StderrLine: {'line': b'      |         \x1b[32m\x1b[KCloudType\x1b[m\x1b[K\n'}
+[7.225151] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:789:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KsurfLessFlat\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.225328] (slam_learn) StderrLine: {'line': b'  789 |         \x1b[01;31m\x1b[KsurfLessFlat\x1b[m\x1b[K = surfLast;\n'}
+[7.225409] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.226132] (-) TimerEvent: {}
+[7.229488] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:790:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KsurfLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.229689] (slam_learn) StderrLine: {'line': b'  790 |         \x1b[01;31m\x1b[KsurfLast\x1b[m\x1b[K = cloudTmp;\n'}
+[7.229768] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.233163] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:792:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcloudTmp\x1b[m\x1b[K\xe2\x80\x99 does not name a type; did you mean \xe2\x80\x98\x1b[01m\x1b[KCloudType\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.233338] (slam_learn) StderrLine: {'line': b'  792 |         \x1b[01;31m\x1b[KcloudTmp\x1b[m\x1b[K = groundSurfLessFlat;\n'}
+[7.233839] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.233927] (slam_learn) StderrLine: {'line': b'      |         \x1b[32m\x1b[KCloudType\x1b[m\x1b[K\n'}
+[7.250816] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:793:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgroundSurfLessFlat\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.251054] (slam_learn) StderrLine: {'line': b'  793 |         \x1b[01;31m\x1b[KgroundSurfLessFlat\x1b[m\x1b[K = groundSurfLast;\n'}
+[7.251177] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.262602] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:794:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgroundSurfLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.262782] (slam_learn) StderrLine: {'line': b'  794 |         \x1b[01;31m\x1b[KgroundSurfLast\x1b[m\x1b[K = cloudTmp;\n'}
+[7.262862] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.276885] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:796:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdtreeCornerLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.277075] (slam_learn) StderrLine: {'line': b'  796 |         \x1b[01;31m\x1b[KkdtreeCornerLast\x1b[m\x1b[K -> setInputCloud(cornerLast);\n'}
+[7.277180] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.288051] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:797:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdtreeSurfLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.288240] (slam_learn) StderrLine: {'line': b'  797 |         \x1b[01;31m\x1b[KkdtreeSurfLast\x1b[m\x1b[K -> setInputCloud(surfLast);\n'}
+[7.288320] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.301773] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:798:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KkdtreeGroundLast\x1b[m\x1b[K\xe2\x80\x99 does not name a type\n'}
+[7.301966] (slam_learn) StderrLine: {'line': b'  798 |         \x1b[01;31m\x1b[KkdtreeGroundLast\x1b[m\x1b[K -> setInputCloud(groundSurfLast);\n'}
+[7.302046] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.302964] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:799:6:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected \xe2\x80\x98\x1b[01m\x1b[K;\x1b[m\x1b[K\xe2\x80\x99 after class definition\n'}
+[7.303124] (slam_learn) StderrLine: {'line': b'  799 |     }\n'}
+[7.303200] (slam_learn) StderrLine: {'line': b'      |      \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.303271] (slam_learn) StderrLine: {'line': b'      |      \x1b[32m\x1b[K;\x1b[m\x1b[K\n'}
+[7.326286] (-) TimerEvent: {}
+[7.338141] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::FrontEnd::run()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.338382] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:210:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kpublish\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.338472] (slam_learn) StderrLine: {'line': b'  210 |             \x1b[01;31m\x1b[Kpublish\x1b[m\x1b[K();\n'}
+[7.338547] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[7.414343] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In member function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::FrontEnd::odometry()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.414533] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:697:50:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpointSel\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.414622] (slam_learn) StderrLine: {'line': b'  697 |                     trans(surfFlat -> points[i], \x1b[01;31m\x1b[KpointSel\x1b[m\x1b[K);\n'}
+[7.414695] (slam_learn) StderrLine: {'line': b'      |                                                  \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.426407] (-) TimerEvent: {}
+[7.435884] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:698:67:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpointSearchInd\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.436114] (slam_learn) StderrLine: {'line': b'  698 |                     kdtreeSurfLast -> nearestKSearch(pointSel, 1, \x1b[01;31m\x1b[KpointSearchInd\x1b[m\x1b[K, pointSearchSqDis);\n'}
+[7.436203] (slam_learn) StderrLine: {'line': b'      |                                                                   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.460713] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:698:83:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpointSearchSqDis\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.460901] (slam_learn) StderrLine: {'line': b'  698 |                     kdtreeSurfLast -> nearestKSearch(pointSel, 1, pointSearchInd, \x1b[01;31m\x1b[KpointSearchSqDis\x1b[m\x1b[K);\n'}
+[7.460990] (slam_learn) StderrLine: {'line': b'      |                                                                                   \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.470493] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:745:91:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kqyx\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.470744] (slam_learn) StderrLine: {'line': b'  745 |                                     curr_point, last_point_a, last_point_b, last_point_c, \x1b[01;31m\x1b[Kqyx\x1b[m\x1b[K, t[2]);\n'}
+[7.470830] (slam_learn) StderrLine: {'line': b'      |                                                                                           \x1b[01;31m\x1b[K^~~\x1b[m\x1b[K\n'}
+[7.480608] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:746:29:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kproblem\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.480820] (slam_learn) StderrLine: {'line': b'  746 |                             \x1b[01;31m\x1b[Kproblem\x1b[m\x1b[K.AddResidualBlock(cost_function, loss_function, q + 2, t);\n'}
+[7.480905] (slam_learn) StderrLine: {'line': b'      |                             \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[7.491779] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:746:69:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kloss_function\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Kcost_function\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.491968] (slam_learn) StderrLine: {'line': b'  746 |                             problem.AddResidualBlock(cost_function, \x1b[01;31m\x1b[Kloss_function\x1b[m\x1b[K, q + 2, t);\n'}
+[7.492049] (slam_learn) StderrLine: {'line': b'      |                                                                     \x1b[01;31m\x1b[K^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.492120] (slam_learn) StderrLine: {'line': b'      |                                                                     \x1b[32m\x1b[Kcost_function\x1b[m\x1b[K\n'}
+[7.499110] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:747:29:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Ksurf\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.499296] (slam_learn) StderrLine: {'line': b'  747 |                             \x1b[01;31m\x1b[Ksurf\x1b[m\x1b[K++;\n'}
+[7.499381] (slam_learn) StderrLine: {'line': b'      |                             \x1b[01;31m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[7.508885] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:758:40:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kproblem\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.509071] (slam_learn) StderrLine: {'line': b'  758 |                 ceres::Solve(options, &\x1b[01;31m\x1b[Kproblem\x1b[m\x1b[K, &summary);\n'}
+[7.509190] (slam_learn) StderrLine: {'line': b'      |                                        \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[7.518358] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:24\x1b[m\x1b[K,\n'}
+[7.518562] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[7.518640] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[7.518712] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[7.518781] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[7.518848] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[7.518915] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[7.518981] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[7.519046] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[7.519113] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[7.519178] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[7.519244] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:20\x1b[m\x1b[K,\n'}
+[7.519311] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[7.519388] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:762:81:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kcorner\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.519457] (slam_learn) StderrLine: {'line': b'  762 |                 RCLCPP_INFO(this -> get_logger(), "corner num:%d, surf num:%d", \x1b[01;31m\x1b[Kcorner\x1b[m\x1b[K, surf);\n'}
+[7.519525] (slam_learn) StderrLine: {'line': b'      |                                                                                 \x1b[01;31m\x1b[K^~~~~~\x1b[m\x1b[K\n'}
+[7.526375] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:762:89:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Ksurf\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.526580] (-) TimerEvent: {}
+[7.526688] (slam_learn) StderrLine: {'line': b'  762 |                 RCLCPP_INFO(this -> get_logger(), "corner num:%d, surf num:%d", corner, \x1b[01;31m\x1b[Ksurf\x1b[m\x1b[K);\n'}
+[7.526786] (slam_learn) StderrLine: {'line': b'      |                                                                                         \x1b[01;31m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[7.543093] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kvoid lidarslam::publish()\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.543288] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:808:27:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kmap_frequency\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.543364] (slam_learn) StderrLine: {'line': b'  808 |         if(cycle_count == \x1b[01;31m\x1b[Kmap_frequency\x1b[m\x1b[K){\n'}
+[7.543433] (slam_learn) StderrLine: {'line': b'      |                           \x1b[01;31m\x1b[K^~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.552750] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:811:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kall_cloud\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.552993] (slam_learn) StderrLine: {'line': b'  811 |             \x1b[01;31m\x1b[Kall_cloud\x1b[m\x1b[K.header = seg_msg.header;\n'}
+[7.553085] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.558997] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:811:32:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kseg_msg\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.559194] (slam_learn) StderrLine: {'line': b'  811 |             all_cloud.header = \x1b[01;31m\x1b[Kseg_msg\x1b[m\x1b[K.header;\n'}
+[7.559271] (slam_learn) StderrLine: {'line': b'      |                                \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[7.568950] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:813:44:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_for_map\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.569202] (slam_learn) StderrLine: {'line': b'  813 |             all_cloud.trans_form.push_back(\x1b[01;31m\x1b[Kt_for_map\x1b[m\x1b[K.x());\n'}
+[7.569283] (slam_learn) StderrLine: {'line': b'      |                                            \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.577495] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:816:44:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_for_map\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.577746] (slam_learn) StderrLine: {'line': b'  816 |             all_cloud.trans_form.push_back(\x1b[01;31m\x1b[Kq_for_map\x1b[m\x1b[K.x());\n'}
+[7.577824] (slam_learn) StderrLine: {'line': b'      |                                            \x1b[01;31m\x1b[K^~~~~~~~~\x1b[m\x1b[K\n'}
+[7.587322] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:820:32:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcornerLast\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[KCornerFactor\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.587571] (slam_learn) StderrLine: {'line': b'  820 |             pointType2MsgPoint(\x1b[01;31m\x1b[KcornerLast\x1b[m\x1b[K, all_cloud.corner_less_sharp);\n'}
+[7.587656] (slam_learn) StderrLine: {'line': b'      |                                \x1b[01;31m\x1b[K^~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.587732] (slam_learn) StderrLine: {'line': b'      |                                \x1b[32m\x1b[KCornerFactor\x1b[m\x1b[K\n'}
+[7.607117] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:820:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpointType2MsgPoint\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.607307] (slam_learn) StderrLine: {'line': b'  820 |             \x1b[01;31m\x1b[KpointType2MsgPoint\x1b[m\x1b[K(cornerLast, all_cloud.corner_less_sharp);\n'}
+[7.607388] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.614338] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:821:32:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KsurfLast\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.614562] (slam_learn) StderrLine: {'line': b'  821 |             pointType2MsgPoint(\x1b[01;31m\x1b[KsurfLast\x1b[m\x1b[K, all_cloud.surf_less_flat);\n'}
+[7.614640] (slam_learn) StderrLine: {'line': b'      |                                \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.626682] (-) TimerEvent: {}
+[7.631234] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:822:32:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgroundSurfLast\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.631455] (slam_learn) StderrLine: {'line': b'  822 |             pointType2MsgPoint(\x1b[01;31m\x1b[KgroundSurfLast\x1b[m\x1b[K, all_cloud.ground_less_flat);\n'}
+[7.631535] (slam_learn) StderrLine: {'line': b'      |                                \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.643704] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:827:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpubAllCloud\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.643948] (slam_learn) StderrLine: {'line': b'  827 |             \x1b[01;31m\x1b[KpubAllCloud\x1b[m\x1b[K -> publish(all_cloud);\n'}
+[7.644028] (slam_learn) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.662823] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:830:10:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KfrontEndGlobalMap\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.663022] (slam_learn) StderrLine: {'line': b'  830 |         *\x1b[01;31m\x1b[KfrontEndGlobalMap\x1b[m\x1b[K += cloudToWorld(surfLast);\n'}
+[7.663108] (slam_learn) StderrLine: {'line': b'      |          \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.672094] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:830:44:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KsurfLast\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.672264] (slam_learn) StderrLine: {'line': b'  830 |         *frontEndGlobalMap += cloudToWorld(\x1b[01;31m\x1b[KsurfLast\x1b[m\x1b[K);\n'}
+[7.672340] (slam_learn) StderrLine: {'line': b'      |                                            \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.684203] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:830:31:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KcloudToWorld\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.684445] (slam_learn) StderrLine: {'line': b'  830 |         *frontEndGlobalMap += \x1b[01;31m\x1b[KcloudToWorld\x1b[m\x1b[K(surfLast);\n'}
+[7.684527] (slam_learn) StderrLine: {'line': b'      |                               \x1b[01;31m\x1b[K^~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.699234] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:831:44:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KgroundSurfLast\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.699482] (slam_learn) StderrLine: {'line': b'  831 |         *frontEndGlobalMap += cloudToWorld(\x1b[01;31m\x1b[KgroundSurfLast\x1b[m\x1b[K);\n'}
+[7.699564] (slam_learn) StderrLine: {'line': b'      |                                            \x1b[01;31m\x1b[K^~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.726580] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:833:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KfrontEndGlobalMapFilter\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.726759] (-) TimerEvent: {}
+[7.726877] (slam_learn) StderrLine: {'line': b'  833 |         \x1b[01;31m\x1b[KfrontEndGlobalMapFilter\x1b[m\x1b[K -> setInputCloud(frontEndGlobalMap);\n'}
+[7.726965] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.751587] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:838:12:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpubFrontEndGlobalMap\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.751851] (slam_learn) StderrLine: {'line': b'  838 |         if(\x1b[01;31m\x1b[KpubFrontEndGlobalMap\x1b[m\x1b[K -> get_subscription_count() != 0){\n'}
+[7.751937] (slam_learn) StderrLine: {'line': b'      |            \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[7.760613] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:850:49:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_w_curr\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.760800] (slam_learn) StderrLine: {'line': b'  850 |         laserOdometry.pose.pose.orientation.x = \x1b[01;31m\x1b[Kq_w_curr\x1b[m\x1b[K.x();\n'}
+[7.760878] (slam_learn) StderrLine: {'line': b'      |                                                 \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.770049] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:854:46:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_w_curr\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.770229] (slam_learn) StderrLine: {'line': b'  854 |         laserOdometry.pose.pose.position.x = \x1b[01;31m\x1b[Kt_w_curr\x1b[m\x1b[K.x();\n'}
+[7.770305] (slam_learn) StderrLine: {'line': b'      |                                              \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.771467] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:861:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kpath\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[Krcpputils::fs::path\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[7.771753] (slam_learn) StderrLine: {'line': b'  861 |         \x1b[01;31m\x1b[Kpath\x1b[m\x1b[K.poses.push_back(laserPose);\n'}
+[7.771868] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[7.771938] (slam_learn) StderrLine: {'line': b'      |         \x1b[32m\x1b[Krcpputils::fs::path\x1b[m\x1b[K\n'}
+[7.772006] (slam_learn) StderrLine: {'line': b'In file included from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logger.hpp:25\x1b[m\x1b[K,\n'}
+[7.772072] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/logging.hpp:23\x1b[m\x1b[K,\n'}
+[7.772137] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/client.hpp:40\x1b[m\x1b[K,\n'}
+[7.772203] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/callback_group.hpp:24\x1b[m\x1b[K,\n'}
+[7.772268] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/any_executable.hpp:20\x1b[m\x1b[K,\n'}
+[7.772343] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategy.hpp:25\x1b[m\x1b[K,\n'}
+[7.772412] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/memory_strategies.hpp:18\x1b[m\x1b[K,\n'}
+[7.772476] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor_options.hpp:20\x1b[m\x1b[K,\n'}
+[7.772541] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executor.hpp:37\x1b[m\x1b[K,\n'}
+[7.772605] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors/multi_threaded_executor.hpp:25\x1b[m\x1b[K,\n'}
+[7.772670] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/executors.hpp:21\x1b[m\x1b[K,\n'}
+[7.772734] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/opt/ros/humble/include/rclcpp/rclcpp/rclcpp.hpp:155\x1b[m\x1b[K,\n'}
+[7.772798] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/include/slam_learn/slam_utils.h:20\x1b[m\x1b[K,\n'}
+[7.772862] (slam_learn) StderrLine: {'line': b'                 from \x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:1\x1b[m\x1b[K:\n'}
+[7.772927] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/opt/ros/humble/include/rcpputils/rcpputils/filesystem_helper.hpp:74:7:\x1b[m\x1b[K \x1b[01;36m\x1b[Knote: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Krcpputils::fs::path\x1b[m\x1b[K\xe2\x80\x99 declared here\n'}
+[7.772993] (slam_learn) StderrLine: {'line': b'   74 | class \x1b[01;36m\x1b[Kpath\x1b[m\x1b[K\n'}
+[7.773057] (slam_learn) StderrLine: {'line': b'      |       \x1b[01;36m\x1b[K^~~~\x1b[m\x1b[K\n'}
+[7.777349] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:864:9:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KpubPath\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.777528] (slam_learn) StderrLine: {'line': b'  864 |         \x1b[01;31m\x1b[KpubPath\x1b[m\x1b[K -> publish(path);\n'}
+[7.777645] (slam_learn) StderrLine: {'line': b'      |         \x1b[01;31m\x1b[K^~~~~~~\x1b[m\x1b[K\n'}
+[7.787876] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Klidarslam::CloudType lidarslam::cloudToWorld(lidarslam::CloudTypePtr)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[7.788073] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:891:17:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kq_w_curr\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.788151] (slam_learn) StderrLine: {'line': b'  891 |             p = \x1b[01;31m\x1b[Kq_w_curr\x1b[m\x1b[K * p + t_w_curr;\n'}
+[7.788221] (slam_learn) StderrLine: {'line': b'      |                 \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.795405] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:891:32:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[Kt_w_curr\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope\n'}
+[7.795606] (slam_learn) StderrLine: {'line': b'  891 |             p = q_w_curr * p + \x1b[01;31m\x1b[Kt_w_curr\x1b[m\x1b[K;\n'}
+[7.795707] (slam_learn) StderrLine: {'line': b'      |                                \x1b[01;31m\x1b[K^~~~~~~~\x1b[m\x1b[K\n'}
+[7.796313] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:\x1b[m\x1b[K At global scope:\n'}
+[7.796457] (slam_learn) StderrLine: {'line': b'\x1b[01m\x1b[K/home/evan/code/lidar_slam/lidar_slam/src/slam_learn/src/front_end.cpp:904:1:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[Kexpected declaration before \xe2\x80\x98\x1b[01m\x1b[K}\x1b[m\x1b[K\xe2\x80\x99 token\n'}
+[7.796594] (slam_learn) StderrLine: {'line': b'  904 | \x1b[01;31m\x1b[K}\x1b[m\x1b[K // lidarslam\n'}
+[7.796683] (slam_learn) StderrLine: {'line': b'      | \x1b[01;31m\x1b[K^\x1b[m\x1b[K\n'}
+[7.826897] (-) TimerEvent: {}
+[7.927265] (-) TimerEvent: {}
+[8.027635] (-) TimerEvent: {}
+[8.127982] (-) TimerEvent: {}
+[8.228308] (-) TimerEvent: {}
+[8.328611] (-) TimerEvent: {}
+[8.428968] (-) TimerEvent: {}
+[8.529293] (-) TimerEvent: {}
+[8.629587] (-) TimerEvent: {}
+[8.729959] (-) TimerEvent: {}
+[8.830259] (-) TimerEvent: {}
+[8.930638] (-) TimerEvent: {}
+[9.031048] (-) TimerEvent: {}
+[9.131396] (-) TimerEvent: {}
+[9.231771] (-) TimerEvent: {}
+[9.332156] (-) TimerEvent: {}
+[9.432496] (-) TimerEvent: {}
+[9.532817] (-) TimerEvent: {}
+[9.633173] (-) TimerEvent: {}
+[9.733486] (-) TimerEvent: {}
+[9.833796] (-) TimerEvent: {}
+[9.934098] (-) TimerEvent: {}
+[10.034411] (-) TimerEvent: {}
+[10.134734] (-) TimerEvent: {}
+[10.235075] (-) TimerEvent: {}
+[10.335389] (-) TimerEvent: {}
+[10.435699] (-) TimerEvent: {}
+[10.536013] (-) TimerEvent: {}
+[10.636365] (-) TimerEvent: {}
+[10.736704] (-) TimerEvent: {}
+[10.837053] (-) TimerEvent: {}
+[10.937384] (-) TimerEvent: {}
+[11.037701] (-) TimerEvent: {}
+[11.138013] (-) TimerEvent: {}
+[11.238326] (-) TimerEvent: {}
+[11.338667] (-) TimerEvent: {}
+[11.438996] (-) TimerEvent: {}
+[11.539310] (-) TimerEvent: {}
+[11.639626] (-) TimerEvent: {}
+[11.739977] (-) TimerEvent: {}
+[11.840291] (-) TimerEvent: {}
+[11.940604] (-) TimerEvent: {}
+[12.040918] (-) TimerEvent: {}
+[12.141206] (-) TimerEvent: {}
+[12.241511] (-) TimerEvent: {}
+[12.341824] (-) TimerEvent: {}
+[12.442144] (-) TimerEvent: {}
+[12.542460] (-) TimerEvent: {}
+[12.642777] (-) TimerEvent: {}
+[12.743125] (-) TimerEvent: {}
+[12.843432] (-) TimerEvent: {}
+[12.943743] (-) TimerEvent: {}
+[13.044073] (-) TimerEvent: {}
+[13.144399] (-) TimerEvent: {}
+[13.244709] (-) TimerEvent: {}
+[13.345009] (-) TimerEvent: {}
+[13.445332] (-) TimerEvent: {}
+[13.545660] (-) TimerEvent: {}
+[13.645950] (-) TimerEvent: {}
+[13.746268] (-) TimerEvent: {}
+[13.846589] (-) TimerEvent: {}
+[13.947080] (-) TimerEvent: {}
+[14.047414] (-) TimerEvent: {}
+[14.183578] (slam_learn) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/front_end_node.dir/build.make:76: CMakeFiles/front_end_node.dir/src/front_end.cpp.o] Error 1\n'}
+[14.183782] (-) TimerEvent: {}
+[14.184388] (slam_learn) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:167: CMakeFiles/front_end_node.dir/all] Error 2\n'}
+[14.185034] (slam_learn) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[14.187508] (slam_learn) CommandEnded: {'returncode': 2}
+[14.284079] (-) TimerEvent: {}
+[14.384440] (-) TimerEvent: {}
+[14.484831] (-) TimerEvent: {}
+[14.585240] (-) TimerEvent: {}
+[14.685554] (-) TimerEvent: {}
+[14.785862] (-) TimerEvent: {}
+[14.886197] (-) TimerEvent: {}
+[14.986609] (-) TimerEvent: {}
+[15.086998] (-) TimerEvent: {}
+[15.187353] (-) TimerEvent: {}
+[15.287950] (-) TimerEvent: {}
+[15.388333] (-) TimerEvent: {}
+[15.488775] (-) TimerEvent: {}
+[15.589177] (-) TimerEvent: {}
+[15.689566] (-) TimerEvent: {}
+[15.789915] (-) TimerEvent: {}
+[15.881114] (slam_learn) JobEnded: {'identifier': 'slam_learn', 'rc': 2}
+[16.184098] (-) TimerEvent: {}
+[16.184255] (-) EventReactorShutdown: {}

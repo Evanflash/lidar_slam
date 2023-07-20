@@ -57,7 +57,7 @@ public:
         pubSegCloud = this -> create_publisher<other_msgs::msg::SegCloud>(
             "/seg_cloud", 1);
         subLaserCloudIn = this -> create_subscription<sensor_msgs::msg::PointCloud2>(
-            "/velodyne_points", 1, std::bind(&DataProcess::run, this, std::placeholders::_1));
+            "/velodyne_points", 100, std::bind(&DataProcess::run, this, std::placeholders::_1));
 
         showSegCloud = this -> create_publisher<sensor_msgs::msg::PointCloud2>(
             "/showseg", 1
@@ -113,7 +113,7 @@ public:
         pcl::removeNaNFromPointCloud(*cloud_in, *cloud_in, indices);
 
         seg_msg.header = cloud_msg.header;
-    
+
         // 变量重置
         resetParameters();    
         // 投影点云
@@ -159,10 +159,10 @@ private:
     */ 
     void resetParameters(){
         const size_t cloud_size = vertical_scans * horizontal_scans;
-        PointType nanPoint(std::numeric_limits<float>::quiet_NaN(), 
-                           std::numeric_limits<float>::quiet_NaN(), 
-                           std::numeric_limits<float>::quiet_NaN(), 
-                           -1);
+        PointType nanPoint;
+        nanPoint.x = std::numeric_limits<float>::quiet_NaN();
+        nanPoint.y = std::numeric_limits<float>::quiet_NaN();
+        nanPoint.z = std::numeric_limits<float>::quiet_NaN();
 
         std::fill(full_cloud -> points.begin(), full_cloud -> points.end(), nanPoint);
 
@@ -198,7 +198,7 @@ private:
                                curPoint.z * curPoint.z);
 
             // 排除距离过近的点 或 距离过远的点
-            if(range < 2.0){
+            if(range < 0.2){
                 continue;
             }
 
@@ -225,7 +225,6 @@ private:
             size_t index = colInd + rowInd * horizontal_scans;
             full_cloud -> points[index] = curPoint;
         }
-
     }
 
     /**
@@ -248,7 +247,7 @@ private:
                 float dZ = full_cloud -> points[upperInd].z - full_cloud -> points[lowerInd].z;
 
                 // 计算仰角，小于阈值则为地面点
-                float vertical_angle = std::atan2(fabs(dZ), sqrt(dX * dX + dY * dY + dZ * dZ));
+                float vertical_angle = std::atan2(dZ, sqrt(dX * dX + dY * dY + dZ * dZ));
                 if((vertical_angle - sensor_mount_angle) <= (M_PI / 18.0)){
                     ground_mat(i, j) = 1;
                     ground_mat(i + 1, j) = 1;

@@ -105,7 +105,7 @@ public:
           t_delta(t_)
     {
         subAllCloud = this -> create_subscription<other_msgs::msg::AllCloud>(
-            "/all_cloud", 10, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
+            "/all_cloud", 100, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
 
         pubPath = this -> create_publisher<nav_msgs::msg::Path>("/global_path", 1);
 
@@ -372,7 +372,7 @@ private:
                 ceres::Manifold *q_manifold = new ceres::EigenQuaternionManifold;
                 problem.AddParameterBlock(q_, 4, q_manifold);
                 problem.AddParameterBlock(t_, 3);
-
+            
                 // 边缘点
                 for(int i = 0; i < cornerSharpNum; ++i){
                     trans(cornerCloud -> points[i], pointSel);
@@ -428,7 +428,7 @@ private:
                         matD = esolver.eigenvalues().real();
                         matV = esolver.eigenvectors().real();
 
-                        if(matD[2] > 3 * matD[1]){
+                        if(matD[2] > 5 * matD[1]){
                             Eigen::Vector3d curr_p{cornerCloud -> points[i].x, 
                                                    cornerCloud -> points[i].y, 
                                                    cornerCloud -> points[i].z};
@@ -446,7 +446,7 @@ private:
                     }
                     
                 }
-
+                
                 // 平面点
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfCloud -> points[i], pointSel);
@@ -557,7 +557,7 @@ private:
                 std::chrono::time_point<std::chrono::system_clock> t1 = std::chrono::system_clock::now();
                 ceres::Solver::Options options;
                 options.linear_solver_type = ceres::DENSE_QR;
-                options.max_num_iterations = 5;
+                options.max_num_iterations = 10;
                 options.minimizer_progress_to_stdout = false;
                 ceres::Solver::Summary summary;
                 ceres::Solve(options, &problem, &summary);

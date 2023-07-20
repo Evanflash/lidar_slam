@@ -144,6 +144,10 @@ struct SurfFactor{
         Eigen::Matrix<T, 3, 1> txyz{t[0], t[1], T(_z)};      
         Eigen::Matrix<T, 3, 1> lp = qz * qyx * cp + txyz;
 
+        // T l = (lp - lpj).dot(ljm);
+        // residual[0] = ljm.x() * l;
+        // residual[1] = ljm.y() * l;
+        // residual[2] = ljm.z() * l;
         residual[0] = (lp - lpj).dot(ljm);
         return true;
     }
