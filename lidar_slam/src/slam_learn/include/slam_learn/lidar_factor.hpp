@@ -314,7 +314,7 @@ struct LidarEdgeFactor{
     Eigen::Vector3d point_b;
 };
 struct LidarPlaneFactor{
-    LidarPlaneFactor(double _pa, double _pb, double _pc, double _pd, PointType _point)
+    LidarPlaneFactor(double _pa, double _pb, double _pc, double _pd, Eigen::Vector3d _point)
         : pa(_pa), pb(_pb), pc(_pc), pd(_pd), point(_point)
     {
         
@@ -325,7 +325,7 @@ struct LidarPlaneFactor{
         Eigen::Quaternion<T> q_last{q[3], q[0], q[1], q[2]};
         Eigen::Matrix<T, 3, 1> t_last{t[0], t[1], t[2]};
 
-        Eigen::Matrix<T, 3, 1> cp{T(point.x), T(point.y), T(point.z)};
+        Eigen::Matrix<T, 3, 1> cp{T(point.x()), T(point.y()), T(point.z())};
         Eigen::Matrix<T, 3, 1> lp = q_last * cp + t_last;
 
         residual[0] = (Eigen::Matrix<T, 1, 3>(T(pa), T(pb), T(pc))).dot(lp) + T(pd);
@@ -333,13 +333,13 @@ struct LidarPlaneFactor{
         return true;
     }
 
-    static ceres::CostFunction *Create(double _pa, double _pb, double _pc, double _pd, PointType _point){
+    static ceres::CostFunction *Create(double _pa, double _pb, double _pc, double _pd, Eigen::Vector3d _point){
         return (new ceres::AutoDiffCostFunction<LidarPlaneFactor, 1, 4, 3>
             (new LidarPlaneFactor(_pa, _pb, _pc, _pd, _point)));
     }
     
     double pa, pb, pc, pd;
-    PointType point;
+    Eigen::Vector3d point;
 };
 }
 

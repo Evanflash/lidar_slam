@@ -426,6 +426,7 @@ public:
                     }
                 }
 
+                /*
                 smallestPickedNum = 0;
                 for(int k = sp; k <= ep; ++k){
                     int curInd = segmentCurvature[k].index;
@@ -464,7 +465,7 @@ public:
                     }
                     
                 }
-                
+                */
                 
                 for(int k = sp; k <= ep; ++k){
                     if(segmentCurvature[k].isflat <= 0){
@@ -493,7 +494,7 @@ public:
          
         // 测试
         sensor_msgs::msg::PointCloud2 msg;
-        pcl::toROSMsg(*cornerSharp, msg);
+        pcl::toROSMsg(*cornerLessSharp, msg);
         msg.header.frame_id = "map";
         pubtest2 -> publish(msg);
 

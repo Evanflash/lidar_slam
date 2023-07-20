@@ -99,10 +99,10 @@ private:
 public:
     BackEnd(const std::string &name)
         : Node(name),
-          q_w_last(1, 0, 0, 0),
-          t_w_last(0, 0, 0),
-          q_delta(q_),
-          t_delta(t_)
+          q_w_last(q_),
+          t_w_last(t_),
+          q_delta(1, 0, 0, 0),
+          t_delta(0, 0, 0)
     {
         subAllCloud = this -> create_subscription<other_msgs::msg::AllCloud>(
             "/all_cloud", 100, std::bind(&BackEnd::getMsg, this, std::placeholders::_1));
@@ -286,6 +286,9 @@ private:
             all_cloud.trans_form[4], all_cloud.trans_form[5]);
         t_delta = Eigen::Vector3d(all_cloud.trans_form[0], all_cloud.trans_form[1], all_cloud.trans_form[2]);
 
+        t_w_last = q_w_last * t_delta + t_w_last;
+        q_w_last = q_w_last * q_delta;
+
         // 获得新一帧点云
         msgToPointCloud(cornerCloud, all_cloud.corner_less_sharp);
         msgToPointCloud(surfCloud, all_cloud.surf_less_flat);
@@ -341,7 +344,7 @@ private:
         // 待优化四元数与偏移
         auto trans = [&](const PointType &pointFrom, PointType &pointTo){
             Eigen::Vector3d p(pointFrom.x, pointFrom.y, pointFrom.z);
-            p = q_w_last * (q_delta * p + t_delta) + t_w_last;
+            p = q_w_last * p + t_w_last;
             pointTo.x = p.x();
             pointTo.y = p.y();
             pointTo.z = p.z();
@@ -359,6 +362,8 @@ private:
 
             // RCLCPP_INFO(this -> get_logger(), "corner:%d, surf:%d, ground:%d", 
             //     cornerSharpNum, surfFlatNum, groundFlatNum);
+            // int valueCorner = 0;
+            // int valueGround = 0;
 
             PointType pointSel;
             std::vector<int> pointSearchInd;
@@ -428,7 +433,7 @@ private:
                         matD = esolver.eigenvalues().real();
                         matV = esolver.eigenvectors().real();
 
-                        if(matD[2] > 5 * matD[1]){
+                        if(matD[2] > 3 * matD[1]){
                             Eigen::Vector3d curr_p{cornerCloud -> points[i].x, 
                                                    cornerCloud -> points[i].y, 
                                                    cornerCloud -> points[i].z};
@@ -438,15 +443,23 @@ private:
                             Eigen::Vector3d point_b{cx - 0.1 * matV(2, 0),
                                                     cy - 0.1 * matV(2, 1),
                                                     cz - 0.1 * matV(2, 2)};
+                            // curr_p = q_w_last * curr_p + t_w_last;
                             ceres::CostFunction *cost_function = 
                                 LidarEdgeFactor::Create(curr_p, point_a, point_b);
                             problem.AddResidualBlock(
                                 cost_function, loss_function, q_, t_);
+                            // RCLCPP_INFO(this -> get_logger(), "curr : x:%f, y:%f, z:%f",
+                            //     curr_p.x(), curr_p.y(), curr_p.z());
+                            // RCLCPP_INFO(this -> get_logger(), "pointSel: x:%f, y:%f, z:%f",
+                            //     pointSel.x, pointSel.y, pointSel.z);
+                            // RCLCPP_INFO(this -> get_logger(), "point_a : x:%f, y:%f, z:%f",
+                            //     point_a.x(), point_a.y(), point_a.z());
                         }
                     }
                     
                 }
                 
+                /*
                 // 平面点
                 for(int i = 0; i < surfFlatNum; ++i){
                     trans(surfCloud -> points[i], pointSel);
@@ -492,14 +505,19 @@ private:
 
                         // 若平面合理，则优化
                         if(planeValid == true){
+                            Eigen::Vector3d point{surfCloud -> points[i].x,
+                                                  surfCloud -> points[i].y,
+                                                  surfCloud -> points[i].z};
+                            // point = q_w_last * point + t_w_last;
                             ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(pa, pb, pc, pd, surfCloud -> points[i]);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, point);
                             problem.AddResidualBlock(
                                 cost_function, loss_function, q_, t_);
                         }
                     }  
                 }
-                
+                */
+
                 // 地面点
                 for(int i = 0; i < groundFlatNum; ++i){
                     trans(groundCloud -> points[i], pointSel);
@@ -545,8 +563,12 @@ private:
 
                         // 若平面合理，则优化
                         if(planeValid == true){
+                            Eigen::Vector3d curr_point{groundCloud -> points[i].x,
+                                                       groundCloud -> points[i].y,
+                                                       groundCloud -> points[i].z};
+                            // curr_point = q_w_last * curr_point + t_w_last;            
                             ceres::CostFunction *cost_function = 
-                                LidarPlaneFactor::Create(pa, pb, pc, pd, groundCloud -> points[i]);
+                                LidarPlaneFactor::Create(pa, pb, pc, pd, curr_point);
                             problem.AddResidualBlock(
                                 cost_function, loss_function, q_, t_);
                         }
@@ -569,8 +591,8 @@ private:
         }
         
         // 矫正位姿
-        t_w_last = t_w_last + q_w_last * t_delta;
-        q_w_last = q_w_last * q_delta;
+        // t_w_last = q_delta * t_w_last + t_delta;
+        // q_w_last = q_delta * q_w_last;
         RCLCPP_INFO(this -> get_logger(), "x:%f, y:%f, z:%f", t_delta.x(), t_delta.y(), t_delta.z());
     }
 
