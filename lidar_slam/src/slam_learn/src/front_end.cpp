@@ -802,7 +802,7 @@ public:
     */
     void publish(){
         // 发布all_cloud
-        static int cycle_count = 0;
+        static int cycle_count = map_frequency - 1;
         cycle_count++;
         if(cycle_count == map_frequency){
             cycle_count = 0;
